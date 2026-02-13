@@ -1,0 +1,502 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel rrhh_permisos_solicitudes_vacaciones search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_id}">
+		{$label rrhh_permisos_solicitudes_vacaciones id }	</label>
+	<div class="r-search-option">
+		{$searchtype_id}
+	</div>
+	<div class="r-search-field">
+		{$id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$id_editcontrol1}
+	</div>
+	
+</div>
+
+{END id_fieldblock}
+											
+{BEGIN id_funcionario_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id_funcionario}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="id_funcionario{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="id_funcionario" data-fieldname="id_funcionario" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_id_funcionario}">
+		{$label rrhh_permisos_solicitudes_vacaciones id_funcionario }	</label>
+	<div class="r-search-option">
+		{$searchtype_id_funcionario}
+	</div>
+	<div class="r-search-field">
+		{$id_funcionario_editcontrol}	</div>
+	<div class="r-search-field">
+		{$id_funcionario_editcontrol1}
+	</div>
+	
+</div>
+
+{END id_funcionario_fieldblock}
+											
+{BEGIN tipo_vinculacion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tipo_vinculacion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tipo_vinculacion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="tipo_vinculacion" data-fieldname="tipo_vinculacion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tipo_vinculacion}">
+		{$label rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }	</label>
+	<div class="r-search-option">
+		{$searchtype_tipo_vinculacion}
+	</div>
+	<div class="r-search-field">
+		{$tipo_vinculacion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tipo_vinculacion_editcontrol1}
+	</div>
+	
+</div>
+
+{END tipo_vinculacion_fieldblock}
+											
+{BEGIN dependencia_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dependencia_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dependencia_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="dependencia_id" data-fieldname="dependencia_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dependencia_id}">
+		{$label rrhh_permisos_solicitudes_vacaciones dependencia_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_dependencia_id}
+	</div>
+	<div class="r-search-field">
+		{$dependencia_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dependencia_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END dependencia_id_fieldblock}
+											
+{BEGIN fecha_desde_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_desde}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fecha_desde{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="fecha_desde" data-fieldname="fecha_desde" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fecha_desde}">
+		{$label rrhh_permisos_solicitudes_vacaciones fecha_desde }	</label>
+	<div class="r-search-option">
+		{$searchtype_fecha_desde}
+	</div>
+	<div class="r-search-field">
+		{$fecha_desde_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fecha_desde_editcontrol1}
+	</div>
+	
+</div>
+
+{END fecha_desde_fieldblock}
+											
+{BEGIN fecha_hasta_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_hasta}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fecha_hasta{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="fecha_hasta" data-fieldname="fecha_hasta" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fecha_hasta}">
+		{$label rrhh_permisos_solicitudes_vacaciones fecha_hasta }	</label>
+	<div class="r-search-option">
+		{$searchtype_fecha_hasta}
+	</div>
+	<div class="r-search-field">
+		{$fecha_hasta_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fecha_hasta_editcontrol1}
+	</div>
+	
+</div>
+
+{END fecha_hasta_fieldblock}
+											
+{BEGIN total_dias_habiles_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_total_dias_habiles}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="total_dias_habiles{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="total_dias_habiles" data-fieldname="total_dias_habiles" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_total_dias_habiles}">
+		{$label rrhh_permisos_solicitudes_vacaciones total_dias_habiles }	</label>
+	<div class="r-search-option">
+		{$searchtype_total_dias_habiles}
+	</div>
+	<div class="r-search-field">
+		{$total_dias_habiles_editcontrol}	</div>
+	<div class="r-search-field">
+		{$total_dias_habiles_editcontrol1}
+	</div>
+	
+</div>
+
+{END total_dias_habiles_fieldblock}
+											
+{BEGIN observacion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_observacion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="observacion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="observacion" data-fieldname="observacion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_observacion}">
+		{$label rrhh_permisos_solicitudes_vacaciones observacion }	</label>
+	<div class="r-search-option">
+		{$searchtype_observacion}
+	</div>
+	<div class="r-search-field">
+		{$observacion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$observacion_editcontrol1}
+	</div>
+	
+</div>
+
+{END observacion_fieldblock}
+											
+{BEGIN estado_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_estado}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="estado{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="estado" data-fieldname="estado" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_estado}">
+		{$label rrhh_permisos_solicitudes_vacaciones estado }	</label>
+	<div class="r-search-option">
+		{$searchtype_estado}
+	</div>
+	<div class="r-search-field">
+		{$estado_editcontrol}	</div>
+	<div class="r-search-field">
+		{$estado_editcontrol1}
+	</div>
+	
+</div>
+
+{END estado_fieldblock}
+											
+{BEGIN fecha_creacion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_creacion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fecha_creacion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="fecha_creacion" data-fieldname="fecha_creacion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fecha_creacion}">
+		{$label rrhh_permisos_solicitudes_vacaciones fecha_creacion }	</label>
+	<div class="r-search-option">
+		{$searchtype_fecha_creacion}
+	</div>
+	<div class="r-search-field">
+		{$fecha_creacion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fecha_creacion_editcontrol1}
+	</div>
+	
+</div>
+
+{END fecha_creacion_fieldblock}
+											
+{BEGIN usuario_creador_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_usuario_creador}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="usuario_creador{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="usuario_creador" data-fieldname="usuario_creador" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_usuario_creador}">
+		{$label rrhh_permisos_solicitudes_vacaciones usuario_creador }	</label>
+	<div class="r-search-option">
+		{$searchtype_usuario_creador}
+	</div>
+	<div class="r-search-field">
+		{$usuario_creador_editcontrol}	</div>
+	<div class="r-search-field">
+		{$usuario_creador_editcontrol1}
+	</div>
+	
+</div>
+
+{END usuario_creador_fieldblock}
+											
+{BEGIN fecha_actualizacion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_actualizacion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fecha_actualizacion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="fecha_actualizacion" data-fieldname="fecha_actualizacion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fecha_actualizacion}">
+		{$label rrhh_permisos_solicitudes_vacaciones fecha_actualizacion }	</label>
+	<div class="r-search-option">
+		{$searchtype_fecha_actualizacion}
+	</div>
+	<div class="r-search-field">
+		{$fecha_actualizacion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fecha_actualizacion_editcontrol1}
+	</div>
+	
+</div>
+
+{END fecha_actualizacion_fieldblock}
+											
+{BEGIN usuario_actualizacion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_usuario_actualizacion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="usuario_actualizacion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="usuario_actualizacion" data-fieldname="usuario_actualizacion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_usuario_actualizacion}">
+		{$label rrhh_permisos_solicitudes_vacaciones usuario_actualizacion }	</label>
+	<div class="r-search-option">
+		{$searchtype_usuario_actualizacion}
+	</div>
+	<div class="r-search-field">
+		{$usuario_actualizacion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$usuario_actualizacion_editcontrol1}
+	</div>
+	
+</div>
+
+{END usuario_actualizacion_fieldblock}
+											
+{BEGIN nombre_completo_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_nombre_completo}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="nombre_completo{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="nombre_completo" data-fieldname="nombre_completo" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_nombre_completo}">
+		{$label rrhh_permisos_solicitudes_vacaciones nombre_completo }	</label>
+	<div class="r-search-option">
+		{$searchtype_nombre_completo}
+	</div>
+	<div class="r-search-field">
+		{$nombre_completo_editcontrol}	</div>
+	<div class="r-search-field">
+		{$nombre_completo_editcontrol1}
+	</div>
+	
+</div>
+
+{END nombre_completo_fieldblock}
+											
+{BEGIN per_ci_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_per_ci}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="per_ci{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="per_ci" data-fieldname="per_ci" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_per_ci}">
+		{$label rrhh_permisos_solicitudes_vacaciones per_ci }	</label>
+	<div class="r-search-option">
+		{$searchtype_per_ci}
+	</div>
+	<div class="r-search-field">
+		{$per_ci_editcontrol}	</div>
+	<div class="r-search-field">
+		{$per_ci_editcontrol1}
+	</div>
+	
+</div>
+
+{END per_ci_fieldblock}
+											
+{BEGIN descripcion_dependencia_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_descripcion_dependencia}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="descripcion_dependencia{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="descripcion_dependencia" data-fieldname="descripcion_dependencia" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_descripcion_dependencia}">
+		{$label rrhh_permisos_solicitudes_vacaciones descripcion_dependencia }	</label>
+	<div class="r-search-option">
+		{$searchtype_descripcion_dependencia}
+	</div>
+	<div class="r-search-field">
+		{$descripcion_dependencia_editcontrol}	</div>
+	<div class="r-search-field">
+		{$descripcion_dependencia_editcontrol1}
+	</div>
+	
+</div>
+
+{END descripcion_dependencia_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Buscar			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reiniciar			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Volver a la lista			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancelar			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>
