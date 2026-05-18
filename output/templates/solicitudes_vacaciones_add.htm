@@ -343,15 +343,6 @@
 </div>
 {END message_block}			{END firstAboveGridCell}	
 	</div>					</div>
-			 
-				<div class="row">
-			 
-				<div 
-	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
-	class=" r-ori-vert			col-md-12
-	
-">
-			</div>					</div>
 			</div>		
 {END above-grid_block}
 	</div>
@@ -381,39 +372,64 @@
 										<tr {$row_grid_0} >
 										
 
-{BEGIN cellblock_grid_c}
+{BEGIN cellblock_grid_c12}
 <td
-	{$cell_grid_c}
+	{$cell_grid_c12}
 	class=" r-ori-vert"
 	
-			
-	ocolspan="2"		data-cellId="grid_c" data-pageid="{$pageid}"
-		data-v-cell="4"
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c12" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
-				
-{BEGIN dependencia_id_fieldblock}
+				<span data-itemtype="text" data-itemid="text2" {$item_text2} data-pageid="{$pageid}" data-small > 
+	<h3>👤 DATOS DEL FUNCIONARIO</h3><br><hr></span>
+											
+{BEGIN nombre_completo_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_dependencia_id}  r-vertical-field" 
-	data-signal-error-for="dependencia_id{$id}" {$required_attr_dependencia_id}
-	data-itemtype="integrated_edit_field" data-itemid="add_dependencia_id" {$item_add_dependencia_id} data-pageid="{$pageid}" data-field="dependencia_id" data-fieldname="dependencia_id" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_nombre_completo}  r-vertical-field" 
+	data-signal-error-for="nombre_completo{$id}" {$required_attr_nombre_completo}
+	data-itemtype="integrated_edit_field" data-itemid="add_nombre_completo" {$item_add_nombre_completo} data-pageid="{$pageid}" data-field="nombre_completo" data-fieldname="nombre_completo" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_dependencia_id}">
-		{BEGIN dependencia_id_label}{$label rrhh_permisos_solicitudes_vacaciones dependencia_id }{END dependencia_id_label}
+	<label class="r-edit-label control-label" for="{$labelfor_nombre_completo}">
+		{BEGIN nombre_completo_label}{$label rrhh_permisos_solicitudes_vacaciones nombre_completo }{END nombre_completo_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$dependencia_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="dependencia_id" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones dependencia_id } >
+		{$nombre_completo_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="nombre_completo" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones nombre_completo } >
 		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones dependencia_id }		</div>
+		{$tooltip rrhh_permisos_solicitudes_vacaciones nombre_completo }		</div>
 	</div>
 </div>
 
 
-{END dependencia_id_fieldblock}
+{END nombre_completo_fieldblock}
+											
+{BEGIN per_ci_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_per_ci}  r-vertical-field" 
+	data-signal-error-for="per_ci{$id}" {$required_attr_per_ci}
+	data-itemtype="integrated_edit_field" data-itemid="add_per_ci" {$item_add_per_ci} data-pageid="{$pageid}" data-field="per_ci" data-fieldname="per_ci" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_per_ci}">
+		{BEGIN per_ci_label}{$label rrhh_permisos_solicitudes_vacaciones per_ci }{END per_ci_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$per_ci_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="per_ci" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones per_ci } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_solicitudes_vacaciones per_ci }		</div>
+	</div>
+</div>
+
+
+{END per_ci_fieldblock}
 											
 {BEGIN descripcion_dependencia_fieldblock}
 
@@ -436,146 +452,69 @@
 
 
 {END descripcion_dependencia_fieldblock}
-	
-								</td>
-			{END cellblock_grid_c}
-			 
-																
-
-{BEGIN cellblock_grid_c1}
-<td
-	{$cell_grid_c1}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c1" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-				
-{BEGIN tipo_vinculacion_fieldblock}
+											
+{BEGIN descripcion_tipo_vinculacion_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_tipo_vinculacion}  r-vertical-field" 
-	data-signal-error-for="tipo_vinculacion{$id}" {$required_attr_tipo_vinculacion}
-	data-itemtype="integrated_edit_field" data-itemid="add_tipo_vinculacion" {$item_add_tipo_vinculacion} data-pageid="{$pageid}" data-field="tipo_vinculacion" data-fieldname="tipo_vinculacion" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_descripcion_tipo_vinculacion}  r-vertical-field" 
+	data-signal-error-for="descripcion_tipo_vinculacion{$id}" {$required_attr_descripcion_tipo_vinculacion}
+	data-itemtype="integrated_edit_field" data-itemid="add_descripcion_tipo_vinculacion" {$item_add_descripcion_tipo_vinculacion} data-pageid="{$pageid}" data-field="descripcion_tipo_vinculacion" data-fieldname="descripcion_tipo_vinculacion" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_tipo_vinculacion}">
-		{BEGIN tipo_vinculacion_label}{$label rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }{END tipo_vinculacion_label}
+	<label class="r-edit-label control-label" for="{$labelfor_descripcion_tipo_vinculacion}">
+		{BEGIN descripcion_tipo_vinculacion_label}{$label rrhh_permisos_solicitudes_vacaciones descripcion_tipo_vinculacion }{END descripcion_tipo_vinculacion_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$tipo_vinculacion_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="tipo_vinculacion" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones tipo_vinculacion } >
+		{$descripcion_tipo_vinculacion_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="descripcion_tipo_vinculacion" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones descripcion_tipo_vinculacion } >
 		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }		</div>
+		{$tooltip rrhh_permisos_solicitudes_vacaciones descripcion_tipo_vinculacion }		</div>
 	</div>
 </div>
 
 
-{END tipo_vinculacion_fieldblock}
+{END descripcion_tipo_vinculacion_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c1}
+			{END cellblock_grid_c12}
 								</tr>
 	 
 	 
 														<tr {$row_grid_1} >
 										
 
-{BEGIN cellblock_grid_c4}
+{BEGIN cellblock_grid_c13}
 <td
-	{$cell_grid_c4}
+	{$cell_grid_c13}
 	class=" r-ori-vert"
 	
 			data-single
-			
-	ocolspan="2"		data-cellId="grid_c4" data-pageid="{$pageid}"
-		data-v-cell="4"
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
-				
-{BEGIN per_ci_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_per_ci}  r-vertical-field" 
-	data-signal-error-for="per_ci{$id}" {$required_attr_per_ci}
-	data-itemtype="integrated_edit_field" data-itemid="add_per_ci" {$item_add_per_ci} data-pageid="{$pageid}" data-field="per_ci" data-fieldname="per_ci" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_per_ci}">
-		{BEGIN per_ci_label}{$label rrhh_permisos_solicitudes_vacaciones per_ci }{END per_ci_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$per_ci_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="per_ci" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones per_ci } >
-		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones per_ci }		</div>
-	</div>
-</div>
-
-
-{END per_ci_fieldblock}
+				<span data-itemtype="text" data-itemid="text4" {$item_text4} data-pageid="{$pageid}" data-small > 
+	<h3>🧳 PERIODO DE VACACIONES</h3><br><hr></span>
 	
 								</td>
-			{END cellblock_grid_c4}
-			 
-																
-
-{BEGIN cellblock_grid_c5}
-<td
-	{$cell_grid_c5}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c5" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-				
-{BEGIN nombre_completo_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_nombre_completo}  r-vertical-field" 
-	data-signal-error-for="nombre_completo{$id}" {$required_attr_nombre_completo}
-	data-itemtype="integrated_edit_field" data-itemid="add_nombre_completo" {$item_add_nombre_completo} data-pageid="{$pageid}" data-field="nombre_completo" data-fieldname="nombre_completo" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_nombre_completo}">
-		{BEGIN nombre_completo_label}{$label rrhh_permisos_solicitudes_vacaciones nombre_completo }{END nombre_completo_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$nombre_completo_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="nombre_completo" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones nombre_completo } >
-		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones nombre_completo }		</div>
-	</div>
-</div>
-
-
-{END nombre_completo_fieldblock}
-	
-								</td>
-			{END cellblock_grid_c5}
+			{END cellblock_grid_c13}
 								</tr>
 	 
 	 
 														<tr {$row_grid_2} >
 										
 
-{BEGIN cellblock_grid_c8}
+{BEGIN cellblock_grid_c17}
 <td
-	{$cell_grid_c8}
-	class="r-align-center r-ori-vert"
+	{$cell_grid_c17}
+	class=" r-ori-vert"
 	
 			data-single
 			
-	ocolspan="2"		data-cellId="grid_c8" data-pageid="{$pageid}"
+	ocolspan="2"		data-cellId="grid_c17" data-pageid="{$pageid}"
 		data-v-cell="4"
 		
 >
@@ -584,18 +523,18 @@
 	<h4><strong>FECHA SOLICITADA</strong><span class="ql-cursor">﻿</span></h4></span>
 	
 								</td>
-			{END cellblock_grid_c8}
+			{END cellblock_grid_c17}
 			 
 																
 
-{BEGIN cellblock_grid_c9}
+{BEGIN cellblock_grid_c18}
 <td
-	{$cell_grid_c9}
-	class="r-align-center r-ori-vert"
+	{$cell_grid_c18}
+	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c9" data-pageid="{$pageid}"
+			data-cellId="grid_c18" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -604,21 +543,21 @@
 	<h4><strong>TOTAL DE DIAS HABILES SOLICITADOS</strong><span class="ql-cursor">﻿</span></h4></span>
 	
 								</td>
-			{END cellblock_grid_c9}
+			{END cellblock_grid_c18}
 								</tr>
 	 
 	 
 														<tr {$row_grid_3} >
 										
 
-{BEGIN cellblock_grid_c6}
+{BEGIN cellblock_grid_c16}
 <td
-	{$cell_grid_c6}
+	{$cell_grid_c16}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c6" data-pageid="{$pageid}"
+			data-cellId="grid_c16" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -647,18 +586,18 @@
 {END fecha_desde_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c6}
+			{END cellblock_grid_c16}
 			 
 																
 
-{BEGIN cellblock_grid_c10}
+{BEGIN cellblock_grid_c20}
 <td
-	{$cell_grid_c10}
+	{$cell_grid_c20}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c10" data-pageid="{$pageid}"
+			data-cellId="grid_c20" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -687,18 +626,18 @@
 {END fecha_hasta_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c10}
+			{END cellblock_grid_c20}
 			 
 																
 
-{BEGIN cellblock_grid_c7}
+{BEGIN cellblock_grid_c19}
 <td
-	{$cell_grid_c7}
+	{$cell_grid_c19}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c7" data-pageid="{$pageid}"
+			data-cellId="grid_c19" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -727,26 +666,52 @@
 {END total_dias_habiles_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c7}
+			{END cellblock_grid_c19}
 								</tr>
 	 
 	 
 														<tr {$row_grid_4} >
 										
 
-{BEGIN cellblock_grid_c3}
+{BEGIN cellblock_grid_c2}
 <td
-	{$cell_grid_c3}
+	{$cell_grid_c2}
 	class=" r-ori-vert"
 	
 			data-single
-			
-	ocolspan="3"		data-cellId="grid_c3" data-pageid="{$pageid}"
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c2" data-pageid="{$pageid}"
 		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
-				
+				<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-small > 
+	<small> 📌 Indique el período exacto en el que se ausentará.</small></span>
+	
+								</td>
+			{END cellblock_grid_c2}
+								</tr>
+	 
+	 
+														<tr {$row_grid_5} >
+										
+
+{BEGIN cellblock_grid_c22}
+<td
+	{$cell_grid_c22}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c22" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text5" {$item_text5} data-pageid="{$pageid}" data-small > 
+	<h3>OBSERVACIONES</h3><br><hr></span>
+											
 {BEGIN observacion_fieldblock}
 
 
@@ -770,11 +735,80 @@
 {END observacion_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c3}
+			{END cellblock_grid_c22}
 								</tr>
 	 
 	 
-														<tr {$row_grid_5} >
+														<tr {$row_grid_6} >
+										
+
+{BEGIN cellblock_grid_c}
+<td
+	{$cell_grid_c}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text6" {$item_text6} data-pageid="{$pageid}" data-small > 
+	<h3>APROBACIÓN / CONTACTO</h3><br><hr></span>
+											
+{BEGIN email_jefe_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_email_jefe}  r-vertical-field" 
+	data-signal-error-for="email_jefe{$id}" {$required_attr_email_jefe}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="email_jefe" data-fieldname="email_jefe" data-before-same-field >
+
+	<label class="r-edit-label control-label" for="{$labelfor_email_jefe}">
+		{BEGIN email_jefe_label}{$label rrhh_permisos_solicitudes_vacaciones email_jefe }{END email_jefe_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$email_jefe_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="email_jefe" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones email_jefe } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_solicitudes_vacaciones email_jefe }		</div>
+	</div>
+</div>
+
+
+{END email_jefe_fieldblock}
+											<span data-itemtype="text" data-itemid="text7" {$item_text7} data-pageid="{$pageid}" data-small > 
+	<small>📌 Debe ser un correo institucional (@mtess.gov.py)</small></span>
+	
+								</td>
+			{END cellblock_grid_c}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c21}
+<td
+	{$cell_grid_c21}
+	class=" r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c21" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c21}
+								</tr>
+	 
+	 
+														<tr {$row_grid_8} >
 										
 
 {BEGIN cellblock_grid_c11}
@@ -790,72 +824,6 @@
 >
 	<div edit-form-cell class="clearfix">
 				
-{BEGIN estado_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_estado}  r-vertical-field" 
-	data-signal-error-for="estado{$id}" {$required_attr_estado}
-	data-itemtype="integrated_edit_field" data-itemid="add_estado" {$item_add_estado} data-pageid="{$pageid}" data-field="estado" data-fieldname="estado" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_estado}">
-		{BEGIN estado_label}{$label rrhh_permisos_solicitudes_vacaciones estado }{END estado_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$estado_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="estado" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones estado } >
-		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones estado }		</div>
-	</div>
-</div>
-
-
-{END estado_fieldblock}
-											
-{BEGIN fecha_creacion_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_creacion}  r-vertical-field" 
-	data-signal-error-for="fecha_creacion{$id}" {$required_attr_fecha_creacion}
-	data-itemtype="integrated_edit_field" data-itemid="add_fecha_creacion" {$item_add_fecha_creacion} data-pageid="{$pageid}" data-field="fecha_creacion" data-fieldname="fecha_creacion" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_fecha_creacion}">
-		{BEGIN fecha_creacion_label}{$label rrhh_permisos_solicitudes_vacaciones fecha_creacion }{END fecha_creacion_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$fecha_creacion_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="fecha_creacion" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones fecha_creacion } >
-		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones fecha_creacion }		</div>
-	</div>
-</div>
-
-
-{END fecha_creacion_fieldblock}
-											
-{BEGIN usuario_creador_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_usuario_creador}  r-vertical-field" 
-	data-signal-error-for="usuario_creador{$id}" {$required_attr_usuario_creador}
-	data-itemtype="integrated_edit_field" data-itemid="add_usuario_creador" {$item_add_usuario_creador} data-pageid="{$pageid}" data-field="usuario_creador" data-fieldname="usuario_creador" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_usuario_creador}">
-		{BEGIN usuario_creador_label}{$label rrhh_permisos_solicitudes_vacaciones usuario_creador }{END usuario_creador_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$usuario_creador_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="usuario_creador" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones usuario_creador } >
-		<div class="text-muted" >
-		{$tooltip rrhh_permisos_solicitudes_vacaciones usuario_creador }		</div>
-	</div>
-</div>
-
-
-{END usuario_creador_fieldblock}
-											
 {BEGIN id_fieldblock}
 
 
@@ -899,6 +867,94 @@
 
 
 {END id_funcionario_fieldblock}
+											
+{BEGIN dependencia_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dependencia_id}  r-vertical-field" 
+	data-signal-error-for="dependencia_id{$id}" {$required_attr_dependencia_id}
+	data-itemtype="integrated_edit_field" data-itemid="add_dependencia_id" {$item_add_dependencia_id} data-pageid="{$pageid}" data-field="dependencia_id" data-fieldname="dependencia_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_dependencia_id}">
+		{BEGIN dependencia_id_label}{$label rrhh_permisos_solicitudes_vacaciones dependencia_id }{END dependencia_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$dependencia_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="dependencia_id" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones dependencia_id } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_solicitudes_vacaciones dependencia_id }		</div>
+	</div>
+</div>
+
+
+{END dependencia_id_fieldblock}
+											
+{BEGIN tipo_vinculacion_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tipo_vinculacion}  r-vertical-field" 
+	data-signal-error-for="tipo_vinculacion{$id}" {$required_attr_tipo_vinculacion}
+	data-itemtype="integrated_edit_field" data-itemid="add_tipo_vinculacion" {$item_add_tipo_vinculacion} data-pageid="{$pageid}" data-field="tipo_vinculacion" data-fieldname="tipo_vinculacion" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_tipo_vinculacion}">
+		{BEGIN tipo_vinculacion_label}{$label rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }{END tipo_vinculacion_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$tipo_vinculacion_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="tipo_vinculacion" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones tipo_vinculacion } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }		</div>
+	</div>
+</div>
+
+
+{END tipo_vinculacion_fieldblock}
+											
+{BEGIN estado_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_estado}  r-vertical-field" 
+	data-signal-error-for="estado{$id}" {$required_attr_estado}
+	data-itemtype="integrated_edit_field" data-itemid="add_estado" {$item_add_estado} data-pageid="{$pageid}" data-field="estado" data-fieldname="estado" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_estado}">
+		{BEGIN estado_label}{$label rrhh_permisos_solicitudes_vacaciones estado }{END estado_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$estado_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="estado" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones estado } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_solicitudes_vacaciones estado }		</div>
+	</div>
+</div>
+
+
+{END estado_fieldblock}
+											
+{BEGIN usuario_creador_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_usuario_creador}  r-vertical-field" 
+	data-signal-error-for="usuario_creador{$id}" {$required_attr_usuario_creador}
+	data-itemtype="integrated_edit_field" data-itemid="add_usuario_creador" {$item_add_usuario_creador} data-pageid="{$pageid}" data-field="usuario_creador" data-fieldname="usuario_creador" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_usuario_creador}">
+		{BEGIN usuario_creador_label}{$label rrhh_permisos_solicitudes_vacaciones usuario_creador }{END usuario_creador_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$usuario_creador_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="usuario_creador" {$tooltipAttr rrhh_permisos_solicitudes_vacaciones usuario_creador } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_solicitudes_vacaciones usuario_creador }		</div>
+	</div>
+</div>
+
+
+{END usuario_creador_fieldblock}
 											
 {BEGIN fecha_actualizacion_fieldblock}
 
@@ -965,8 +1021,8 @@
 		<span data-itemtype="add_save" data-itemid="add_save" {$item_add_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-					<span class="glyphicon glyphicon-floppy-disk"></span>
-							Guardar			</a>
+					<span class="glyphicon glyphicon-send"></span>
+							Enviar solicitud			</a>
 </span>
 	 
 		<span data-itemtype="add_reset" data-itemid="add_reset" {$item_add_reset} data-pageid="{$pageid}" data-small data-button-item>

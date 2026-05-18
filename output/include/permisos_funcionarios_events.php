@@ -35,6 +35,9 @@
 		$this->events["BeforeEdit"]=true;
 
 
+		$this->events["BeforeShowView"]=true;
+
+
 	}
 
 //	handlers
@@ -167,6 +170,25 @@ function BeforeShowAdd(&$xt, &$templatefile, $pageObject)
  *   esta lógica deberá revisarse.
  */
 
+
+/*==============================================================
+=            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
+==============================================================*/
+/**
+ * Imprime información en la consola del navegador.
+ * Útil SOLO en desarrollo para verificar valores.
+ *
+ * @param mixed  $data    Datos a mostrar
+ * @param string $context Texto descriptivo del contexto
+ */
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
+
 // Identificador interno del funcionario (se asigna automáticamente)
 $pageObject->hideItem("add_id_funcionario");// Oculta el campo id_funcionario
 
@@ -185,24 +207,34 @@ $pageObject->hideItem("add_tipo_vinculacion");// Oculta el campo tipo_vinculacio
 
 $pageObject->hideItem("add_email_jefe_id");// Oculta el campo email_jefe_id
 
+$pageObject->hideItem("add_save"); // Oculta el boton Guardar que trae por defecto.
+
+$pageObject->hideItem("text_email_jefe"); // Oculta el texto de email_jefe.
+
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
 
 // ID del usuario logueado (tabla users de PHPRunner)
 $userPersonal = $currentUser["usu_personal"];
 
-// Obtener Dependencia y datos de la persona logueada.
+// Obtener datos de la persona logueada.
 $sqlDependencia = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta AS descripcion_dependencia,
 																p.per_ci AS persona_ci,
 																d.dep_cod,
 																p.per_nombre || '  ' || p.per_apellido AS nombre_completo,
 																p.per_cod,
 																p.tipo_funcionario_tfun_cod,
-																tf.tfun_descri AS descripcion_tipo_funcionario
+																tf.tfun_descri AS descripcion_tipo_funcionario,
+																TO_CHAR(AGE(CURRENT_DATE, p.per_ingreso), 'YY \"años, \" MM \"meses y \" DD \"días\"') AS antiguedad_laboral,
+																c.car_descri,
+																s.sed_descripcion
 												FROM personales p
 													LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
 													LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
+													LEFT JOIN cargos c ON c.car_cod = p.cargos_car_cod
+													LEFT JOIN sedes s ON s.sed_cod = p.per_sede
 												WHERE p.per_cod = $userPersonal";
+//debug_to_console("sqlDependencia: " . $sqlDependencia);
 $resultDependencia = CustomQuery($sqlDependencia);
 $dataDependencia = db_fetch_array($resultDependencia);
 $pageObject->setProxyValue("dep_cod", $dataDependencia["dep_cod"]);
@@ -212,9 +244,15 @@ $pageObject->setProxyValue("nombre_completo", $dataDependencia["nombre_completo"
 $pageObject->setProxyValue("per_cod", $dataDependencia["per_cod"]);
 $pageObject->setProxyValue("tipo_funcionario_tfun_cod", $dataDependencia["tipo_funcionario_tfun_cod"]);
 $pageObject->setProxyValue("descripcion_tipo_funcionario", $dataDependencia["descripcion_tipo_funcionario"]);
+$pageObject->setProxyValue("antiguedad_laboral", $dataDependencia["antiguedad_laboral"]);
+$pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
+$pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
 
-// Query para obtener TODOS los jefes posibles
-$sqlEmail = "
+
+
+
+// Query para obtener TODOS los jefes posibles del usuario logueado.
+/*$sqlEmail = "
 	SELECT pe.per_cod,
 		pe.per_email_instit,
 		car.car_descri
@@ -223,7 +261,16 @@ $sqlEmail = "
 		JOIN public.personales pe1 ON pe1.dependencias_dep_cod = pe.dependencias_dep_cod
 	WHERE car.car_cod IN (4, 5)
 	AND pe1.per_cod = {$userPersonal}
+";*/
+$sqlEmail = "
+	SELECT public.vw_personales_superiores.superior_cod AS per_cod, 
+					public.vw_personales_superiores.superior_email AS per_email_instit, 
+					public.vw_personales_superiores.cargo_superior AS car_descri
+	FROM public.vw_personales_superiores
+	WHERE public.vw_personales_superiores.funcionario_cod = {$userPersonal}
 ";
+//debug_to_console("sqlEmail: " . $sqlEmail);
+//print_r($_SESSION);
 $resultEmail = CustomQuery($sqlEmail);
 $jefes = array();
 while ($row = db_fetch_array($resultEmail)) {
@@ -235,6 +282,32 @@ while ($row = db_fetch_array($resultEmail)) {
 }
 // 👉 Pasamos TODO como JSON al frontend(JavaScript Onload event)
 $pageObject->setProxyValue("jefes_emails", json_encode($jefes));
+
+
+
+
+
+// Query para obtener el conteo de cantidad de permisos por mes.
+$sqlTotalPermisos = DB::PrepareSQL(
+"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
+				COUNT(*) AS cantidad_permisos_mes
+FROM rrhh_permisos.permisos_funcionarios
+WHERE id_funcionario = ':1'
+  AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
+  AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
+GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
+);
+//debug_to_console("sqlTotalPermisos: " . $sqlTotalPermisos);
+$resultTotalPermisos = DB::Query($sqlTotalPermisos);
+$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
+if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
+	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
+} else {
+	$cantidad_permisos_mes = 0;
+}
+//debug_to_console("mes_nombre: " . $rowTotalPermisos['mes_nombre'] . ", total_permisos: " . $rowTotalPermisos['cantidad_permisos_mes']);
+$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
+
 
 ;		
 } // function BeforeShowAdd
@@ -312,13 +385,13 @@ require_once(getabspath("include/email_utils.php"));
  * @param mixed  $data    Datos a mostrar
  * @param string $context Texto descriptivo del contexto
  */
-function debug_to_console($data, $context = 'Debug in Console') {
-	ob_start();
-	$output  = 'console.info(\'' . $context . ':\');';
-	$output .= 'console.log(' . json_encode($data) . ');';
-	$output  = sprintf('<script>%s</script>', $output);
-	echo $output;
-}
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
 
 
 /*==============================================================
@@ -375,22 +448,22 @@ try {
 	--------------------------------------------*/
 	$sqlInsertPermisosFuncionarios = DB::PrepareSQL(
 		"INSERT INTO rrhh_permisos.permisos_funcionarios (id_funcionario,
-																													tipo_vinculacion,
-																													dependencia_id,
-																													fecha_desde,
-																													hora_desde,
-																													fecha_hasta,
-																													hora_hasta,
-																													motivo_id,
-																													comision_servicios,
-																													comision_servicios_descripcion,
-																													observacion,
-																													estado,
-																													archivo_adjunto,
-																													solicitado_por,
-																													fecha_solicitud,
-																													resultado_decision,
-																													rrhh_resultado_decision) 
+																															tipo_vinculacion,
+																															dependencia_id,
+																															fecha_desde,
+																															hora_desde,
+																															fecha_hasta,
+																															hora_hasta,
+																															motivo_id,
+																															comision_servicios,
+																															comision_servicios_descripcion,
+																															observacion,
+																															estado,
+																															archivo_adjunto,
+																															solicitado_por,
+																															fecha_solicitud,
+																															resultado_decision,
+																															rrhh_resultado_decision) 
 			VALUES (':1',':2',':3',':4',':5',':6',':7',':8',':9',':10',':11',':12',':13',':14',NOW(),':15',':16')
 				RETURNING id",
 				$id_funcionario,
@@ -416,6 +489,7 @@ try {
 	$row_permisos_funcionarios = $resultPermisosFuncionarios->fetchAssoc();
 	$permiso_funcionario_id = $row_permisos_funcionarios['id'];
 	
+	
 	// ============================================================================
 	// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
 	// ============================================================================
@@ -431,11 +505,12 @@ try {
 					'motivo' => $nombreMotivo,
 					'observacion' => $observacion,
 					'dependencia' => $nombreDependencia,
-					'email_jefe_id' => $email_jefe_id
+					'email_jefe_id' => $email_jefe_id,
+					'tipo_solicitud' => 'permiso'
 	);
 
 	/*--------------------------------------------
-	| Enviar correo de notificación
+	| Enviar correo de notificación							|
 	--------------------------------------------*/
 	$emailEnviado = EmailUtils::enviarNotificacionSolicitudPermiso(
 		$datosPermiso, 
@@ -445,16 +520,16 @@ try {
 
 	if ($emailEnviado) {
 		error_log("Correo enviado para permiso ID: " . $permiso_funcionario_id);
-		debug_to_console("Correo enviado para permiso ID: " . $permiso_funcionario_id);
+		//debug_to_console("Correo enviado para permiso ID: " . $permiso_funcionario_id);
 	} else {
 		error_log("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
-		debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
+		//debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
 	}
 
 } catch (Exception $e) {
 	// Si ocurre un error en el correo, NO se revierte la inserción del permiso.
 	error_log("Excepción al enviar correo: " . $e->getMessage());
-	debug_to_console("Excepción al enviar correo: " . $e->getMessage());
+	//debug_to_console("Excepción al enviar correo: " . $e->getMessage());
 }
 
 ;		
@@ -637,13 +712,13 @@ require_once(getabspath("include/email_utils.php"));
  * @param mixed  $data    Datos a mostrar
  * @param string $context Texto descriptivo del contexto
  */
-function debug_to_console($data, $context = 'Debug in Console') {
-	ob_start();
-	$output  = 'console.info(\'' . $context . ':\');';
-	$output .= 'console.log(' . json_encode($data) . ');';
-	$output  = sprintf('<script>%s</script>', $output);
-	echo $output;
-}
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
 
 /**
  * $values contiene los campos enviados desde el formulario ADD
@@ -659,6 +734,11 @@ $email_jefe = $values["email_jefe"];
 $email_jefe_id = $values["email_jefe_id"];
 $nombreDependencia = $values["descripcion_dependencia_edit"];
 
+if (!isset($values["intentos_correccion"])) {
+	$values["intentos_correccion"] = $oldvalues["intentos_correccion"];
+}
+
+
 /*==============================================================
 =            OBTENER DESCRIPCIÓN DEL MOTIVO                    =
 ==============================================================*/
@@ -673,15 +753,6 @@ $rowMotivo = $resultMotivo->fetchAssoc();
 $nombreMotivo = $rowMotivo ? $rowMotivo['tip_descripcion'] : 'No especificado';
 
 
-//if (!$fecha_desde || !$fecha_hasta) {
-//	$message = "Debe completar las fechas desde y hasta.";
-//	return false;
-//}
-//if (strtotime($fecha_hasta) < strtotime($fecha_desde)) {
-//	$message = "La fecha hasta no puede ser menor que la fecha desde.";
-//	return false;
-//}
-
 /*==============================================================
 =        ACTUALIZACIÓN DEL PERMISO Y ENVÍO DE CORREO           =
 ==============================================================*/
@@ -691,7 +762,7 @@ try {
 	--------------------------------------------*/
 
 	// Construcción del SQL de actualización del permiso del funcionario
-	$update_permiso_func = DB::PrepareSQL("UPDATE rrhh_permisos.permisos_funcionarios 
+	/*$update_permiso_func = DB::PrepareSQL("UPDATE rrhh_permisos.permisos_funcionarios 
 																									SET tipo_vinculacion = ':1',
 																										dependencia_id = ':2',
 																										fecha_desde = ':3',
@@ -717,52 +788,91 @@ try {
 																										$values["observacion"],
 																										now(),
 																										$values["archivo_adjunto"],
+																										$values["id"]);*/
+	$update_permiso_func = DB::PrepareSQL("UPDATE rrhh_permisos.permisos_funcionarios 
+																									SET tipo_vinculacion = ':1',
+																										dependencia_id = ':2',
+																										fecha_desde = ':3',
+																										hora_desde = ':4',
+																										fecha_hasta = ':5',
+																										hora_hasta = ':6',
+																										motivo_id = ':7',
+																										comision_servicios = ':8',
+																										comision_servicios_descripcion = ':9',
+																										observacion = ':10',
+																										fecha_actualizacion = ':11',
+																										archivo_adjunto = ':12',
+																										intentos_correccion = ':13',
+																										rrhh_resultado_decision = ':14',
+																										rrhh_motivo_rechazo = ':15'
+																									WHERE id = ':16'",
+																										$values["tipo_vinculacion"],
+																										$values["dependencia_id"],
+																										$values["fecha_desde"],
+																										$values["hora_desde"],
+																										$values["fecha_hasta"],
+																										$values["hora_hasta"],
+																										$values["motivo_id"],
+																										$values["comision_servicios"],
+																										$values["comision_servicios_descripcion"],
+																										$values["observacion"],
+																										now(),
+																										$values["archivo_adjunto"],
+																										$values["intentos_correccion"],
+																										$values["rrhh_resultado_decision"],
+																										$values["rrhh_motivo_rechazo"],
 																										$values["id"]);
 	// Ejecución del UPDATE en la base de datos
 	DB::Exec($update_permiso_func);
 	//debug_to_console("update_permiso_func: " . $update_permiso_func);
 	$permiso_funcionario_id = $values["id"];
+
 	
-	// ============================================================================
-	// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
-	// ============================================================================
-	/*-----------------------------------------------------
-	| Preparar datos del permiso para el correo electrónico
-	------------------------------------------------------*/
-	$datosPermiso = array(
-					'nombre_funcionario' => trim($nombre_completo),
-					'fecha_desde' => $fecha_desde,
-					'hora_desde' => $hora_desde,
-					'fecha_hasta' => $fecha_hasta,
-					'hora_hasta' => $hora_hasta,
-					'motivo' => $nombreMotivo,
-					'observacion' => $observacion,
-					'dependencia' => $nombreDependencia,
-					'email_jefe_id' => $email_jefe_id
-	);
+	if ($enviar_mail_jefe == 1) {
+		// ============================================================================
+		// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
+		// ============================================================================
+		/*-----------------------------------------------------
+		| Preparar datos del permiso para el correo electrónico
+		------------------------------------------------------*/
+		$datosPermiso = array(
+						'nombre_funcionario' => trim($nombre_completo),
+						'fecha_desde' => $fecha_desde,
+						'hora_desde' => $hora_desde,
+						'fecha_hasta' => $fecha_hasta,
+						'hora_hasta' => $hora_hasta,
+						'motivo' => $nombreMotivo,
+						'observacion' => $observacion,
+						'dependencia' => $nombreDependencia,
+						'email_jefe_id' => $email_jefe_id,
+						'tipo_solicitud' => 'permiso',
+		);
 
 
-	/*--------------------------------------------
-	| Enviar correo de notificación
-	--------------------------------------------*/
-	$emailEnviado = EmailUtils::enviarNotificacionSolicitudPermiso(
-		$datosPermiso, 
-		$permiso_funcionario_id,
-		$email_jefe
-	);
+		/*--------------------------------------------
+		| Enviar correo de notificación
+		| - Toda la logica y programacion del envio de correo
+		| se encuentra en el archivo: output\include\email_utils.php
+		--------------------------------------------*/
+		$emailEnviado = EmailUtils::enviarNotificacionSolicitudPermiso(
+			$datosPermiso, 
+			$permiso_funcionario_id,
+			$email_jefe
+		);
 
-	if ($emailEnviado) {
-		error_log("Correo enviado para permiso ID: " . $permiso_funcionario_id);
-		debug_to_console("Correo enviado para permiso ID: " . $permiso_funcionario_id);
-	} else {
-		error_log("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
-		debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
-	}
-
+		if ($emailEnviado) {
+			error_log("Correo enviado para permiso ID: " . $permiso_funcionario_id);
+			//debug_to_console("Correo enviado para permiso ID: " . $permiso_funcionario_id);
+		} else {
+			error_log("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
+			//debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
+		}
+	} // FIN '$enviar_mail_jefe == 1'
+	
 } catch (Exception $e) {
 	// Si ocurre un error en el correo, NO se revierte la inserción del permiso.
 	error_log("Excepción al enviar correo: " . $e->getMessage());
-	debug_to_console("Excepción al enviar correo: " . $e->getMessage());
+	//debug_to_console("Excepción al enviar correo: " . $e->getMessage());
 }
 
 
@@ -859,15 +969,40 @@ try {
 function BeforeShowEdit(&$xt, &$templatefile, $values, $pageObject)
 {
 
-		$pageObject->hideItem("edit_id"); // Oculta el campo id
+		/*==============================================================
+=            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
+==============================================================*/
+/**
+ * Imprime información en la consola del navegador.
+ * Útil SOLO en desarrollo para verificar valores.
+ *
+ * @param mixed  $data    Datos a mostrar
+ * @param string $context Texto descriptivo del contexto
+ */
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
+
+$pageObject->hideItem("edit_id"); // Oculta el campo id
 $pageObject->hideItem("edit_dependencia_id");
 $pageObject->hideItem("edit_email_jefe_id"); // Oculta el campo email_jefe_id
 $pageObject->hideItem("edit_tipo_vinculacion"); // Oculta el campo tipo_vinculacion
+$pageObject->hideItem("edit_save"); // Oculta el boton Guardar que trae por defecto.
 
 // Se creo un campo falso 'nombre_completo_edit', porque no puedo hacer el envio desde el formulario
-// del campo real porque es un campo de solo lectura y al ser solo readOnly no se puede enviar, solucion provisoria.
+// del campo real porque es un campo de solo lectura y al ser solo readOnly no se puede enviar, es una solucion provisoria...
 $pageObject->hideItem("nombre_completo_edit");
 $pageObject->hideItem("descripcion_dependencia_edit");
+
+$pageObject->hideItem("text_email_jefe_edit"); // Oculta el texto email_jefe_edit
+
+$pageObject->hideItem("edit_decidido_por"); // Oculta el campo decidido_por
+
+$pageObject->hideItem("edit_id_funcionario"); // Oculta el campo id_funcionario
 
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
@@ -882,13 +1017,19 @@ $sqlDependencia = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta 
 																p.per_nombre || ' ' || p.per_apellido AS nombre_completo,
 																p.per_cod,
 																p.tipo_funcionario_tfun_cod,
-																tf.tfun_descri AS descripcion_tipo_funcionario
+																tf.tfun_descri AS descripcion_tipo_funcionario,
+																TO_CHAR(AGE(CURRENT_DATE, p.per_ingreso), 'YY \"años, \" MM \"meses y \" DD \"días\"') AS antiguedad_laboral,
+																c.car_descri,
+																s.sed_descripcion
 												FROM personales p
 													LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
 													LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
+													LEFT JOIN cargos c ON c.car_cod = p.cargos_car_cod
+													LEFT JOIN sedes s ON s.sed_cod = p.per_sede
 												WHERE p.per_cod = $userPersonal";
 $resultDependencia = CustomQuery($sqlDependencia);
 $dataDependencia = db_fetch_array($resultDependencia);
+
 $pageObject->setProxyValue("dep_cod", $dataDependencia["dep_cod"]);
 $pageObject->setProxyValue("descripcion_dependencia", $dataDependencia["descripcion_dependencia"]);
 $pageObject->setProxyValue("persona_ci", $dataDependencia["persona_ci"]);
@@ -896,6 +1037,9 @@ $pageObject->setProxyValue("nombre_completo", $dataDependencia["nombre_completo"
 $pageObject->setProxyValue("per_cod", $dataDependencia["per_cod"]);
 $pageObject->setProxyValue("tipo_funcionario_tfun_cod", $dataDependencia["tipo_funcionario_tfun_cod"]);
 $pageObject->setProxyValue("descripcion_tipo_funcionario", $dataDependencia["descripcion_tipo_funcionario"]);
+$pageObject->setProxyValue("antiguedad_laboral", $dataDependencia["antiguedad_laboral"]);
+$pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
+$pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
 
 // Query para obtener TODOS los jefes posibles
 $sqlEmail = "
@@ -920,6 +1064,29 @@ while ($row = db_fetch_array($resultEmail)) {
 
 // 👉 Pasamos TODO como JSON al frontend(JavaScript Onload event)
 $pageObject->setProxyValue("jefes_emails", json_encode($jefes));
+
+
+
+// Query para obtener el conteo de cantidad de permisos por mes.
+$sqlTotalPermisos = DB::PrepareSQL(
+"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
+				COUNT(*) AS cantidad_permisos_mes
+FROM rrhh_permisos.permisos_funcionarios
+WHERE id_funcionario = ':1'
+  AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
+  AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
+GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
+);
+//debug_to_console("sqlTotalPermisos: " . $sqlTotalPermisos);
+$resultTotalPermisos = DB::Query($sqlTotalPermisos);
+$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
+if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
+	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
+} else {
+	$cantidad_permisos_mes = 0;
+}
+//debug_to_console("mes_nombre: " . $rowTotalPermisos['mes_nombre'] . ", total_permisos: " . $rowTotalPermisos['cantidad_permisos_mes']);
+$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
 
 ;		
 } // function BeforeShowEdit
@@ -984,9 +1151,12 @@ $userPersonal = (int)$currentUser["usu_personal"];
     AND pf.id_funcionario = {$userPersonal}
 ";*/
 
+// Todos los estados del usuario
 $strWhereClause .= "
     AND pf.id_funcionario = {$userPersonal}
 ";
+
+
 ;		
 } // function BeforeQueryList
 
@@ -1176,7 +1346,7 @@ $pageObject->setMessage($html_exitoso);
 function BeforeMoveNextList(&$data, &$row, &$record, $recordId, $pageObject)
 {
 
-		
+		/*
 $pageObject->hideItem("grid_edit", $recordId); // Oculta inicialmente el boton de edicion.
 
 if ($data["resultado_decision"] == 'PENDIENTE') {
@@ -1184,7 +1354,18 @@ if ($data["resultado_decision"] == 'PENDIENTE') {
 } else {
 	$pageObject->hideItem("grid_edit", $recordId); // Oculta el boton de edicion.
 }
+*/
 
+
+$pageObject->hideItem("grid_edit", $recordId); // Oculta inicialmente el boton de edicion.
+$pageObject->hideItem("list_intentos_correccion"); // Oculta el campo intentos de correcion(necesario para el 'edit')
+
+if ($data["resultado_decision"] == 'PENDIENTE'
+			OR ($data["rrhh_resultado_decision"] == 'RECHAZADO' AND $data["intentos_correccion"] < 1) ) {
+	$pageObject->showItem("grid_edit", $recordId); // Muestra el boton de edicion.
+} else {
+	$pageObject->hideItem("grid_edit", $recordId); // Oculta el boton de edicion.
+}
 
 ;		
 } // function BeforeMoveNextList
@@ -1348,119 +1529,764 @@ $pageObject->setMessage($html_exitoso);
 function BeforeAdd(&$values, &$sqlValues, &$message, $inline, $pageObject)
 {
 
-		// EVENTO: Before record added
+		/*==============================================================
+=            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
+==============================================================*/
+/**
+ * Imprime información en la consola del navegador.
+ * Útil SOLO en desarrollo para verificar valores.
+ *
+ * @param mixed  $data    Datos a mostrar
+ * @param string $context Texto descriptivo del contexto
+ */
+function debug_to_console($data, $context = 'Debug in Console') {
+	ob_start();
+	$output  = 'console.info(\'' . $context . ':\');';
+	$output .= 'console.log(' . json_encode($data) . ');';
+	$output  = sprintf('<script>%s</script>', $output);
+	echo $output;
+	
+	//ob_start();
+	//$json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
+	//$script =  "console.group('PHP " . addslashes($context) . "');";
+	//$script .= "console.log(" . $json_data . ");";
+	//$script .= "console.groupEnd();";
+	//printf('<script>%s</script>', $script);
+}
 
-$camposRequeridos = [
-	"dependencia_id"   => "Dependencia",
-	"tipo_vinculacion" => "Tipo de vinculación"
+
+/**
+ * ============================================================
+ * 🎨 GENERADOR DE MENSAJES DE ERROR VISUALES
+ * ============================================================
+ * Genera un bloque HTML estilizado para mostrar errores al usuario.
+ *
+ * @param string $titulo
+ * @param string $descripcion
+ * @param array  $items Lista opcional de detalles
+ * @param string $footer Texto adicional (ej: instrucciones)
+ */
+function generarMensajeError($titulo, $descripcion, $items = [], $footer = "") {
+	$htmlItems = "";
+	
+	if (!empty($items)) {
+		$htmlItems .= "<ul style='margin-top:8px'>";
+		foreach ($items as $item) {
+			$htmlItems .= "<li>$item</li>";
+		}
+		$htmlItems .= "</ul>";
+	}
+	
+	return "
+	<div style='
+		background:#f8d7da;
+		color:#721c24;
+		padding:14px;
+		border-radius:12px;
+		border-left:6px solid #dc3545;
+	'>
+		<b>❌ $titulo</b>
+		<br><br>
+		<b>$descripcion</b>
+		$htmlItems
+		$footer
+	</div>";
+}
+
+
+/**
+ * ============================================================
+ * 👤 VALIDACIÓN DE DATOS DEL PERFIL DEL FUNCIONARIO
+ * ============================================================
+ * Se valida que el funcionario tenga datos básicos completos.
+ * Estos datos NO se cargan en el formulario directamente,
+ * pero son necesarios para procesar correctamente el permiso.
+ * Verifica que el usuario tenga completos los datos básicos
+ * antes de permitir enviar una solicitud.
+ */
+$camposRequeridosPerfil = [
+	"descripcion_dependencia" => "Dependencia",
+	"descripcion_tipo_vinculacion" => "Tipo de vinculación"
 ];
 
-$faltantes = [];
+$faltantesPerfil = [];
 
-foreach ($camposRequeridos as $campo => $label) {
+foreach ($camposRequeridosPerfil as $campo => $label) {
 	if (!isset($values[$campo]) || trim($values[$campo]) === "") {
-		$faltantes[] = $label;
+		$faltantesPerfil[] = $label;
 	}
 }
 
-if (!empty($faltantes)) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Faltan completar los siguientes datos de tu perfil:</b>
-		<ul style='margin-top:8px'>
-			<li>" . implode("</li><li>", $faltantes) . "</li>
-		</ul>
-		Por favor, comunícate con el área de <b>Recursos Humanos</b> para actualizar tu información.
-	</div>";
-	$message = $mensaje;
+// ⛔ Si faltan datos → detener proceso
+if (!empty($faltantesPerfil)) {
+	$message = generarMensajeError(
+		"No es posible enviar la solicitud de permiso.",
+		"Faltan completar los siguientes datos de tu perfil:",
+		$faltantesPerfil,
+		"Por favor, comunícate con la <b>Dirección General de Talentos Humanos</b> para actualizar tu información."
+	);
 	
 	return false; // ⛔ DETIENE TODO
 }
+// FIN VALIDACIÓN DE PERFIL DEL FUNCIONARIO
 
 
-if (!$values["fecha_desde"] || !$values["fecha_hasta"]) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Faltan completar los siguientes datos del formulario:</b>
-		<ul style='margin-top:8px'>
-			<li>Fecha Desde / Fecha Hasta</li>
-		</ul>
-		Por favor, envia toda la información necesaria.
-	</div>";
-	$message = $mensaje;
-	
-	return false; // ⛔ DETIENE TODO
+/**
+ * ============================================================
+ * 📝 VALIDACIÓN DE CAMPOS DEL FORMULARIO
+ * ============================================================
+ * Verifica que todos los campos obligatorios estén completos.
+ */
+$camposRequeridosFormulario = [
+	"motivo_id" => "Tipo de permiso o justificación",
+	"fecha_desde" => "Fecha desde",
+	"hora_desde" => "Hora de inicio",
+	"fecha_hasta" => "Fecha hasta",
+	"hora_hasta" => "Hora de fin",
+	"email_jefe_id" => "Correo electrónico del superior inmediato"
+];
+
+$faltantesFormulario = [];
+
+foreach ($camposRequeridosFormulario as $campoForm => $labelForm) {
+	if (!isset($values[$campoForm]) || trim($values[$campoForm]) === "") {
+		$faltantesFormulario[] = $labelForm;
+	}
 }
 
-if (strtotime($values["fecha_hasta"]) < strtotime($values["fecha_desde"])) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Inconsistencia en los datos del formulario:</b>
-		<ul style='margin-top:8px'>
-			<li>Fecha Desde / Fecha Hasta</li>
-		</ul>
-		La <b>fecha desde</b> no puede ser menor que la <b>fecha hasta</b>
-		<br>
-		Por favor corrige y envia toda la información necesaria.
-	</div>";
-	$message = $mensaje;
-	
+// ⛔ Si faltan datos → detener proceso
+if (!empty($faltantesFormulario)) {
+	$message = generarMensajeError(
+		"No es posible enviar la solicitud de permiso.",
+		"Falta completar los siguientes datos del formulario:",
+		$faltantesFormulario,
+		"Por favor, completa los campos obligatorios del formulario."
+	);
+
 	return false; // ⛔ DETIENE TODO
+}
+// FIN VALIDACIÓN DE CAMPOS DEL FORMULARIO
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// VALIDACIÓN LÍMITE MENSUAL, LÍMITE ANUAL, TIEMPO DE PRESENTACIÓN (24h o 48h)
+
+/**
+ * ============================================================
+ * 📌 OBTENER DATOS DEL TIPO DE PERMISO
+ * ============================================================
+ */
+$motivo_id = $values["motivo_id"];
+debug_to_console("motivo_id: " . $motivo_id);
+
+// Obtener la descripcion del tipo de permiso para un mensaje más claro para el usuario.
+$sqlMotivoDesc = "SELECT * 
+											FROM public.tipos_ocurrencias 
+											WHERE tip_cod = $motivo_id";
+$rsMotivoDesc = DB::Query($sqlMotivoDesc);
+$dataMotivoDesc = $rsMotivoDesc->fetchAssoc();
+$tip_descripcion = $dataMotivoDesc["tip_descripcion"];
+$tip_dias = $dataMotivoDesc["tip_dias"];
+$tip_cantidad_maxima_mes = $dataMotivoDesc["tip_cantidad_maxima_mes"];
+$tip_cantidad_maxima_anho = $dataMotivoDesc["tip_cantidad_maxima_anho"];
+debug_to_console("tip_descripcion: " . $tip_descripcion . ", tip_dias: " . $tip_dias . ", tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . ", tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
+
+/*
+ * 🔧 VALIDACION DE LÍMITE MENSUAL 
+ * Valida si un funcionario ya alcanzó el límite máximo de permisos permitidos 
+ * para un tipo específico en el mes actual.
+ *
+ * Filtra por el tipo de permiso (ej: médico, personal, duelo).
+ * Filtra por el empleado específico que está solicitando.
+ * Compara que el mes de fecha_desde sea igual al mes actual. Esto 
+ * cuenta solo los permisos del mes en curso, sin importar el día exacto.
+*/
+
+// 🔧 PASO 1 — Obtener configuración
+//$sql = "SELECT * FROM rrhh_permisos.parametros_permisos WHERE tip_cod::int = $motivo_id AND par_estado = 'ACTIVO'";
+//$sql = "SELECT * 
+//					FROM public.tipos_ocurrencias 
+//					WHERE tip_cod = $motivo_id";
+//debug_to_console("sql: " . $sql);
+//$rs = DB::Query($sql);
+//$config = $rs->fetchAssoc();
+//debug_to_console("tip_cod: " . $config["tip_cod"]);
+
+
+// 🔧 PASO 2 — VALIDAR LÍMITE MENSUAL
+//$sqlMes = "SELECT COUNT(*) as count_total_permisos_mes
+//						FROM rrhh_permisos.permisos_funcionarios
+//						WHERE motivo_id::int = $motivo_id
+//						AND id_funcionario = " . $values["id_funcionario"]."
+//						AND date_trunc('month', fecha_desde) = date_trunc('month', CURRENT_DATE)";
+//debug_to_console("sqlMes: " . $sqlMes);
+//$rsMes = DB::Query($sqlMes);
+//$dataMes = $rsMes->fetchAssoc();
+//debug_to_console("dataMesTotal: " . $dataMes["count_total_permisos_mes"]);
+
+//if ($config["tip_cantidad_maxima_mes"] && $dataMes["count_total_permisos_mes"] >= $config["tip_cantidad_maxima_mes"]) {
+//	$usados = (int)$dataMes["count_total_permisos_mes"];
+//	$maximo = (int)$config["tip_cantidad_maxima_mes"];
+//	$restantes = max(0, $maximo - $usados);
+
+	// Calcular cuándo se reinicia el límite (primer día del próximo mes)
+//	$reinicia = date('d/m/Y', strtotime('first day of next month'));
+	
+	// ✅ Mensaje amigable y completo
+//	$message = generarMensajeError(
+//		"📋 <strong>Límite mensual alcanzado[$maximo]</strong>",
+//		"Ya utilizaste <strong>$usados de $maximo</strong> permisos del tipo: <em>'$tip_descripcion'</em> este mes.<br>"
+//		. ($restantes > 0 
+//			? "Te quedan <strong>$restantes</strong> disponible(s)." 
+//			: "No te quedan permisos disponibles de este tipo para este mes.")
+//			. "<br><br>"
+//			. "🗓️ El límite se reiniciará el: <strong>$reinicia</strong><br>"
+//			. "💡 Puedes solicitar otro tipo de permiso si lo necesitas.",
+//		[]
+//	);
+	
+//	return false;
+//}
+
+// 🔧 PASO 3 — VALIDAR LÍMITE ANUAL
+//$sqlAnho = "SELECT COUNT(*) as count_total_permisos_anho
+//							FROM rrhh_permisos.permisos_funcionarios 
+//							WHERE motivo_id::int = $motivo_id 
+//							AND id_funcionario = " . $values["id_funcionario"]." 
+//							AND date_part('year', fecha_desde) = date_part('year', CURRENT_DATE)";
+//debug_to_console("sqlAnho: " . $sqlAnho);
+//$rsAnho = DB::Query($sqlAnho);
+//$dataAnho = $rsAnho->fetchAssoc();
+//debug_to_console("dataAnhoTotal: " . $dataAnho["count_total_permisos_anho"]);
+
+//if ($config["tip_cantidad_maxima_anho"] && $dataAnho["count_total_permisos_anho"] >= $config["tip_cantidad_maxima_anho"]) {
+//    $usadosAnho = (int)$dataAnho["count_total_permisos_anho"];
+//		$maximoAnho = (int)$config["tip_cantidad_maxima_anho"];
+//		$restantesAnho = max(0, $maximoAnho - $usadosAnho);
+	
+	// ✅ Mensaje amigable y completo
+//	$message = generarMensajeError(
+//		"📋 <strong>Límite anual alcanzado[$maximoAnho]</strong>",
+//		"Ya utilizaste <strong>$usadosAnho de $maximoAnho</strong> permisos del tipo: <em>'$tip_descripcion'</em> este año.<br>"
+//		. ($restantesAnho > 0 
+//			? "Te quedan <strong>$restantesAnho</strong> disponible(s)." 
+//			: "No te quedan permisos disponibles de este tipo para este año.")
+//			. "<br><br>"
+//			. "💡 Puedes solicitar otro tipo de permiso si lo necesitas.",
+//		[]
+//	);
+	
+//	return false;
+//}
+
+// 🔧 PASO 4 — VALIDAR TIEMPO DE PRESENTACIÓN (24h o 48h)
+// ###IMPORTANTE### ESTA VALIDACION DEBO SEGUIR REVISANDO PORQUE LA PRESENTACION EN ALGUNOS CASOS DICE POSTERIOR AL EVENTO O AL REINTEGRO
+//ENTONCES COMO PUEDO SABER ESO, CON LA FECHA DE MARCACION...
+//$fechaPermiso = new DateTime($values["fecha_desde"]);
+//$hoy = new DateTime();
+//$diffHoras = ($hoy->getTimestamp() - $fechaPermiso->getTimestamp()) / 3600;
+
+//if ($config["par_tiempo_presentacion_horas"] && $diffHoras > $config["par_tiempo_presentacion_horas"]) {
+//	$maximoTiempoPresentacionHoras = (int)$config["par_tiempo_presentacion_horas"];
+//	$maximoTiempoPresentacionHorasDescripcion = $config["par_tiempo_presentacion_horas_descripcion"];
+//	//debug_to_console("maximoTiempoPresentacionHoras: " . $maximoTiempoPresentacionHoras . " maximoTiempoPresentacionHorasDescripcion: " . $maximoTiempoPresentacionHorasDescripcion);
+	
+	// ✅ Mensaje amigable y completo
+//	$message = generarMensajeError(
+//		"📋 <strong>Límite de tiempo de presentacion alcanzado[$maximoTiempoPresentacionHoras]</strong> hs.",
+//		"Ya superaste el tiempo máximo de presentación: <strong>'$maximoTiempoPresentacionHorasDescripcion'</strong> 
+//		para el tipo de permiso: <em>'$tip_descripcion'</em>.<br>",
+//		[]
+//	);
+//	
+//	return false;
+//}
+// FIN VALIDACIÓN LÍMITE MENSUAL, LÍMITE ANUAL, TIEMPO DE PRESENTACIÓN (24h o 48h)
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+/**
+ * ============================================================
+ * 📅 FUNCIONES AUXILIARES DE FECHAS
+ * ============================================================
+ */
+
+/**
+ * Funcion que calcula dias entre fechas.
+ * Genera un array con todas las fechas entre inicio y fin
+ */
+function lista_dias($inicio, $fin) {
+	$rango = array();
+	if (is_string($inicio) === true) $inicio = strtotime($inicio);
+	if (is_string($fin) === true ) $fin = strtotime($fin);
+	if ($inicio > $fin) return createDateRangeArray($fin, $inicio);
+	
+	do {
+		$rango[] = date('Y-m-d', $inicio);
+		$inicio = strtotime("+ 1 day", $inicio);
+	} while($inicio <= $fin);
+	
+	return $rango;
+}
+
+/**
+ * Obtiene lista de feriados desde BD
+ */
+function lista_feriados() {
+	$lista_feriados = array();
+	$sql_feriados = "select fer_fecha from feriados";
+	$resultado_feriados = CustomQuery($sql_feriados);
+	while($feriado = db_fetch_array($resultado_feriados)) {
+		array_push($lista_feriados, $feriado['fer_fecha']);
+	}
+	return $lista_feriados;
+}
+
+/**
+ * ============================================================
+ * 📊 CÁLCULO DE DÍAS UTILIZADOS
+ * ============================================================
+ * Calcula días consumidos considerando:
+ * - Fines de semana
+ * - Feriados
+ * - Tipo de días (corridos o hábiles)
+ */
+function gasto_dias($lista_dias, $tipo_dias) {
+	//debug_to_console("gasto_dias.lista_dias: " . $lista_dias);
+	//debug_to_console("gasto_dias.tipo_dias: " . $tipo_dias);
+
+	$resultado = array();
+	$meses_gasto = array();
+	$cantida_total_meses = 0;
+	$mes = 0;
+	$anho = 0;
+	$dias = 0;
+	$cantidad_dias = 0;
+	$corridos = $tipo_dias;
+	$feriados = lista_feriados();
+	
+	foreach ($lista_dias as $valor) {
+		debug_to_console("gasto_dias.valor1: " . $valor);
+		debug_to_console("gasto_dias.valor2: " . date('w', strtotime($valor)));
+		if (((date('w', strtotime($valor)) != 6) and (date('w', strtotime($valor)) != 0) and array_search($valor, $feriados, true) === FALSE ) OR $corridos == 1) {	
+			$dias = $dias + 1;
+			$cantidad_dias = $dias;
+			if ($anho == 0 or $anho <> date("Y", strtotime($valor))) {
+				$anho = date("Y", strtotime($valor));
+				$mes = number_format(date("m", strtotime($valor)));
+				$cantida_total_meses = $cantida_total_meses + 1;
+				$dias = 1;
+			}
+			
+			if ($mes <> date("m", strtotime($valor))) {
+				$mes = number_format(date("m", strtotime($valor)));	
+				$cantida_total_meses = $cantida_total_meses + 1;
+				$dias = 1;
+				$cantidad_dias = 1;
+			}
+			debug_to_console("gasto_dias.cantida_total_meses.cantidad_dias: " . $cantidad_dias);
+			$meses_gasto[$cantida_total_meses][0] = $anho;
+			$meses_gasto[$cantida_total_meses][1] = $mes;
+			$meses_gasto[$cantida_total_meses][2] = $cantidad_dias;
+		}
+	}
+	
+	return $meses_gasto;
+}
+
+/**
+ * ============================================================
+ * 🧮 CÁLCULO DE MÁXIMOS (MES / AÑO)
+ * ============================================================
+ * función que genera lista de días entre fechas.
+ * Retorna:
+ * [0] → Máximo en un mes
+ * [1] → Máximo en un año
+ * [2] → Detalle por mes
+ */
+function calcular_maximos($lista_dias, $tipo_dias) {
+	//print_r($lista_dias);
+	debug_to_console("calcular_maximos.parametro.lista_dias " . $lista_dias . ", parametro.tipo_dias: " .$tipo_dias );
+	
+	$resultado = array();
+	$meses_gasto = array();
+	$cantida_total_meses = 0;
+	$maximo_mes = 0;
+	$maximo_anho = 0;
+	$suma_mes = 0;
+	$suma_anho = 0;
+	$mes = 0;
+	$anho = 0;
+	$corridos = $tipo_dias;
+	$mes_registrado = 0;
+	$feriados = lista_feriados();
+	foreach ($lista_dias as $valor) {
+		//debug_to_console("calcular_maximos.lista_dias.valor1: " . $valor);
+		debug_to_console("calcular_maximos.lista_dias.valor2: " . date('w', strtotime($valor)));
+		if (((date('w', strtotime($valor)) != 6) and (date('w', strtotime($valor)) != 0) and array_search($valor, $feriados, true) === FALSE) OR $corridos == 1) {
+			if ($anho == 0) {
+				$cantida_total_meses = $cantida_total_meses + 1;
+				$mes_registrado = $cantida_total_meses;
+				$anho = date("Y", strtotime($valor));
+				$mes = date("m", strtotime($valor));
+				$suma_anho = $suma_anho + 1;
+				$maximo_anho = 0;
+				$suma_mes = $suma_mes + 1;
+				$maximo_mes = 0;
+			} else {
+				if ($anho == date("Y", strtotime($valor))) {
+					if ($mes == date("m", strtotime($valor))) {
+						$suma_mes = $suma_mes + 1;	
+					} else {
+						$cantida_total_meses = $cantida_total_meses + 1;
+						$suma_mes = 0;
+						$mes = date("m", strtotime($valor));
+						$suma_mes = $suma_mes + 1;
+					}
+					
+					$suma_anho = $suma_anho + 1;
+				} else {
+					$cantida_total_meses = $cantida_total_meses + 1;
+					$meses_gasto[$cantida_total_meses][0] = $anho;
+					$meses_gasto[$cantida_total_meses][1] = $mes;
+					$meses_gasto[$cantida_total_meses][2] = $maximo_mes;
+					$cantidad_anhos = $cantidad_anhos + 1;
+					$cantidad_meses = $cantidad_meses + 1;
+					$suma_anho = 0;
+					$suma_mes = 0;
+					$anho = date("Y", strtotime($valor));
+					$mes = date("m", strtotime($valor));
+					$suma_anho = $suma_anho + 1;
+					$suma_mes = $suma_mes + 1;
+				}
+			}
+			
+			if ($mes_registrado != $cantida_total_meses) {
+				$meses_gasto[$cantida_total_meses][0] = $anho;
+				$meses_gasto[$cantida_total_meses][1] = $mes_registrado;
+				$fecha_final = $anho . "-" . $mes . "-" . "01";
+				$cantidad_maxima_mes = date("t", strtotime($fecha_final));
+				$meses_gasto[$cantida_total_meses][2] = $cantidad_maxima_mes;
+				$mes_registrado = $cantida_total_meses;
+			}
+			
+			if ($maximo_anho < $suma_anho) {
+				$maximo_anho = $suma_anho;
+			}
+			
+			if ($maximo_mes < $suma_mes) {
+				$maximo_mes = $suma_mes;
+				$meses_gasto[$cantida_total_meses][0] = $anho;
+				$meses_gasto[$cantida_total_meses][1] = $mes;
+				$meses_gasto[$cantida_total_meses][2] = $maximo_mes;	
+			}
+			debug_to_console("calcular_maximos.maximo_mes: " . $maximo_mes . ", anho: " . $anho . ", mes: " . $mes);
+		}
+		
+	}
+	
+	$resultado[0] = $maximo_mes;
+	$resultado[1] = $maximo_anho;
+	$resultado[2] = gasto_dias($lista_dias, $tipo_dias);
+	
+	return $resultado;
 }
 
 
-if (!$values["email_jefe_id"]) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Faltan completar los siguientes datos del formulario:</b>
-		<ul style='margin-top:8px'>
-			<li>Correo electrónico del superior inmediato</li>
-		</ul>
-		Por favor, envia toda la información necesaria.
-	</div>";
-	$message = $mensaje;
-	
-	return false; // ⛔ DETIENE TODO
+
+
+
+
+$resultado_maximo = array();
+
+/**
+ * ============================================================
+ * 📊 OBTENER CONFIGURACIÓN DEL PERMISO
+ * ============================================================
+ * Consulta cantidades de dias permitidos por permiso.
+ */
+//$sql_cantidades = "SELECT tip_cantidad_maxima_mes,tip_cantidad_maxima_anho,tip_dias 
+//												FROM tipos_ocurrencias 
+//												WHERE tip_cod = " . $motivo_id;
+//debug_to_console("sql_cantidades: " . $sql_cantidades);
+//$resultados_cantidades = CustomQuery($sql_cantidades); //Deprecado
+//$fila_cantidades = db_fetch_array($resultados_cantidades);
+
+// Generar lista de días del permiso solicitado
+$lista_dias = lista_dias($values['fecha_desde'], $values['fecha_hasta']);
+
+// Calcular consumo
+//$resultado_maximo = calcular_maximos($lista_dias, $fila_cantidades['tip_dias']);
+$resultado_maximo = calcular_maximos($lista_dias, $tip_dias);
+//debug_to_console("resultado_maximo[2]: " . count($resultado_maximo[2]) );
+
+//$tip_cantidad_maxima_mes = $fila_cantidades["tip_cantidad_maxima_mes"];
+//$tip_cantidad_maxima_anho = $fila_cantidades["tip_cantidad_maxima_anho"];
+//debug_to_console("tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . " tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
+
+if (count($resultado_maximo[2]) <= 0) {
+	$message = generarMensajeError(
+		"📋 <strong>Error en Fecha de Permiso</strong><br>",
+		"<ul>
+			<li> No se puede cargar un Permiso en día Feriado o Fin de semana, Verifique la fecha!</li>
+			</ul>",
+		[]
+	);
+	return false;
 }
+
+foreach ($resultado_maximo[2] as $valores_mes) {
+	//debug_to_console("valores_mes[0]: " . $valores_mes[0] . " valores_mes[1]: " . $valores_mes[1] );
+	if ($valores_mes[1] == 1){
+		$desc_mes = "Enero";
+	} else if($valores_mes[1] == 2) {
+		$desc_mes = "Febrero";
+	} else if($valores_mes[1] == 3) {
+		$desc_mes = "Marzo";
+	} else if($valores_mes[1] == 4) {
+		$desc_mes = "Abril";
+	} else if($valores_mes[1] == 5) {
+		$desc_mes = "Mayo";
+	} else if($valores_mes[1] == 6) {
+		$desc_mes = "Junio";
+	} else if($valores_mes[1] == 7) {
+		$desc_mes = "Julio";
+	} else if($valores_mes[1] == 8) {
+		$desc_mes = "Agosto";
+	} else if($valores_mes[1] == 9) {
+		$desc_mes = "Septiembre";
+	} else if($valores_mes[1] == 10) {
+		$desc_mes = "Octubre";
+	} else if($valores_mes[1] == 11) {
+		$desc_mes = "Noviembre";
+	} else if($valores_mes[1] == 12) {
+		$desc_mes = "Diciembre";
+	}
+}
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE LÍMITE MENSUAL
+ * ============================================================
+ */
+debug_to_console("resultado_maximo[0]: " . $resultado_maximo[0] . " tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes );
+//if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
+if ($resultado_maximo[0] > $tip_cantidad_maxima_mes) {
+	//$message = generarMensajeError(
+	//	"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+	//	"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> 
+	//		<ul>
+	//		<li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $fila_cantidades['tip_cantidad_maxima_mes'] . " </li>
+	//		<li> Cantidad actual: " . $resultado_maximo[0] . "</li>
+	//		</ul>",
+	//	[]
+	//);
+	$message = generarMensajeError(
+		"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+		"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> 
+			<ul>
+			<li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $tip_cantidad_maxima_mes . " </li>
+			<li> Cantidad actual: " . $resultado_maximo[0] . "</li>
+			</ul>",
+		[]
+	);
+	return false;
+} else {
+	foreach ($resultado_maximo[2] as $valores_mes) {
+		
+		/**
+		 * ============================================================
+		 * 🔁 VALIDACIÓN CONTRA HISTORIAL (BD)
+		 * ============================================================
+		 * Suma lo ya utilizado + lo solicitado
+		 */
+		$sql_total_meses = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS total_dias
+														FROM (
+																SELECT *, 
+																		(SELECT tip_cod_tipo_sumatoria FROM tipos_ocurrencias WHERE tip_cod = ocu_tipo) AS ocu_cod_tipo_sumatoria
+																FROM ocurrencias
+																	JOIN detalle_ocurrencias ON ocu_cod = det_cod_ocurrencia
+															) AS novedades
+														WHERE (ocu_tipo = " . $motivo_id . " OR ocu_cod_tipo_sumatoria = " . $motivo_id . ")
+														AND det_anho_gasto = " . $valores_mes[0]."
+														AND det_mes_gasto = " . $valores_mes[1]."
+														AND det_cod_persona = " . $values['id_funcionario']."";
+		//debug_to_console("sql_total_meses-else: " . $sql_total_meses);
+		$resultado_total_meses = CustomQuery($sql_total_meses); // Deprecado
+		$fila_total_mes = db_fetch_array($resultado_total_meses);
+		
+		//debug_to_console("tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . ", total_dias: " . $fila_total_mes["total_dias"] . ", valores_mes: " . $valores_mes[2]);
+		// ⛔ Validar contra límite
+		//if ($fila_cantidades["tip_cantidad_maxima_mes"] < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+		if ($tip_cantidad_maxima_mes < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+			$message = generarMensajeError(
+				"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+				"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'.<br> 
+					<ul>
+						<li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de:  ".$tip_cantidad_maxima_mes."</il> 
+						<li>La Cantidad utilizada en el mes de ".$desc_mes." es de: ".($fila_total_mes["total_dias"]+$valores_mes[2]) . "</li>
+					</ul>",
+				[]
+			);
+			return false;
+		}
+	}
+}
+
+//ESTOY CARGANDO PERMISOS CON FECHA DE HOY Y NO ME BLOQUEA NADA, PORQUE ME PERMITE CARGAR SIENDO QUE DEBE VALIDAR QUE NO SE CARGUE MAS DEL PERMITIDO
+
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN ANUAL
+ * ============================================================
+ */
+$cantidad_anhos = 0;
+$anho_actual = 0;
+$lista_anhos_valores = array();
+$valor_anho = array();
+
+// consulta acumulada anual
+foreach ($resultado_maximo[2] as $valores_anho) {
+	if ($anho_actual == 0) {
+		$anho_actual = $valores_anho[0];
+	}
+	
+	if ($anho_actual != $valores_anho[0]) {
+		$valor_anho[1] = $cantidad_anhos;
+		$valor_anho[0] = $anho_actual;
+		array_push($lista_anhos_valores, $valor_anho);
+		$valor_anho = array();
+	} else {
+		$cantidad_anhos = $valores_anho[2];
+	}
+}		
+$valor_anho[1] = $cantidad_anhos;
+$valor_anho[0] = $anho_actual;
+array_push($lista_anhos_valores, $valor_anho);
+	
+foreach($lista_anhos_valores as $gastados_anho) {
+
+	$sql_suma = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS suma_anho
+									FROM (
+										SELECT *, 
+												(SELECT tip_cod_tipo_sumatoria FROM tipos_ocurrencias WHERE tip_cod = ocu_tipo) AS ocu_cod_tipo_sumatoria
+										FROM ocurrencias
+											JOIN detalle_ocurrencias ON ocu_cod = det_cod_ocurrencia
+									) AS novedades
+									WHERE (ocu_tipo = ".$motivo_id." OR ocu_cod_tipo_sumatoria = ".$motivo_id.")
+									AND det_anho_gasto = ".$valores_mes[0]."
+									AND det_cod_persona = ".$values['id_funcionario']."";
+	//debug_to_console("sql_suma: " . $sql_suma);
+	$resultado_suma = CustomQuery($sql_suma);
+	$fila_suma = db_fetch_array($resultado_suma);
+	//if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $fila_cantidades['tip_cantidad_maxima_anho']) {
+	if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $tip_cantidad_maxima_anho) {
+		$valor = $fila_suma['suma_anho'] + $gastados_anho[1];
+		//$message = generarMensajeError(
+		//	"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
+		//	"Cantidad máxima por año:".$fila_cantidades['tip_cantidad_maxima_anho']." Cantidad Actual: ".$valor,
+		//	[]
+		//);
+		$message = generarMensajeError(
+			"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
+			"Cantidad máxima por año:".$tip_cantidad_maxima_anho." Cantidad Actual: ".$valor,
+			[]
+		);
+		return false;
+	}
+}
+
+$_SESSION['lista_anhos_valores'] = $resultado_maximo[2];
+
+
+
+
+
+
+
+
+
+/*
+//$fecha_desde = $values["fecha_desde"];
+//$hora_desde = $values["hora_desde"];
+//debug_to_console("fecha_desde: " . $fecha_desde . " hora_desde: " . $hora_desde);
+//fecha_desde: 2026-05-08 00:00:00 hora_desde: 07:00:00
+
+//$fechaObj = new DateTime($fecha_desde);
+//debug_to_console("fechaObj: " . $fechaObj->format('Y-m-d') );
+
+//$fecha_desde_obj = new DateTime($values["fecha_desde"]);
+//debug_to_console("fecha_desde_obj: " . $fecha_desde_obj->format('Y-m-d') );
+
+//$fecha_desde_obj = new DateTime($values["fecha_desde"]);
+//$fecha_desde_obj_string = $fecha_desde_obj->format('Y-m-d') . ' '. $hora_desde;
+//debug_to_console("fecha_desde_obj_string: " . $fecha_desde_obj_string );
+
+//$fecha_desde_obj = new DateTime($values["fecha_desde"]);
+//$fecha_desde_obj_string = $fecha_desde_obj->format('Y-m-d') . ' '. $values["hora_desde"];
+//$fechaHoraEvento = new DateTime($fecha_desde_obj_string);
+//debug_to_console("fechaHoraEvento: " . $fechaHoraEvento->format('Y-m-d H:i:s') );
+
+
+$fecha_desde_obj = new DateTime($values["fecha_desde"]);
+$fecha_desde_obj_string = $fecha_desde_obj->format('Y-m-d') . ' '. $values["hora_desde"];
+$fechaHoraEvento = new DateTime($fecha_desde_obj_string);// CONSTRUIR FECHA/HORA DEL EVENTO
+$fechaHoraActual = new DateTime();// FECHA/HORA ACTUAL
+debug_to_console("fechaHoraActual: " . $fechaHoraActual->format('Y-m-d H:i:s') );
+debug_to_console("fechaHoraEvento: " . $fechaHoraEvento->format('Y-m-d H:i:s') );
+// DIFERENCIA EN SEGUNDOS
+debug_to_console("fechaHoraActualTimestamp: " . $fechaHoraActual->getTimestamp() );
+debug_to_console("fechaHoraEventoTimestamp: " . $fechaHoraEvento->getTimestamp() );
+$diferenciaSegundos = $fechaHoraActual->getTimestamp() - $fechaHoraEvento->getTimestamp();
+debug_to_console("diferenciaSegundos: " . $diferenciaSegundos );
+// CONVERTIR A HORAS
+$horasTranscurridas = $diferenciaSegundos / 3600;
+debug_to_console("horasTranscurridas: " . $horasTranscurridas );
+// VALIDAR LIMITE
+
+if ($motivo_id == 25) { //REPOSO MEDICO
+	if (intval($horasTranscurridas) > 24) {
+		//$mensaje = "<b>Tiempo máximo excedido.</b><br><br>";
+		//$mensaje .= "El tipo de permiso: <b>" . $dataTipo["tip_descripcion"] . "</b><br>";
+		//$mensaje .= "solo puede presentarse dentro de <b>" . $horasPermitidas . " horas</b> posteriores al evento.<br><br>";
+		//$mensaje .= "Tiempo transcurrido: <b>" . round($horasTranscurridas, 2) . " horas</b>.";
+		//$message = $mensaje;
+		//return false;
+		$message = generarMensajeError(
+			"📋 <strong>Límite de tiempo de presentacion a DGTH alcanzado[48] Hs.</strong><br>",
+			"Límite de tiempo de presentacion a DGTH para el Motivo '$tip_descripcion'<br> 
+<ul>
+<li>
+El Límite de tiempo de presentacion a DGTH para el Motivo '$tip_descripcion' es 
+de: <b>48 horas Posteriores Producida o Acaecida la ausencia</b> 
+</li>
+<li> Tiempo transcurrido: " . intval($horasTranscurridas) . " horas</li>
+</ul>",
+			[]
+		);
+		return false;
+	}
+	
+}
+
+return false;
+*/
+
+
+
 
 
 return true;
+
+
 
 ;		
 } // function BeforeAdd
@@ -1540,88 +2366,576 @@ return true;
 function BeforeEdit(&$values, &$sqlValues, $where, &$oldvalues, &$keys, &$message, $inline, $pageObject)
 {
 
+		/******************************************************************************************
+ * EVENTO: Before record updated (Edit Page)
+ * MÓDULO: Permisos de Funcionarios
+ *
+ * PROPÓSITO:
+ * Este evento se ejecuta antes de actualizar un permiso.
+ * Se utiliza para:
+ *
+ * 1. Validar datos obligatorios del perfil del funcionario
+ * 2. Validar campos requeridos del formulario
+ * 3. Controlar la lógica de corrección de permisos rechazados por RRHH
+ *
+ * REGLA DE NEGOCIO CLAVE:
+ * - Si un permiso es RECHAZADO por RRHH:
+ *      → El funcionario puede corregirlo SOLO UNA VEZ
+ *      → Se controla mediante el campo: intentos_correccion
+ * - Luego de corregir:
+ *      → El estado vuelve a "PENDIENTE"
+ *      → El flujo reinicia
+ *
+ * NOTA:
+ * - $values = nuevos valores del formulario
+ * - $oldvalues = valores actuales en la base de datos
+ * - return false = cancela el guardado
+ ******************************************************************************************/
+
+/*==============================================================
+=            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
+==============================================================*/
+/**
+ * Imprime información en la consola del navegador.
+ * Útil SOLO en desarrollo para verificar valores.
+ *
+ * @param mixed  $data    Datos a mostrar
+ * @param string $context Texto descriptivo del contexto
+ */
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
+
+/*==============================================================
+=        FUNCIÓN PARA GENERAR MENSAJES DE ERROR VISUAL        =
+==============================================================*/
+/**
+ * Genera un bloque HTML estilizado para mostrar errores al usuario.
+ * Permite incluir:
+ * @param string $titulo
+ * @param string $descripcion
+ * @param array  $items Lista opcional de campos faltantes
+ * @param string $footer Texto adicional (ej: instrucciones)
+ */
+function generarMensajeError($titulo, $descripcion, $items = [], $footer = "") {
+	$htmlItems = "";
+	
+	if (!empty($items)) {
+		$htmlItems .= "<ul style='margin-top:8px'>";
+		foreach ($items as $item) {
+			$htmlItems .= "<li>$item</li>";
+		}
+		$htmlItems .= "</ul>";
+	}
+	
+	return "
+	<div style='
+		background:#f8d7da;
+		color:#721c24;
+		padding:14px;
+		border-radius:12px;
+		border-left:6px solid #dc3545;
+	'>
+		<b>❌ $titulo</b>
+		<br><br>
+		<b>$descripcion</b>
+		$htmlItems
+		$footer
+	</div>";
+}
+
+
+/**
+ * ============================================================
+ * 👤 VALIDACIÓN DE DATOS DEL PERFIL DEL FUNCIONARIO
+ * ============================================================
+ * Se valida que el funcionario tenga datos básicos completos.
+ * Estos datos NO se cargan en el formulario directamente,
+ * pero son necesarios para procesar correctamente el permiso.
+ * Verifica que el usuario tenga completos los datos básicos
+ * antes de permitir enviar una solicitud.
+ */
+// (descripcion_tipo_vinculacion: es de solo lectura(READONLY) por eso no se envia por POST, solucion provisoria enviar el descripcion_dependencia_edit).
+$camposRequeridosPerfil = [
+	"descripcion_dependencia_edit" => "Dependencia",
+	//"descripcion_tipo_vinculacion" => "Tipo de vinculación"
+	"tipo_vinculacion" => "Tipo de vinculación"
+];
+
+$faltantesPerfil = [];
+
+foreach ($camposRequeridosPerfil as $campo => $label) {
+	if (!isset($values[$campo]) || trim($values[$campo]) === "") {
+		$faltantesPerfil[] = $label;
+	}
+}
+
+// ⛔ Si faltan datos → detener proceso
+if (!empty($faltantesPerfil)) {
+	$message = generarMensajeError(
+		"No es posible enviar la solicitud de permiso.",
+		"Faltan completar los siguientes datos de tu perfil:",
+		$faltantesPerfil,
+		"Por favor, comunícate con el área de <b>Recursos Humanos</b> para actualizar tu información."
+	);
+	
+	return false; // ⛔ DETIENE TODO
+}
+// FIN VALIDACIÓN DE PERFIL DEL FUNCIONARIO
+
+
+
+/**
+ * ============================================================
+ * 📝 VALIDACIÓN DE CAMPOS DEL FORMULARIO
+ * ============================================================
+ * Verifica que todos los campos obligatorios estén completos.
+ */
+$camposRequeridosFormulario = [
+	"motivo_id" => "Tipo de permiso o justificación",
+	"fecha_desde" => "Fecha desde",
+	"hora_desde" => "Hora de inicio",
+	"fecha_hasta" => "Fecha hasta",
+	"hora_hasta" => "Hora de fin",
+	"email_jefe_id" => "Correo electrónico del superior inmediato"
+];
+
+$faltantesFormulario = [];
+
+foreach ($camposRequeridosFormulario as $campoForm => $labelForm) {
+	if (!isset($values[$campoForm]) || trim($values[$campoForm]) === "") {
+		$faltantesFormulario[] = $labelForm;
+	}
+}
+
+// ⛔ Si faltan datos → detener proceso
+if (!empty($faltantesFormulario)) {
+	$message = generarMensajeError(
+		"No es posible enviar la solicitud de permiso.",
+		"Falta completar los siguientes datos del formulario:",
+		$faltantesFormulario,
+		"Por favor, completa los campos obligatorios del formulario."
+	);
+
+	return false; // ⛔ DETIENE TODO
+}
+// FIN VALIDACIÓN DE CAMPOS DEL FORMULARIO
+
+
+
+$motivo_id = $values["motivo_id"];
+//debug_to_console("motivo_id: " . $motivo_id);
+
+// Obtener la descripcion del tipo de permiso para un mensaje más claro para el usuario.
+$sqlMotivoDesc = "SELECT * 
+											FROM public.tipos_ocurrencias 
+											WHERE tip_cod = $motivo_id";
+$rsMotivoDesc = DB::Query($sqlMotivoDesc);
+$dataMotivoDesc = $rsMotivoDesc->fetchAssoc();
+$tip_descripcion = $dataMotivoDesc["tip_descripcion"];
+//debug_to_console("tip_descripcion: " . $tip_descripcion);
+
+
+/**
+ * ============================================================
+ * 📅 FUNCIONES AUXILIARES DE FECHAS
+ * ============================================================
+ */
+
+/**
+ * Funcion que calcula dias entre fechas.
+ * Genera un array con todas las fechas entre inicio y fin
+ */
+function lista_dias($inicio, $fin) {
+	$rango = array();
+	if (is_string($inicio) === true) $inicio = strtotime($inicio);
+	if (is_string($fin) === true ) $fin = strtotime($fin);
+	if ($inicio > $fin) return createDateRangeArray($fin, $inicio);
+	
+	do {
+		$rango[] = date('Y-m-d', $inicio);
+		$inicio = strtotime("+ 1 day", $inicio);
+	} while($inicio <= $fin);
+	
+	return $rango;
+}
+
+/**
+ * Obtiene lista de feriados desde BD
+ */
+function lista_feriados() {
+	$lista_feriados = array();
+	$sql_feriados = "select fer_fecha from feriados";
+	$resultado_feriados = CustomQuery($sql_feriados);
+	while($feriado = db_fetch_array($resultado_feriados)) {
+		array_push($lista_feriados, $feriado['fer_fecha']);
+	}
+	return $lista_feriados;
+}
+
+/**
+ * ============================================================
+ * 📊 CÁLCULO DE DÍAS UTILIZADOS
+ * ============================================================
+ * Calcula días consumidos considerando:
+ * - Fines de semana
+ * - Feriados
+ * - Tipo de días (corridos o hábiles)
+ */
+function gasto_dias($lista_dias, $tipo_dias) {	
+	$resultado = array();
+	$meses_gasto = array();
+	$cantida_total_meses = 0;
+	$mes = 0;
+	$anho = 0;
+	$dias = 0;
+	$cantidad_dias = 0;
+	$corridos = $tipo_dias;
+	$feriados = lista_feriados();
+	
+	foreach ($lista_dias as $valor) {
+		if (((date('w', strtotime($valor)) != 6) and (date('w', strtotime($valor)) != 0) and array_search($valor, $feriados, true) === FALSE ) OR $corridos == 1) {	
+			$dias = $dias + 1;
+			$cantidad_dias = $dias;
+			if ($anho == 0 or $anho <> date("Y", strtotime($valor))) {
+				$anho = date("Y", strtotime($valor));
+				$mes = number_format(date("m", strtotime($valor)));
+				$cantida_total_meses = $cantida_total_meses + 1;
+				$dias = 1;
+			}
+			
+			if ($mes <> date("m", strtotime($valor))) {
+				$mes = number_format(date("m", strtotime($valor)));	
+				$cantida_total_meses = $cantida_total_meses + 1;
+				$dias = 1;
+				$cantidad_dias = 1;
+			}
+
+			$meses_gasto[$cantida_total_meses][0] = $anho;
+			$meses_gasto[$cantida_total_meses][1] = $mes;
+			$meses_gasto[$cantida_total_meses][2] = $cantidad_dias;
+		}
+	}
+	
+	return $meses_gasto;
+}
+
+
+/**
+ * ============================================================
+ * 🧮 CÁLCULO DE MÁXIMOS (MES / AÑO)
+ * ============================================================
+ * función que genera lista de días entre fechas.
+ * Retorna:
+ * [0] → Máximo en un mes
+ * [1] → Máximo en un año
+ * [2] → Detalle por mes
+ */
+function calcular_maximos($lista_dias, $tipo_dias) {
+	$resultado = array();
+	$meses_gasto = array();
+	$cantida_total_meses = 0;
+	$maximo_mes = 0;
+	$maximo_anho = 0;
+	$suma_mes = 0;
+	$suma_anho = 0;
+	$mes = 0;
+	$anho = 0;
+	$corridos = $tipo_dias;
+	$mes_registrado = 0;
+	$feriados = lista_feriados();
+	foreach ($lista_dias as $valor) {
+		if (((date('w', strtotime($valor)) != 6) and (date('w', strtotime($valor)) != 0) and array_search($valor, $feriados, true) === FALSE) OR $corridos == 1) {
+			if ($anho == 0) {
+				$cantida_total_meses = $cantida_total_meses + 1;
+				$mes_registrado = $cantida_total_meses;
+				$anho = date("Y", strtotime($valor));
+				$mes = date("m", strtotime($valor));
+				$suma_anho = $suma_anho + 1;
+				$maximo_anho = 0;
+				$suma_mes = $suma_mes + 1;
+				$maximo_mes = 0;
+			} else {
+				if ($anho == date("Y", strtotime($valor))) {
+					if ($mes == date("m", strtotime($valor))) {
+						$suma_mes = $suma_mes + 1;	
+					} else {
+						$cantida_total_meses = $cantida_total_meses + 1;
+						$suma_mes = 0;
+						$mes = date("m", strtotime($valor));
+						$suma_mes = $suma_mes + 1;
+					}
+					
+					$suma_anho = $suma_anho + 1;
+				} else {
+					$cantida_total_meses = $cantida_total_meses + 1;
+					$meses_gasto[$cantida_total_meses][0] = $anho;
+					$meses_gasto[$cantida_total_meses][1] = $mes;
+					$meses_gasto[$cantida_total_meses][2] = $maximo_mes;
+					$cantidad_anhos = $cantidad_anhos + 1;
+					$cantidad_meses = $cantidad_meses + 1;
+					$suma_anho = 0;
+					$suma_mes = 0;
+					$anho = date("Y", strtotime($valor));
+					$mes = date("m", strtotime($valor));
+					$suma_anho = $suma_anho + 1;
+					$suma_mes = $suma_mes + 1;
+				}
+			}
+			
+			if ($mes_registrado != $cantida_total_meses) {
+				$meses_gasto[$cantida_total_meses][0] = $anho;
+				$meses_gasto[$cantida_total_meses][1] = $mes_registrado;
+				$fecha_final = $anho . "-" . $mes . "-" . "01";
+				$cantidad_maxima_mes = date("t", strtotime($fecha_final));
+				$meses_gasto[$cantida_total_meses][2] = $cantidad_maxima_mes;
+				$mes_registrado = $cantida_total_meses;
+			}
+			
+			if ($maximo_anho < $suma_anho) {
+				$maximo_anho = $suma_anho;
+			}
+			
+			if ($maximo_mes < $suma_mes) {
+				$maximo_mes = $suma_mes;
+				$meses_gasto[$cantida_total_meses][0] = $anho;
+				$meses_gasto[$cantida_total_meses][1] = $mes;
+				$meses_gasto[$cantida_total_meses][2] = $maximo_mes;	
+			}	
+		}
+	}
+	
+	$resultado[0] = $maximo_mes;
+	$resultado[1] = $maximo_anho;
+	$resultado[2] = gasto_dias($lista_dias, $tipo_dias);
+	return $resultado;
+
+}
+
+
+$resultado_maximo = array();
+/**
+ * ============================================================
+ * 📊 OBTENER CONFIGURACIÓN DEL PERMISO
+ * ============================================================
+ * Consulta cantidades de dias permitidos por permiso.
+ */
+$sql_cantidades = "SELECT tip_cantidad_maxima_mes,tip_cantidad_maxima_anho,tip_dias 
+											FROM tipos_ocurrencias 
+											WHERE tip_cod = " . $motivo_id;
+//debug_to_console("sql_cantidades: " . $sql_cantidades);
+$resultados_cantidades = CustomQuery($sql_cantidades);
+$fila_cantidades = db_fetch_array($resultados_cantidades);
+
+// Generar lista de días del permiso solicitado
+$lista_dias = lista_dias($values['fecha_desde'], $values['fecha_hasta']);
+
+// Calcular consumo
+$resultado_maximo = calcular_maximos($lista_dias, $fila_cantidades['tip_dias']);
+
+$tip_cantidad_maxima_mes = $fila_cantidades["tip_cantidad_maxima_mes"];
+$tip_cantidad_maxima_anho = $fila_cantidades["tip_cantidad_maxima_anho"];
+//debug_to_console("tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . " tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
+
+foreach ($resultado_maximo[2] as $valores_mes) {
+	//debug_to_console("valores_mes[0]: " . $valores_mes[0] . " valores_mes[1]: " . $valores_mes[1] );
+	if ($valores_mes[1] == 1){
+		$desc_mes = "Enero";
+	} else if($valores_mes[1] == 2) {
+		$desc_mes = "Febrero";
+	} else if($valores_mes[1] == 3) {
+		$desc_mes = "Marzo";
+	} else if($valores_mes[1] == 4) {
+		$desc_mes = "Abril";
+	} else if($valores_mes[1] == 5) {
+		$desc_mes = "Mayo";
+	} else if($valores_mes[1] == 6) {
+		$desc_mes = "Junio";
+	} else if($valores_mes[1] == 7) {
+		$desc_mes = "Julio";
+	} else if($valores_mes[1] == 8) {
+		$desc_mes = "Agosto";
+	} else if($valores_mes[1] == 9) {
+		$desc_mes = "Septiembre";
+	} else if($valores_mes[1] == 10) {
+		$desc_mes = "Octubre";
+	} else if($valores_mes[1] == 11) {
+		$desc_mes = "Noviembre";
+	} else if($valores_mes[1] == 12) {
+		$desc_mes = "Diciembre";
+	}
+}
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE LÍMITE MENSUAL
+ * ============================================================
+ */
+//debug_to_console("resultado_maximo[0]: " . $resultado_maximo[0] . " fila_cantidades: " . $fila_cantidades['tip_cantidad_maxima_mes'] );
+if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
+	$message = generarMensajeError(
+		"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+		"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> <ul><li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $fila_cantidades['tip_cantidad_maxima_mes'] . " </li><li> Cantidad actual: " . $resultado_maximo[0] . "</li></ul>",
+		[]
+	);
+	return false;
+} else {
+	foreach ($resultado_maximo[2] as $valores_mes) {
 		
-
-// Place event code here.
-// Use "Add Action" button to add code snippets.
-
-//return true;
-
-
-if (!$values["fecha_desde"] || !$values["fecha_hasta"]) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Faltan completar los siguientes datos del formulario:</b>
-		<ul style='margin-top:8px'>
-			<li>Fecha Desde / Fecha Hasta</li>
-		</ul>
-		Por favor, envia toda la información necesaria.
-	</div>";
-	$message = $mensaje;
-	
-	return false; // ⛔ DETIENE TODO
-}
-
-if (strtotime($values["fecha_hasta"]) < strtotime($values["fecha_desde"])) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Inconsistencia en los datos del formulario:</b>
-		<ul style='margin-top:8px'>
-			<li>Fecha Desde / Fecha Hasta</li>
-		</ul>
-		La <b>fecha desde</b> no puede ser menor que la <b>fecha hasta</b>
-		<br>
-		Por favor corrige y envia toda la información necesaria.
-	</div>";
-	$message = $mensaje;
-	
-	return false; // ⛔ DETIENE TODO
+		/**
+		 * ============================================================
+		 * 🔁 VALIDACIÓN CONTRA HISTORIAL (BD)
+		 * ============================================================
+		 * Suma lo ya utilizado + lo solicitado
+		 */
+		$sql_total_meses = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS total_dias
+														FROM (
+																SELECT *, 
+																		(SELECT tip_cod_tipo_sumatoria FROM tipos_ocurrencias WHERE tip_cod = ocu_tipo) AS ocu_cod_tipo_sumatoria
+																FROM ocurrencias
+																	JOIN detalle_ocurrencias ON ocu_cod = det_cod_ocurrencia
+															) AS novedades
+														WHERE (ocu_tipo = " . $motivo_id . " OR ocu_cod_tipo_sumatoria = " . $motivo_id . ")
+														AND det_anho_gasto = " . $valores_mes[0]."
+														AND det_mes_gasto = " . $valores_mes[1]."
+														AND det_cod_persona = " . $values['id_funcionario']."";
+		//debug_to_console("sql_total_meses: " . $sql_total_meses);
+		$resultado_total_meses = CustomQuery($sql_total_meses);
+		$fila_total_mes = db_fetch_array($resultado_total_meses);
+		
+		// ⛔ Validar contra límite
+		if ($fila_cantidades["tip_cantidad_maxima_mes"] < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+			$message = generarMensajeError(
+				"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+				"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'.<br> <ul><li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de:  ".$tip_cantidad_maxima_mes."</il> <li>La Cantidad utilizada en el mes de ".$desc_mes." es de: ".($fila_total_mes["total_dias"]+$valores_mes[2]) . "</li></ul>",
+				[]
+			);
+			return false;
+		}
+	}
 }
 
 
-if (!$values["email_jefe_id"]) {
-	$mensaje = "
-	<div style='
-		background:#f8d7da;
-		color:#721c24;
-		padding:14px;
-		border-radius:12px;
-		border-left:6px solid #dc3545;
-	'>
-		<b>❌ No es posible enviar la solicitud de permiso.</b>
-		<br>
-		<br>
-		<b>Faltan completar los siguientes datos del formulario:</b>
-		<ul style='margin-top:8px'>
-			<li>Correo electrónico del superior inmediato</li>
-		</ul>
-		Por favor, envia toda la información necesaria.
-	</div>";
-	$message = $mensaje;
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN ANUAL
+ * ============================================================
+ */
+$cantidad_anhos = 0;
+$anho_actual = 0;
+$lista_anhos_valores = array();
+$valor_anho = array();
+
+// consulta acumulada anual
+foreach ($resultado_maximo[2] as $valores_anho) {
+	if ($anho_actual == 0) {
+		$anho_actual = $valores_anho[0];
+	}
 	
-	return false; // ⛔ DETIENE TODO
+	if ($anho_actual != $valores_anho[0]) {
+		$valor_anho[1] = $cantidad_anhos;
+		$valor_anho[0] = $anho_actual;
+		array_push($lista_anhos_valores, $valor_anho);
+		$valor_anho = array();
+	} else {
+		$cantidad_anhos = $valores_anho[2];
+	}
+}		
+$valor_anho[1] = $cantidad_anhos;
+$valor_anho[0] = $anho_actual;
+array_push($lista_anhos_valores, $valor_anho);
+
+foreach($lista_anhos_valores as $gastados_anho) {
+	$sql_suma = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS suma_anho
+									FROM (
+										SELECT *, 
+												(SELECT tip_cod_tipo_sumatoria FROM tipos_ocurrencias WHERE tip_cod = ocu_tipo) AS ocu_cod_tipo_sumatoria
+										FROM ocurrencias
+											JOIN detalle_ocurrencias ON ocu_cod = det_cod_ocurrencia
+									) AS novedades
+									WHERE (ocu_tipo = ".$motivo_id." OR ocu_cod_tipo_sumatoria = ".$motivo_id.")
+									AND det_anho_gasto = ".$valores_mes[0]."
+									AND det_cod_persona = ".$values['id_funcionario']."";
+	$resultado_suma = CustomQuery($sql_suma);
+	$fila_suma = db_fetch_array($resultado_suma);
+	if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $fila_cantidades['tip_cantidad_maxima_anho']) {
+		$valor = $fila_suma['suma_anho'] + $gastados_anho[1];
+		$message = generarMensajeError(
+			"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
+			"<ul><li>La Cantidad máxima por año para el Motivo '$tip_descripcion' es de: ".$fila_cantidades['tip_cantidad_maxima_anho']."</il> <li>Cantidad Actual de solicitudes: ".$valor."</li></ul>",
+			[]
+		);
+		return false;
+	}
+}
+
+$_SESSION['lista_anhos_valores'] = $resultado_maximo[2];
+
+
+
+/*==============================================================
+=        LÓGICA DE CORRECCIÓN DE PERMISOS RECHAZADOS         =
+==============================================================*/
+/**
+ * Este bloque controla el comportamiento cuando el permiso
+ * fue previamente RECHAZADO por RRHH(DGTH).
+ *
+ * ESCENARIO:
+ * - El funcionario edita un permiso rechazado
+ *
+ * ACCIONES:
+ * - Se incrementa el contador de correcciones
+ * - Se cambia el estado a PENDIENTE (reinicia flujo)
+ * - Se actualiza el motivo de rechazo
+ * - Se evita reenviar correo al jefe
+ */
+if ($oldvalues["rrhh_resultado_decision"] == 'RECHAZADO') {
+	
+	// Incrementar contador de correcciones
+	$values["intentos_correccion"] = $oldvalues["intentos_correccion"] + 1;
+    
+	// Volver a estado pendiente para que pase otra vez por flujo
+	// Reiniciar flujo → vuelve a pendiente
+	$values["rrhh_resultado_decision"] = 'PENDIENTE';
+	// Mensaje interno de control (ya no es rechazo real)
+	$values["rrhh_motivo_rechazo"] = $oldvalues["rrhh_motivo_rechazo"];
+	// No reenviar correo al jefe (ya fue enviado anteriormente)
+	$enviar_mail_jefe = 0;
+} else {
+	/**
+	 * ESCENARIO:
+	 * - Edición normal (permiso aún no rechazado)
+	 *
+	 * ACCIONES:
+	 * - Mantener valores actuales sin alterar lógica de corrección
+	 */
+	
+	// Mantener valor actual de intentos si no viene en el formulario
+	if(!isset($values["intentos_correccion"])) {
+		$values["intentos_correccion"] = $oldvalues["intentos_correccion"];
+	}
+	
+	// Mantener motivo de rechazo existente (si aplica)
+	$values["rrhh_motivo_rechazo"] = $oldvalues["rrhh_motivo_rechazo"];
+	// Enviar correo al jefe (flujo normal)
+	$enviar_mail_jefe = 1;
 }
 
 
+/*==============================================================
+=        FINALIZACIÓN DEL EVENTO                             =
+==============================================================*/
+/**
+ * Si todas las validaciones pasan correctamente,
+ * se permite continuar con el proceso de actualización.
+ */
 return true;
+
 
 ;		
 } // function BeforeEdit
@@ -1645,6 +2959,249 @@ return true;
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				// Before display
+function BeforeShowView(&$xt, &$templatefile, &$values, $pageObject)
+{
+
+		
+/*==============================================================
+=            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
+==============================================================*/
+/**
+ * Imprime información en la consola del navegador.
+ * Útil SOLO en desarrollo para verificar valores.
+ *
+ * @param mixed  $data    Datos a mostrar
+ * @param string $context Texto descriptivo del contexto
+ */
+function debug_to_console($data, $context = 'Debug in Console') {
+	ob_start();
+	$output  = 'console.info(\'' . $context . ':\');';
+	$output .= 'console.log(' . json_encode($data) . ');';
+	$output  = sprintf('<script>%s</script>', $output);
+	echo $output;
+}
+
+// Obtener datos del usuario logueado en PHPRunner
+$currentUser = Security::currentUserData();
+
+// ID del usuario logueado (tabla users de PHPRunner)
+$userPersonal = $currentUser["usu_personal"];
+
+// Obtener datos de la persona logueada.
+$sqlDependencia = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta AS descripcion_dependencia,
+																p.per_ci AS persona_ci,
+																d.dep_cod,
+																p.per_nombre || '  ' || p.per_apellido AS nombre_completo,
+																p.per_cod,
+																p.tipo_funcionario_tfun_cod,
+																tf.tfun_descri AS descripcion_tipo_funcionario,
+																TO_CHAR(AGE(CURRENT_DATE, p.per_ingreso), 'YY \"años, \" MM \"meses y \" DD \"días\"') AS antiguedad_laboral,
+																c.car_descri,
+																s.sed_descripcion
+												FROM personales p
+													LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
+													LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
+													LEFT JOIN cargos c ON c.car_cod = p.cargos_car_cod
+													LEFT JOIN sedes s ON s.sed_cod = p.per_sede
+												WHERE p.per_cod = $userPersonal";
+//debug_to_console("sqlDependencia: " . $sqlDependencia);
+$resultDependencia = CustomQuery($sqlDependencia);
+$dataDependencia = db_fetch_array($resultDependencia);
+$pageObject->setProxyValue("dep_cod", $dataDependencia["dep_cod"]);
+$pageObject->setProxyValue("descripcion_dependencia", $dataDependencia["descripcion_dependencia"]);
+$pageObject->setProxyValue("persona_ci", $dataDependencia["persona_ci"]);
+$pageObject->setProxyValue("nombre_completo", $dataDependencia["nombre_completo"]);
+$pageObject->setProxyValue("per_cod", $dataDependencia["per_cod"]);
+$pageObject->setProxyValue("tipo_funcionario_tfun_cod", $dataDependencia["tipo_funcionario_tfun_cod"]);
+$pageObject->setProxyValue("descripcion_tipo_funcionario", $dataDependencia["descripcion_tipo_funcionario"]);
+$pageObject->setProxyValue("antiguedad_laboral", $dataDependencia["antiguedad_laboral"]);
+$pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
+$pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
+
+
+// Query para obtener el conteo de cantidad de permisos por mes.
+$sqlTotalPermisos = DB::PrepareSQL(
+"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
+				COUNT(*) AS cantidad_permisos_mes
+FROM rrhh_permisos.permisos_funcionarios
+WHERE id_funcionario = ':1'
+  AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
+  AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
+GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
+);
+//debug_to_console("sqlTotalPermisos: " . $sqlTotalPermisos);
+$resultTotalPermisos = DB::Query($sqlTotalPermisos);
+$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
+if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
+	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
+} else {
+	$cantidad_permisos_mes = 0;
+}
+//debug_to_console("mes_nombre: " . $rowTotalPermisos['mes_nombre'] . ", total_permisos: " . $rowTotalPermisos['cantidad_permisos_mes']);
+$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
+
+// Oculta el id de permiso de el formulario.
+$pageObject->hideItem("view_id");
+
+//debug_to_console("id: " . $values["id"]);
+
+// Calcular la cantidad de días entre dos fechas.
+$sqlTotalDias = DB::PrepareSQL(
+"SELECT id,
+    id_funcionario,
+    fecha_desde,
+    fecha_hasta,
+    (fecha_hasta - fecha_desde) AS dias_diferencia,
+    (fecha_hasta - fecha_desde) + 1 AS dias_totales
+FROM rrhh_permisos.permisos_funcionarios
+WHERE permisos_funcionarios.id = ':1'", $values["id"]
+);
+//debug_to_console("sqlTotalDias: " . $sqlTotalDias);
+$resultTotalDias = DB::Query($sqlTotalDias);
+$rowTotalDias = $resultTotalDias->fetchAssoc();
+// Voy a usar la columna de 'dias_totales' porque la columna de 'dias_diferencia', si
+// el permiso es en el dia muestra cero(0), y para evitar confusiones al usuario 
+// uso esa columna del query. 
+$dias_totales = $rowTotalDias['dias_totales'];
+
+//debug_to_console("dias_totales: " . $dias_totales);
+$pageObject->setProxyValue("dias_totales", $dias_totales);
+
+;		
+} // function BeforeShowView
+
 		
 		
 		

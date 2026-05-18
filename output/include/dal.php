@@ -47,9 +47,16 @@ function DBLookup($sql)
   */
 class tDAL
 {
+	var $tbldbtalentos_at_192_168_123_51_public_cargos;
+	var $tbldbtalentos_at_192_168_123_51_public_ciudades;
+	var $tbldbtalentos_at_192_168_123_51_public_departamentos;
 	var $tbldbtalentos_at_192_168_123_51_public_dependencias;
+	var $tbldbtalentos_at_192_168_123_51_public_instituciones_origen;
+	var $tbldbtalentos_at_192_168_123_51_public_paises;
 	var $tbldbtalentos_at_192_168_123_51_public_personales;
+	var $tbldbtalentos_at_192_168_123_51_public_profesiones;
 	var $tbldbtalentos_at_192_168_123_51_public_roles;
+	var $tbldbtalentos_at_192_168_123_51_public_sedes;
 	var $tbldbtalentos_at_192_168_123_51_public_tipo_funcionario;
 	var $tbldbtalentos_at_192_168_123_51_public_tipos_ocurrencias;
 	var $tbldbtalentos_at_192_168_123_51_public_usuarios;
@@ -62,9 +69,16 @@ class tDAL
 	{
 		if($this->lstTables)
 			return;
+		$this->lstTables[] = array("name" => "cargos", "varname" => "dbtalentos_at_192_168_123_51_public_cargos", "altvarname" => "cargos", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
+		$this->lstTables[] = array("name" => "ciudades", "varname" => "dbtalentos_at_192_168_123_51_public_ciudades", "altvarname" => "ciudades", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
+		$this->lstTables[] = array("name" => "departamentos", "varname" => "dbtalentos_at_192_168_123_51_public_departamentos", "altvarname" => "departamentos", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "dependencias", "varname" => "dbtalentos_at_192_168_123_51_public_dependencias", "altvarname" => "dependencias", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
+		$this->lstTables[] = array("name" => "instituciones_origen", "varname" => "dbtalentos_at_192_168_123_51_public_instituciones_origen", "altvarname" => "instituciones_origen", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
+		$this->lstTables[] = array("name" => "paises", "varname" => "dbtalentos_at_192_168_123_51_public_paises", "altvarname" => "paises", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "personales", "varname" => "dbtalentos_at_192_168_123_51_public_personales", "altvarname" => "personales", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
+		$this->lstTables[] = array("name" => "profesiones", "varname" => "dbtalentos_at_192_168_123_51_public_profesiones", "altvarname" => "profesiones", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "roles", "varname" => "dbtalentos_at_192_168_123_51_public_roles", "altvarname" => "roles", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
+		$this->lstTables[] = array("name" => "sedes", "varname" => "dbtalentos_at_192_168_123_51_public_sedes", "altvarname" => "sedes", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "tipo_funcionario", "varname" => "dbtalentos_at_192_168_123_51_public_tipo_funcionario", "altvarname" => "tipo_funcionario", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "tipos_ocurrencias", "varname" => "dbtalentos_at_192_168_123_51_public_tipos_ocurrencias", "altvarname" => "tipos_ocurrencias", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "usuarios", "varname" => "dbtalentos_at_192_168_123_51_public_usuarios", "altvarname" => "usuarios", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");

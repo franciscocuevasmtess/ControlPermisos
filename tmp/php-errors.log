@@ -1,0 +1,40 @@
+[13-May-2026 08:42:12 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 08:42:12 America/New_York] Error al enviar correo para permiso ID: 98
+[13-May-2026 08:45:08 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 08:45:08 America/New_York] Error al enviar correo para permiso ID: 99
+[13-May-2026 08:47:20 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 08:47:20 America/New_York] Error al enviar correo para permiso ID: 100
+[13-May-2026 09:41:36 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 09:41:36 America/New_York] Error al enviar correo para permiso ID: 101
+[13-May-2026 09:42:17 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 09:42:17 America/New_York] Error al enviar correo para permiso ID: 102
+[13-May-2026 10:07:43 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 10:07:43 America/New_York] Error al enviar correo para permiso ID: 103
+[13-May-2026 10:23:02 America/New_York] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection timed out (0x0000274C/10060)
+	Is the server running on host &quot;192.168.123.51&quot; and accepting
+	TCP/IP connections on port 5432? in C:\xampp\htdocs\ControlPermisos\output\connections\PostgreConnection.php on line 62
+[13-May-2026 10:23:02 America/New_York] PHP Fatal error:  Unable to connect in C:\xampp\htdocs\ControlPermisos\output\connections\Connection.php on line 668
+[13-May-2026 12:19:20 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 12:19:20 America/New_York] Error al enviar correo para permiso ID: 104
+[13-May-2026 12:27:47 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 12:27:47 America/New_York] Error al enviar correo para permiso ID: 105
+[13-May-2026 12:44:48 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 12:44:48 America/New_York] Error al enviar correo para permiso ID: 106
+[13-May-2026 13:05:06 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:05:06 America/New_York] Error al enviar correo para permiso ID: 107
+[13-May-2026 13:18:21 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:18:21 America/New_York] Error al enviar correo para permiso ID: 108
+[13-May-2026 13:26:22 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:26:22 America/New_York] Error al enviar correo para permiso ID: 109
+[13-May-2026 13:36:30 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:36:30 America/New_York] Error al enviar correo para permiso ID: 110
+[13-May-2026 13:40:29 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:40:29 America/New_York] Error al enviar correo para permiso ID: 111
+[13-May-2026 13:50:42 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:50:42 America/New_York] Error al enviar correo para permiso ID: 112
+[13-May-2026 13:56:15 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:56:15 America/New_York] Error al enviar correo para permiso ID: 113
+[13-May-2026 13:57:20 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[13-May-2026 13:57:20 America/New_York] Error al enviar correo para permiso ID: 114
+[18-May-2026 06:50:07 America/New_York] Error al enviar email a: franciscocuevas@mtess.gov.py
+[18-May-2026 06:50:07 America/New_York] Error al enviar correo para permiso ID: 115

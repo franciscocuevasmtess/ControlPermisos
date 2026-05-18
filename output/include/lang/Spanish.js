@@ -255,4 +255,6 @@ Runner.lang.customlabels = {
 	prefix: 'CUSTOM_LABEL_',
 
 	// custom labels
+	CUSTOM_LABEL_VIEW_RECORD: 'Ver Solicitud de vac.',
+	CUSTOM_LABEL_RESET: 'Limpiar formulario'
 };

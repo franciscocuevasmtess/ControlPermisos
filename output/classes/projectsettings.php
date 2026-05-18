@@ -3590,6 +3590,10 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "solicitudes_vacaciones" ] = "rrhh_permisos.solicitudes_vacaciones";
 	$projectEntities[ "public.usuarios" ] = array( "url" => "usuarios", "type" => 0 );
 	$projectEntitiesReverse[ "usuarios" ] = "public.usuarios";
+	$projectEntities[ "comisionamiento" ] = array( "url" => "comisionamiento", "type" => 1 );
+	$projectEntitiesReverse[ "comisionamiento" ] = "comisionamiento";
+	$projectEntities[ "public.personales" ] = array( "url" => "personales", "type" => 0 );
+	$projectEntitiesReverse[ "personales" ] = "public.personales";
 }
 
 function findTable( $table ) {

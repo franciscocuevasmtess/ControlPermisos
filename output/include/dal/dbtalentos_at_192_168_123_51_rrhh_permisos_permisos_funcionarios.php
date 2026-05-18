@@ -26,6 +26,8 @@ $dalTablepermisos_funcionarios["rrhh_decidido_por"] = array("type"=>3,"varname"=
 $dalTablepermisos_funcionarios["rrhh_fecha_decision"] = array("type"=>135,"varname"=>"rrhh_fecha_decision", "name" => "rrhh_fecha_decision", "autoInc" => "0");
 $dalTablepermisos_funcionarios["rrhh_resultado_decision"] = array("type"=>200,"varname"=>"rrhh_resultado_decision", "name" => "rrhh_resultado_decision", "autoInc" => "0");
 $dalTablepermisos_funcionarios["rrhh_motivo_rechazo"] = array("type"=>201,"varname"=>"rrhh_motivo_rechazo", "name" => "rrhh_motivo_rechazo", "autoInc" => "0");
+$dalTablepermisos_funcionarios["ocu_cod"] = array("type"=>3,"varname"=>"ocu_cod", "name" => "ocu_cod", "autoInc" => "0");
+$dalTablepermisos_funcionarios["intentos_correccion"] = array("type"=>3,"varname"=>"intentos_correccion", "name" => "intentos_correccion", "autoInc" => "0");
 $dalTablepermisos_funcionarios["id"]["key"]=true;
 
 $dal_info["dbtalentos_at_192_168_123_51_rrhh_permisos_permisos_funcionarios"] = &$dalTablepermisos_funcionarios;

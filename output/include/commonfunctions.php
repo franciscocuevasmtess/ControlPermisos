@@ -215,6 +215,10 @@ function checkTableName($shortTName )
 		return true;
 	if ("usuarios" == $shortTName )
 		return true;
+	if ("comisionamiento" == $shortTName )
+		return true;
+	if ("personales" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -319,6 +323,24 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.usuarios";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("comisionamiento");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="comisionamiento";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.personales");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.personales";
+	}
 	return $arr;
 }
 
@@ -334,6 +356,8 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.tipos_ocurrencias";
 	$arr[]="rrhh_permisos.solicitudes_vacaciones";
 	$arr[]="public.usuarios";
+	$arr[]="comisionamiento";
+	$arr[]="public.personales";
 	return $arr;
 }
 
@@ -958,37 +982,41 @@ function GetUserPermissionsStatic( $table )
 	if( $table=="rrhh_permisos.permisos_funcionarios" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.dependencias" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.tipo_funcionario" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.tipos_ocurrencias" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="rrhh_permisos.solicitudes_vacaciones" )
 	{
 //	default permissions
-		// grant all by default
-		return "ADESPI".$extraPerm;
+		return "AEDSPI".$extraPerm;
 	}
 	if( $table=="public.usuarios" )
 	{
 //	default permissions
-		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="comisionamiento" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.personales" )
+	{
+//	default permissions
 		return "ADESPI".$extraPerm;
 	}
 	// grant nothing by default

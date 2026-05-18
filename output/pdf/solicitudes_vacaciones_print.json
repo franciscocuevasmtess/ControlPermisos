@@ -112,6 +112,21 @@ pdfDocument = {
 										{BEGIN col_grid_15}
 					"%",
 					{END col_grid_15}
+										{BEGIN col_grid_16}
+					"%",
+					{END col_grid_16}
+										{BEGIN col_grid_17}
+					"%",
+					{END col_grid_17}
+										{BEGIN col_grid_18}
+					"%",
+					{END col_grid_18}
+										{BEGIN col_grid_19}
+					"%",
+					{END col_grid_19}
+										{BEGIN col_grid_20}
+					"%",
+					{END col_grid_20}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -259,7 +274,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones id }","hidden":"{$item_hide_simple_grid_field16}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones id }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -288,7 +303,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones id_funcionario }","hidden":"{$item_hide_simple_grid_field17}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones id_funcionario }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -317,7 +332,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field18}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -346,7 +361,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones dependencia_id }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones dependencia_id }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -375,7 +390,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_desde }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_desde }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -404,7 +419,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_hasta }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_hasta }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -433,7 +448,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones total_dias_habiles }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones total_dias_habiles }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -462,7 +477,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones observacion }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones observacion }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -491,7 +506,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones estado }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones estado }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -504,35 +519,6 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field9}
 {
 	cellId: 'headcell_field9',
-	col:0,
-	row:0,
-			fieldName: 'fecha_creacion',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_creacion }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$fecha_creacion_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field9}
-																							{BEGIN cellblock_grid_headcell_field10}
-{
-	cellId: 'headcell_field10',
 	col:0,
 	row:0,
 			fieldName: 'usuario_creador',
@@ -549,7 +535,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones usuario_creador }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones usuario_creador }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -558,10 +544,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field10}
-																							{BEGIN cellblock_grid_headcell_field11}
+{END cellblock_grid_headcell_field9}
+																							{BEGIN cellblock_grid_headcell_field10}
 {
-	cellId: 'headcell_field11',
+	cellId: 'headcell_field10',
 	col:0,
 	row:0,
 			fieldName: 'fecha_actualizacion',
@@ -578,7 +564,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_actualizacion }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_actualizacion }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -587,10 +573,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field11}
-																							{BEGIN cellblock_grid_headcell_field12}
+{END cellblock_grid_headcell_field10}
+																							{BEGIN cellblock_grid_headcell_field11}
 {
-	cellId: 'headcell_field12',
+	cellId: 'headcell_field11',
 	col:0,
 	row:0,
 			fieldName: 'usuario_actualizacion',
@@ -607,7 +593,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones usuario_actualizacion }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones usuario_actualizacion }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -616,10 +602,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field12}
-																							{BEGIN cellblock_grid_headcell_field13}
+{END cellblock_grid_headcell_field11}
+																							{BEGIN cellblock_grid_headcell_field12}
 {
-	cellId: 'headcell_field13',
+	cellId: 'headcell_field12',
 	col:0,
 	row:0,
 			fieldName: 'nombre_completo',
@@ -636,7 +622,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones nombre_completo }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones nombre_completo }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -645,10 +631,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field13}
-																							{BEGIN cellblock_grid_headcell_field14}
+{END cellblock_grid_headcell_field12}
+																							{BEGIN cellblock_grid_headcell_field13}
 {
-	cellId: 'headcell_field14',
+	cellId: 'headcell_field13',
 	col:0,
 	row:0,
 			fieldName: 'per_ci',
@@ -665,7 +651,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones per_ci }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones per_ci }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -674,10 +660,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field14}
-																							{BEGIN cellblock_grid_headcell_field15}
+{END cellblock_grid_headcell_field13}
+																							{BEGIN cellblock_grid_headcell_field14}
 {
-	cellId: 'headcell_field15',
+	cellId: 'headcell_field14',
 	col:0,
 	row:0,
 			fieldName: 'descripcion_dependencia',
@@ -694,7 +680,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -703,7 +689,181 @@ pdfDocument = {
       
       },
 
+{END cellblock_grid_headcell_field14}
+																							{BEGIN cellblock_grid_headcell_field15}
+{
+	cellId: 'headcell_field15',
+	col:0,
+	row:0,
+			fieldName: 'descripcion_tipo_vinculacion',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$descripcion_tipo_vinculacion_align}',
+     
+      
+      },
+
 {END cellblock_grid_headcell_field15}
+																							{BEGIN cellblock_grid_headcell_field16}
+{
+	cellId: 'headcell_field16',
+	col:0,
+	row:0,
+			fieldName: 'fecha_solicitud',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_solicitud }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$fecha_solicitud_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field16}
+																							{BEGIN cellblock_grid_headcell_field17}
+{
+	cellId: 'headcell_field17',
+	col:0,
+	row:0,
+			fieldName: 'email_jefe',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones email_jefe }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$email_jefe_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field17}
+																							{BEGIN cellblock_grid_headcell_field18}
+{
+	cellId: 'headcell_field18',
+	col:0,
+	row:0,
+			fieldName: 'email_jefe_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones email_jefe_id }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$email_jefe_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field18}
+																							{BEGIN cellblock_grid_headcell_field19}
+{
+	cellId: 'headcell_field19',
+	col:0,
+	row:0,
+			fieldName: 'nombre_completo_edit',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$nombre_completo_edit_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field19}
+																							{BEGIN cellblock_grid_headcell_field20}
+{
+	cellId: 'headcell_field20',
+	col:0,
+	row:0,
+			fieldName: 'descripcion_dependencia_edit',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$descripcion_dependencia_edit_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field20}
 											],
 				{END row_grid_0}
 		
@@ -979,35 +1139,6 @@ pdfDocument = {
 	cellId: 'cell_field9',
 	col:0,
 	row:0,
-			fieldName: 'fecha_creacion',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$fecha_creacion_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$fecha_creacion_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field9}
-																							{BEGIN cellblock_grid_cell_field10}
-{
-	cellId: 'cell_field10',
-	col:0,
-	row:0,
 			fieldName: 'usuario_creador',
 				style: 'bodycell',
 		
@@ -1031,10 +1162,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field10}
-																							{BEGIN cellblock_grid_cell_field11}
+{END cellblock_grid_cell_field9}
+																							{BEGIN cellblock_grid_cell_field10}
 {
-	cellId: 'cell_field11',
+	cellId: 'cell_field10',
 	col:0,
 	row:0,
 			fieldName: 'fecha_actualizacion',
@@ -1060,10 +1191,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field11}
-																							{BEGIN cellblock_grid_cell_field12}
+{END cellblock_grid_cell_field10}
+																							{BEGIN cellblock_grid_cell_field11}
 {
-	cellId: 'cell_field12',
+	cellId: 'cell_field11',
 	col:0,
 	row:0,
 			fieldName: 'usuario_actualizacion',
@@ -1089,10 +1220,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field12}
-																							{BEGIN cellblock_grid_cell_field13}
+{END cellblock_grid_cell_field11}
+																							{BEGIN cellblock_grid_cell_field12}
 {
-	cellId: 'cell_field13',
+	cellId: 'cell_field12',
 	col:0,
 	row:0,
 			fieldName: 'nombre_completo',
@@ -1118,10 +1249,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field13}
-																							{BEGIN cellblock_grid_cell_field14}
+{END cellblock_grid_cell_field12}
+																							{BEGIN cellblock_grid_cell_field13}
 {
-	cellId: 'cell_field14',
+	cellId: 'cell_field13',
 	col:0,
 	row:0,
 			fieldName: 'per_ci',
@@ -1147,10 +1278,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field14}
-																							{BEGIN cellblock_grid_cell_field15}
+{END cellblock_grid_cell_field13}
+																							{BEGIN cellblock_grid_cell_field14}
 {
-	cellId: 'cell_field15',
+	cellId: 'cell_field14',
 	col:0,
 	row:0,
 			fieldName: 'descripcion_dependencia',
@@ -1176,7 +1307,181 @@ pdfDocument = {
       
       },
 
+{END cellblock_grid_cell_field14}
+																							{BEGIN cellblock_grid_cell_field15}
+{
+	cellId: 'cell_field15',
+	col:0,
+	row:0,
+			fieldName: 'descripcion_tipo_vinculacion',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$descripcion_tipo_vinculacion_pdfvalue},"hidden":"{$item_hide_simple_grid_field16}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$descripcion_tipo_vinculacion_align}',
+     
+      
+      },
+
 {END cellblock_grid_cell_field15}
+																							{BEGIN cellblock_grid_cell_field16}
+{
+	cellId: 'cell_field16',
+	col:0,
+	row:0,
+			fieldName: 'fecha_solicitud',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$fecha_solicitud_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$fecha_solicitud_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field16}
+																							{BEGIN cellblock_grid_cell_field17}
+{
+	cellId: 'cell_field17',
+	col:0,
+	row:0,
+			fieldName: 'email_jefe',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$email_jefe_pdfvalue},"hidden":"{$item_hide_simple_grid_field17}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$email_jefe_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field17}
+																							{BEGIN cellblock_grid_cell_field18}
+{
+	cellId: 'cell_field18',
+	col:0,
+	row:0,
+			fieldName: 'email_jefe_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$email_jefe_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field18}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$email_jefe_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field18}
+																							{BEGIN cellblock_grid_cell_field19}
+{
+	cellId: 'cell_field19',
+	col:0,
+	row:0,
+			fieldName: 'nombre_completo_edit',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$nombre_completo_edit_pdfvalue},"hidden":"{$item_hide_simple_grid_field19}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$nombre_completo_edit_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field19}
+																							{BEGIN cellblock_grid_cell_field20}
+{
+	cellId: 'cell_field20',
+	col:0,
+	row:0,
+			fieldName: 'descripcion_dependencia_edit',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$descripcion_dependencia_edit_pdfvalue},"hidden":"{$item_hide_simple_grid_field20}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$descripcion_dependencia_edit_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field20}
 											],
 				{END row_grid_1}
 		
@@ -1602,6 +1907,136 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field15}
+																							{BEGIN cellblock_grid_footcell_field16}
+{
+	cellId: 'footcell_field16',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field16}
+																							{BEGIN cellblock_grid_footcell_field17}
+{
+	cellId: 'footcell_field17',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field17}
+																							{BEGIN cellblock_grid_footcell_field18}
+{
+	cellId: 'footcell_field18',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field18}
+																							{BEGIN cellblock_grid_footcell_field19}
+{
+	cellId: 'footcell_field19',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field19}
+																							{BEGIN cellblock_grid_footcell_field20}
+{
+	cellId: 'footcell_field20',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field20}
 											],
 				{END row_grid_2}
 		

@@ -249,6 +249,8 @@ class ConnectionManager_Base
 		$connectionsIds["public.tipos_ocurrencias"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["rrhh_permisos.solicitudes_vacaciones"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["public.usuarios"] = "dbtalentos_at_192_168_123_51";
+		$connectionsIds["comisionamiento"] = "dbtalentos_at_192_168_123_51";
+		$connectionsIds["public.personales"] = "dbtalentos_at_192_168_123_51";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

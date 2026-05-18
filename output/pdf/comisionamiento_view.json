@@ -1,0 +1,1027 @@
+
+pdfDocument = {
+{BEGIN backgroundImage}
+	background: {
+		image: {$backgroundImage},
+		{BEGIN bgWidth}
+		imgWidth: {$bgWidth},
+		imgHeight: {$bgHeight},
+		{END bgWidth}
+	},
+{END backgroundImage}
+	styles: {
+				bodycell: {
+			fontSize:12,
+		},
+		headcell: {
+			fontSize:12,
+			bold: true
+		},
+
+	
+	},
+	defaultStyle: {
+		fontSize: 14,
+	},
+	"content": [
+								
+{
+	table: {
+	
+				
+		location: 'top',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jspagetitlelabel comisionamiento view}","hidden":"{$item_hide_view_header}","fontSize":30},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				
+		location: 'above-grid',
+		
+		
+		widths: [
+								"*", 
+											"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c1',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				tableForm: true,
+				
+		location: 'grid',
+		
+		
+		widths: [
+									{BEGIN col_grid_0}
+						"*", 
+							{END col_grid_0}
+												{BEGIN col_grid_1}
+						"*", 
+							{END col_grid_1}
+												{BEGIN col_grid_2}
+						"*", 
+							{END col_grid_2}
+					 ],	
+		
+			heights: [
+								{BEGIN row_grid_0}
+						
+			"%",
+						{END row_grid_0}
+			 
+								{BEGIN row_grid_1}
+						
+			"%",
+						{END row_grid_1}
+			 
+								{BEGIN row_grid_2}
+						
+			"%",
+						{END row_grid_2}
+			 
+								{BEGIN row_grid_3}
+						
+			"%",
+						{END row_grid_3}
+			 
+								{BEGIN row_grid_4}
+						
+			"%",
+						{END row_grid_4}
+			 
+								{BEGIN row_grid_5}
+						
+			"%",
+						{END row_grid_5}
+			 
+								{BEGIN row_grid_6}
+						
+			"%",
+						{END row_grid_6}
+			 
+								{BEGIN row_grid_7}
+						
+			"%",
+						{END row_grid_7}
+			 
+								{BEGIN row_grid_8}
+						
+			"%",
+						{END row_grid_8}
+			 
+								{BEGIN row_grid_9}
+						
+			"%",
+						{END row_grid_9}
+			 
+								{BEGIN row_grid_10}
+						
+			"%",
+						{END row_grid_10}
+			 
+								{BEGIN row_grid_11}
+						
+			"%",
+						{END row_grid_11}
+			 
+				],
+	
+		body: [
+				
+				{BEGIN row_grid_0}
+				[
+																{BEGIN cellblock_grid_c18}
+{
+	cellId: 'c18',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c18}
+			colSpan: {$colspan_grid_c18},
+			{END colspan_grid_c18}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>👤 DATOS DEL FUNCIONARIO</h3><br><hr>","hidden":"{$item_hide_text2}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c18}
+																		{ 
+				cellId: 'c18',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c18',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_0}
+						{BEGIN row_grid_1}
+				[
+																{BEGIN cellblock_grid_c22}
+{
+	cellId: 'c22',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_nombre_completo}","stack":[{"text":"{$jslabel comisionamiento nombre_completo }","bold":true},{"text":{$nombre_completo_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_per_ci}","stack":[{"text":"{$jslabel comisionamiento per_ci }","bold":true},{"text":{$per_ci_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_dependencia_id}","stack":[{"text":"{$jslabel comisionamiento dependencia_id }","bold":true},{"text":{$dependencia_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_tipo_vinculacion}","stack":[{"text":"{$jslabel comisionamiento tipo_vinculacion }","bold":true},{"text":{$tipo_vinculacion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c22}
+																							{BEGIN cellblock_grid_c23}
+{
+	cellId: 'c23',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c23}
+			colSpan: {$colspan_grid_c23},
+			{END colspan_grid_c23}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_antiguedad_laboral}","stack":[{"text":"{$jslabel comisionamiento antiguedad_laboral }","bold":true},{"text":{$antiguedad_laboral_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_car_descri}","stack":[{"text":"{$jslabel comisionamiento car_descri }","bold":true},{"text":{$car_descri_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_sed_descripcion}","stack":[{"text":"{$jslabel comisionamiento sed_descripcion }","bold":true},{"text":{$sed_descripcion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_cantidad_permisos_mes}","stack":[{"text":"{$jslabel comisionamiento cantidad_permisos_mes }","bold":true},{"text":{$cantidad_permisos_mes_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c23}
+																		{ 
+				cellId: 'c23',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_1}
+						{BEGIN row_grid_2}
+				[
+																{BEGIN cellblock_grid_c19}
+{
+	cellId: 'c19',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c19}
+			colSpan: {$colspan_grid_c19},
+			{END colspan_grid_c19}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>📝 TIPO DE PERMISO / JUSTIFICACION</h3><br><hr>","hidden":"{$item_hide_text3}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel comisionamiento motivo_id }","bold":true},{"text":{$motivo_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c19}
+																		{ 
+				cellId: 'c19',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c19',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_2}
+						{BEGIN row_grid_3}
+				[
+																{BEGIN cellblock_grid_c20}
+{
+	cellId: 'c20',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c20}
+			colSpan: {$colspan_grid_c20},
+			{END colspan_grid_c20}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>📅 PERIODO DEL PERMISO 🕒</h3><br><hr>","hidden":"{$item_hide_text4}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c20}
+																		{ 
+				cellId: 'c20',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c20',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_3}
+						{BEGIN row_grid_4}
+				[
+																{BEGIN cellblock_grid_c3}
+{
+	cellId: 'c3',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h4><strong>📅 Fecha de inicio del permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_fecha_desde}","stack":[{"text":"{$jslabel comisionamiento fecha_desde }","bold":true},{"text":{$fecha_desde_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_hora_desde}","stack":[{"text":"{$jslabel comisionamiento hora_desde }","bold":true},{"text":{$hora_desde_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c3}
+																							{BEGIN cellblock_grid_c13}
+{
+	cellId: 'c13',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h4><strong>📅 Fecha de fin del permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text1}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_fecha_hasta}","stack":[{"text":"{$jslabel comisionamiento fecha_hasta }","bold":true},{"text":{$fecha_hasta_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_hora_hasta}","stack":[{"text":"{$jslabel comisionamiento hora_hasta }","bold":true},{"text":{$hora_hasta_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c13}
+																							{BEGIN cellblock_grid_c14}
+{
+	cellId: 'c14',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h4><strong>🔢 Cantidad de días de permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text8}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_cantidad_dias_permiso}","stack":[{"text":"{$jslabel comisionamiento cantidad_dias_permiso }","bold":true},{"text":{$cantidad_dias_permiso_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c14}
+											],
+				{END row_grid_4}
+						{BEGIN row_grid_5}
+				[
+																{BEGIN cellblock_grid_c11}
+{
+	cellId: 'c11',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c11}
+			colSpan: {$colspan_grid_c11},
+			{END colspan_grid_c11}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>🚗 COMISIÓN DE SERVICIOS</h3><br><hr>","hidden":"{$item_hide_text5}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c11}
+																		{ 
+				cellId: 'c11',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c11',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_5}
+						{BEGIN row_grid_6}
+				[
+																{BEGIN cellblock_grid_c15}
+{
+	cellId: 'c15',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_comision_servicios}","stack":[{"text":"{$jslabel comisionamiento comision_servicios }","bold":true},{"text":{$comision_servicios_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c15}
+																							{BEGIN cellblock_grid_c21}
+{
+	cellId: 'c21',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c21}
+			colSpan: {$colspan_grid_c21},
+			{END colspan_grid_c21}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_comision_servicios_descripcion}","stack":[{"text":"{$jslabel comisionamiento comision_servicios_descripcion }","bold":true},{"text":{$comision_servicios_descripcion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c21}
+																		{ 
+				cellId: 'c21',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_6}
+						{BEGIN row_grid_7}
+				[
+																{BEGIN cellblock_grid_c4}
+{
+	cellId: 'c4',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c4}
+			colSpan: {$colspan_grid_c4},
+			{END colspan_grid_c4}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>💬 OBSERVACIONES Y DOCUMENTOS</h3><br><hr>","hidden":"{$item_hide_text6}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_observacion}","stack":[{"text":"{$jslabel comisionamiento observacion }","bold":true},{"text":{$observacion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c4}
+																		{ 
+				cellId: 'c4',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c4',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_7}
+						{BEGIN row_grid_8}
+				[
+																{BEGIN cellblock_grid_c8}
+{
+	cellId: 'c8',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c8}
+			colSpan: {$colspan_grid_c8},
+			{END colspan_grid_c8}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>📌 ESTADO DE LA SOLICITUD</h3><br><hr>","hidden":"{$item_hide_text7}","isHtml":true},
+				
+				
+			{"text":"<div style=\"background:#e7f3ff;padding:10px;border-radius:8px;\">\n  ℹ️ Su solicitud pasa por dos niveles de aprobación:\n  <br>1. Jefe inmediato\n  <br>2. Recursos Humanos\n</div>","hidden":"{$item_hide_text9}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c8}
+																		{ 
+				cellId: 'c8',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c8',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_8}
+						{BEGIN row_grid_9}
+				[
+																{BEGIN cellblock_grid_c9}
+{
+	cellId: 'c9',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel comisionamiento fecha_solicitud }","bold":true},{"text":{$fecha_solicitud_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c9}
+																							{BEGIN cellblock_grid_c10}
+{
+	cellId: 'c10',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel comisionamiento resultado_decision }","bold":true},{"text":{$resultado_decision_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c10}
+																							{BEGIN cellblock_grid_c}
+{
+	cellId: 'c',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel comisionamiento rrhh_resultado_decision }","bold":true},{"text":{$rrhh_resultado_decision_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c}
+											],
+				{END row_grid_9}
+						{BEGIN row_grid_10}
+				[
+																{BEGIN cellblock_grid_c16}
+{
+	cellId: 'c16',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c16}
+			colSpan: {$colspan_grid_c16},
+			{END colspan_grid_c16}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>📌 MOTIVO DE RECHAZO</h3><br><hr>","hidden":"{$item_hide_text10}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_rrhh_motivo_rechazo}","stack":[{"text":"{$jslabel comisionamiento rrhh_motivo_rechazo }","bold":true},{"text":{$rrhh_motivo_rechazo_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c16}
+																		{ 
+				cellId: 'c16',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c16',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_10}
+						{BEGIN row_grid_11}
+				[
+																{BEGIN cellblock_grid_c12}
+{
+	cellId: 'c12',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c12}
+			colSpan: {$colspan_grid_c12},
+			{END colspan_grid_c12}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_id}","stack":[{"text":"{$jslabel comisionamiento id }","bold":true},{"text":{$id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c12}
+																		{ 
+				cellId: 'c12',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c12',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_11}
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				
+		location: 'below-grid',
+		
+		
+		widths: [
+								"*", 
+											"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_view_back_list}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_view_close}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																							{
+	cellId: 'c2',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'right',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+			]
+};
+
+pdfFonts = {$pdfFonts};
+  

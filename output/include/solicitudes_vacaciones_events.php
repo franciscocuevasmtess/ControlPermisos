@@ -20,6 +20,12 @@
 
 		$this->events["CustomEdit"]=true;
 
+		$this->events["AfterAdd"]=true;
+
+		$this->events["BeforeShowEdit"]=true;
+
+		$this->events["BeforeShowList"]=true;
+
 
 	}
 
@@ -101,8 +107,12 @@ $pageObject->hideItem("add_fecha_actualizacion");//oculta el campo fecha_actuali
 // Usuario que realizó la última actualización
 $pageObject->hideItem("add_usuario_actualizacion");//oculta el campo usuario_actualizacion
 
-
 $pageObject->hideItem("add_dependencia_id");
+
+$pageObject->hideItem("add_tipo_vinculacion");// Oculta el campo tipo_vinculacion
+
+$pageObject->hideItem("add_email_jefe_id");// Oculta el campo email_jefe_id
+
 
 
 // Obtener datos del usuario logueado en PHPRunner
@@ -115,10 +125,13 @@ $userPersonal = $currentUser["usu_personal"];
 $sqlDependencia = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta AS descripcion_dependencia,
 																p.per_ci AS persona_ci,
 																d.dep_cod,
-																p.per_nombre || ' - ' || p.per_apellido AS nombre_completo,
-																p.per_cod
+																p.per_nombre || ' ' || p.per_apellido AS nombre_completo,
+																p.per_cod,
+																p.tipo_funcionario_tfun_cod,
+																tf.tfun_descri AS descripcion_tipo_funcionario
 												FROM personales p
-													JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
+													LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
+													LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
 												WHERE p.per_cod = $userPersonal";
 $resultDependencia = CustomQuery($sqlDependencia);
 $dataDependencia = db_fetch_array($resultDependencia);
@@ -127,7 +140,32 @@ $pageObject->setProxyValue("descripcion_dependencia", $dataDependencia["descripc
 $pageObject->setProxyValue("persona_ci", $dataDependencia["persona_ci"]);
 $pageObject->setProxyValue("nombre_completo", $dataDependencia["nombre_completo"]);
 $pageObject->setProxyValue("per_cod", $dataDependencia["per_cod"]);
+$pageObject->setProxyValue("tipo_funcionario_tfun_cod", $dataDependencia["tipo_funcionario_tfun_cod"]);
+$pageObject->setProxyValue("descripcion_tipo_funcionario", $dataDependencia["descripcion_tipo_funcionario"]);
 
+
+// Query para obtener TODOS los jefes posibles
+$sqlEmail = "
+	SELECT pe.per_cod,
+		pe.per_email_instit,
+		car.car_descri
+	FROM public.personales pe
+		JOIN public.cargos car ON car.car_cod = pe.cargos_car_cod
+		JOIN public.personales pe1 ON pe1.dependencias_dep_cod = pe.dependencias_dep_cod
+	WHERE car.car_cod IN (4, 5)
+	AND pe1.per_cod = {$userPersonal}
+";
+$resultEmail = CustomQuery($sqlEmail);
+$jefes = array();
+while ($row = db_fetch_array($resultEmail)) {
+	$jefes[] = array(
+		"per_cod"    => $row["per_cod"],
+		"per_email_instit" => $row["per_email_instit"],
+		"car_descri" => $row["car_descri"]
+	);
+}
+// 👉 Pasamos TODO como JSON al frontend(JavaScript Onload event)
+$pageObject->setProxyValue("jefes_emails", json_encode($jefes));
 
 
 ;		
@@ -254,6 +292,13 @@ function CustomAdd(&$values, &$keys, &$error, $inline, $pageObject)
 
 
 /*==============================================================
+=            INCLUSIÓN DE UTILIDADES / LIBRERÍAS               =
+==============================================================*/
+// Incluir utilidades de correo electrónico
+require_once(getabspath("include/email_utils.php"));
+
+
+/*==============================================================
 =            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
 ==============================================================*/
 /**
@@ -279,31 +324,43 @@ function debug_to_console($data, $context = 'Debug in Console') {
 // Obtener datos del usuario actualmente autenticado
 $currentUserData = Security::currentUserData();
 	
+
 /*==============================================================
 =            OBTENCIÓN DE VALORES DEL FORMULARIO               =
 ==============================================================*/
 /**
  * $values contiene los campos enviados desde el formulario ADD
+ * Estos valores luego serán insertados en la base de datos
  */
 $dependencia_id = $values["dependencia_id"];
 $per_ci = $values["per_ci"];
 $id_funcionario = $values["id_funcionario"];
 $fecha_desde = $values["fecha_desde"];
+$hora_desde = "00:00:00";
 $fecha_hasta = $values["fecha_hasta"];
+$hora_hasta = "23:59:59";
 $total_dias_habiles = $values["total_dias_habiles"];
 $observacion = $values["observacion"];
 $tipo_vinculacion = $values["tipo_vinculacion"];
 $nombre_completo = $values["nombre_completo"];
 $estado = "PENDIENTE"; // Estado inicial de la solicitud
-$fecha_creacion = $values["fecha_creacion"]; // Fecha de creación del registro
 $usuario_creador = $currentUserData["usu_cod"];
 $nombreDependencia = $values["descripcion_dependencia"];
+$email_jefe = $values["email_jefe"];
+$email_jefe_id = $values["email_jefe_id"];
+$nombreMotivo = 'Solicitud de Vacación';
 
-/*==============================================================
-=            INSERCIÓN DE SOLICITUD DE VACACIONES              =
-==============================================================*/
-$sqlInsertSolicitudesVacaciones = DB::PrepareSQL(
-	"INSERT INTO rrhh_permisos.solicitudes_vacaciones (id_funcionario,
+
+/*================================================================================
+=            INSERCIÓN DE LA SOLICITUD DE VACACIONES Y ENVÍO DE CORREO           =
+=================================================================================*/
+try {
+	/*--------------------------------------------------
+	| Insertar Solicitud de vacacion en la base de datos
+	--------------------------------------------------*/
+	
+	$sqlInsertSolicitudesVacaciones = DB::PrepareSQL(
+		"INSERT INTO rrhh_permisos.solicitudes_vacaciones (id_funcionario,
 																																	tipo_vinculacion,
 																																	dependencia_id,
 																																	fecha_desde,
@@ -311,38 +368,83 @@ $sqlInsertSolicitudesVacaciones = DB::PrepareSQL(
 																																	total_dias_habiles,
 																																	observacion,
 																																	estado,
-																																	fecha_creacion,
+																																	fecha_solicitud,
 																																	usuario_creador) 
-	VALUES (':1',':2',':3',':4',':5',':6',':7',':8',':9',':10')
-		RETURNING id",
-		$id_funcionario,
-		$tipo_vinculacion,
-		$dependencia_id,
-		$fecha_desde,
-		$fecha_hasta,
-		$total_dias_habiles,
-		$observacion,
-		$estado,
-		$fecha_creacion,
-		$usuario_creador);
-	//debug_to_console($sqlInsertSolicitudesVacaciones);
+		VALUES (':1',':2',':3',':4',':5',':6',':7',':8',NOW(),':9')
+			RETURNING id",
+			$id_funcionario,
+			$tipo_vinculacion,
+			$dependencia_id,
+			$fecha_desde,
+			$fecha_hasta,
+			$total_dias_habiles,
+			$observacion,
+			$estado,
+			$usuario_creador);
+		debug_to_console($sqlInsertSolicitudesVacaciones);
 
-// Ejecutar la consulta
-$resultSolicitudesVacaciones = DB::Query($sqlInsertSolicitudesVacaciones);
+	// Ejecutar la consulta
+	$resultSolicitudesVacaciones = DB::Query($sqlInsertSolicitudesVacaciones);
 
-// Obtener el ID generado de la solicitud
-$row_solicitudes_vacaciones = $resultSolicitudesVacaciones->fetchAssoc();
-$solicitud_vacacion_id = $row_solicitudes_vacaciones['id'];
+	// Obtener el ID generado de la solicitud
+	$row_solicitudes_vacaciones = $resultSolicitudesVacaciones->fetchAssoc();
+	$solicitud_vacacion_id = $row_solicitudes_vacaciones['id'];
+	debug_to_console("solicitud_vacacion_id: " . $solicitud_vacacion_id);
+
+
+
 	
-/*==============================================================
-=            CONTROL DE FLUJO PHPRUNNER                        =
-==============================================================*/
-/**
- * return false:
- *  - Evita que PHPRunner haga el INSERT automático
- *  - Se usa porque el INSERT ya se realizó manualmente
- */
-return false;
+	// ============================================================================
+	// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
+	// ============================================================================
+	/*-----------------------------------------------------
+	| Preparar datos del permiso para el correo electrónico
+	------------------------------------------------------*/
+	$datosPermiso = array(
+					'nombre_funcionario' => trim($nombre_completo),
+					'fecha_desde' => $fecha_desde,
+					'hora_desde' => $hora_desde,
+					'fecha_hasta' => $fecha_hasta,
+					'hora_hasta' => $hora_hasta,
+					'motivo' => $nombreMotivo,
+					'observacion' => $observacion,
+					'dependencia' => $nombreDependencia,
+					'email_jefe_id' => $email_jefe_id,
+					'tipo_solicitud' => 'vacaciones'
+	);
+	
+	
+	/*--------------------------------------------
+	| Enviar correo de notificación								 |
+	--------------------------------------------*/
+	$emailEnviado = EmailUtils::enviarNotificacionSolicitudPermiso(
+		$datosPermiso, 
+		$solicitud_vacacion_id, 
+		$email_jefe
+	);
+	
+	if ($emailEnviado) {
+		error_log("Correo enviado para solicitud vacación ID: " . $solicitud_vacacion_id);
+		debug_to_console("Correo enviado para solicitud vacación ID: " . $solicitud_vacacion_id);
+	} else {
+		error_log("Error al enviar correo para solicitud vacación ID: " . $solicitud_vacacion_id);
+		debug_to_console("Error al enviar correo para solicitud vacación ID: " . $solicitud_vacacion_id);
+	}
+	
+} catch (Exception $e) {
+	// Si ocurre un error en el correo, NO se revierte la inserción del permiso.
+	error_log("Excepción al enviar correo: " . $e->getMessage());
+	debug_to_console("Excepción al enviar correo: " . $e->getMessage());
+}
+
+
+
+
+
+
+
+
+
 
 
 ;		
@@ -498,6 +600,70 @@ function CustomEdit(&$values, $where, &$oldvalues, &$keys, &$error, $inline, $pa
  *  - Mantiene intactos los campos de auditoría y control
  *****************************************************************/
 
+/*==============================================================
+=            INCLUSIÓN DE UTILIDADES / LIBRERÍAS               =
+==============================================================*/
+// Incluir utilidades de correo electrónico
+require_once(getabspath("include/email_utils.php"));
+
+
+/*==============================================================
+=            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
+==============================================================*/
+/**
+ * Envía información a la consola del navegador.
+ * Útil únicamente durante el desarrollo.
+ *
+ * @param mixed  $data    Datos a mostrar
+ * @param string $context Contexto del mensaje
+ */
+function debug_to_console($data, $context = 'Debug in Console') {
+	ob_start();
+	$output  = 'console.info(\'' . $context . ':\');';
+	$output .= 'console.log(' . json_encode($data) . ');';
+	$output  = sprintf('<script>%s</script>', $output);
+	echo $output;
+}
+
+
+/*==============================================================
+=            DATOS DEL USUARIO LOGUEADO                        =
+==============================================================*/
+
+// Obtener datos del usuario actualmente autenticado
+$currentUserData = Security::currentUserData();
+
+
+/*==============================================================
+=            OBTENCIÓN DE VALORES DEL FORMULARIO               =
+==============================================================*/
+/**
+ * $values contiene los campos enviados desde el formulario ADD
+ * Estos valores luego serán insertados en la base de datos
+ */
+//$dependencia_id = $values["dependencia_id"];
+//$per_ci = $values["per_ci"];
+//$id_funcionario = $values["id_funcionario"];
+$fecha_desde = $values["fecha_desde"];
+$hora_desde = "00:00:00";
+$fecha_hasta = $values["fecha_hasta"];
+$hora_hasta = "23:59:59";
+//$total_dias_habiles = $values["total_dias_habiles"];
+$observacion = $values["observacion"];
+//$tipo_vinculacion = $values["tipo_vinculacion"];
+$nombre_completo = $values["nombre_completo"];
+//$estado = "PENDIENTE"; // Estado inicial de la solicitud
+//$usuario_creador = $currentUserData["usu_cod"];
+$nombreDependencia = $values["descripcion_dependencia"];
+//$email_jefe = $values["email_jefe"];
+//$email_jefe_id = $values["email_jefe_id"];
+$nombreMotivo = 'Solicitud de Vacación';
+
+
+
+
+
+
 
 /*==============================================================
 =            ACTUALIZACIÓN DE SOLICITUD DE VACACIONES          =
@@ -513,29 +679,106 @@ function CustomEdit(&$values, $where, &$oldvalues, &$keys, &$error, $inline, $pa
  * La fecha de actualización se asigna automáticamente.
  */
 
+
+
+/*================================================================================
+=            ACTUALIZACIÓN DE LA SOLICITUD DE VACACIONES Y ENVÍO DE CORREO       =
+=================================================================================*/
+try {
+	/*----------------------------------------------------
+	| Actualizar Solicitud de vacacion en la base de datos
+	-----------------------------------------------------*/
+	$update_solicitud_vacaciones = DB::PrepareSQL(
+		"UPDATE rrhh_permisos.solicitudes_vacaciones 
+			SET tipo_vinculacion = ':1',
+					dependencia_id = ':2',
+					fecha_desde = ':3',
+					fecha_hasta = ':4',
+					total_dias_habiles = ':5',
+					observacion = ':6',
+					fecha_actualizacion = ':7'
+		WHERE id = ':8'",
+		$values["tipo_vinculacion"],
+		$values["dependencia_id"],
+		$values["fecha_desde"],
+		$values["fecha_hasta"],
+		$values["total_dias_habiles"],
+		$values["observacion"],
+		now(),
+		$values["id"]
+	);
+	debug_to_console($update_solicitud_vacaciones);
+
+	// Ejecutar la actualización
+	//DB::Exec($update_solicitud_vacaciones);
+	// Ejecutar la consulta
+	$resultSolicitudesVacaciones = DB::Query($update_solicitud_vacaciones);
+
+	// Obtener el ID generado de la solicitud
+	//$row_solicitudes_vacaciones = $resultSolicitudesVacaciones->fetchAssoc();
+	//$solicitud_vacacion_id = $row_solicitudes_vacaciones['id'];
+	$solicitud_vacacion_id = $values["id"];
+	debug_to_console("solicitud_vacacion_id: " . $solicitud_vacacion_id);
+	
+	
+	// ============================================================================
+	// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
+	// ============================================================================
+	/*-----------------------------------------------------
+	| Preparar datos del permiso para el correo electrónico
+	------------------------------------------------------*/
+	$datosPermiso = array(
+					'nombre_funcionario' => trim($nombre_completo),
+					'fecha_desde' => $fecha_desde,
+					'hora_desde' => $hora_desde,
+					'fecha_hasta' => $fecha_hasta,
+					'hora_hasta' => $hora_hasta,
+					'motivo' => $nombreMotivo,
+					'observacion' => $observacion,
+					'dependencia' => $nombreDependencia,
+					//'email_jefe_id' => $email_jefe_id,
+					'tipo_solicitud' => 'vacaciones'
+	);
+
+
+
+
+
+
+} catch (Exception $e) {
+	// Si ocurre un error en el correo, NO se revierte la inserción del permiso.
+	error_log("Excepción al enviar correo: " . $e->getMessage());
+	debug_to_console("Excepción al enviar correo: " . $e->getMessage());
+}
+
+
+
+
+
+
 // Actualizar solicitud vacacion funcionario
-$update_solicitud_vacaciones = DB::PrepareSQL(
-	"UPDATE rrhh_permisos.solicitudes_vacaciones 
-		SET tipo_vinculacion = ':1',
-				dependencia_id = ':2',
-				fecha_desde = ':3',
-				fecha_hasta = ':4',
-				total_dias_habiles = ':5',
-				observacion = ':6',
-				fecha_actualizacion = ':7'
-	WHERE id = ':8'",
-	$values["tipo_vinculacion"],
-	$values["dependencia_id"],
-	$values["fecha_desde"],
-	$values["fecha_hasta"],
-	$values["total_dias_habiles"],
-	$values["observacion"],
-	now(),
-	$values["id"]
-);
+//$update_solicitud_vacaciones = DB::PrepareSQL(
+//	"UPDATE rrhh_permisos.solicitudes_vacaciones 
+//		SET tipo_vinculacion = ':1',
+//				dependencia_id = ':2',
+//				fecha_desde = ':3',
+//				fecha_hasta = ':4',
+//				total_dias_habiles = ':5',
+//				observacion = ':6',
+//				fecha_actualizacion = ':7'
+//	WHERE id = ':8'",
+//	$values["tipo_vinculacion"],
+//	$values["dependencia_id"],
+//	$values["fecha_desde"],
+//	$values["fecha_hasta"],
+//	$values["total_dias_habiles"],
+//	$values["observacion"],
+//	now(),
+//	$values["id"]
+//);
 
 // Ejecutar la actualización
-DB::Exec($update_solicitud_vacaciones);
+//DB::Exec($update_solicitud_vacaciones);
 
 /*==============================================================
 =            CONTROL DE FLUJO PHPRUNNER                        =
@@ -545,7 +788,7 @@ DB::Exec($update_solicitud_vacaciones);
  *  - Evita que PHPRunner ejecute su UPDATE automático
  *  - Se usa porque la actualización ya fue manejada manualmente
  */
-return false;
+//return false;
 
 
 ;		
@@ -568,6 +811,344 @@ return false;
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				// After record added
+function AfterAdd(&$values, &$keys, $inline, $pageObject)
+{
+
+		// $pageObject->setMessageType(MESSAGE_SUCCESS);
+$pageObject->setMessageType(1);
+
+$html_exitoso = '
+<div style="
+    border: 1px solid #28a745;
+    background-color: #e9f7ef;
+    color: #155724;
+    padding: 18px 22px;
+    border-radius: 6px;
+    margin: 15px 0;
+">
+    <h4 style="margin-top:0; color:#1e7e34;">
+        ✅ ¡Solicitud enviada con éxito!
+    </h4>
+
+    <p style="margin: 8px 0; color:#155724; font-size: 18px;">
+       Tu solicitud de vacaciones fue registrada correctamente y enviada a tu superior inmediato para su revisión.
+    </p>
+		<a href="solicitudes_vacaciones_list.php" style="
+        display: inline-block;
+        margin-top: 12px;
+        padding: 8px 14px;
+        background-color: #28a745;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 500;
+    ">
+        ⬅ Volver al Listado
+    </a>
+</div>
+';
+
+$pageObject->setMessage($html_exitoso);
+
+
+;		
+} // function AfterAdd
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				// Before display
+function BeforeShowEdit(&$xt, &$templatefile, $values, $pageObject)
+{
+
+		
+// Oculta el campo dependencia_id
+$pageObject->hideItem("edit_dependencia_id");
+
+// Oculta el campo edit_descripcion_dependencia_edit
+$pageObject->hideItem("edit_descripcion_dependencia_edit");
+
+// Oculta el campo edit_id_funcionario
+$pageObject->hideItem("edit_id_funcionario");
+
+// Oculta el campo edit_tipo_vinculacion
+$pageObject->hideItem("edit_tipo_vinculacion");
+
+// Oculta el campo id
+$pageObject->hideItem("edit_id"); 
+
+
+// Obtener datos del usuario logueado en PHPRunner
+$currentUser = Security::currentUserData();
+
+// ID del usuario logueado (tabla users de PHPRunner)
+$userPersonal = $currentUser["usu_personal"];
+
+// Obtener Dependencia y datos de la persona logueada.
+$sqlPersonales = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta AS descripcion_dependencia,
+																p.per_ci AS persona_ci,
+																d.dep_cod,
+																p.per_nombre || ' ' || p.per_apellido AS nombre_completo,
+																p.per_cod,
+																p.tipo_funcionario_tfun_cod,
+																tf.tfun_descri AS descripcion_tipo_funcionario
+										FROM personales p
+											LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
+											LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
+										WHERE p.per_cod = $userPersonal";
+$resultPersonales = CustomQuery($sqlPersonales);
+$dataPersonales = db_fetch_array($resultPersonales);
+$pageObject->setProxyValue("dep_cod", $dataPersonales["dep_cod"]);
+$pageObject->setProxyValue("descripcion_dependencia", $dataPersonales["descripcion_dependencia"]);
+$pageObject->setProxyValue("persona_ci", $dataPersonales["persona_ci"]);
+$pageObject->setProxyValue("nombre_completo", $dataPersonales["nombre_completo"]);
+$pageObject->setProxyValue("per_cod", $dataPersonales["per_cod"]);
+$pageObject->setProxyValue("tipo_funcionario_tfun_cod", $dataPersonales["tipo_funcionario_tfun_cod"]);
+$pageObject->setProxyValue("descripcion_tipo_funcionario", $dataPersonales["descripcion_tipo_funcionario"]);
+
+
+
+
+
+// Query para obtener TODOS los jefes posibles
+$sqlEmail = "
+	SELECT pe.per_cod,
+		pe.per_email_instit,
+		car.car_descri
+	FROM public.personales pe
+		JOIN public.cargos car ON car.car_cod = pe.cargos_car_cod
+		JOIN public.personales pe1 ON pe1.dependencias_dep_cod = pe.dependencias_dep_cod
+	WHERE car.car_cod IN (4, 5)
+	AND pe1.per_cod = {$userPersonal}
+";
+$resultEmail = CustomQuery($sqlEmail);
+$jefes = array();
+while ($row = db_fetch_array($resultEmail)) {
+	$jefes[] = array(
+		"per_cod"    => $row["per_cod"],
+		"per_email_instit" => $row["per_email_instit"],
+		"car_descri" => $row["car_descri"]
+	);
+}
+
+// 👉 Pasamos TODO como JSON al frontend(JavaScript Onload event)
+$pageObject->setProxyValue("jefes_emails", json_encode($jefes));
+
+
+
+;		
+} // function BeforeShowEdit
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				// Before display
+function BeforeShowList(&$xt, &$templatefile, $pageObject)
+{
+
+		
+
+// Place event code here.
+// Use "Add Action" button to add code snippets.
+
+//$pageObject->hideItem("add");  // Oculta el boton para crear una nueva solicitud de vacaciones.
+$pageObject->hideItem("grid_edit"); // Oculta el boton para editar una nueva solicitud de vacaciones.
+$pageObject->hideItem("grid_view"); // Oculta el boton para ver detalles
+
+$pageObject->hideItem("add"); // Oculta el boton para crear una nuea solicitud de vacaciones.
+;		
+} // function BeforeShowList
+
 		
 		
 		

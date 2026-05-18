@@ -50,6 +50,8 @@ include(getabspath('classes/pdlayout.php'));
 //	custom labels
 $custom_labels = array();
 $custom_labels["Spanish"] = array();
+	$custom_labels["Spanish"]['VIEW_RECORD'] = "Ver Solicitud de vac.";
+	$custom_labels["Spanish"]['RESET'] = "Limpiar formulario";
 
 define('GLOBAL_PAGES_SHORT', "_global");
 define('GLOBAL_PAGES', "<global>");
@@ -644,7 +646,7 @@ $globalSettings["htmlEmailTemplates"] = array();
 
 
 $globalSettings["createLoginPage"] = true;
-$globalSettings["userGroupCount"] = 0;
+$globalSettings["userGroupCount"] = 1;
 
 
 $globalSettings["apiGoogleMapsCode"] = "";
@@ -718,7 +720,7 @@ $cLoginTable = "public.usuarios";
 $cDisplayNameField = "";
 $cUserNameField	= "usu_usuario";
 $cPasswordField	= "usu_contrasenha";
-$cUserGroupField = "";
+$cUserGroupField = "usu_usuario";
 $cEmailField = "";
 $cUserpicField = "";
 $loginKeyFields= array();
@@ -753,9 +755,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "606_1770653322";
+$projectBuildKey = "1162_1777031130";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "606";
+$projectBuildNumber = "1162";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -787,6 +789,8 @@ $tableCaptions["Spanish"]["public_tipo_funcionario"] = "Tipo Funcionario";
 $tableCaptions["Spanish"]["public_tipos_ocurrencias"] = "Tipos Ocurrencias";
 $tableCaptions["Spanish"]["rrhh_permisos_solicitudes_vacaciones"] = "Solicitudes Vacaciones";
 $tableCaptions["Spanish"]["public_usuarios"] = "Usuarios";
+$tableCaptions["Spanish"]["comisionamiento"] = "Comisionamiento";
+$tableCaptions["Spanish"]["public_personales"] = "Personales";
 
 
 $globalEvents = new class_GlobalEvents;

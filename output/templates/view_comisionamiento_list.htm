@@ -1,0 +1,2357 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-list"   
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="250px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expandir" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+ 
+
+			<div class="clearfix  r-ori-vert" data-cellId="left_c1" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
+				<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Búsqueda			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Mostrar opciones</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>todas las condiciones</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>cualquier condición</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>esconder</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_id}" {$filterRow_attrs_id}>
+			<label>{$label view_comisionamiento id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_id}</span>
+						</div>
+		{END searchCtrlBlock_id}
+																{BEGIN searchCtrlBlock_rrhh_fecha_decision}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_rrhh_fecha_decision}" {$filterRow_attrs_rrhh_fecha_decision}>
+			<label>{$label view_comisionamiento rrhh_fecha_decision }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_rrhh_fecha_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_rrhh_fecha_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_rrhh_fecha_decision}</span>
+						</div>
+		{END searchCtrlBlock_rrhh_fecha_decision}
+																{BEGIN searchCtrlBlock_fecha_decision}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_fecha_decision}" {$filterRow_attrs_fecha_decision}>
+			<label>{$label view_comisionamiento fecha_decision }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_fecha_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_fecha_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_fecha_decision}</span>
+						</div>
+		{END searchCtrlBlock_fecha_decision}
+																{BEGIN searchCtrlBlock_cantidad_permisos_mes}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_cantidad_permisos_mes}" {$filterRow_attrs_cantidad_permisos_mes}>
+			<label>{$label view_comisionamiento cantidad_permisos_mes }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_cantidad_permisos_mes}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_cantidad_permisos_mes}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_cantidad_permisos_mes}</span>
+						</div>
+		{END searchCtrlBlock_cantidad_permisos_mes}
+																{BEGIN searchCtrlBlock_cantidad_dias_permiso}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_cantidad_dias_permiso}" {$filterRow_attrs_cantidad_dias_permiso}>
+			<label>{$label view_comisionamiento cantidad_dias_permiso }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_cantidad_dias_permiso}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_cantidad_dias_permiso}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_cantidad_dias_permiso}</span>
+						</div>
+		{END searchCtrlBlock_cantidad_dias_permiso}
+																{BEGIN searchCtrlBlock_sed_descripcion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_sed_descripcion}" {$filterRow_attrs_sed_descripcion}>
+			<label>{$label view_comisionamiento sed_descripcion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_sed_descripcion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_sed_descripcion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_sed_descripcion}</span>
+						</div>
+		{END searchCtrlBlock_sed_descripcion}
+																{BEGIN searchCtrlBlock_car_descri}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_car_descri}" {$filterRow_attrs_car_descri}>
+			<label>{$label view_comisionamiento car_descri }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_car_descri}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_car_descri}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_car_descri}</span>
+						</div>
+		{END searchCtrlBlock_car_descri}
+																{BEGIN searchCtrlBlock_antiguedad_laboral}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_antiguedad_laboral}" {$filterRow_attrs_antiguedad_laboral}>
+			<label>{$label view_comisionamiento antiguedad_laboral }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_antiguedad_laboral}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_antiguedad_laboral}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_antiguedad_laboral}</span>
+						</div>
+		{END searchCtrlBlock_antiguedad_laboral}
+																{BEGIN searchCtrlBlock_rrhh_motivo_rechazo}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_rrhh_motivo_rechazo}" {$filterRow_attrs_rrhh_motivo_rechazo}>
+			<label>{$label view_comisionamiento rrhh_motivo_rechazo }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_rrhh_motivo_rechazo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_rrhh_motivo_rechazo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_rrhh_motivo_rechazo}</span>
+						</div>
+		{END searchCtrlBlock_rrhh_motivo_rechazo}
+																{BEGIN searchCtrlBlock_rrhh_resultado_decision}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_rrhh_resultado_decision}" {$filterRow_attrs_rrhh_resultado_decision}>
+			<label>{$label view_comisionamiento rrhh_resultado_decision }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_rrhh_resultado_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_rrhh_resultado_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_rrhh_resultado_decision}</span>
+						</div>
+		{END searchCtrlBlock_rrhh_resultado_decision}
+																{BEGIN searchCtrlBlock_descripcion_dependencia_edit}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_descripcion_dependencia_edit}" {$filterRow_attrs_descripcion_dependencia_edit}>
+			<label>{$label view_comisionamiento descripcion_dependencia_edit }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_descripcion_dependencia_edit}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_descripcion_dependencia_edit}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_descripcion_dependencia_edit}</span>
+						</div>
+		{END searchCtrlBlock_descripcion_dependencia_edit}
+																{BEGIN searchCtrlBlock_nombre_completo_edit}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_nombre_completo_edit}" {$filterRow_attrs_nombre_completo_edit}>
+			<label>{$label view_comisionamiento nombre_completo_edit }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_nombre_completo_edit}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_nombre_completo_edit}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_nombre_completo_edit}</span>
+						</div>
+		{END searchCtrlBlock_nombre_completo_edit}
+																{BEGIN searchCtrlBlock_horas_compensar}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_horas_compensar}" {$filterRow_attrs_horas_compensar}>
+			<label>{$label view_comisionamiento horas_compensar }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_horas_compensar}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_horas_compensar}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_horas_compensar}</span>
+						</div>
+		{END searchCtrlBlock_horas_compensar}
+																{BEGIN searchCtrlBlock_resultado_decision}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_resultado_decision}" {$filterRow_attrs_resultado_decision}>
+			<label>{$label view_comisionamiento resultado_decision }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_resultado_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_resultado_decision}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_resultado_decision}</span>
+						</div>
+		{END searchCtrlBlock_resultado_decision}
+																{BEGIN searchCtrlBlock_email_jefe_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_email_jefe_id}" {$filterRow_attrs_email_jefe_id}>
+			<label>{$label view_comisionamiento email_jefe_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_email_jefe_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_email_jefe_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_email_jefe_id}</span>
+						</div>
+		{END searchCtrlBlock_email_jefe_id}
+																{BEGIN searchCtrlBlock_fecha_solicitud}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_fecha_solicitud}" {$filterRow_attrs_fecha_solicitud}>
+			<label>{$label view_comisionamiento fecha_solicitud }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_fecha_solicitud}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_fecha_solicitud}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_fecha_solicitud}</span>
+						</div>
+		{END searchCtrlBlock_fecha_solicitud}
+																{BEGIN searchCtrlBlock_solicitado_por}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_solicitado_por}" {$filterRow_attrs_solicitado_por}>
+			<label>{$label view_comisionamiento solicitado_por }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_solicitado_por}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_solicitado_por}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_solicitado_por}</span>
+						</div>
+		{END searchCtrlBlock_solicitado_por}
+																{BEGIN searchCtrlBlock_descripcion_tipo_vinculacion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_descripcion_tipo_vinculacion}" {$filterRow_attrs_descripcion_tipo_vinculacion}>
+			<label>{$label view_comisionamiento descripcion_tipo_vinculacion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_descripcion_tipo_vinculacion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_descripcion_tipo_vinculacion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_descripcion_tipo_vinculacion}</span>
+						</div>
+		{END searchCtrlBlock_descripcion_tipo_vinculacion}
+																{BEGIN searchCtrlBlock_descripcion_dependencia}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_descripcion_dependencia}" {$filterRow_attrs_descripcion_dependencia}>
+			<label>{$label view_comisionamiento descripcion_dependencia }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_descripcion_dependencia}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_descripcion_dependencia}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_descripcion_dependencia}</span>
+						</div>
+		{END searchCtrlBlock_descripcion_dependencia}
+																{BEGIN searchCtrlBlock_email_jefe}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_email_jefe}" {$filterRow_attrs_email_jefe}>
+			<label>{$label view_comisionamiento email_jefe }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_email_jefe}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_email_jefe}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_email_jefe}</span>
+						</div>
+		{END searchCtrlBlock_email_jefe}
+																{BEGIN searchCtrlBlock_archivo_adjunto}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_archivo_adjunto}" {$filterRow_attrs_archivo_adjunto}>
+			<label>{$label view_comisionamiento archivo_adjunto }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_archivo_adjunto}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_archivo_adjunto}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_archivo_adjunto}</span>
+						</div>
+		{END searchCtrlBlock_archivo_adjunto}
+																{BEGIN searchCtrlBlock_estado}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_estado}" {$filterRow_attrs_estado}>
+			<label>{$label view_comisionamiento estado }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_estado}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_estado}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_estado}</span>
+						</div>
+		{END searchCtrlBlock_estado}
+																{BEGIN searchCtrlBlock_observacion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_observacion}" {$filterRow_attrs_observacion}>
+			<label>{$label view_comisionamiento observacion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_observacion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_observacion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_observacion}</span>
+						</div>
+		{END searchCtrlBlock_observacion}
+																{BEGIN searchCtrlBlock_comision_servicios_descripcion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_comision_servicios_descripcion}" {$filterRow_attrs_comision_servicios_descripcion}>
+			<label>{$label view_comisionamiento comision_servicios_descripcion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_comision_servicios_descripcion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_comision_servicios_descripcion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_comision_servicios_descripcion}</span>
+						</div>
+		{END searchCtrlBlock_comision_servicios_descripcion}
+																{BEGIN searchCtrlBlock_comision_servicios}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_comision_servicios}" {$filterRow_attrs_comision_servicios}>
+			<label>{$label view_comisionamiento comision_servicios }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_comision_servicios}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_comision_servicios}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_comision_servicios}</span>
+						</div>
+		{END searchCtrlBlock_comision_servicios}
+																{BEGIN searchCtrlBlock_motivo_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_motivo_id}" {$filterRow_attrs_motivo_id}>
+			<label>{$label view_comisionamiento motivo_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_motivo_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_motivo_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_motivo_id}</span>
+						</div>
+		{END searchCtrlBlock_motivo_id}
+																{BEGIN searchCtrlBlock_hora_hasta}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_hora_hasta}" {$filterRow_attrs_hora_hasta}>
+			<label>{$label view_comisionamiento hora_hasta }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_hora_hasta}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_hora_hasta}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_hora_hasta}</span>
+						</div>
+		{END searchCtrlBlock_hora_hasta}
+																{BEGIN searchCtrlBlock_fecha_hasta}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_fecha_hasta}" {$filterRow_attrs_fecha_hasta}>
+			<label>{$label view_comisionamiento fecha_hasta }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_fecha_hasta}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_fecha_hasta}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_fecha_hasta}</span>
+						</div>
+		{END searchCtrlBlock_fecha_hasta}
+																{BEGIN searchCtrlBlock_hora_desde}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_hora_desde}" {$filterRow_attrs_hora_desde}>
+			<label>{$label view_comisionamiento hora_desde }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_hora_desde}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_hora_desde}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_hora_desde}</span>
+						</div>
+		{END searchCtrlBlock_hora_desde}
+																{BEGIN searchCtrlBlock_fecha_desde}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_fecha_desde}" {$filterRow_attrs_fecha_desde}>
+			<label>{$label view_comisionamiento fecha_desde }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_fecha_desde}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_fecha_desde}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_fecha_desde}</span>
+						</div>
+		{END searchCtrlBlock_fecha_desde}
+																{BEGIN searchCtrlBlock_dependencia_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_dependencia_id}" {$filterRow_attrs_dependencia_id}>
+			<label>{$label view_comisionamiento dependencia_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_dependencia_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_dependencia_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_dependencia_id}</span>
+						</div>
+		{END searchCtrlBlock_dependencia_id}
+																{BEGIN searchCtrlBlock_nombre_completo}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_nombre_completo}" {$filterRow_attrs_nombre_completo}>
+			<label>{$label view_comisionamiento nombre_completo }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_nombre_completo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_nombre_completo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_nombre_completo}</span>
+						</div>
+		{END searchCtrlBlock_nombre_completo}
+																{BEGIN searchCtrlBlock_tipo_vinculacion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_tipo_vinculacion}" {$filterRow_attrs_tipo_vinculacion}>
+			<label>{$label view_comisionamiento tipo_vinculacion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_tipo_vinculacion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_tipo_vinculacion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_tipo_vinculacion}</span>
+						</div>
+		{END searchCtrlBlock_tipo_vinculacion}
+																{BEGIN searchCtrlBlock_per_ci}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_per_ci}" {$filterRow_attrs_per_ci}>
+			<label>{$label view_comisionamiento per_ci }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_per_ci}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_per_ci}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_per_ci}</span>
+						</div>
+		{END searchCtrlBlock_per_ci}
+																{BEGIN searchCtrlBlock_per_apellido}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_per_apellido}" {$filterRow_attrs_per_apellido}>
+			<label>{$label view_comisionamiento per_apellido }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_per_apellido}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_per_apellido}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_per_apellido}</span>
+						</div>
+		{END searchCtrlBlock_per_apellido}
+																{BEGIN searchCtrlBlock_per_nombre}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_per_nombre}" {$filterRow_attrs_per_nombre}>
+			<label>{$label view_comisionamiento per_nombre }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_per_nombre}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_per_nombre}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_per_nombre}</span>
+						</div>
+		{END searchCtrlBlock_per_nombre}
+																{BEGIN searchCtrlBlock_id_funcionario}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_id_funcionario}" {$filterRow_attrs_id_funcionario}>
+			<label>{$label view_comisionamiento id_funcionario }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_id_funcionario}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_id_funcionario}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_id_funcionario}</span>
+						</div>
+		{END searchCtrlBlock_id_funcionario}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Buscar</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Mostrar todo</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Muestrame el menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Encubrir" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="simple_search" {$item_simple_search} data-topcell-item-type="simple_search" >
+				<span data-itemtype="simple_search" data-itemid="simple_search" {$item_simple_search} data-pageid="{$pageid}" class="form-group">
+
+<div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="Mostrar todo">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="list_options" {$item_list_options} data-topcell-item-type="list_options" >
+				<span data-itemtype="list_options" data-itemid="list_options" {$item_list_options} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-cog"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="showOptPanel{$id}"  title="" >
+				
+		Mostrar panel de búsqueda		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="hideOptPanel{$id}"  title="" >
+				
+		Ocultar panel de búsqueda		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+					</ul>
+	</span>
+</span>
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
+				{BEGIN guestloginbutton}
+<span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" href="#" {$guestloginlink_attrs} >
+							Conectar			</a>
+</span>
+{END guestloginbutton}
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="username_button" {$item_username_button} data-topcell-item-type="username_button" >
+				{BEGIN loggedas_message}
+<span data-itemtype="username_button" data-itemid="username_button" {$item_username_button} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
+						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN userinfo_link}
+	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
+				<a  href="userinfo.php"  title="" >
+				
+		Perfil del usuario		
+		</a>
+	</li>
+{END userinfo_link}
+							{BEGIN logoutbutton}
+	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$logoutlink_attrs}  title="" >
+				
+		Desconectarse		
+		</a>
+	</li>
+{END logoutbutton}
+					</ul>
+	</span>
+</span>
+{END loggedas_message}
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	</div>		
+{END top_block}
+						</div>
+											<div class="r-above">
+					{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-6
+	
+">
+		{BEGIN firstAboveGridCell}
+		 
+		{BEGIN add_link}
+<span data-itemtype="add" data-itemid="add" {$item_add} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$addlink_attrs} href="view_comisionamiento_add.php{$stateLink_full}" >
+					<span class="glyphicon glyphicon-plus"></span>
+							Solicitar permiso			</a>
+</span>
+{END add_link}
+			{END firstAboveGridCell}	
+	</div>			 
+				<div 
+	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
+	class="r-align-right			col-md-6
+	
+">
+		 
+		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" data-small >
+{$mlp_push}{$mlparam first var first_shown}{$mlparam last var last_shown}{$mlparam total var records_found}{mlang_message DISPLAYING}{$mlp_pop}</span>	 
+		<span data-itemtype="page_size" data-itemid="page_size" {$item_page_size} data-pageid="{$pageid}" >
+		{$recsPerPage}
+</span>		</div>					</div>
+			</div>		
+{END above-grid_block}
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+					{BEGIN grid_block}
+{BEGIN message_block}
+<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
+{END message_block}	<style>
+@media screen and (max-width: 767px) {
+		[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="id"]:before {
+		content: "{$label view_comisionamiento id}";
+	}
+						[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="nombre_completo"]:before {
+		content: "{$label view_comisionamiento nombre_completo}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="per_ci"]:before {
+		content: "{$label view_comisionamiento per_ci}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="tipo_vinculacion"]:before {
+		content: "{$label view_comisionamiento tipo_vinculacion}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="dependencia_id"]:before {
+		content: "{$label view_comisionamiento dependencia_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_desde"]:before {
+		content: "{$label view_comisionamiento fecha_desde}";
+	}
+				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_hasta"]:before {
+		content: "{$label view_comisionamiento fecha_hasta}";
+	}
+				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="motivo_id"]:before {
+		content: "{$label view_comisionamiento motivo_id}";
+	}
+					[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="observacion"]:before {
+		content: "{$label view_comisionamiento observacion}";
+	}
+									[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_solicitud"]:before {
+		content: "{$label view_comisionamiento fecha_solicitud}";
+	}
+				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="resultado_decision"]:before {
+		content: "{$label view_comisionamiento resultado_decision}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="horas_compensar"]:before {
+		content: "{$label view_comisionamiento horas_compensar}";
+	}
+					[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_resultado_decision"]:before {
+		content: "{$label view_comisionamiento rrhh_resultado_decision}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_motivo_rechazo"]:before {
+		content: "{$label view_comisionamiento rrhh_motivo_rechazo}";
+	}
+								[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_decision"]:before {
+		content: "{$label view_comisionamiento fecha_decision}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_fecha_decision"]:before {
+		content: "{$label view_comisionamiento rrhh_fecha_decision}";
+	}
+	}
+</style>
+<table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-striped table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
+	cellpadding="0"
+	data-body-height="1"
+>
+						<thead>
+			{BEGIN grid_header}
+			
+																														<tr {$rowattrs} {$row_grid_0} class="{$rowclass}
+									{$gridHeader_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_headcell_icons1}
+	<th
+	
+	{$cell_grid_headcell_icons1}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_icons1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"		data-control-cell
+	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_icons1}
+									{BEGIN cellblock_grid_headcell_icons2}
+	<th
+	
+	{$cell_grid_headcell_icons2}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_icons2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
+	🔹 Identificación de la solicitud de permiso</span>
+	
+	</th>
+	{END cellblock_grid_headcell_icons2}
+									{BEGIN cellblock_grid_headcell_icons8}
+	<th
+	
+	{$cell_grid_headcell_icons8}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_icons8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
+	🔹Detalles de la solicitud de permiso</span>
+	
+	</th>
+	{END cellblock_grid_headcell_icons8}
+									{BEGIN cellblock_grid_headcell_icons13}
+	<th
+	
+	{$cell_grid_headcell_icons13}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_icons13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		<span data-itemtype="text" data-itemid="text2" {$item_text2} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
+	🔹 Decisión del jefe inmediato</span>
+	
+	</th>
+	{END cellblock_grid_headcell_icons13}
+									{BEGIN cellblock_grid_headcell_field11}
+	<th
+	
+	{$cell_grid_headcell_field11}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
+	🔹Decisión de RRHH (final)</span>
+	
+	</th>
+	{END cellblock_grid_headcell_field11}
+							</tr>
+											<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
+									{$gridHeader_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_headcell_icons}
+	<th
+	
+	{$cell_grid_headcell_icons}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_icons" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"		data-control-cell
+	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_icons}
+									{BEGIN cellblock_grid_headcell_field}
+	<th
+	
+	{$cell_grid_headcell_field}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$id_class}	"
+
+			data-field="id"
+	
+	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN id_fieldheadercolumn}
+	{BEGIN id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="id" data-fieldname="id" 
+
+			{$id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento id }</span>
+					{$arrow_icon_id}
+			</span>
+	</span>
+	{END id_fieldheader}
+{END id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field}
+									{BEGIN cellblock_grid_headcell_field4}
+	<th
+	
+	{$cell_grid_headcell_field4}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$fecha_solicitud_class}	"
+
+			data-field="fecha_solicitud"
+	
+	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_solicitud_fieldheadercolumn}
+	{BEGIN fecha_solicitud_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label7" {$item_grid_field_label7} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_solicitud" data-fieldname="fecha_solicitud" 
+
+			{$fecha_solicitud_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento fecha_solicitud }</span>
+					{$arrow_icon_fecha_solicitud}
+			</span>
+	</span>
+	{END fecha_solicitud_fieldheader}
+{END fecha_solicitud_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field4}
+									{BEGIN cellblock_grid_headcell_field5}
+	<th
+	
+	{$cell_grid_headcell_field5}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$nombre_completo_class}	"
+
+			data-field="nombre_completo"
+	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nombre_completo_fieldheadercolumn}
+	{BEGIN nombre_completo_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label4" {$item_grid_field_label4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nombre_completo" data-fieldname="nombre_completo" 
+
+			{$nombre_completo_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento nombre_completo }</span>
+					{$arrow_icon_nombre_completo}
+			</span>
+	</span>
+	{END nombre_completo_fieldheader}
+{END nombre_completo_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
+	<th
+	
+	{$cell_grid_headcell_field6}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$per_ci_class}	"
+
+			data-field="per_ci"
+	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN per_ci_fieldheadercolumn}
+	{BEGIN per_ci_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label2" {$item_grid_field_label2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="per_ci" data-fieldname="per_ci" 
+
+			{$per_ci_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento per_ci }</span>
+					{$arrow_icon_per_ci}
+			</span>
+	</span>
+	{END per_ci_fieldheader}
+{END per_ci_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field6}
+									{BEGIN cellblock_grid_headcell_field7}
+	<th
+	
+	{$cell_grid_headcell_field7}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$dependencia_id_class}	"
+
+			data-field="dependencia_id"
+	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN dependencia_id_fieldheadercolumn}
+	{BEGIN dependencia_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label5" {$item_grid_field_label5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dependencia_id" data-fieldname="dependencia_id" 
+
+			{$dependencia_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento dependencia_id }</span>
+					{$arrow_icon_dependencia_id}
+			</span>
+	</span>
+	{END dependencia_id_fieldheader}
+{END dependencia_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
+	<th
+	
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$tipo_vinculacion_class}	"
+
+			data-field="tipo_vinculacion"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tipo_vinculacion_fieldheadercolumn}
+	{BEGIN tipo_vinculacion_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label3" {$item_grid_field_label3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tipo_vinculacion" data-fieldname="tipo_vinculacion" 
+
+			{$tipo_vinculacion_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento tipo_vinculacion }</span>
+					{$arrow_icon_tipo_vinculacion}
+			</span>
+	</span>
+	{END tipo_vinculacion_fieldheader}
+{END tipo_vinculacion_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
+									{BEGIN cellblock_grid_headcell_field10}
+	<th
+	
+	{$cell_grid_headcell_field10}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$motivo_id_class}	"
+
+			data-field="motivo_id"
+	
+	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN motivo_id_fieldheadercolumn}
+	{BEGIN motivo_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label10" {$item_grid_field_label10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="motivo_id" data-fieldname="motivo_id" 
+
+			{$motivo_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento motivo_id }</span>
+					{$arrow_icon_motivo_id}
+			</span>
+	</span>
+	{END motivo_id_fieldheader}
+{END motivo_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field10}
+									{BEGIN cellblock_grid_headcell_field12}
+	<th
+	
+	{$cell_grid_headcell_field12}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$fecha_desde_class}	"
+
+			data-field="fecha_desde"
+	
+	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_desde_fieldheadercolumn}
+	{BEGIN fecha_desde_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label6" {$item_grid_field_label6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_desde" data-fieldname="fecha_desde" 
+
+			{$fecha_desde_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento fecha_desde }</span>
+					{$arrow_icon_fecha_desde}
+			</span>
+	</span>
+	{END fecha_desde_fieldheader}
+{END fecha_desde_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field12}
+									{BEGIN cellblock_grid_headcell_field15}
+	<th
+	
+	{$cell_grid_headcell_field15}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$fecha_hasta_class}	"
+
+			data-field="fecha_hasta"
+	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_hasta_fieldheadercolumn}
+	{BEGIN fecha_hasta_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label8" {$item_grid_field_label8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_hasta" data-fieldname="fecha_hasta" 
+
+			{$fecha_hasta_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento fecha_hasta }</span>
+					{$arrow_icon_fecha_hasta}
+			</span>
+	</span>
+	{END fecha_hasta_fieldheader}
+{END fecha_hasta_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field15}
+									{BEGIN cellblock_grid_headcell_field2}
+	<th
+	
+	{$cell_grid_headcell_field2}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$observacion_class}	"
+
+			data-field="observacion"
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN observacion_fieldheadercolumn}
+	{BEGIN observacion_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label13" {$item_grid_field_label13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="observacion" data-fieldname="observacion" 
+
+			{$observacion_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento observacion }</span>
+					{$arrow_icon_observacion}
+			</span>
+	</span>
+	{END observacion_fieldheader}
+{END observacion_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
+									{BEGIN cellblock_grid_headcell_field1}
+	<th
+	
+	{$cell_grid_headcell_field1}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$horas_compensar_class}	"
+
+			data-field="horas_compensar"
+	
+	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN horas_compensar_fieldheadercolumn}
+	{BEGIN horas_compensar_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label" {$item_grid_field_label} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="horas_compensar" data-fieldname="horas_compensar" 
+
+			{$horas_compensar_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento horas_compensar }</span>
+					{$arrow_icon_horas_compensar}
+			</span>
+	</span>
+	{END horas_compensar_fieldheader}
+{END horas_compensar_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field1}
+									{BEGIN cellblock_grid_headcell_field3}
+	<th
+	
+	{$cell_grid_headcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$resultado_decision_class}	"
+
+			data-field="resultado_decision"
+	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN resultado_decision_fieldheadercolumn}
+	{BEGIN resultado_decision_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label1" {$item_grid_field_label1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="resultado_decision" data-fieldname="resultado_decision" 
+
+			{$resultado_decision_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento resultado_decision }</span>
+					{$arrow_icon_resultado_decision}
+			</span>
+	</span>
+	{END resultado_decision_fieldheader}
+{END resultado_decision_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field3}
+									{BEGIN cellblock_grid_headcell_field9}
+	<th
+	
+	{$cell_grid_headcell_field9}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$fecha_decision_class}	"
+
+			data-field="fecha_decision"
+	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_decision_fieldheadercolumn}
+	{BEGIN fecha_decision_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label11" {$item_grid_field_label11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_decision" data-fieldname="fecha_decision" 
+
+			{$fecha_decision_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento fecha_decision }</span>
+					{$arrow_icon_fecha_decision}
+			</span>
+	</span>
+	{END fecha_decision_fieldheader}
+{END fecha_decision_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field13}
+	<th
+	
+	{$cell_grid_headcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$rrhh_resultado_decision_class}	"
+
+			data-field="rrhh_resultado_decision"
+	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN rrhh_resultado_decision_fieldheadercolumn}
+	{BEGIN rrhh_resultado_decision_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label9" {$item_grid_field_label9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="rrhh_resultado_decision" data-fieldname="rrhh_resultado_decision" 
+
+			{$rrhh_resultado_decision_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento rrhh_resultado_decision }</span>
+					{$arrow_icon_rrhh_resultado_decision}
+			</span>
+	</span>
+	{END rrhh_resultado_decision_fieldheader}
+{END rrhh_resultado_decision_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field16}
+	<th
+	
+	{$cell_grid_headcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$rrhh_fecha_decision_class}	"
+
+			data-field="rrhh_fecha_decision"
+	
+	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN rrhh_fecha_decision_fieldheadercolumn}
+	{BEGIN rrhh_fecha_decision_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label12" {$item_grid_field_label12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="rrhh_fecha_decision" data-fieldname="rrhh_fecha_decision" 
+
+			{$rrhh_fecha_decision_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento rrhh_fecha_decision }</span>
+					{$arrow_icon_rrhh_fecha_decision}
+			</span>
+	</span>
+	{END rrhh_fecha_decision_fieldheader}
+{END rrhh_fecha_decision_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
+	<th
+	
+	{$cell_grid_headcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$rrhh_motivo_rechazo_class}	"
+
+			data-field="rrhh_motivo_rechazo"
+	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN rrhh_motivo_rechazo_fieldheadercolumn}
+	{BEGIN rrhh_motivo_rechazo_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label14" {$item_grid_field_label14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="rrhh_motivo_rechazo" data-fieldname="rrhh_motivo_rechazo" 
+
+			{$rrhh_motivo_rechazo_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label view_comisionamiento rrhh_motivo_rechazo }</span>
+					{$arrow_icon_rrhh_motivo_rechazo}
+			</span>
+	</span>
+	{END rrhh_motivo_rechazo_fieldheader}
+{END rrhh_motivo_rechazo_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field17}
+							</tr>
+															
+					{END grid_header}
+			</thead>
+															<tbody>
+					{BEGIN grid_row}
+							
+																																								<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
+				
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_cell_icons}
+	<td
+	
+	{$cell_grid_cell_icons}
+	{$recordattrs}
+	class="
+					"
+
+	
+	data-cellId="grid_cell_icons" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"		data-control-cell
+	
+	>
+
+	 
+		{BEGIN edit_column}
+{BEGIN edit_link}
+<span data-itemtype="grid_edit" data-itemid="grid_edit" {$item_grid_edit} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Modificar Solicitud Permiso" class="btn-link   
+	 glyphicon glyphicon-pencil" href="view_comisionamiento_edit.php?{$editlink}" {$editlink_attrs} title="Editar" >		
+				
+								</a>
+</span>
+{END edit_link}
+{END edit_column}
+	 
+		{BEGIN view_column}
+{BEGIN view_link}
+<span data-itemtype="grid_view" data-itemid="grid_view" {$item_grid_view} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Ver Solicitud Permiso" class="btn-link   
+	 glyphicon glyphicon-eye-open" href="view_comisionamiento_view.php?{$editlink}" {$viewlink_attrs} title="Ver" >		
+				
+								</a>
+</span>
+{END view_link}
+{END view_column}
+	
+	</td>
+	{END cellblock_grid_cell_icons}
+									{BEGIN cellblock_grid_cell_field}
+	<td
+	
+	{$cell_grid_cell_field}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$id_class}	"
+
+			data-field="id"
+	
+	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field" {$item_simple_grid_field} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="id" data-fieldname="id" data-default-width >
+{$id_value}
+</span>
+{END id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field}
+									{BEGIN cellblock_grid_cell_field4}
+	<td
+	
+	{$cell_grid_cell_field4}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$fecha_solicitud_class}	"
+
+			data-field="fecha_solicitud"
+	
+	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_solicitud_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field11" {$item_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_solicitud" data-fieldname="fecha_solicitud" data-default-width >
+{$fecha_solicitud_value}
+</span>
+{END fecha_solicitud_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field4}
+									{BEGIN cellblock_grid_cell_field5}
+	<td
+	
+	{$cell_grid_cell_field5}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$nombre_completo_class}	"
+
+			data-field="nombre_completo"
+	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN nombre_completo_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field4" {$item_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="nombre_completo" data-fieldname="nombre_completo" data-default-width >
+{$nombre_completo_value}
+</span>
+{END nombre_completo_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
+	<td
+	
+	{$cell_grid_cell_field6}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$per_ci_class}	"
+
+			data-field="per_ci"
+	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN per_ci_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field2" {$item_grid_field2} data-pageid="{$pageid}" data-page="view_comisionamiento_list" data-record-id="{$recId}" data-field="per_ci" data-fieldname="per_ci" data-default-width >
+{$per_ci_value}
+</span>
+{END per_ci_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field6}
+									{BEGIN cellblock_grid_cell_field7}
+	<td
+	
+	{$cell_grid_cell_field7}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$dependencia_id_class}	"
+
+			data-field="dependencia_id"
+	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN dependencia_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field5" {$item_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dependencia_id" data-fieldname="dependencia_id" data-default-width >
+{$dependencia_id_value}
+</span>
+{END dependencia_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
+	<td
+	
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$tipo_vinculacion_class}	"
+
+			data-field="tipo_vinculacion"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN tipo_vinculacion_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field3" {$item_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="tipo_vinculacion" data-fieldname="tipo_vinculacion" data-default-width >
+{$tipo_vinculacion_value}
+</span>
+{END tipo_vinculacion_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
+									{BEGIN cellblock_grid_cell_field10}
+	<td
+	
+	{$cell_grid_cell_field10}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$motivo_id_class}	"
+
+			data-field="motivo_id"
+	
+	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN motivo_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field10" {$item_grid_field10} data-pageid="{$pageid}" data-page="view_comisionamiento_list" data-record-id="{$recId}" data-field="motivo_id" data-fieldname="motivo_id" data-default-width >
+{$motivo_id_value}
+</span>
+{END motivo_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field10}
+									{BEGIN cellblock_grid_cell_field12}
+	<td
+	
+	{$cell_grid_cell_field12}
+	{$recordattrs}
+	class="
+		r-align-center		 {$fecha_desde_class}	"
+
+			data-field="fecha_desde"
+	
+	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_desde_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field6" {$item_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_desde" data-fieldname="fecha_desde" data-default-width >
+{$fecha_desde_value}
+</span>
+{END fecha_desde_fieldcolumn}	 
+		{BEGIN hora_desde_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field7" {$item_grid_field7} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="hora_desde" data-fieldname="hora_desde" data-default-width >
+{$hora_desde_value}
+</span>
+{END hora_desde_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field12}
+									{BEGIN cellblock_grid_cell_field15}
+	<td
+	
+	{$cell_grid_cell_field15}
+	{$recordattrs}
+	class="
+		r-align-center		 {$fecha_hasta_class}	"
+
+			data-field="fecha_hasta"
+	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_hasta_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field8" {$item_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_hasta" data-fieldname="fecha_hasta" data-default-width >
+{$fecha_hasta_value}
+</span>
+{END fecha_hasta_fieldcolumn}	 
+		{BEGIN hora_hasta_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field9" {$item_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="hora_hasta" data-fieldname="hora_hasta" data-default-width >
+{$hora_hasta_value}
+</span>
+{END hora_hasta_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field15}
+									{BEGIN cellblock_grid_cell_field2}
+	<td
+	
+	{$cell_grid_cell_field2}
+	{$recordattrs}
+	class="
+		r-align-left r-ori-vert		 {$observacion_class}	"
+
+			data-field="observacion"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN observacion_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field13" {$item_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="observacion" data-fieldname="observacion" data-default-width >
+{$observacion_value}
+</span>
+{END observacion_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
+									{BEGIN cellblock_grid_cell_field1}
+	<td
+	
+	{$cell_grid_cell_field1}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$horas_compensar_class}	"
+
+			data-field="horas_compensar"
+	
+	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN horas_compensar_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field" {$item_grid_field} data-pageid="{$pageid}" data-page="view_comisionamiento_list" data-record-id="{$recId}" data-field="horas_compensar" data-fieldname="horas_compensar" data-default-width >
+{$horas_compensar_value}
+</span>
+{END horas_compensar_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field1}
+									{BEGIN cellblock_grid_cell_field3}
+	<td
+	
+	{$cell_grid_cell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$resultado_decision_class}	"
+
+			data-field="resultado_decision"
+	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN resultado_decision_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field1" {$item_grid_field1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="resultado_decision" data-fieldname="resultado_decision" data-default-width >
+{$resultado_decision_value}
+</span>
+{END resultado_decision_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field3}
+									{BEGIN cellblock_grid_cell_field9}
+	<td
+	
+	{$cell_grid_cell_field9}
+	{$recordattrs}
+	class="
+		r-align-center r-ori-vert		 {$fecha_decision_class}	"
+
+			data-field="fecha_decision"
+	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fecha_decision_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field14" {$item_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fecha_decision" data-fieldname="fecha_decision" data-default-width >
+{$fecha_decision_value}
+</span>
+{END fecha_decision_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_cell_field17}
+	<td
+	
+	{$cell_grid_cell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$rrhh_resultado_decision_class}	"
+
+			data-field="rrhh_resultado_decision"
+	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN rrhh_resultado_decision_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field12" {$item_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="rrhh_resultado_decision" data-fieldname="rrhh_resultado_decision" data-default-width >
+{$rrhh_resultado_decision_value}
+</span>
+{END rrhh_resultado_decision_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field17}
+									{BEGIN cellblock_grid_cell_field11}
+	<td
+	
+	{$cell_grid_cell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$rrhh_fecha_decision_class}	"
+
+			data-field="rrhh_fecha_decision"
+	
+	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN rrhh_fecha_decision_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field15" {$item_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="rrhh_fecha_decision" data-fieldname="rrhh_fecha_decision" data-default-width >
+{$rrhh_fecha_decision_value}
+</span>
+{END rrhh_fecha_decision_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field11}
+									{BEGIN cellblock_grid_cell_field13}
+	<td
+	
+	{$cell_grid_cell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$rrhh_motivo_rechazo_class}	"
+
+			data-field="rrhh_motivo_rechazo"
+	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN rrhh_motivo_rechazo_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field16" {$item_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="rrhh_motivo_rechazo" data-fieldname="rrhh_motivo_rechazo" data-default-width >
+{$rrhh_motivo_rechazo_value}
+</span>
+{END rrhh_motivo_rechazo_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field13}
+							</tr>
+										
+											{END grid_row}
+					</tbody>
+													<tfoot>
+			
+																																													<tr {$rowattrs} {$row_grid_3} class="{$rowclass}
+									{$gridFooter_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_footcell_icons}
+	<td
+	
+	{$cell_grid_footcell_icons}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_icons" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_icons}
+									{BEGIN cellblock_grid_footcell_field}
+	<td
+	
+	{$cell_grid_footcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field}
+									{BEGIN cellblock_grid_footcell_field4}
+	<td
+	
+	{$cell_grid_footcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field4}
+									{BEGIN cellblock_grid_footcell_field5}
+	<td
+	
+	{$cell_grid_footcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field5}
+									{BEGIN cellblock_grid_footcell_field6}
+	<td
+	
+	{$cell_grid_footcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field6}
+									{BEGIN cellblock_grid_footcell_field7}
+	<td
+	
+	{$cell_grid_footcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field7}
+									{BEGIN cellblock_grid_footcell_field8}
+	<td
+	
+	{$cell_grid_footcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field8}
+									{BEGIN cellblock_grid_footcell_field10}
+	<td
+	
+	{$cell_grid_footcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field10}
+									{BEGIN cellblock_grid_footcell_field12}
+	<td
+	
+	{$cell_grid_footcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field12}
+									{BEGIN cellblock_grid_footcell_field15}
+	<td
+	
+	{$cell_grid_footcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field15}
+									{BEGIN cellblock_grid_footcell_field2}
+	<td
+	
+	{$cell_grid_footcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field2}
+									{BEGIN cellblock_grid_footcell_field1}
+	<td
+	
+	{$cell_grid_footcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field1}
+									{BEGIN cellblock_grid_footcell_field3}
+	<td
+	
+	{$cell_grid_footcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field3}
+									{BEGIN cellblock_grid_footcell_field9}
+	<td
+	
+	{$cell_grid_footcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field9}
+									{BEGIN cellblock_grid_footcell_field11}
+	<td
+	
+	{$cell_grid_footcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field11}
+									{BEGIN cellblock_grid_footcell_field13}
+	<td
+	
+	{$cell_grid_footcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field13}
+									{BEGIN cellblock_grid_footcell_field14}
+	<td
+	
+	{$cell_grid_footcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="view_comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field14}
+							</tr>
+					
+					</tfoot>
+				</table>
+{END grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="r-align-center r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN pagination_block}
+<span data-itemtype="pagination" data-itemid="pagination" {$item_pagination} data-pageid="{$pageid}" >
+{$pagination}
+</span>
+{END pagination_block}
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+	</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

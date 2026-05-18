@@ -1,0 +1,1253 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view"   
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="250px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expandir" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Muestrame el menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Encubrir" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
+				{BEGIN guestloginbutton}
+<span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" href="#" {$guestloginlink_attrs} >
+							Conectar			</a>
+</span>
+{END guestloginbutton}
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="username_button" {$item_username_button} data-topcell-item-type="username_button" >
+				{BEGIN loggedas_message}
+<span data-itemtype="username_button" data-itemid="username_button" {$item_username_button} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
+						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN userinfo_link}
+	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
+				<a  href="userinfo.php"  title="" >
+				
+		Perfil del usuario		
+		</a>
+	</li>
+{END userinfo_link}
+							{BEGIN logoutbutton}
+	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$logoutlink_attrs}  title="" >
+				
+		Desconectarse		
+		</a>
+	</li>
+{END logoutbutton}
+					</ul>
+	</span>
+</span>
+{END loggedas_message}
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel view_comisionamiento view}</h2>
+		</div>					</div>
+			</div>		
+{END top_block}
+						</div>
+											<div class="r-above">
+					{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		{BEGIN firstAboveGridCell}
+				{END firstAboveGridCell}	
+	</div>					</div>
+			</div>		
+{END above-grid_block}
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+					{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="left"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="3"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c18}
+<td
+	{$cell_grid_c18}
+	class=" r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c18" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text2" {$item_text2} data-pageid="{$pageid}" data-small > 
+	<h3>👤 DATOS DEL FUNCIONARIO</h3><br><hr></span>
+	
+								</td>
+			{END cellblock_grid_c18}
+								</tr>
+	 
+	 
+														<tr {$row_grid_1} >
+										
+
+{BEGIN cellblock_grid_c22}
+<td
+	{$cell_grid_c22}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c22" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN nombre_completo_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_nombre_completo}  r-vertical-field" data-fieldname="nombre_completo" data-signal-error-for="nombre_completo{$id}" data-itemtype="integrated_edit_field" data-itemid="view_nombre_completo" {$item_view_nombre_completo} data-pageid="{$pageid}" data-field="nombre_completo" data-fieldname="nombre_completo" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_nombre_completo}">
+		
+		{BEGIN nombre_completo_label}{$label view_comisionamiento nombre_completo }{END nombre_completo_label}
+	</label>
+	<div class="" >
+		{$nombre_completo_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END nombre_completo_fieldblock}
+											
+{BEGIN per_ci_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_per_ci}  r-vertical-field" data-fieldname="per_ci" data-signal-error-for="per_ci{$id}" data-itemtype="integrated_edit_field" data-itemid="view_per_ci" {$item_view_per_ci} data-pageid="{$pageid}" data-field="per_ci" data-fieldname="per_ci" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_per_ci}">
+		
+		{BEGIN per_ci_label}{$label view_comisionamiento per_ci }{END per_ci_label}
+	</label>
+	<div class="" >
+		{$per_ci_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END per_ci_fieldblock}
+											
+{BEGIN dependencia_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dependencia_id}  r-vertical-field" data-fieldname="dependencia_id" data-signal-error-for="dependencia_id{$id}" data-itemtype="integrated_edit_field" data-itemid="view_dependencia_id" {$item_view_dependencia_id} data-pageid="{$pageid}" data-field="dependencia_id" data-fieldname="dependencia_id" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_dependencia_id}">
+		
+		{BEGIN dependencia_id_label}{$label view_comisionamiento dependencia_id }{END dependencia_id_label}
+	</label>
+	<div class="" >
+		{$dependencia_id_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END dependencia_id_fieldblock}
+											
+{BEGIN tipo_vinculacion_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tipo_vinculacion}  r-vertical-field" data-fieldname="tipo_vinculacion" data-signal-error-for="tipo_vinculacion{$id}" data-itemtype="integrated_edit_field" data-itemid="view_tipo_vinculacion" {$item_view_tipo_vinculacion} data-pageid="{$pageid}" data-field="tipo_vinculacion" data-fieldname="tipo_vinculacion" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_tipo_vinculacion}">
+		
+		{BEGIN tipo_vinculacion_label}{$label view_comisionamiento tipo_vinculacion }{END tipo_vinculacion_label}
+	</label>
+	<div class="" >
+		{$tipo_vinculacion_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END tipo_vinculacion_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c22}
+			 
+																
+
+{BEGIN cellblock_grid_c23}
+<td
+	{$cell_grid_c23}
+	class=" r-ori-vert"
+	
+			
+	ocolspan="2"		data-cellId="grid_c23" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN antiguedad_laboral_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antiguedad_laboral}  r-vertical-field" data-fieldname="antiguedad_laboral" data-signal-error-for="antiguedad_laboral{$id}" data-itemtype="integrated_edit_field" data-itemid="view_antiguedad_laboral" {$item_view_antiguedad_laboral} data-pageid="{$pageid}" data-field="antiguedad_laboral" data-fieldname="antiguedad_laboral" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_antiguedad_laboral}">
+		
+		{BEGIN antiguedad_laboral_label}{$label view_comisionamiento antiguedad_laboral }{END antiguedad_laboral_label}
+	</label>
+	<div class="" >
+		{$antiguedad_laboral_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END antiguedad_laboral_fieldblock}
+											
+{BEGIN car_descri_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_car_descri}  r-vertical-field" data-fieldname="car_descri" data-signal-error-for="car_descri{$id}" data-itemtype="integrated_edit_field" data-itemid="view_car_descri" {$item_view_car_descri} data-pageid="{$pageid}" data-field="car_descri" data-fieldname="car_descri" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_car_descri}">
+		
+		{BEGIN car_descri_label}{$label view_comisionamiento car_descri }{END car_descri_label}
+	</label>
+	<div class="" >
+		{$car_descri_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END car_descri_fieldblock}
+											
+{BEGIN sed_descripcion_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sed_descripcion}  r-vertical-field" data-fieldname="sed_descripcion" data-signal-error-for="sed_descripcion{$id}" data-itemtype="integrated_edit_field" data-itemid="view_sed_descripcion" {$item_view_sed_descripcion} data-pageid="{$pageid}" data-field="sed_descripcion" data-fieldname="sed_descripcion" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_sed_descripcion}">
+		
+		{BEGIN sed_descripcion_label}{$label view_comisionamiento sed_descripcion }{END sed_descripcion_label}
+	</label>
+	<div class="" >
+		{$sed_descripcion_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END sed_descripcion_fieldblock}
+											
+{BEGIN cantidad_permisos_mes_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_cantidad_permisos_mes}  r-vertical-field" data-fieldname="cantidad_permisos_mes" data-signal-error-for="cantidad_permisos_mes{$id}" data-itemtype="integrated_edit_field" data-itemid="view_cantidad_permisos_mes" {$item_view_cantidad_permisos_mes} data-pageid="{$pageid}" data-field="cantidad_permisos_mes" data-fieldname="cantidad_permisos_mes" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_cantidad_permisos_mes}">
+		
+		{BEGIN cantidad_permisos_mes_label}{$label view_comisionamiento cantidad_permisos_mes }{END cantidad_permisos_mes_label}
+	</label>
+	<div class="" >
+		{$cantidad_permisos_mes_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END cantidad_permisos_mes_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c23}
+								</tr>
+	 
+	 
+														<tr {$row_grid_2} >
+										
+
+{BEGIN cellblock_grid_c19}
+<td
+	{$cell_grid_c19}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c19" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-small > 
+	<h3>📝 TIPO DE PERMISO / JUSTIFICACION</h3><br><hr></span>
+											
+{BEGIN motivo_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_motivo_id}  r-vertical-field" data-fieldname="motivo_id" data-signal-error-for="motivo_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="motivo_id" data-fieldname="motivo_id" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_motivo_id}">
+		
+		{BEGIN motivo_id_label}{$label view_comisionamiento motivo_id }{END motivo_id_label}
+	</label>
+	<div class="" >
+		{$motivo_id_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END motivo_id_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c19}
+								</tr>
+	 
+	 
+														<tr {$row_grid_3} >
+										
+
+{BEGIN cellblock_grid_c20}
+<td
+	{$cell_grid_c20}
+	class=" r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c20" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text4" {$item_text4} data-pageid="{$pageid}" data-small > 
+	<h3>📅 PERIODO DEL PERMISO 🕒</h3><br><hr></span>
+	
+								</td>
+			{END cellblock_grid_c20}
+								</tr>
+	 
+	 
+														<tr {$row_grid_4} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+	<h4><strong>📅 Fecha de inicio del permiso</strong><span class="ql-cursor">﻿</span></h4></span>
+											
+{BEGIN fecha_desde_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_desde}  r-vertical-field" data-fieldname="fecha_desde" data-signal-error-for="fecha_desde{$id}" data-itemtype="integrated_edit_field" data-itemid="view_fecha_desde" {$item_view_fecha_desde} data-pageid="{$pageid}" data-field="fecha_desde" data-fieldname="fecha_desde" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_fecha_desde}">
+		
+		{BEGIN fecha_desde_label}{$label view_comisionamiento fecha_desde }{END fecha_desde_label}
+	</label>
+	<div class="" >
+		{$fecha_desde_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END fecha_desde_fieldblock}
+											
+{BEGIN hora_desde_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hora_desde}  r-vertical-field" data-fieldname="hora_desde" data-signal-error-for="hora_desde{$id}" data-itemtype="integrated_edit_field" data-itemid="view_hora_desde" {$item_view_hora_desde} data-pageid="{$pageid}" data-field="hora_desde" data-fieldname="hora_desde" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_hora_desde}">
+		
+		{BEGIN hora_desde_label}{$label view_comisionamiento hora_desde }{END hora_desde_label}
+	</label>
+	<div class="" >
+		{$hora_desde_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END hora_desde_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+			 
+																
+
+{BEGIN cellblock_grid_c13}
+<td
+	{$cell_grid_c13}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-small > 
+	<h4><strong>📅 Fecha de fin del permiso</strong><span class="ql-cursor">﻿</span></h4></span>
+											
+{BEGIN fecha_hasta_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_hasta}  r-vertical-field" data-fieldname="fecha_hasta" data-signal-error-for="fecha_hasta{$id}" data-itemtype="integrated_edit_field" data-itemid="view_fecha_hasta" {$item_view_fecha_hasta} data-pageid="{$pageid}" data-field="fecha_hasta" data-fieldname="fecha_hasta" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_fecha_hasta}">
+		
+		{BEGIN fecha_hasta_label}{$label view_comisionamiento fecha_hasta }{END fecha_hasta_label}
+	</label>
+	<div class="" >
+		{$fecha_hasta_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END fecha_hasta_fieldblock}
+											
+{BEGIN hora_hasta_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hora_hasta}  r-vertical-field" data-fieldname="hora_hasta" data-signal-error-for="hora_hasta{$id}" data-itemtype="integrated_edit_field" data-itemid="view_hora_hasta" {$item_view_hora_hasta} data-pageid="{$pageid}" data-field="hora_hasta" data-fieldname="hora_hasta" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_hora_hasta}">
+		
+		{BEGIN hora_hasta_label}{$label view_comisionamiento hora_hasta }{END hora_hasta_label}
+	</label>
+	<div class="" >
+		{$hora_hasta_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END hora_hasta_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c13}
+			 
+																
+
+{BEGIN cellblock_grid_c14}
+<td
+	{$cell_grid_c14}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c14" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text8" {$item_text8} data-pageid="{$pageid}" data-small > 
+	<h4><strong>🔢 Cantidad de días de permiso</strong><span class="ql-cursor">﻿</span></h4></span>
+											
+{BEGIN cantidad_dias_permiso_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_cantidad_dias_permiso}  r-vertical-field" data-fieldname="cantidad_dias_permiso" data-signal-error-for="cantidad_dias_permiso{$id}" data-itemtype="integrated_edit_field" data-itemid="view_cantidad_dias_permiso" {$item_view_cantidad_dias_permiso} data-pageid="{$pageid}" data-field="cantidad_dias_permiso" data-fieldname="cantidad_dias_permiso" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_cantidad_dias_permiso}">
+		
+		{BEGIN cantidad_dias_permiso_label}{$label view_comisionamiento cantidad_dias_permiso }{END cantidad_dias_permiso_label}
+	</label>
+	<div class="" >
+		{$cantidad_dias_permiso_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END cantidad_dias_permiso_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c14}
+								</tr>
+	 
+	 
+														<tr {$row_grid_5} >
+										
+
+{BEGIN cellblock_grid_c11}
+<td
+	{$cell_grid_c11}
+	class=" r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c11" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text5" {$item_text5} data-pageid="{$pageid}" data-small > 
+	<h3>🚗 COMISIÓN DE SERVICIOS</h3><br><hr></span>
+	
+								</td>
+			{END cellblock_grid_c11}
+								</tr>
+	 
+	 
+														<tr {$row_grid_6} >
+										
+
+{BEGIN cellblock_grid_c15}
+<td
+	{$cell_grid_c15}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c15" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN comision_servicios_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_comision_servicios}  r-vertical-field" data-fieldname="comision_servicios" data-signal-error-for="comision_servicios{$id}" data-itemtype="integrated_edit_field" data-itemid="view_comision_servicios" {$item_view_comision_servicios} data-pageid="{$pageid}" data-field="comision_servicios" data-fieldname="comision_servicios" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_comision_servicios}">
+		
+		{BEGIN comision_servicios_label}{$label view_comisionamiento comision_servicios }{END comision_servicios_label}
+	</label>
+	<div class="" >
+		{$comision_servicios_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END comision_servicios_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c15}
+			 
+																
+
+{BEGIN cellblock_grid_c21}
+<td
+	{$cell_grid_c21}
+	class=" r-ori-vert"
+	
+			data-single
+			
+	ocolspan="2"		data-cellId="grid_c21" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN comision_servicios_descripcion_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_comision_servicios_descripcion}  r-vertical-field" data-fieldname="comision_servicios_descripcion" data-signal-error-for="comision_servicios_descripcion{$id}" data-itemtype="integrated_edit_field" data-itemid="view_comision_servicios_descripcion" {$item_view_comision_servicios_descripcion} data-pageid="{$pageid}" data-field="comision_servicios_descripcion" data-fieldname="comision_servicios_descripcion" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_comision_servicios_descripcion}">
+		
+		{BEGIN comision_servicios_descripcion_label}{$label view_comisionamiento comision_servicios_descripcion }{END comision_servicios_descripcion_label}
+	</label>
+	<div class="" >
+		{$comision_servicios_descripcion_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END comision_servicios_descripcion_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c21}
+								</tr>
+	 
+	 
+														<tr {$row_grid_7} >
+										
+
+{BEGIN cellblock_grid_c4}
+<td
+	{$cell_grid_c4}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c4" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text6" {$item_text6} data-pageid="{$pageid}" data-small > 
+	<h3>💬 OBSERVACIONES Y DOCUMENTOS</h3><br><hr></span>
+											
+{BEGIN observacion_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_observacion}  r-vertical-field" data-fieldname="observacion" data-signal-error-for="observacion{$id}" data-itemtype="integrated_edit_field" data-itemid="view_observacion" {$item_view_observacion} data-pageid="{$pageid}" data-field="observacion" data-fieldname="observacion" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_observacion}">
+		
+		{BEGIN observacion_label}{$label view_comisionamiento observacion }{END observacion_label}
+	</label>
+	<div class="" >
+		{$observacion_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END observacion_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c4}
+								</tr>
+	 
+	 
+														<tr {$row_grid_8} >
+										
+
+{BEGIN cellblock_grid_c8}
+<td
+	{$cell_grid_c8}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c8" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text7" {$item_text7} data-pageid="{$pageid}" data-small > 
+	<h3>📌 ESTADO DE LA SOLICITUD</h3><br><hr></span>
+											<span data-itemtype="text" data-itemid="text9" {$item_text9} data-pageid="{$pageid}" data-small > 
+	<div style="background:#e7f3ff;padding:10px;border-radius:8px;">
+  ℹ️ Su solicitud pasa por dos niveles de aprobación:
+  <br>1. Jefe inmediato
+  <br>2. Recursos Humanos
+</div></span>
+	
+								</td>
+			{END cellblock_grid_c8}
+								</tr>
+	 
+	 
+														<tr {$row_grid_9} >
+										
+
+{BEGIN cellblock_grid_c9}
+<td
+	{$cell_grid_c9}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c9" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN fecha_solicitud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_solicitud}  r-vertical-field" data-fieldname="fecha_solicitud" data-signal-error-for="fecha_solicitud{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="fecha_solicitud" data-fieldname="fecha_solicitud" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_fecha_solicitud}">
+		
+		{BEGIN fecha_solicitud_label}{$label view_comisionamiento fecha_solicitud }{END fecha_solicitud_label}
+	</label>
+	<div class="" >
+		{$fecha_solicitud_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END fecha_solicitud_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c9}
+			 
+																
+
+{BEGIN cellblock_grid_c10}
+<td
+	{$cell_grid_c10}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c10" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN resultado_decision_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_resultado_decision}  r-vertical-field" data-fieldname="resultado_decision" data-signal-error-for="resultado_decision{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="resultado_decision" data-fieldname="resultado_decision" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_resultado_decision}">
+		
+		{BEGIN resultado_decision_label}{$label view_comisionamiento resultado_decision }{END resultado_decision_label}
+	</label>
+	<div class="" >
+		{$resultado_decision_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END resultado_decision_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c10}
+			 
+																
+
+{BEGIN cellblock_grid_c}
+<td
+	{$cell_grid_c}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN rrhh_resultado_decision_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_rrhh_resultado_decision}  r-vertical-field" data-fieldname="rrhh_resultado_decision" data-signal-error-for="rrhh_resultado_decision{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="rrhh_resultado_decision" data-fieldname="rrhh_resultado_decision" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_rrhh_resultado_decision}">
+		
+		{BEGIN rrhh_resultado_decision_label}{$label view_comisionamiento rrhh_resultado_decision }{END rrhh_resultado_decision_label}
+	</label>
+	<div class="" >
+		{$rrhh_resultado_decision_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END rrhh_resultado_decision_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c}
+								</tr>
+	 
+	 
+														<tr {$row_grid_10} >
+										
+
+{BEGIN cellblock_grid_c16}
+<td
+	{$cell_grid_c16}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c16" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text10" {$item_text10} data-pageid="{$pageid}" data-small > 
+	<h3>📌 MOTIVO DE RECHAZO</h3><br><hr></span>
+											
+{BEGIN rrhh_motivo_rechazo_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_rrhh_motivo_rechazo}  r-vertical-field" data-fieldname="rrhh_motivo_rechazo" data-signal-error-for="rrhh_motivo_rechazo{$id}" data-itemtype="integrated_edit_field" data-itemid="view_rrhh_motivo_rechazo" {$item_view_rrhh_motivo_rechazo} data-pageid="{$pageid}" data-field="rrhh_motivo_rechazo" data-fieldname="rrhh_motivo_rechazo" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_rrhh_motivo_rechazo}">
+		
+		{BEGIN rrhh_motivo_rechazo_label}{$label view_comisionamiento rrhh_motivo_rechazo }{END rrhh_motivo_rechazo_label}
+	</label>
+	<div class="" >
+		{$rrhh_motivo_rechazo_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END rrhh_motivo_rechazo_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c16}
+								</tr>
+	 
+	 
+														<tr {$row_grid_11} >
+										
+
+{BEGIN cellblock_grid_c12}
+<td
+	{$cell_grid_c12}
+	class=" r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c12" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-vertical-field" data-fieldname="id" data-signal-error-for="id{$id}" data-itemtype="integrated_edit_field" data-itemid="view_id" {$item_view_id} data-pageid="{$pageid}" data-field="id" data-fieldname="id" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_id}">
+		
+		{BEGIN id_label}{$label view_comisionamiento id }{END id_label}
+	</label>
+	<div class="" >
+		{$id_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END id_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c12}
+								</tr>
+			</tbody></table>
+{END grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	
+">
+		 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+					<span class="glyphicon glyphicon-step-backward"></span>
+							Volver a la lista			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							Cerrar ventana			</a>
+</span>
+{END close_button}
+		</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+			</div>					</div>
+			</div>		
+{END below-grid_block}
+	</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

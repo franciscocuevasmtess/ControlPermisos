@@ -20,6 +20,8 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
     $observacion = isset($datosPermiso['observacion']) ? htmlspecialchars($datosPermiso['observacion']) : '';
     $dependencia = isset($datosPermiso['dependencia']) ? htmlspecialchars($datosPermiso['dependencia']) : 'N/A';
 
+    $tipoSolicitud = $datosPermiso['tipo_solicitud'];
+
     // ========================================================================
     // PARTE 2: FORMATEAR FECHAS CON HORA
     // ========================================================================
@@ -34,6 +36,21 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
         $fechaFinCompleta .= ' ' . $horaFin;
     }
 
+
+
+    if ($tipoSolicitud === 'permiso') {
+        $titulo = 'Aprobación de Permiso';
+        $encabezado = 'Solicitud de Aprobación de Permiso';
+    } elseif ($tipoSolicitud === 'vacaciones') {
+        $titulo = 'Aprobación de Vacaciones';
+        $encabezado = 'Solicitud de Aprobación de Vacaciones';
+    } //else {
+        //$titulo = 'Aprobación de Permiso';
+        //$encabezado = 'Solicitud de Aprobación de Permiso';
+    //}
+
+
+
     // ========================================================================
     // PARTE 3: GENERAR HTML DEL CORREO
     // ========================================================================
@@ -42,7 +59,7 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprobación de Permiso</title>
+    <title>' . $titulo . '</title>
     <style>
         /* Estilos generales */
         body {
@@ -150,7 +167,7 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
     <div class="container">
         <!-- ENCABEZADO -->
         <div class="header">
-            <h1>Solicitud de Aprobación de Permiso</h1>
+            <h1>' . $encabezado . '</h1>
         </div>
         
         <!-- CONTENIDO -->

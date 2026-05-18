@@ -151,6 +151,36 @@ pdfDocument = {
 										{BEGIN col_grid_28}
 					"%",
 					{END col_grid_28}
+										{BEGIN col_grid_29}
+					"%",
+					{END col_grid_29}
+										{BEGIN col_grid_30}
+					"%",
+					{END col_grid_30}
+										{BEGIN col_grid_31}
+					"%",
+					{END col_grid_31}
+										{BEGIN col_grid_32}
+					"%",
+					{END col_grid_32}
+										{BEGIN col_grid_33}
+					"%",
+					{END col_grid_33}
+										{BEGIN col_grid_34}
+					"%",
+					{END col_grid_34}
+										{BEGIN col_grid_35}
+					"%",
+					{END col_grid_35}
+										{BEGIN col_grid_36}
+					"%",
+					{END col_grid_36}
+										{BEGIN col_grid_37}
+					"%",
+					{END col_grid_37}
+										{BEGIN col_grid_38}
+					"%",
+					{END col_grid_38}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -298,7 +328,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios id }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios id }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -327,7 +357,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios id_funcionario }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios id_funcionario }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -356,7 +386,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios per_nombre }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios per_nombre }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -385,7 +415,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios per_apellido }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios per_apellido }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -414,7 +444,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios per_ci }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios per_ci }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -443,7 +473,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -472,7 +502,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios nombre_completo }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios nombre_completo }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -501,7 +531,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios dependencia_id }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios dependencia_id }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -530,7 +560,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_desde }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_desde }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -559,7 +589,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios hora_desde }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios hora_desde }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -588,7 +618,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_hasta }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_hasta }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -617,7 +647,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios hora_hasta }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios hora_hasta }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -646,7 +676,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios motivo_id }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios motivo_id }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -675,7 +705,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios comision_servicios }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios comision_servicios }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -704,7 +734,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios comision_servicios_descripcion }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios comision_servicios_descripcion }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -733,7 +763,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios observacion }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios observacion }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -762,7 +792,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios estado }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios estado }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -791,7 +821,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios archivo_adjunto }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios archivo_adjunto }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -820,7 +850,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios email_jefe }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios email_jefe }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -849,7 +879,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field58}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -878,7 +908,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field59}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -907,7 +937,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios solicitado_por }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios solicitado_por }","hidden":"{$item_hide_simple_grid_field60}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -936,7 +966,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_solicitud }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_solicitud }","hidden":"{$item_hide_simple_grid_field61}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -965,7 +995,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios email_jefe_id }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios email_jefe_id }","hidden":"{$item_hide_simple_grid_field62}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -994,7 +1024,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios resultado_decision }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios resultado_decision }","hidden":"{$item_hide_simple_grid_field63}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1023,7 +1053,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios horas_compensar }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios horas_compensar }","hidden":"{$item_hide_simple_grid_field64}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1052,7 +1082,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field65}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1081,7 +1111,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field66}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1110,7 +1140,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios rrhh_resultado_decision }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios rrhh_resultado_decision }","hidden":"{$item_hide_simple_grid_field67}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1120,6 +1150,296 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field28}
+																							{BEGIN cellblock_grid_headcell_field29}
+{
+	cellId: 'headcell_field29',
+	col:0,
+	row:0,
+			fieldName: 'rrhh_motivo_rechazo',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios rrhh_motivo_rechazo }","hidden":"{$item_hide_simple_grid_field68}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$rrhh_motivo_rechazo_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field29}
+																							{BEGIN cellblock_grid_headcell_field30}
+{
+	cellId: 'headcell_field30',
+	col:0,
+	row:0,
+			fieldName: 'antiguedad_laboral',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios antiguedad_laboral }","hidden":"{$item_hide_simple_grid_field69}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antiguedad_laboral_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field30}
+																							{BEGIN cellblock_grid_headcell_field31}
+{
+	cellId: 'headcell_field31',
+	col:0,
+	row:0,
+			fieldName: 'car_descri',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios car_descri }","hidden":"{$item_hide_simple_grid_field70}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$car_descri_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field31}
+																							{BEGIN cellblock_grid_headcell_field32}
+{
+	cellId: 'headcell_field32',
+	col:0,
+	row:0,
+			fieldName: 'sed_descripcion',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios sed_descripcion }","hidden":"{$item_hide_simple_grid_field71}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sed_descripcion_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field32}
+																							{BEGIN cellblock_grid_headcell_field33}
+{
+	cellId: 'headcell_field33',
+	col:0,
+	row:0,
+			fieldName: 'cantidad_dias_permiso',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios cantidad_dias_permiso }","hidden":"{$item_hide_simple_grid_field72}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$cantidad_dias_permiso_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field33}
+																							{BEGIN cellblock_grid_headcell_field34}
+{
+	cellId: 'headcell_field34',
+	col:0,
+	row:0,
+			fieldName: 'cantidad_permisos_mes',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios cantidad_permisos_mes }","hidden":"{$item_hide_simple_grid_field73}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$cantidad_permisos_mes_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field34}
+																							{BEGIN cellblock_grid_headcell_field35}
+{
+	cellId: 'headcell_field35',
+	col:0,
+	row:0,
+			fieldName: 'fecha_decision',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_decision }","hidden":"{$item_hide_simple_grid_field74}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$fecha_decision_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field35}
+																							{BEGIN cellblock_grid_headcell_field36}
+{
+	cellId: 'headcell_field36',
+	col:0,
+	row:0,
+			fieldName: 'rrhh_fecha_decision',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios rrhh_fecha_decision }","hidden":"{$item_hide_simple_grid_field75}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$rrhh_fecha_decision_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field36}
+																							{BEGIN cellblock_grid_headcell_field37}
+{
+	cellId: 'headcell_field37',
+	col:0,
+	row:0,
+			fieldName: 'intentos_correccion',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios intentos_correccion }","hidden":"{$item_hide_simple_grid_field76}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$intentos_correccion_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field37}
+																							{BEGIN cellblock_grid_headcell_field38}
+{
+	cellId: 'headcell_field38',
+	col:0,
+	row:0,
+			fieldName: 'decidido_por',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel rrhh_permisos_permisos_funcionarios decidido_por }","hidden":"{$item_hide_simple_grid_field77}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$decidido_por_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field38}
 											],
 				{END row_grid_0}
 		
@@ -1970,6 +2290,296 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field28}
+																							{BEGIN cellblock_grid_cell_field29}
+{
+	cellId: 'cell_field29',
+	col:0,
+	row:0,
+			fieldName: 'rrhh_motivo_rechazo',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$rrhh_motivo_rechazo_pdfvalue},"hidden":"{$item_hide_simple_grid_field29}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$rrhh_motivo_rechazo_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field29}
+																							{BEGIN cellblock_grid_cell_field30}
+{
+	cellId: 'cell_field30',
+	col:0,
+	row:0,
+			fieldName: 'antiguedad_laboral',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$antiguedad_laboral_pdfvalue},"hidden":"{$item_hide_simple_grid_field30}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antiguedad_laboral_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field30}
+																							{BEGIN cellblock_grid_cell_field31}
+{
+	cellId: 'cell_field31',
+	col:0,
+	row:0,
+			fieldName: 'car_descri',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$car_descri_pdfvalue},"hidden":"{$item_hide_simple_grid_field31}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$car_descri_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field31}
+																							{BEGIN cellblock_grid_cell_field32}
+{
+	cellId: 'cell_field32',
+	col:0,
+	row:0,
+			fieldName: 'sed_descripcion',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sed_descripcion_pdfvalue},"hidden":"{$item_hide_simple_grid_field32}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sed_descripcion_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field32}
+																							{BEGIN cellblock_grid_cell_field33}
+{
+	cellId: 'cell_field33',
+	col:0,
+	row:0,
+			fieldName: 'cantidad_dias_permiso',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$cantidad_dias_permiso_pdfvalue},"hidden":"{$item_hide_simple_grid_field34}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$cantidad_dias_permiso_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field33}
+																							{BEGIN cellblock_grid_cell_field34}
+{
+	cellId: 'cell_field34',
+	col:0,
+	row:0,
+			fieldName: 'cantidad_permisos_mes',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$cantidad_permisos_mes_pdfvalue},"hidden":"{$item_hide_simple_grid_field33}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$cantidad_permisos_mes_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field34}
+																							{BEGIN cellblock_grid_cell_field35}
+{
+	cellId: 'cell_field35',
+	col:0,
+	row:0,
+			fieldName: 'fecha_decision',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$fecha_decision_pdfvalue},"hidden":"{$item_hide_simple_grid_field35}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$fecha_decision_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field35}
+																							{BEGIN cellblock_grid_cell_field36}
+{
+	cellId: 'cell_field36',
+	col:0,
+	row:0,
+			fieldName: 'rrhh_fecha_decision',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$rrhh_fecha_decision_pdfvalue},"hidden":"{$item_hide_simple_grid_field36}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$rrhh_fecha_decision_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field36}
+																							{BEGIN cellblock_grid_cell_field37}
+{
+	cellId: 'cell_field37',
+	col:0,
+	row:0,
+			fieldName: 'intentos_correccion',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$intentos_correccion_pdfvalue},"hidden":"{$item_hide_simple_grid_field37}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$intentos_correccion_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field37}
+																							{BEGIN cellblock_grid_cell_field38}
+{
+	cellId: 'cell_field38',
+	col:0,
+	row:0,
+			fieldName: 'decidido_por',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$decidido_por_pdfvalue},"hidden":"{$item_hide_simple_grid_field38}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$decidido_por_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field38}
 											],
 				{END row_grid_1}
 		
@@ -2733,6 +3343,266 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field28}
+																							{BEGIN cellblock_grid_footcell_field29}
+{
+	cellId: 'footcell_field29',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field29}
+																							{BEGIN cellblock_grid_footcell_field30}
+{
+	cellId: 'footcell_field30',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field30}
+																							{BEGIN cellblock_grid_footcell_field31}
+{
+	cellId: 'footcell_field31',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field31}
+																							{BEGIN cellblock_grid_footcell_field32}
+{
+	cellId: 'footcell_field32',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field32}
+																							{BEGIN cellblock_grid_footcell_field33}
+{
+	cellId: 'footcell_field33',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field33}
+																							{BEGIN cellblock_grid_footcell_field34}
+{
+	cellId: 'footcell_field34',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field34}
+																							{BEGIN cellblock_grid_footcell_field35}
+{
+	cellId: 'footcell_field35',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field35}
+																							{BEGIN cellblock_grid_footcell_field36}
+{
+	cellId: 'footcell_field36',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field36}
+																							{BEGIN cellblock_grid_footcell_field37}
+{
+	cellId: 'footcell_field37',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field37}
+																							{BEGIN cellblock_grid_footcell_field38}
+{
+	cellId: 'footcell_field38',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field38}
 											],
 				{END row_grid_2}
 		

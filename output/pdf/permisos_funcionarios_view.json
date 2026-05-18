@@ -56,9 +56,6 @@ pdfDocument = {
 				
 			{"text":"{$jspagetitlelabel rrhh_permisos_permisos_funcionarios view}","hidden":"{$item_hide_view_header}","fontSize":30},
 				
-				
-			{"text":""},
-				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
@@ -142,6 +139,9 @@ pdfDocument = {
 												{BEGIN col_grid_1}
 						"*", 
 							{END col_grid_1}
+												{BEGIN col_grid_2}
+						"*", 
+							{END col_grid_2}
 					 ],	
 		
 			heights: [
@@ -190,6 +190,21 @@ pdfDocument = {
 			"%",
 						{END row_grid_8}
 			 
+								{BEGIN row_grid_9}
+						
+			"%",
+						{END row_grid_9}
+			 
+								{BEGIN row_grid_10}
+						
+			"%",
+						{END row_grid_10}
+			 
+								{BEGIN row_grid_11}
+						
+			"%",
+						{END row_grid_11}
+			 
 				],
 	
 		body: [
@@ -218,6 +233,48 @@ pdfDocument = {
 				
 			{"text":"<h3>👤 DATOS DEL FUNCIONARIO</h3><br><hr>","hidden":"{$item_hide_text2}","isHtml":true},
 				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c18}
+																		{ 
+				cellId: 'c18',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c18',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_0}
+						{BEGIN row_grid_1}
+				[
+																{BEGIN cellblock_grid_c22}
+{
+	cellId: 'c22',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
 				
 			{"hidden":"{$item_hide_view_nombre_completo}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios nombre_completo }","bold":true},{"text":{$nombre_completo_pdfvalue}}],"margin":[0,0,0,15]},
 				
@@ -237,17 +294,56 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_c18}
+{END cellblock_grid_c22}
+																							{BEGIN cellblock_grid_c23}
+{
+	cellId: 'c23',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c23}
+			colSpan: {$colspan_grid_c23},
+			{END colspan_grid_c23}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_antiguedad_laboral}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios antiguedad_laboral }","bold":true},{"text":{$antiguedad_laboral_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_car_descri}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios car_descri }","bold":true},{"text":{$car_descri_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_sed_descripcion}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios sed_descripcion }","bold":true},{"text":{$sed_descripcion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_cantidad_permisos_mes}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios cantidad_permisos_mes }","bold":true},{"text":{$cantidad_permisos_mes_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c23}
 																		{ 
-				cellId: 'c18',
+				cellId: 'c23',
 				row:  0,
 				col:  1,
 				text: '',
 				compensateColspan: true
 			},
 							],
-				{END row_grid_0}
-						{BEGIN row_grid_1}
+				{END row_grid_1}
+						{BEGIN row_grid_2}
 				[
 																{BEGIN cellblock_grid_c19}
 {
@@ -269,7 +365,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h3>TIPO DE PERMISO / JUSTIFICACION</h3><br><hr>","hidden":"{$item_hide_text3}","isHtml":true},
+			{"text":"<h3>📝 TIPO DE PERMISO / JUSTIFICACION</h3><br><hr>","hidden":"{$item_hide_text3}","isHtml":true},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios motivo_id }","bold":true},{"text":{$motivo_id_pdfvalue}}],"margin":[0,0,0,15]},
@@ -289,9 +385,16 @@ pdfDocument = {
 				text: '',
 				compensateColspan: true
 			},
+														{ 
+				cellId: 'c19',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
 							],
-				{END row_grid_1}
-						{BEGIN row_grid_2}
+				{END row_grid_2}
+						{BEGIN row_grid_3}
 				[
 																{BEGIN cellblock_grid_c20}
 {
@@ -313,7 +416,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h3>PERIODO DEL PERMISO</h3><br><hr>","hidden":"{$item_hide_text4}","isHtml":true},
+			{"text":"<h3>📅 PERIODO DEL PERMISO 🕒</h3><br><hr>","hidden":"{$item_hide_text4}","isHtml":true},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -330,9 +433,16 @@ pdfDocument = {
 				text: '',
 				compensateColspan: true
 			},
+														{ 
+				cellId: 'c20',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
 							],
-				{END row_grid_2}
-						{BEGIN row_grid_3}
+				{END row_grid_3}
+						{BEGIN row_grid_4}
 				[
 																{BEGIN cellblock_grid_c3}
 {
@@ -351,7 +461,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h4><strong>Desde</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text}","isHtml":true},
+			{"text":"<h4><strong>📅 Fecha de inicio del permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text}","isHtml":true},
 				
 				
 			{"hidden":"{$item_hide_view_fecha_desde}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_desde }","bold":true},{"text":{$fecha_desde_pdfvalue}}],"margin":[0,0,0,15]},
@@ -384,7 +494,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h4><strong>Hasta</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text1}","isHtml":true},
+			{"text":"<h4><strong>📅 Fecha de fin del permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text1}","isHtml":true},
 				
 				
 			{"hidden":"{$item_hide_view_fecha_hasta}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios fecha_hasta }","bold":true},{"text":{$fecha_hasta_pdfvalue}}],"margin":[0,0,0,15]},
@@ -400,9 +510,42 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c13}
+																							{BEGIN cellblock_grid_c14}
+{
+	cellId: 'c14',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h4><strong>🔢 Cantidad de días de permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text8}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_cantidad_dias_permiso}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios cantidad_dias_permiso }","bold":true},{"text":{$cantidad_dias_permiso_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_horas_compensar}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios horas_compensar }","bold":true},{"text":{$horas_compensar_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c14}
 											],
-				{END row_grid_3}
-						{BEGIN row_grid_4}
+				{END row_grid_4}
+						{BEGIN row_grid_5}
 				[
 																{BEGIN cellblock_grid_c11}
 {
@@ -424,7 +567,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h3>COMISIÓN DE SERVICIOS</h3><br><hr>","hidden":"{$item_hide_text5}","isHtml":true},
+			{"text":"<h3>🚗 COMISIÓN DE SERVICIOS</h3><br><hr>","hidden":"{$item_hide_text5}","isHtml":true},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -441,9 +584,16 @@ pdfDocument = {
 				text: '',
 				compensateColspan: true
 			},
+														{ 
+				cellId: 'c11',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
 							],
-				{END row_grid_4}
-						{BEGIN row_grid_5}
+				{END row_grid_5}
+						{BEGIN row_grid_6}
 				[
 																{BEGIN cellblock_grid_c15}
 {
@@ -481,6 +631,9 @@ pdfDocument = {
 		
 	//	dynamic colspan/rowspan
 
+					{BEGIN colspan_grid_c21}
+			colSpan: {$colspan_grid_c21},
+			{END colspan_grid_c21}
 		
 		
 	
@@ -499,9 +652,16 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c21}
-											],
-				{END row_grid_5}
-						{BEGIN row_grid_6}
+																		{ 
+				cellId: 'c21',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_6}
+						{BEGIN row_grid_7}
 				[
 																{BEGIN cellblock_grid_c4}
 {
@@ -523,7 +683,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h3>OBSERVACIONES Y DOCUMENTOS</h3><br><hr>","hidden":"{$item_hide_text6}","isHtml":true},
+			{"text":"<h3>💬 OBSERVACIONES Y DOCUMENTOS</h3><br><hr>","hidden":"{$item_hide_text6}","isHtml":true},
 				
 				
 			{"hidden":"{$item_hide_view_observacion}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios observacion }","bold":true},{"text":{$observacion_pdfvalue}}],"margin":[0,0,0,15]},
@@ -543,9 +703,16 @@ pdfDocument = {
 				text: '',
 				compensateColspan: true
 			},
+														{ 
+				cellId: 'c4',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
 							],
-				{END row_grid_6}
-						{BEGIN row_grid_7}
+				{END row_grid_7}
+						{BEGIN row_grid_8}
 				[
 																{BEGIN cellblock_grid_c8}
 {
@@ -567,7 +734,10 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h3>ESTADO DE LA SOLICITUD</h3><br><hr>","hidden":"{$item_hide_text7}","isHtml":true},
+			{"text":"<h3>📌 ESTADO DE LA SOLICITUD</h3><br><hr>","hidden":"{$item_hide_text7}","isHtml":true},
+				
+				
+			{"text":"<div style=\"background:#e7f3ff;padding:10px;border-radius:8px;\">\n  ℹ️ Su solicitud pasa por dos niveles de aprobación:\n  <br>1. Jefe inmediato\n  <br>2. Recursos Humanos\n</div>","hidden":"{$item_hide_text9}","isHtml":true},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -584,9 +754,16 @@ pdfDocument = {
 				text: '',
 				compensateColspan: true
 			},
+														{ 
+				cellId: 'c8',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
 							],
-				{END row_grid_7}
-						{BEGIN row_grid_8}
+				{END row_grid_8}
+						{BEGIN row_grid_9}
 				[
 																{BEGIN cellblock_grid_c9}
 {
@@ -642,8 +819,134 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c10}
+																							{BEGIN cellblock_grid_c}
+{
+	cellId: 'c',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios rrhh_resultado_decision }","bold":true},{"text":{$rrhh_resultado_decision_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c}
 											],
-				{END row_grid_8}
+				{END row_grid_9}
+						{BEGIN row_grid_10}
+				[
+																{BEGIN cellblock_grid_c16}
+{
+	cellId: 'c16',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c16}
+			colSpan: {$colspan_grid_c16},
+			{END colspan_grid_c16}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<h3>📌 MOTIVO DE RECHAZO</h3><br><hr>","hidden":"{$item_hide_text10}","isHtml":true},
+				
+				
+			{"hidden":"{$item_hide_view_rrhh_motivo_rechazo}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios rrhh_motivo_rechazo }","bold":true},{"text":{$rrhh_motivo_rechazo_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c16}
+																		{ 
+				cellId: 'c16',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c16',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_10}
+						{BEGIN row_grid_11}
+				[
+																{BEGIN cellblock_grid_c12}
+{
+	cellId: 'c12',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c12}
+			colSpan: {$colspan_grid_c12},
+			{END colspan_grid_c12}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_id}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios id }","bold":true},{"text":{$id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c12}
+																		{ 
+				cellId: 'c12',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c12',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_11}
 		
 		]
 	}

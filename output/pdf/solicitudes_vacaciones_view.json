@@ -451,10 +451,25 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field7}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones observacion }","bold":true},{"text":{$observacion_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_creacion }","bold":true},{"text":{$fecha_creacion_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
 			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_dependencia }","bold":true},{"text":{$descripcion_dependencia_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_tipo_vinculacion }","bold":true},{"text":{$descripcion_tipo_vinculacion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones fecha_solicitud }","bold":true},{"text":{$fecha_solicitud_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones email_jefe }","bold":true},{"text":{$email_jefe_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones email_jefe_id }","bold":true},{"text":{$email_jefe_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones nombre_completo_edit }","bold":true},{"text":{$nombre_completo_edit_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field15}","stack":[{"text":"{$jslabel rrhh_permisos_solicitudes_vacaciones descripcion_dependencia_edit }","bold":true},{"text":{$descripcion_dependencia_edit_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],

@@ -8,7 +8,7 @@ $dalTablesolicitudes_vacaciones["fecha_hasta"] = array("type"=>7,"varname"=>"fec
 $dalTablesolicitudes_vacaciones["total_dias_habiles"] = array("type"=>3,"varname"=>"total_dias_habiles", "name" => "total_dias_habiles", "autoInc" => "0");
 $dalTablesolicitudes_vacaciones["observacion"] = array("type"=>201,"varname"=>"observacion", "name" => "observacion", "autoInc" => "0");
 $dalTablesolicitudes_vacaciones["estado"] = array("type"=>200,"varname"=>"estado", "name" => "estado", "autoInc" => "0");
-$dalTablesolicitudes_vacaciones["fecha_creacion"] = array("type"=>135,"varname"=>"fecha_creacion", "name" => "fecha_creacion", "autoInc" => "0");
+$dalTablesolicitudes_vacaciones["fecha_solicitud"] = array("type"=>135,"varname"=>"fecha_solicitud", "name" => "fecha_solicitud", "autoInc" => "0");
 $dalTablesolicitudes_vacaciones["usuario_creador"] = array("type"=>200,"varname"=>"usuario_creador", "name" => "usuario_creador", "autoInc" => "0");
 $dalTablesolicitudes_vacaciones["fecha_actualizacion"] = array("type"=>135,"varname"=>"fecha_actualizacion", "name" => "fecha_actualizacion", "autoInc" => "0");
 $dalTablesolicitudes_vacaciones["usuario_actualizacion"] = array("type"=>200,"varname"=>"usuario_actualizacion", "name" => "usuario_actualizacion", "autoInc" => "0");

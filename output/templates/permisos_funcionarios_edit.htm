@@ -309,6 +309,21 @@
 		 
 		<h2 data-itemtype="edit_header" data-itemid="edit_header" {$item_edit_header} data-pageid="{$pageid}" >{$pagetitlelabel rrhh_permisos_permisos_funcionarios edit}</h2>
 		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c" data-pageid="{$pageid}"	{$cell_top_c}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<span data-itemtype="text" data-itemid="text13" {$item_text13} data-pageid="{$pageid}" data-small > 
+	<div style="background:#e7f3ff;padding:12px;border-radius:8px;margin-bottom:15px;">
+  ℹ️ Complete el formulario para solicitar un permiso laboral.  
+  Todos los campos marcados(*) son obligatorios.
+</div></span>
+		</div>					</div>
 			</div>		
 {END top_block}
 						</div>
@@ -359,9 +374,9 @@
 	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
 	class="r-edit-form" cellpadding="0" cellspacing="0" 
 	{$grid_hiddenattr} 
-		data-form-width="2"
+		data-form-width="3"
 		
-		data-v-width="4"
+		data-v-width="6"
 	>
 	<tbody>
 										<tr {$row_grid_0} >
@@ -372,16 +387,37 @@
 	{$cell_grid_c15}
 	class=" r-ori-vert"
 	
+			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c15" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c15" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text2" {$item_text2} data-pageid="{$pageid}" data-small > 
 	<h3>👤 DATOS DEL FUNCIONARIO</h3><br><hr></span>
-											
+	
+								</td>
+			{END cellblock_grid_c15}
+								</tr>
+	 
+	 
+														<tr {$row_grid_1} >
+										
+
+{BEGIN cellblock_grid_c17}
+<td
+	{$cell_grid_c17}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c17" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN nombre_completo_edit_fieldblock}
 
 
@@ -497,7 +533,7 @@
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_descripcion_tipo_vinculacion}  r-vertical-field" 
 	data-signal-error-for="descripcion_tipo_vinculacion{$id}" {$required_attr_descripcion_tipo_vinculacion}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="descripcion_tipo_vinculacion" data-fieldname="descripcion_tipo_vinculacion" >
+	data-itemtype="integrated_edit_field" data-itemid="edit_descripcion_tipo_vinculacion" {$item_edit_descripcion_tipo_vinculacion} data-pageid="{$pageid}" data-field="descripcion_tipo_vinculacion" data-fieldname="descripcion_tipo_vinculacion" >
 
 	<label class="r-edit-label control-label" for="{$labelfor_descripcion_tipo_vinculacion}">
 		{BEGIN descripcion_tipo_vinculacion_label}{$label rrhh_permisos_permisos_funcionarios descripcion_tipo_vinculacion }{END descripcion_tipo_vinculacion_label}
@@ -515,11 +551,116 @@
 {END descripcion_tipo_vinculacion_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c15}
+			{END cellblock_grid_c17}
+			 
+																
+
+{BEGIN cellblock_grid_c18}
+<td
+	{$cell_grid_c18}
+	class=" r-ori-vert"
+	
+			
+	ocolspan="2"		data-cellId="grid_c18" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN antiguedad_laboral_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antiguedad_laboral}  r-vertical-field" 
+	data-signal-error-for="antiguedad_laboral{$id}" {$required_attr_antiguedad_laboral}
+	data-itemtype="integrated_edit_field" data-itemid="edit_antiguedad_laboral" {$item_edit_antiguedad_laboral} data-pageid="{$pageid}" data-field="antiguedad_laboral" data-fieldname="antiguedad_laboral" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_antiguedad_laboral}">
+		{BEGIN antiguedad_laboral_label}{$label rrhh_permisos_permisos_funcionarios antiguedad_laboral }{END antiguedad_laboral_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$antiguedad_laboral_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="antiguedad_laboral" {$tooltipAttr rrhh_permisos_permisos_funcionarios antiguedad_laboral } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios antiguedad_laboral }		</div>
+	</div>
+</div>
+
+
+{END antiguedad_laboral_fieldblock}
+											
+{BEGIN car_descri_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_car_descri}  r-vertical-field" 
+	data-signal-error-for="car_descri{$id}" {$required_attr_car_descri}
+	data-itemtype="integrated_edit_field" data-itemid="edit_car_descri" {$item_edit_car_descri} data-pageid="{$pageid}" data-field="car_descri" data-fieldname="car_descri" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_car_descri}">
+		{BEGIN car_descri_label}{$label rrhh_permisos_permisos_funcionarios car_descri }{END car_descri_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$car_descri_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="car_descri" {$tooltipAttr rrhh_permisos_permisos_funcionarios car_descri } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios car_descri }		</div>
+	</div>
+</div>
+
+
+{END car_descri_fieldblock}
+											
+{BEGIN sed_descripcion_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sed_descripcion}  r-vertical-field" 
+	data-signal-error-for="sed_descripcion{$id}" {$required_attr_sed_descripcion}
+	data-itemtype="integrated_edit_field" data-itemid="edit_sed_descripcion" {$item_edit_sed_descripcion} data-pageid="{$pageid}" data-field="sed_descripcion" data-fieldname="sed_descripcion" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sed_descripcion}">
+		{BEGIN sed_descripcion_label}{$label rrhh_permisos_permisos_funcionarios sed_descripcion }{END sed_descripcion_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sed_descripcion_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sed_descripcion" {$tooltipAttr rrhh_permisos_permisos_funcionarios sed_descripcion } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios sed_descripcion }		</div>
+	</div>
+</div>
+
+
+{END sed_descripcion_fieldblock}
+											
+{BEGIN cantidad_permisos_mes_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_cantidad_permisos_mes}  r-vertical-field" 
+	data-signal-error-for="cantidad_permisos_mes{$id}" {$required_attr_cantidad_permisos_mes}
+	data-itemtype="integrated_edit_field" data-itemid="edit_cantidad_permisos_mes" {$item_edit_cantidad_permisos_mes} data-pageid="{$pageid}" data-field="cantidad_permisos_mes" data-fieldname="cantidad_permisos_mes" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_cantidad_permisos_mes}">
+		{BEGIN cantidad_permisos_mes_label}{$label rrhh_permisos_permisos_funcionarios cantidad_permisos_mes }{END cantidad_permisos_mes_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$cantidad_permisos_mes_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="cantidad_permisos_mes" {$tooltipAttr rrhh_permisos_permisos_funcionarios cantidad_permisos_mes } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios cantidad_permisos_mes }		</div>
+	</div>
+</div>
+
+
+{END cantidad_permisos_mes_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c18}
 								</tr>
 	 
 	 
-														<tr {$row_grid_1} >
+														<tr {$row_grid_2} >
 										
 
 {BEGIN cellblock_grid_c16}
@@ -529,13 +670,13 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c16" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c16" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-small > 
-	<h3>TIPO DE PERMISO / JUSTIFICACION</h3><br><hr></span>
+	<h3>📝 TIPO DE PERMISO / JUSTIFICACION</h3><br><hr></span>
 											
 {BEGIN motivo_id_fieldblock}
 
@@ -564,7 +705,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_2} >
+														<tr {$row_grid_3} >
 										
 
 {BEGIN cellblock_grid_c1}
@@ -575,20 +716,20 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c1" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c1" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text4" {$item_text4} data-pageid="{$pageid}" data-small > 
-	<h3>PERIODO DEL PERMISO</h3><br><hr></span>
+	<h3>📅 PERIODO DEL PERMISO 🕒</h3><br><hr></span>
 	
 								</td>
 			{END cellblock_grid_c1}
 								</tr>
 	 
 	 
-														<tr {$row_grid_3} >
+														<tr {$row_grid_4} >
 										
 
 {BEGIN cellblock_grid_c}
@@ -603,7 +744,7 @@
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
-	<h4><strong>Desde</strong><span class="ql-cursor">﻿</span></h4></span>
+	<h4><strong>📅 Fecha de inicio del permiso</strong><span class="ql-cursor">﻿</span></h4></span>
 											
 {BEGIN fecha_desde_fieldblock}
 
@@ -660,13 +801,13 @@
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c2" data-pageid="{$pageid}"
-		data-v-cell="2"
+	ocolspan="2"		data-cellId="grid_c2" data-pageid="{$pageid}"
+		data-v-cell="4"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-small > 
-	<h4><strong>Hasta</strong><span class="ql-cursor">﻿</span></h4></span>
+	<h4><strong>📅 Fecha de fin del permiso</strong><span class="ql-cursor">﻿</span></h4></span>
 											
 {BEGIN fecha_hasta_fieldblock}
 
@@ -717,7 +858,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_4} >
+														<tr {$row_grid_5} >
 										
 
 {BEGIN cellblock_grid_c14}
@@ -728,8 +869,8 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c14" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c14" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -741,7 +882,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_5} >
+														<tr {$row_grid_6} >
 										
 
 {BEGIN cellblock_grid_c5}
@@ -752,20 +893,20 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c5" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c5" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text6" {$item_text6} data-pageid="{$pageid}" data-small > 
-	<h3>COMISIÓN DE SERVICIOS</h3><br><hr></span>
+	<h3>🚗 COMISIÓN DE SERVICIOS</h3><br><hr></span>
 	
 								</td>
 			{END cellblock_grid_c5}
 								</tr>
 	 
 	 
-														<tr {$row_grid_6} >
+														<tr {$row_grid_7} >
 										
 
 {BEGIN cellblock_grid_c4}
@@ -814,8 +955,8 @@
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c6" data-pageid="{$pageid}"
-		data-v-cell="2"
+	ocolspan="2"		data-cellId="grid_c6" data-pageid="{$pageid}"
+		data-v-cell="4"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -842,14 +983,14 @@
 
 {END comision_servicios_descripcion_fieldblock}
 											<span data-itemtype="text" data-itemid="text7" {$item_text7} data-pageid="{$pageid}" data-small > 
-	<small> 📌 Indique lugar, institución o motivo de la comisión</small></span>
+	<small> 📌 En caso de traslado indique lugar, institución o motivo de la comisión</small></span>
 	
 								</td>
 			{END cellblock_grid_c6}
 								</tr>
 	 
 	 
-														<tr {$row_grid_7} >
+														<tr {$row_grid_8} >
 										
 
 {BEGIN cellblock_grid_c10}
@@ -859,20 +1000,20 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c10" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c10" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text8" {$item_text8} data-pageid="{$pageid}" data-small > 
-	<h3>OBSERVACIONES Y DOCUMENTOS</h3><br><hr></span>
+	<h3>💬 OBSERVACIONES Y DOCUMENTOS</h3><br><hr></span>
 											
 {BEGIN observacion_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_observacion}  r-vertical-field" 
 	data-signal-error-for="observacion{$id}" {$required_attr_observacion}
-	data-itemtype="integrated_edit_field" data-itemid="edit_observacion" {$item_edit_observacion} data-pageid="{$pageid}" data-field="observacion" data-fieldname="observacion" >
+	data-itemtype="integrated_edit_field" data-itemid="edit_observacion" {$item_edit_observacion} data-pageid="{$pageid}" data-field="observacion" data-fieldname="observacion" data-before-same-field >
 
 	<label class="r-edit-label control-label" for="{$labelfor_observacion}">
 		{BEGIN observacion_label}{$label rrhh_permisos_permisos_funcionarios observacion }{END observacion_label}
@@ -888,6 +1029,8 @@
 
 
 {END observacion_fieldblock}
+											<span data-itemtype="text" data-itemid="text14" {$item_text14} data-pageid="{$pageid}" data-small > 
+	<small>📌 Puede agregar información adicional si lo considera necesario.</small></span>
 											
 {BEGIN archivo_adjunto_fieldblock}
 
@@ -912,13 +1055,17 @@
 {END archivo_adjunto_fieldblock}
 											<span data-itemtype="text" data-itemid="text9" {$item_text9} data-pageid="{$pageid}" data-small > 
 	<small>📌 Adjunte documentos de respaldo si el permiso lo requiere (certificado médico, nota, etc.).</small></span>
+											<span data-itemtype="text" data-itemid="text15" {$item_text15} data-pageid="{$pageid}" data-small > 
+	<div style="font-size:12px;color:#6c757d;margin-top:5px;">
+  Formatos permitidos: PDF, JPG, PNG.
+</div></span>
 	
 								</td>
 			{END cellblock_grid_c10}
 								</tr>
 	 
 	 
-														<tr {$row_grid_8} >
+														<tr {$row_grid_9} >
 										
 
 {BEGIN cellblock_grid_c11}
@@ -928,20 +1075,20 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c11" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c11" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text10" {$item_text10} data-pageid="{$pageid}" data-small > 
-	<h3>APROBACIÓN / CONTACTO</h3><br><hr></span>
+	<h3>📧 PROCESO DE APROBACIÓN</h3><br><hr></span>
 											
 {BEGIN email_jefe_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_email_jefe}  r-vertical-field" 
 	data-signal-error-for="email_jefe{$id}" {$required_attr_email_jefe}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="email_jefe" data-fieldname="email_jefe" data-before-same-field >
+	data-itemtype="integrated_edit_field" data-itemid="edit_email_solicitud" {$item_edit_email_solicitud} data-pageid="{$pageid}" data-field="email_jefe" data-fieldname="email_jefe" data-before-same-field >
 
 	<label class="r-edit-label control-label" for="{$labelfor_email_jefe}">
 		{BEGIN email_jefe_label}{$label rrhh_permisos_permisos_funcionarios email_jefe }{END email_jefe_label}
@@ -957,15 +1104,17 @@
 
 
 {END email_jefe_fieldblock}
-											<span data-itemtype="text" data-itemid="text11" {$item_text11} data-pageid="{$pageid}" data-small > 
-	<small>📌 Debe ser un correo institucional (@mtess.gov.py)</small></span>
+											<span data-itemtype="text" data-itemid="text_email_jefe_edit" {$item_text_email_jefe_edit} data-pageid="{$pageid}" data-small > 
+	<small>📌 Su solicitud será enviada automáticamente a su jefe inmediato superior.<br>
+  El mismo deberá revisar y aprobar o rechazar el permiso.
+</small></span>
 	
 								</td>
 			{END cellblock_grid_c11}
 								</tr>
 	 
 	 
-														<tr {$row_grid_9} >
+														<tr {$row_grid_10} >
 										
 
 {BEGIN cellblock_grid_c3}
@@ -976,20 +1125,20 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c3" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text12" {$item_text12} data-pageid="{$pageid}" data-small > 
-	<h3>ESTADO DE LA SOLICITUD</h3><br><hr></span>
+	<h3>📌 ESTADO DE LA SOLICITUD</h3><br><hr></span>
 	
 								</td>
 			{END cellblock_grid_c3}
 								</tr>
 	 
 	 
-														<tr {$row_grid_10} >
+														<tr {$row_grid_11} >
 										
 
 {BEGIN cellblock_grid_c7}
@@ -1010,7 +1159,7 @@
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_fecha_solicitud}  r-vertical-field" 
 	data-signal-error-for="fecha_solicitud{$id}" {$required_attr_fecha_solicitud}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="fecha_solicitud" data-fieldname="fecha_solicitud" >
+	data-itemtype="integrated_edit_field" data-itemid="edit_fecha_solicitud" {$item_edit_fecha_solicitud} data-pageid="{$pageid}" data-field="fecha_solicitud" data-fieldname="fecha_solicitud" >
 
 	<label class="r-edit-label control-label" for="{$labelfor_fecha_solicitud}">
 		{BEGIN fecha_solicitud_label}{$label rrhh_permisos_permisos_funcionarios fecha_solicitud }{END fecha_solicitud_label}
@@ -1050,7 +1199,7 @@
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_resultado_decision}  r-vertical-field" 
 	data-signal-error-for="resultado_decision{$id}" {$required_attr_resultado_decision}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="resultado_decision" data-fieldname="resultado_decision" >
+	data-itemtype="integrated_edit_field" data-itemid="edit_resultado_decision" {$item_edit_resultado_decision} data-pageid="{$pageid}" data-field="resultado_decision" data-fieldname="resultado_decision" >
 
 	<label class="r-edit-label control-label" for="{$labelfor_resultado_decision}">
 		{BEGIN resultado_decision_label}{$label rrhh_permisos_permisos_funcionarios resultado_decision }{END resultado_decision_label}
@@ -1069,10 +1218,50 @@
 	
 								</td>
 			{END cellblock_grid_c8}
+			 
+																
+
+{BEGIN cellblock_grid_c9}
+<td
+	{$cell_grid_c9}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c9" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN rrhh_resultado_decision_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_rrhh_resultado_decision}  r-vertical-field" 
+	data-signal-error-for="rrhh_resultado_decision{$id}" {$required_attr_rrhh_resultado_decision}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="rrhh_resultado_decision" data-fieldname="rrhh_resultado_decision" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_rrhh_resultado_decision}">
+		{BEGIN rrhh_resultado_decision_label}{$label rrhh_permisos_permisos_funcionarios rrhh_resultado_decision }{END rrhh_resultado_decision_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$rrhh_resultado_decision_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="rrhh_resultado_decision" {$tooltipAttr rrhh_permisos_permisos_funcionarios rrhh_resultado_decision } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios rrhh_resultado_decision }		</div>
+	</div>
+</div>
+
+
+{END rrhh_resultado_decision_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c9}
 								</tr>
 	 
 	 
-														<tr {$row_grid_11} >
+														<tr {$row_grid_12} >
 										
 
 {BEGIN cellblock_grid_c13}
@@ -1082,8 +1271,8 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c13" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -1175,6 +1364,50 @@
 
 
 {END tipo_vinculacion_fieldblock}
+											
+{BEGIN decidido_por_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_decidido_por}  r-vertical-field" 
+	data-signal-error-for="decidido_por{$id}" {$required_attr_decidido_por}
+	data-itemtype="integrated_edit_field" data-itemid="edit_decidido_por" {$item_edit_decidido_por} data-pageid="{$pageid}" data-field="decidido_por" data-fieldname="decidido_por" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_decidido_por}">
+		{BEGIN decidido_por_label}{$label rrhh_permisos_permisos_funcionarios decidido_por }{END decidido_por_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$decidido_por_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="decidido_por" {$tooltipAttr rrhh_permisos_permisos_funcionarios decidido_por } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios decidido_por }		</div>
+	</div>
+</div>
+
+
+{END decidido_por_fieldblock}
+											
+{BEGIN id_funcionario_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id_funcionario}  r-vertical-field" 
+	data-signal-error-for="id_funcionario{$id}" {$required_attr_id_funcionario}
+	data-itemtype="integrated_edit_field" data-itemid="edit_id_funcionario" {$item_edit_id_funcionario} data-pageid="{$pageid}" data-field="id_funcionario" data-fieldname="id_funcionario" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_id_funcionario}">
+		{BEGIN id_funcionario_label}{$label rrhh_permisos_permisos_funcionarios id_funcionario }{END id_funcionario_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$id_funcionario_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="id_funcionario" {$tooltipAttr rrhh_permisos_permisos_funcionarios id_funcionario } >
+		<div class="text-muted" >
+		{$tooltip rrhh_permisos_permisos_funcionarios id_funcionario }		</div>
+	</div>
+</div>
+
+
+{END id_funcionario_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c13}
@@ -1190,7 +1423,7 @@
 			 
 				<div 
 	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
-	class="			col-md-6
+	class="			col-md-12
 	
 ">
 		 
@@ -1199,9 +1432,16 @@
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
 					<span class="glyphicon glyphicon-send"></span>
-							Enviar Solicitud			</a>
+							Enviar Solicitud_OLD			</a>
 </span>
 {END save_edit}
+	 
+		<span data-itemtype="custom_button" data-itemid="boton_envia_solicitud_edit" {$item_boton_envia_solicitud_edit} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" id="New_Button1" href="javascript:void(0)" typeid="ib" >
+					<span class="glyphicon glyphicon-send"></span>
+							Enviar Solicitud			</a>
+</span>
 	 
 		{BEGIN back_button}
 <span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
@@ -1219,13 +1459,7 @@
 							Cancelar			</a>
 </span>
 {END close_button}
-		</div>			 
-				<div 
-	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
-	class="r-align-right r-ori-vert			col-md-6
-	
-">
-			</div>					</div>
+		</div>					</div>
 			</div>		
 {END below-grid_block}
 	</div>

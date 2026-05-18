@@ -46,15 +46,12 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelssolicitudes_vacaciones["Spanish"]["total_dias_habiles"] = "Total de días ";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["total_dias_habiles"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["total_dias_habiles"] = "";
-	$fieldLabelssolicitudes_vacaciones["Spanish"]["observacion"] = "Observación";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["observacion"] = "Observaciones adicionales";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["observacion"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["observacion"] = "";
 	$fieldLabelssolicitudes_vacaciones["Spanish"]["estado"] = "Estado";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["estado"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["estado"] = "";
-	$fieldLabelssolicitudes_vacaciones["Spanish"]["fecha_creacion"] = "Fecha Creación";
-	$fieldToolTipssolicitudes_vacaciones["Spanish"]["fecha_creacion"] = "";
-	$placeHolderssolicitudes_vacaciones["Spanish"]["fecha_creacion"] = "";
 	$fieldLabelssolicitudes_vacaciones["Spanish"]["usuario_creador"] = "Usuario Creador";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["usuario_creador"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["usuario_creador"] = "";
@@ -67,14 +64,33 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelssolicitudes_vacaciones["Spanish"]["nombre_completo"] = "Nombre Completo";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["nombre_completo"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["nombre_completo"] = "";
-	$fieldLabelssolicitudes_vacaciones["Spanish"]["per_ci"] = "C.I. Nº";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["per_ci"] = "🆔 Cédula de identidad";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["per_ci"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["per_ci"] = "";
-	$fieldLabelssolicitudes_vacaciones["Spanish"]["descripcion_dependencia"] = "Descripcion Dependencia";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["descripcion_dependencia"] = "🏛️ Dependencia";
 	$fieldToolTipssolicitudes_vacaciones["Spanish"]["descripcion_dependencia"] = "";
 	$placeHolderssolicitudes_vacaciones["Spanish"]["descripcion_dependencia"] = "";
-	$pageTitlessolicitudes_vacaciones["Spanish"]["add"] = "Formulario de Solicitud de Vacaciones";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["descripcion_tipo_vinculacion"] = "Tipo de Vinculación";
+	$fieldToolTipssolicitudes_vacaciones["Spanish"]["descripcion_tipo_vinculacion"] = "";
+	$placeHolderssolicitudes_vacaciones["Spanish"]["descripcion_tipo_vinculacion"] = "";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["fecha_solicitud"] = "Fecha Solicitud";
+	$fieldToolTipssolicitudes_vacaciones["Spanish"]["fecha_solicitud"] = "";
+	$placeHolderssolicitudes_vacaciones["Spanish"]["fecha_solicitud"] = "";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["email_jefe"] = "Email Jefe";
+	$fieldToolTipssolicitudes_vacaciones["Spanish"]["email_jefe"] = "";
+	$placeHolderssolicitudes_vacaciones["Spanish"]["email_jefe"] = "";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["email_jefe_id"] = "Email Jefe Id";
+	$fieldToolTipssolicitudes_vacaciones["Spanish"]["email_jefe_id"] = "";
+	$placeHolderssolicitudes_vacaciones["Spanish"]["email_jefe_id"] = "";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["nombre_completo_edit"] = "Nombre Completo Edit";
+	$fieldToolTipssolicitudes_vacaciones["Spanish"]["nombre_completo_edit"] = "";
+	$placeHolderssolicitudes_vacaciones["Spanish"]["nombre_completo_edit"] = "";
+	$fieldLabelssolicitudes_vacaciones["Spanish"]["descripcion_dependencia_edit"] = "Descripcion Dependencia Edit";
+	$fieldToolTipssolicitudes_vacaciones["Spanish"]["descripcion_dependencia_edit"] = "";
+	$placeHolderssolicitudes_vacaciones["Spanish"]["descripcion_dependencia_edit"] = "";
+	$pageTitlessolicitudes_vacaciones["Spanish"]["add"] = "FORMULARIO DE SOLICITUD DE VACACIONES";
 	$pageTitlessolicitudes_vacaciones["Spanish"]["view"] = "Solicitud Vacacion ID {%id}";
+	$pageTitlessolicitudes_vacaciones["Spanish"]["edit"] = "FORMULARIO DE SOLICITUD DE VACACIONES, EDITAR [{%id}]";
 	if (count($fieldToolTipssolicitudes_vacaciones["Spanish"]))
 		$tdatasolicitudes_vacaciones[".isUseToolTips"] = true;
 }
@@ -172,7 +188,7 @@ $tdatasolicitudes_vacaciones[".isUseAjaxSuggest"] = true;
 
 
 
-
+						
 
 $tdatasolicitudes_vacaciones[".ajaxCodeSnippetAdded"] = false;
 
@@ -203,11 +219,16 @@ $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "fecha_hasta";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "total_dias_habiles";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "observacion";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "estado";
-$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "fecha_creacion";
+$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "fecha_solicitud";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "usuario_creador";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "fecha_actualizacion";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "usuario_actualizacion";
 $tdatasolicitudes_vacaciones[".googleLikeFields"][] = "descripcion_dependencia";
+$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "descripcion_dependencia_edit";
+$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "descripcion_tipo_vinculacion";
+$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "email_jefe";
+$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "email_jefe_id";
+$tdatasolicitudes_vacaciones[".googleLikeFields"][] = "nombre_completo_edit";
 
 
 
@@ -241,7 +262,7 @@ $tdatasolicitudes_vacaciones[".strOrderBy"] = $tstrOrderBy;
 $tdatasolicitudes_vacaciones[".orderindexes"] = array();
 
 
-$tdatasolicitudes_vacaciones[".sqlHead"] = "SELECT sv.id,  	sv.id_funcionario,  	p.per_ci,  	p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  	sv.tipo_vinculacion,  	sv.dependencia_id,  	sv.fecha_desde,  	sv.fecha_hasta,  	sv.total_dias_habiles,  	sv.observacion,  	sv.estado,  	sv.fecha_creacion,  	sv.usuario_creador,  	sv.fecha_actualizacion,  	sv.usuario_actualizacion,  	'' AS descripcion_dependencia";
+$tdatasolicitudes_vacaciones[".sqlHead"] = "SELECT sv.id,  	sv.id_funcionario,  	p.per_ci,  	p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  	sv.tipo_vinculacion,  	sv.dependencia_id,  	sv.fecha_desde,  	sv.fecha_hasta,  	sv.total_dias_habiles,  	sv.observacion,  	sv.estado,  	sv.fecha_solicitud,  	sv.usuario_creador,  	sv.fecha_actualizacion,  	sv.usuario_actualizacion,  	'' AS descripcion_dependencia,  	'' AS descripcion_dependencia_edit,  	'' AS descripcion_tipo_vinculacion,  	'' AS email_jefe,  	'' AS email_jefe_id,  	'' AS nombre_completo_edit";
 $tdatasolicitudes_vacaciones[".sqlFrom"] = "FROM rrhh_permisos.solicitudes_vacaciones sv   		LEFT JOIN public.personales p ON sv.id_funcionario = p.per_cod";
 $tdatasolicitudes_vacaciones[".sqlWhereExpr"] = "";
 $tdatasolicitudes_vacaciones[".sqlTail"] = "";
@@ -627,7 +648,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -651,10 +672,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -764,7 +783,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -788,10 +807,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1234,7 +1251,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	$edata = array("EditFormat" => "Date");
 
 	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+		$edata["weekdayMessage"] = array("message" => "Invalid week day", "messageType" => "Text");
 	$edata["weekdays"] = "[]";
 
 
@@ -1243,7 +1260,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 
 
 
-	
+		$edata["IsRequired"] = true;
+
 	
 	
 	
@@ -1253,7 +1271,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 
 	
 	
-		$edata["DateEditType"] = 13;
+		$edata["DateEditType"] = 5;
 	$edata["InitialYearFactor"] = 100;
 	$edata["LastYearFactor"] = 10;
 
@@ -1266,7 +1284,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-	
+						$edata["validateAs"]["basicValidate"][] = "IsRequired";
+		
 	
 //	End validation
 
@@ -1373,7 +1392,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	$edata = array("EditFormat" => "Date");
 
 	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+		$edata["weekdayMessage"] = array("message" => "Invalid week day", "messageType" => "Text");
 	$edata["weekdays"] = "[]";
 
 
@@ -1382,7 +1401,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 
 
 
-	
+		$edata["IsRequired"] = true;
+
 	
 	
 	
@@ -1392,7 +1412,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 
 	
 	
-		$edata["DateEditType"] = 13;
+		$edata["DateEditType"] = 5;
 	$edata["InitialYearFactor"] = 100;
 	$edata["LastYearFactor"] = 10;
 
@@ -1405,7 +1425,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-	
+						$edata["validateAs"]["basicValidate"][] = "IsRequired";
+		
 	
 //	End validation
 
@@ -1869,14 +1890,14 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 
 	$tdatasolicitudes_vacaciones["estado"] = $fdata;
 		$tdatasolicitudes_vacaciones[".searchableFields"][] = "estado";
-//	fecha_creacion
+//	fecha_solicitud
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 12;
-	$fdata["strName"] = "fecha_creacion";
-	$fdata["GoodName"] = "fecha_creacion";
+	$fdata["strName"] = "fecha_solicitud";
+	$fdata["GoodName"] = "fecha_solicitud";
 	$fdata["ownerTable"] = "rrhh_permisos.solicitudes_vacaciones";
-	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","fecha_creacion");
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","fecha_solicitud");
 	$fdata["FieldType"] = 135;
 
 
@@ -1884,13 +1905,13 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "fecha_creacion";
+		$fdata["strField"] = "fecha_solicitud";
 
-		$fdata["sourceSingle"] = "fecha_creacion";
+		$fdata["sourceSingle"] = "fecha_solicitud";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "sv.fecha_creacion";
+	$fdata["FullName"] = "sv.fecha_solicitud";
 
 	
 	
@@ -1927,7 +1948,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Date");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "Invalid week day", "messageType" => "Text");
@@ -1949,10 +1970,7 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 
 	
 	
-		$edata["DateEditType"] = 5;
-	$edata["InitialYearFactor"] = 100;
-	$edata["LastYearFactor"] = 10;
-
+	
 	
 	
 	
@@ -2006,8 +2024,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatasolicitudes_vacaciones["fecha_creacion"] = $fdata;
-		$tdatasolicitudes_vacaciones[".searchableFields"][] = "fecha_creacion";
+	$tdatasolicitudes_vacaciones["fecha_solicitud"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "fecha_solicitud";
 //	usuario_creador
 //	Custom field settings
 	$fdata = array();
@@ -2480,6 +2498,702 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
+	$edata = array("EditFormat" => "Readonly");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatasolicitudes_vacaciones["descripcion_dependencia"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "descripcion_dependencia";
+//	descripcion_dependencia_edit
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 17;
+	$fdata["strName"] = "descripcion_dependencia_edit";
+	$fdata["GoodName"] = "descripcion_dependencia_edit";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","descripcion_dependencia_edit");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "descripcion_dependencia_edit";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "''";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatasolicitudes_vacaciones["descripcion_dependencia_edit"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "descripcion_dependencia_edit";
+//	descripcion_tipo_vinculacion
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 18;
+	$fdata["strName"] = "descripcion_tipo_vinculacion";
+	$fdata["GoodName"] = "descripcion_tipo_vinculacion";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","descripcion_tipo_vinculacion");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "descripcion_tipo_vinculacion";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "''";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Readonly");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatasolicitudes_vacaciones["descripcion_tipo_vinculacion"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "descripcion_tipo_vinculacion";
+//	email_jefe
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 19;
+	$fdata["strName"] = "email_jefe";
+	$fdata["GoodName"] = "email_jefe";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","email_jefe");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "email_jefe";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "''";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Lookup wizard");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+// Begin Lookup settings
+		$edata["LookupType"] = 0;
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+	
+		$edata["LookupValues"] = array();
+
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
+
+
+		$edata["IsRequired"] = true;
+
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+						$edata["validateAs"]["basicValidate"][] = "IsRequired";
+		
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+		$fdata["filterTotalFields"] = "id";
+		$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatasolicitudes_vacaciones["email_jefe"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "email_jefe";
+//	email_jefe_id
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 20;
+	$fdata["strName"] = "email_jefe_id";
+	$fdata["GoodName"] = "email_jefe_id";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","email_jefe_id");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "email_jefe_id";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "''";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatasolicitudes_vacaciones["email_jefe_id"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "email_jefe_id";
+//	nombre_completo_edit
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 21;
+	$fdata["strName"] = "nombre_completo_edit";
+	$fdata["GoodName"] = "nombre_completo_edit";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_solicitudes_vacaciones","nombre_completo_edit");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "nombre_completo_edit";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "''";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
 	$edata = array("EditFormat" => "Text field");
 
 	
@@ -2558,8 +3272,8 @@ $tdatasolicitudes_vacaciones[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatasolicitudes_vacaciones["descripcion_dependencia"] = $fdata;
-		$tdatasolicitudes_vacaciones[".searchableFields"][] = "descripcion_dependencia";
+	$tdatasolicitudes_vacaciones["nombre_completo_edit"] = $fdata;
+		$tdatasolicitudes_vacaciones[".searchableFields"][] = "nombre_completo_edit";
 
 
 $tables_data["rrhh_permisos.solicitudes_vacaciones"]=&$tdatasolicitudes_vacaciones;
@@ -2604,7 +3318,7 @@ function createSqlQuery_solicitudes_vacaciones()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "sv.id,  	sv.id_funcionario,  	p.per_ci,  	p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  	sv.tipo_vinculacion,  	sv.dependencia_id,  	sv.fecha_desde,  	sv.fecha_hasta,  	sv.total_dias_habiles,  	sv.observacion,  	sv.estado,  	sv.fecha_creacion,  	sv.usuario_creador,  	sv.fecha_actualizacion,  	sv.usuario_actualizacion,  	'' AS descripcion_dependencia";
+$proto0["m_strFieldList"] = "sv.id,  	sv.id_funcionario,  	p.per_ci,  	p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  	sv.tipo_vinculacion,  	sv.dependencia_id,  	sv.fecha_desde,  	sv.fecha_hasta,  	sv.total_dias_habiles,  	sv.observacion,  	sv.estado,  	sv.fecha_solicitud,  	sv.usuario_creador,  	sv.fecha_actualizacion,  	sv.usuario_actualizacion,  	'' AS descripcion_dependencia,  	'' AS descripcion_dependencia_edit,  	'' AS descripcion_tipo_vinculacion,  	'' AS email_jefe,  	'' AS email_jefe_id,  	'' AS nombre_completo_edit";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.solicitudes_vacaciones sv   		LEFT JOIN public.personales p ON sv.id_funcionario = p.per_cod";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -2798,12 +3512,12 @@ $obj = new SQLFieldListItem($proto26);
 $proto0["m_fieldlist"][]=$obj;
 						$proto28=array();
 			$obj = new SQLField(array(
-	"m_strName" => "fecha_creacion",
+	"m_strName" => "fecha_solicitud",
 	"m_strTable" => "sv",
 	"m_srcTableName" => "rrhh_permisos.solicitudes_vacaciones"
 ));
 
-$proto28["m_sql"] = "sv.fecha_creacion";
+$proto28["m_sql"] = "sv.fecha_solicitud";
 $proto28["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
 $proto28["m_expr"]=$obj;
 $proto28["m_alias"] = "";
@@ -2864,115 +3578,175 @@ $proto36["m_alias"] = "descripcion_dependencia";
 $obj = new SQLFieldListItem($proto36);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto38=array();
-$proto38["m_link"] = "SQLL_MAIN";
-			$proto39=array();
-$proto39["m_strName"] = "rrhh_permisos.solicitudes_vacaciones";
-$proto39["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
-$proto39["m_columns"] = array();
-$proto39["m_columns"][] = "id_funcionario";
-$proto39["m_columns"][] = "tipo_vinculacion";
-$proto39["m_columns"][] = "dependencia_id";
-$proto39["m_columns"][] = "fecha_desde";
-$proto39["m_columns"][] = "fecha_hasta";
-$proto39["m_columns"][] = "total_dias_habiles";
-$proto39["m_columns"][] = "observacion";
-$proto39["m_columns"][] = "estado";
-$proto39["m_columns"][] = "fecha_creacion";
-$proto39["m_columns"][] = "usuario_creador";
-$proto39["m_columns"][] = "fecha_actualizacion";
-$proto39["m_columns"][] = "usuario_actualizacion";
-$proto39["m_columns"][] = "id";
-$obj = new SQLTable($proto39);
+						$proto38=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
 
-$proto38["m_table"] = $obj;
-$proto38["m_sql"] = "rrhh_permisos.solicitudes_vacaciones sv";
-$proto38["m_alias"] = "sv";
+$proto38["m_sql"] = "''";
 $proto38["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
-$proto40=array();
-$proto40["m_sql"] = "";
-$proto40["m_uniontype"] = "SQLL_UNKNOWN";
+$proto38["m_expr"]=$obj;
+$proto38["m_alias"] = "descripcion_dependencia_edit";
+$obj = new SQLFieldListItem($proto38);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto40=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto40["m_sql"] = "''";
+$proto40["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto40["m_expr"]=$obj;
+$proto40["m_alias"] = "descripcion_tipo_vinculacion";
+$obj = new SQLFieldListItem($proto40);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto42=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto42["m_sql"] = "''";
+$proto42["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto42["m_expr"]=$obj;
+$proto42["m_alias"] = "email_jefe";
+$obj = new SQLFieldListItem($proto42);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto44=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto44["m_sql"] = "''";
+$proto44["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto44["m_expr"]=$obj;
+$proto44["m_alias"] = "email_jefe_id";
+$obj = new SQLFieldListItem($proto44);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto46=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto46["m_sql"] = "''";
+$proto46["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto46["m_expr"]=$obj;
+$proto46["m_alias"] = "nombre_completo_edit";
+$obj = new SQLFieldListItem($proto46);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto48=array();
+$proto48["m_link"] = "SQLL_MAIN";
+			$proto49=array();
+$proto49["m_strName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto49["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto49["m_columns"] = array();
+$proto49["m_columns"][] = "id_funcionario";
+$proto49["m_columns"][] = "tipo_vinculacion";
+$proto49["m_columns"][] = "dependencia_id";
+$proto49["m_columns"][] = "fecha_desde";
+$proto49["m_columns"][] = "fecha_hasta";
+$proto49["m_columns"][] = "total_dias_habiles";
+$proto49["m_columns"][] = "observacion";
+$proto49["m_columns"][] = "estado";
+$proto49["m_columns"][] = "fecha_solicitud";
+$proto49["m_columns"][] = "usuario_creador";
+$proto49["m_columns"][] = "fecha_actualizacion";
+$proto49["m_columns"][] = "usuario_actualizacion";
+$proto49["m_columns"][] = "id";
+$obj = new SQLTable($proto49);
+
+$proto48["m_table"] = $obj;
+$proto48["m_sql"] = "rrhh_permisos.solicitudes_vacaciones sv";
+$proto48["m_alias"] = "sv";
+$proto48["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto50=array();
+$proto50["m_sql"] = "";
+$proto50["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto40["m_column"]=$obj;
-$proto40["m_contained"] = array();
-$proto40["m_strCase"] = "";
-$proto40["m_havingmode"] = false;
-$proto40["m_inBrackets"] = false;
-$proto40["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto40);
+$proto50["m_column"]=$obj;
+$proto50["m_contained"] = array();
+$proto50["m_strCase"] = "";
+$proto50["m_havingmode"] = false;
+$proto50["m_inBrackets"] = false;
+$proto50["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto50);
 
-$proto38["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto38);
+$proto48["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto48);
 
 $proto0["m_fromlist"][]=$obj;
-												$proto42=array();
-$proto42["m_link"] = "SQLL_LEFTJOIN";
-			$proto43=array();
-$proto43["m_strName"] = "public.personales";
-$proto43["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
-$proto43["m_columns"] = array();
-$proto43["m_columns"][] = "per_cod";
-$proto43["m_columns"][] = "categoria_cat_codigo";
-$proto43["m_columns"][] = "departamentos_dep_cod";
-$proto43["m_columns"][] = "dependencias_dep_cod";
-$proto43["m_columns"][] = "paises_pai_cod";
-$proto43["m_columns"][] = "ciudades_ciu_cod";
-$proto43["m_columns"][] = "profesiones_pro_cod";
-$proto43["m_columns"][] = "per_profesional";
-$proto43["m_columns"][] = "tipo_funcionario_tfun_cod";
-$proto43["m_columns"][] = "per_institucion_origen";
-$proto43["m_columns"][] = "cargos_car_cod";
-$proto43["m_columns"][] = "per_nombre";
-$proto43["m_columns"][] = "per_apellido";
-$proto43["m_columns"][] = "per_ci";
-$proto43["m_columns"][] = "per_sexo";
-$proto43["m_columns"][] = "per_nacimiento";
-$proto43["m_columns"][] = "per_est_civil";
-$proto43["m_columns"][] = "per_gruposangre";
-$proto43["m_columns"][] = "per_pcd";
-$proto43["m_columns"][] = "per_domicilio";
-$proto43["m_columns"][] = "per_barrio";
-$proto43["m_columns"][] = "per_teleparticular";
-$proto43["m_columns"][] = "per_telecelular";
-$proto43["m_columns"][] = "per_email_part";
-$proto43["m_columns"][] = "per_email_instit";
-$proto43["m_columns"][] = "per_ruc";
-$proto43["m_columns"][] = "per_contacto_eme";
-$proto43["m_columns"][] = "per_tele_emer";
-$proto43["m_columns"][] = "per_ingreso";
-$proto43["m_columns"][] = "per_nombramiento";
-$proto43["m_columns"][] = "per_estado";
-$proto43["m_columns"][] = "per_usuario";
-$proto43["m_columns"][] = "per_sede";
-$obj = new SQLTable($proto43);
+												$proto52=array();
+$proto52["m_link"] = "SQLL_LEFTJOIN";
+			$proto53=array();
+$proto53["m_strName"] = "public.personales";
+$proto53["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto53["m_columns"] = array();
+$proto53["m_columns"][] = "per_cod";
+$proto53["m_columns"][] = "categoria_cat_codigo";
+$proto53["m_columns"][] = "departamentos_dep_cod";
+$proto53["m_columns"][] = "dependencias_dep_cod";
+$proto53["m_columns"][] = "paises_pai_cod";
+$proto53["m_columns"][] = "ciudades_ciu_cod";
+$proto53["m_columns"][] = "profesiones_pro_cod";
+$proto53["m_columns"][] = "per_profesional";
+$proto53["m_columns"][] = "tipo_funcionario_tfun_cod";
+$proto53["m_columns"][] = "per_institucion_origen";
+$proto53["m_columns"][] = "cargos_car_cod";
+$proto53["m_columns"][] = "per_nombre";
+$proto53["m_columns"][] = "per_apellido";
+$proto53["m_columns"][] = "per_ci";
+$proto53["m_columns"][] = "per_sexo";
+$proto53["m_columns"][] = "per_nacimiento";
+$proto53["m_columns"][] = "per_est_civil";
+$proto53["m_columns"][] = "per_gruposangre";
+$proto53["m_columns"][] = "per_pcd";
+$proto53["m_columns"][] = "per_domicilio";
+$proto53["m_columns"][] = "per_barrio";
+$proto53["m_columns"][] = "per_teleparticular";
+$proto53["m_columns"][] = "per_telecelular";
+$proto53["m_columns"][] = "per_email_part";
+$proto53["m_columns"][] = "per_email_instit";
+$proto53["m_columns"][] = "per_ruc";
+$proto53["m_columns"][] = "per_contacto_eme";
+$proto53["m_columns"][] = "per_tele_emer";
+$proto53["m_columns"][] = "per_ingreso";
+$proto53["m_columns"][] = "per_nombramiento";
+$proto53["m_columns"][] = "per_estado";
+$proto53["m_columns"][] = "per_usuario";
+$proto53["m_columns"][] = "per_sede";
+$obj = new SQLTable($proto53);
 
-$proto42["m_table"] = $obj;
-$proto42["m_sql"] = "LEFT JOIN public.personales p ON sv.id_funcionario = p.per_cod";
-$proto42["m_alias"] = "p";
-$proto42["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
-$proto44=array();
-$proto44["m_sql"] = "p.per_cod = sv.id_funcionario";
-$proto44["m_uniontype"] = "SQLL_UNKNOWN";
+$proto52["m_table"] = $obj;
+$proto52["m_sql"] = "LEFT JOIN public.personales p ON sv.id_funcionario = p.per_cod";
+$proto52["m_alias"] = "p";
+$proto52["m_srcTableName"] = "rrhh_permisos.solicitudes_vacaciones";
+$proto54=array();
+$proto54["m_sql"] = "p.per_cod = sv.id_funcionario";
+$proto54["m_uniontype"] = "SQLL_UNKNOWN";
 						$obj = new SQLField(array(
 	"m_strName" => "per_cod",
 	"m_strTable" => "p",
 	"m_srcTableName" => "rrhh_permisos.solicitudes_vacaciones"
 ));
 
-$proto44["m_column"]=$obj;
-$proto44["m_contained"] = array();
-$proto44["m_strCase"] = "= sv.id_funcionario";
-$proto44["m_havingmode"] = false;
-$proto44["m_inBrackets"] = false;
-$proto44["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto44);
+$proto54["m_column"]=$obj;
+$proto54["m_contained"] = array();
+$proto54["m_strCase"] = "= sv.id_funcionario";
+$proto54["m_havingmode"] = false;
+$proto54["m_inBrackets"] = false;
+$proto54["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto54);
 
-$proto42["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto42);
+$proto52["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto52);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -2988,7 +3762,7 @@ $queryData_solicitudes_vacaciones = createSqlQuery_solicitudes_vacaciones();
 	
 		;
 
-																
+																					
 
 $tdatasolicitudes_vacaciones[".sqlquery"] = $queryData_solicitudes_vacaciones;
 
