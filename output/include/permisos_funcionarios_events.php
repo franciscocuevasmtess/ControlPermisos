@@ -211,6 +211,15 @@ $pageObject->hideItem("add_save"); // Oculta el boton Guardar que trae por defec
 
 $pageObject->hideItem("text_email_jefe"); // Oculta el texto de email_jefe.
 
+$pageObject->hideItem("add_sex_descripcion"); // Oculta el campo sex_descripcion
+
+
+
+
+
+
+
+
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
 
@@ -227,12 +236,14 @@ $sqlDependencia = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta 
 																tf.tfun_descri AS descripcion_tipo_funcionario,
 																TO_CHAR(AGE(CURRENT_DATE, p.per_ingreso), 'YY \"años, \" MM \"meses y \" DD \"días\"') AS antiguedad_laboral,
 																c.car_descri,
-																s.sed_descripcion
+																s.sed_descripcion,
+																s2.sex_descripcion
 												FROM personales p
 													LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
 													LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
 													LEFT JOIN cargos c ON c.car_cod = p.cargos_car_cod
 													LEFT JOIN sedes s ON s.sed_cod = p.per_sede
+													LEFT JOIN sexos s2 ON p.per_sexo::integer = s2.sex_cod
 												WHERE p.per_cod = $userPersonal";
 //debug_to_console("sqlDependencia: " . $sqlDependencia);
 $resultDependencia = CustomQuery($sqlDependencia);
@@ -247,21 +258,11 @@ $pageObject->setProxyValue("descripcion_tipo_funcionario", $dataDependencia["des
 $pageObject->setProxyValue("antiguedad_laboral", $dataDependencia["antiguedad_laboral"]);
 $pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
 $pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
-
+$pageObject->setProxyValue("sex_descripcion", $dataDependencia["sex_descripcion"]);
 
 
 
 // Query para obtener TODOS los jefes posibles del usuario logueado.
-/*$sqlEmail = "
-	SELECT pe.per_cod,
-		pe.per_email_instit,
-		car.car_descri
-	FROM public.personales pe
-		JOIN public.cargos car ON car.car_cod = pe.cargos_car_cod
-		JOIN public.personales pe1 ON pe1.dependencias_dep_cod = pe.dependencias_dep_cod
-	WHERE car.car_cod IN (4, 5)
-	AND pe1.per_cod = {$userPersonal}
-";*/
 $sqlEmail = "
 	SELECT public.vw_personales_superiores.superior_cod AS per_cod, 
 					public.vw_personales_superiores.superior_email AS per_email_instit, 
@@ -282,9 +283,6 @@ while ($row = db_fetch_array($resultEmail)) {
 }
 // 👉 Pasamos TODO como JSON al frontend(JavaScript Onload event)
 $pageObject->setProxyValue("jefes_emails", json_encode($jefes));
-
-
-
 
 
 // Query para obtener el conteo de cantidad de permisos por mes.
@@ -413,8 +411,8 @@ $id_funcionario = $values["id_funcionario"]; // per_cod
 $fecha_desde = $values["fecha_desde"];
 $hora_desde = $values["hora_desde"];
 $motivo_id = $values["motivo_id"];
-$comision_servicios = $values["comision_servicios"];
-$comision_servicios_descripcion = $values["comision_servicios_descripcion"];
+//$comision_servicios = $values["comision_servicios"];
+//$comision_servicios_descripcion = $values["comision_servicios_descripcion"];
 $observacion = $values["observacion"];
 $tipo_vinculacion = $values["tipo_vinculacion"];
 $nombre_completo = $values["nombre_completo"];
@@ -448,23 +446,21 @@ try {
 	--------------------------------------------*/
 	$sqlInsertPermisosFuncionarios = DB::PrepareSQL(
 		"INSERT INTO rrhh_permisos.permisos_funcionarios (id_funcionario,
-																															tipo_vinculacion,
-																															dependencia_id,
-																															fecha_desde,
-																															hora_desde,
-																															fecha_hasta,
-																															hora_hasta,
-																															motivo_id,
-																															comision_servicios,
-																															comision_servicios_descripcion,
-																															observacion,
-																															estado,
-																															archivo_adjunto,
-																															solicitado_por,
-																															fecha_solicitud,
-																															resultado_decision,
-																															rrhh_resultado_decision) 
-			VALUES (':1',':2',':3',':4',':5',':6',':7',':8',':9',':10',':11',':12',':13',':14',NOW(),':15',':16')
+																														tipo_vinculacion,
+																														dependencia_id,
+																														fecha_desde,
+																														hora_desde,
+																														fecha_hasta,
+																														hora_hasta,
+																														motivo_id,
+																														observacion,
+																														estado,
+																														archivo_adjunto,
+																														solicitado_por,
+																														fecha_solicitud,
+																														resultado_decision,
+																														rrhh_resultado_decision) 
+		VALUES (':1',':2',':3',':4',':5',':6',':7',':8',':9',':10',':11',':12',NOW(),':13',':14')
 				RETURNING id",
 				$id_funcionario,
 				$tipo_vinculacion,
@@ -474,8 +470,6 @@ try {
 				$fecha_hasta,
 				$hora_hasta,
 				$motivo_id,
-				$comision_servicios,
-				$comision_servicios_descripcion,
 				$observacion,
 				$estado,
 				$archivo_adjunto,
@@ -484,11 +478,11 @@ try {
 				$estado
 	);
 	//debug_to_console($sqlInsertPermisosFuncionarios);
-
+	
 	$resultPermisosFuncionarios = DB::Query($sqlInsertPermisosFuncionarios);
 	$row_permisos_funcionarios = $resultPermisosFuncionarios->fetchAssoc();
 	$permiso_funcionario_id = $row_permisos_funcionarios['id'];
-	
+	//debug_to_console("Permiso generado con ID: ".$permiso_funcionario_id);
 	
 	// ============================================================================
 	// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
@@ -774,33 +768,6 @@ try {
 																										comision_servicios_descripcion = ':9',
 																										observacion = ':10',
 																										fecha_actualizacion = ':11',
-																										archivo_adjunto = ':12'
-																									WHERE id = ':13'",
-																										$values["tipo_vinculacion"],
-																										$values["dependencia_id"],
-																										$values["fecha_desde"],
-																										$values["hora_desde"],
-																										$values["fecha_hasta"],
-																										$values["hora_hasta"],
-																										$values["motivo_id"],
-																										$values["comision_servicios"],
-																										$values["comision_servicios_descripcion"],
-																										$values["observacion"],
-																										now(),
-																										$values["archivo_adjunto"],
-																										$values["id"]);*/
-	$update_permiso_func = DB::PrepareSQL("UPDATE rrhh_permisos.permisos_funcionarios 
-																									SET tipo_vinculacion = ':1',
-																										dependencia_id = ':2',
-																										fecha_desde = ':3',
-																										hora_desde = ':4',
-																										fecha_hasta = ':5',
-																										hora_hasta = ':6',
-																										motivo_id = ':7',
-																										comision_servicios = ':8',
-																										comision_servicios_descripcion = ':9',
-																										observacion = ':10',
-																										fecha_actualizacion = ':11',
 																										archivo_adjunto = ':12',
 																										intentos_correccion = ':13',
 																										rrhh_resultado_decision = ':14',
@@ -815,6 +782,35 @@ try {
 																										$values["motivo_id"],
 																										$values["comision_servicios"],
 																										$values["comision_servicios_descripcion"],
+																										$values["observacion"],
+																										now(),
+																										$values["archivo_adjunto"],
+																										$values["intentos_correccion"],
+																										$values["rrhh_resultado_decision"],
+																										$values["rrhh_motivo_rechazo"],
+																										$values["id"]);*/
+	$update_permiso_func = DB::PrepareSQL("UPDATE rrhh_permisos.permisos_funcionarios 
+																									SET tipo_vinculacion = ':1',
+																										dependencia_id = ':2',
+																										fecha_desde = ':3',
+																										hora_desde = ':4',
+																										fecha_hasta = ':5',
+																										hora_hasta = ':6',
+																										motivo_id = ':7',
+																										observacion = ':8',
+																										fecha_actualizacion = ':9',
+																										archivo_adjunto = ':10',
+																										intentos_correccion = ':11',
+																										rrhh_resultado_decision = ':12',
+																										rrhh_motivo_rechazo = ':13'
+																									WHERE id = ':14'",
+																										$values["tipo_vinculacion"],
+																										$values["dependencia_id"],
+																										$values["fecha_desde"],
+																										$values["hora_desde"],
+																										$values["fecha_hasta"],
+																										$values["hora_hasta"],
+																										$values["motivo_id"],
 																										$values["observacion"],
 																										now(),
 																										$values["archivo_adjunto"],
@@ -1004,6 +1000,16 @@ $pageObject->hideItem("edit_decidido_por"); // Oculta el campo decidido_por
 
 $pageObject->hideItem("edit_id_funcionario"); // Oculta el campo id_funcionario
 
+$pageObject->hideItem("edit_sex_descripcion"); // Oculta el campo sex_descripcion
+
+
+$pageObject->hideItem("text6");
+$pageObject->hideItem("edit_comision_servicios");
+$pageObject->hideItem("edit_comision_servicios_descripcion");
+$pageObject->hideItem("text7");
+
+
+
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
 
@@ -1020,12 +1026,14 @@ $sqlDependencia = "SELECT d.dep_descripcion || ' - ' || d.dep_descripcion_corta 
 																tf.tfun_descri AS descripcion_tipo_funcionario,
 																TO_CHAR(AGE(CURRENT_DATE, p.per_ingreso), 'YY \"años, \" MM \"meses y \" DD \"días\"') AS antiguedad_laboral,
 																c.car_descri,
-																s.sed_descripcion
+																s.sed_descripcion,
+																s2.sex_descripcion
 												FROM personales p
 													LEFT JOIN dependencias d ON d.dep_cod = p.dependencias_dep_cod
 													LEFT JOIN tipo_funcionario tf ON tf.tfun_cod = p.tipo_funcionario_tfun_cod
 													LEFT JOIN cargos c ON c.car_cod = p.cargos_car_cod
 													LEFT JOIN sedes s ON s.sed_cod = p.per_sede
+													LEFT JOIN sexos s2 ON p.per_sexo::integer = s2.sex_cod
 												WHERE p.per_cod = $userPersonal";
 $resultDependencia = CustomQuery($sqlDependencia);
 $dataDependencia = db_fetch_array($resultDependencia);
@@ -1040,17 +1048,25 @@ $pageObject->setProxyValue("descripcion_tipo_funcionario", $dataDependencia["des
 $pageObject->setProxyValue("antiguedad_laboral", $dataDependencia["antiguedad_laboral"]);
 $pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
 $pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
+$pageObject->setProxyValue("sex_descripcion", $dataDependencia["sex_descripcion"]);
 
 // Query para obtener TODOS los jefes posibles
+//$sqlEmail = "
+//	SELECT pe.per_cod,
+//		pe.per_email_instit,
+//		car.car_descri
+//	FROM public.personales pe
+//		JOIN public.cargos car ON car.car_cod = pe.cargos_car_cod
+//		JOIN public.personales pe1 ON pe1.dependencias_dep_cod = pe.dependencias_dep_cod
+//	WHERE car.car_cod IN (4, 5)
+//	AND pe1.per_cod = {$userPersonal}
+//";
 $sqlEmail = "
-	SELECT pe.per_cod,
-		pe.per_email_instit,
-		car.car_descri
-	FROM public.personales pe
-		JOIN public.cargos car ON car.car_cod = pe.cargos_car_cod
-		JOIN public.personales pe1 ON pe1.dependencias_dep_cod = pe.dependencias_dep_cod
-	WHERE car.car_cod IN (4, 5)
-	AND pe1.per_cod = {$userPersonal}
+	SELECT public.vw_personales_superiores.superior_cod AS per_cod, 
+					public.vw_personales_superiores.superior_email AS per_email_instit, 
+					public.vw_personales_superiores.cargo_superior AS car_descri
+	FROM public.vw_personales_superiores
+	WHERE public.vw_personales_superiores.funcionario_cod = {$userPersonal}
 ";
 $resultEmail = CustomQuery($sqlEmail);
 $jefes = array();
@@ -1668,146 +1684,22 @@ if (!empty($faltantesFormulario)) {
 // FIN VALIDACIÓN DE CAMPOS DEL FORMULARIO
 
 
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-// VALIDACIÓN LÍMITE MENSUAL, LÍMITE ANUAL, TIEMPO DE PRESENTACIÓN (24h o 48h)
-
-/**
- * ============================================================
- * 📌 OBTENER DATOS DEL TIPO DE PERMISO
- * ============================================================
- */
 $motivo_id = $values["motivo_id"];
-debug_to_console("motivo_id: " . $motivo_id);
+//debug_to_console("motivo_id: " . $motivo_id);
 
 // Obtener la descripcion del tipo de permiso para un mensaje más claro para el usuario.
 $sqlMotivoDesc = "SELECT * 
-											FROM public.tipos_ocurrencias 
-											WHERE tip_cod = $motivo_id";
+										FROM public.tipos_ocurrencias 
+										WHERE tip_cod = $motivo_id";
 $rsMotivoDesc = DB::Query($sqlMotivoDesc);
 $dataMotivoDesc = $rsMotivoDesc->fetchAssoc();
 $tip_descripcion = $dataMotivoDesc["tip_descripcion"];
 $tip_dias = $dataMotivoDesc["tip_dias"];
 $tip_cantidad_maxima_mes = $dataMotivoDesc["tip_cantidad_maxima_mes"];
 $tip_cantidad_maxima_anho = $dataMotivoDesc["tip_cantidad_maxima_anho"];
-debug_to_console("tip_descripcion: " . $tip_descripcion . ", tip_dias: " . $tip_dias . ", tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . ", tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
-
-/*
- * 🔧 VALIDACION DE LÍMITE MENSUAL 
- * Valida si un funcionario ya alcanzó el límite máximo de permisos permitidos 
- * para un tipo específico en el mes actual.
- *
- * Filtra por el tipo de permiso (ej: médico, personal, duelo).
- * Filtra por el empleado específico que está solicitando.
- * Compara que el mes de fecha_desde sea igual al mes actual. Esto 
- * cuenta solo los permisos del mes en curso, sin importar el día exacto.
-*/
-
-// 🔧 PASO 1 — Obtener configuración
-//$sql = "SELECT * FROM rrhh_permisos.parametros_permisos WHERE tip_cod::int = $motivo_id AND par_estado = 'ACTIVO'";
-//$sql = "SELECT * 
-//					FROM public.tipos_ocurrencias 
-//					WHERE tip_cod = $motivo_id";
-//debug_to_console("sql: " . $sql);
-//$rs = DB::Query($sql);
-//$config = $rs->fetchAssoc();
-//debug_to_console("tip_cod: " . $config["tip_cod"]);
-
-
-// 🔧 PASO 2 — VALIDAR LÍMITE MENSUAL
-//$sqlMes = "SELECT COUNT(*) as count_total_permisos_mes
-//						FROM rrhh_permisos.permisos_funcionarios
-//						WHERE motivo_id::int = $motivo_id
-//						AND id_funcionario = " . $values["id_funcionario"]."
-//						AND date_trunc('month', fecha_desde) = date_trunc('month', CURRENT_DATE)";
-//debug_to_console("sqlMes: " . $sqlMes);
-//$rsMes = DB::Query($sqlMes);
-//$dataMes = $rsMes->fetchAssoc();
-//debug_to_console("dataMesTotal: " . $dataMes["count_total_permisos_mes"]);
-
-//if ($config["tip_cantidad_maxima_mes"] && $dataMes["count_total_permisos_mes"] >= $config["tip_cantidad_maxima_mes"]) {
-//	$usados = (int)$dataMes["count_total_permisos_mes"];
-//	$maximo = (int)$config["tip_cantidad_maxima_mes"];
-//	$restantes = max(0, $maximo - $usados);
-
-	// Calcular cuándo se reinicia el límite (primer día del próximo mes)
-//	$reinicia = date('d/m/Y', strtotime('first day of next month'));
-	
-	// ✅ Mensaje amigable y completo
-//	$message = generarMensajeError(
-//		"📋 <strong>Límite mensual alcanzado[$maximo]</strong>",
-//		"Ya utilizaste <strong>$usados de $maximo</strong> permisos del tipo: <em>'$tip_descripcion'</em> este mes.<br>"
-//		. ($restantes > 0 
-//			? "Te quedan <strong>$restantes</strong> disponible(s)." 
-//			: "No te quedan permisos disponibles de este tipo para este mes.")
-//			. "<br><br>"
-//			. "🗓️ El límite se reiniciará el: <strong>$reinicia</strong><br>"
-//			. "💡 Puedes solicitar otro tipo de permiso si lo necesitas.",
-//		[]
-//	);
-	
-//	return false;
-//}
-
-// 🔧 PASO 3 — VALIDAR LÍMITE ANUAL
-//$sqlAnho = "SELECT COUNT(*) as count_total_permisos_anho
-//							FROM rrhh_permisos.permisos_funcionarios 
-//							WHERE motivo_id::int = $motivo_id 
-//							AND id_funcionario = " . $values["id_funcionario"]." 
-//							AND date_part('year', fecha_desde) = date_part('year', CURRENT_DATE)";
-//debug_to_console("sqlAnho: " . $sqlAnho);
-//$rsAnho = DB::Query($sqlAnho);
-//$dataAnho = $rsAnho->fetchAssoc();
-//debug_to_console("dataAnhoTotal: " . $dataAnho["count_total_permisos_anho"]);
-
-//if ($config["tip_cantidad_maxima_anho"] && $dataAnho["count_total_permisos_anho"] >= $config["tip_cantidad_maxima_anho"]) {
-//    $usadosAnho = (int)$dataAnho["count_total_permisos_anho"];
-//		$maximoAnho = (int)$config["tip_cantidad_maxima_anho"];
-//		$restantesAnho = max(0, $maximoAnho - $usadosAnho);
-	
-	// ✅ Mensaje amigable y completo
-//	$message = generarMensajeError(
-//		"📋 <strong>Límite anual alcanzado[$maximoAnho]</strong>",
-//		"Ya utilizaste <strong>$usadosAnho de $maximoAnho</strong> permisos del tipo: <em>'$tip_descripcion'</em> este año.<br>"
-//		. ($restantesAnho > 0 
-//			? "Te quedan <strong>$restantesAnho</strong> disponible(s)." 
-//			: "No te quedan permisos disponibles de este tipo para este año.")
-//			. "<br><br>"
-//			. "💡 Puedes solicitar otro tipo de permiso si lo necesitas.",
-//		[]
-//	);
-	
-//	return false;
-//}
-
-// 🔧 PASO 4 — VALIDAR TIEMPO DE PRESENTACIÓN (24h o 48h)
-// ###IMPORTANTE### ESTA VALIDACION DEBO SEGUIR REVISANDO PORQUE LA PRESENTACION EN ALGUNOS CASOS DICE POSTERIOR AL EVENTO O AL REINTEGRO
-//ENTONCES COMO PUEDO SABER ESO, CON LA FECHA DE MARCACION...
-//$fechaPermiso = new DateTime($values["fecha_desde"]);
-//$hoy = new DateTime();
-//$diffHoras = ($hoy->getTimestamp() - $fechaPermiso->getTimestamp()) / 3600;
-
-//if ($config["par_tiempo_presentacion_horas"] && $diffHoras > $config["par_tiempo_presentacion_horas"]) {
-//	$maximoTiempoPresentacionHoras = (int)$config["par_tiempo_presentacion_horas"];
-//	$maximoTiempoPresentacionHorasDescripcion = $config["par_tiempo_presentacion_horas_descripcion"];
-//	//debug_to_console("maximoTiempoPresentacionHoras: " . $maximoTiempoPresentacionHoras . " maximoTiempoPresentacionHorasDescripcion: " . $maximoTiempoPresentacionHorasDescripcion);
-	
-	// ✅ Mensaje amigable y completo
-//	$message = generarMensajeError(
-//		"📋 <strong>Límite de tiempo de presentacion alcanzado[$maximoTiempoPresentacionHoras]</strong> hs.",
-//		"Ya superaste el tiempo máximo de presentación: <strong>'$maximoTiempoPresentacionHorasDescripcion'</strong> 
-//		para el tipo de permiso: <em>'$tip_descripcion'</em>.<br>",
-//		[]
-//	);
-//	
-//	return false;
-//}
-// FIN VALIDACIÓN LÍMITE MENSUAL, LÍMITE ANUAL, TIEMPO DE PRESENTACIÓN (24h o 48h)
-////////////////////////////////////////////////////////////////////////////////
-
-
+$tip_presentacion_cantidad = $dataMotivoDesc["tip_presentacion_cantidad"];
+$tip_genero_permitido = $dataMotivoDesc["tip_genero_permitido"];
+//debug_to_console("tip_descripcion: " . $tip_descripcion . ", tip_dias: " . $tip_dias . ", tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . ", tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
 
 
 /**
@@ -1857,9 +1749,6 @@ function lista_feriados() {
  * - Tipo de días (corridos o hábiles)
  */
 function gasto_dias($lista_dias, $tipo_dias) {
-	//debug_to_console("gasto_dias.lista_dias: " . $lista_dias);
-	//debug_to_console("gasto_dias.tipo_dias: " . $tipo_dias);
-
 	$resultado = array();
 	$meses_gasto = array();
 	$cantida_total_meses = 0;
@@ -1871,8 +1760,6 @@ function gasto_dias($lista_dias, $tipo_dias) {
 	$feriados = lista_feriados();
 	
 	foreach ($lista_dias as $valor) {
-		debug_to_console("gasto_dias.valor1: " . $valor);
-		debug_to_console("gasto_dias.valor2: " . date('w', strtotime($valor)));
 		if (((date('w', strtotime($valor)) != 6) and (date('w', strtotime($valor)) != 0) and array_search($valor, $feriados, true) === FALSE ) OR $corridos == 1) {	
 			$dias = $dias + 1;
 			$cantidad_dias = $dias;
@@ -1889,7 +1776,7 @@ function gasto_dias($lista_dias, $tipo_dias) {
 				$dias = 1;
 				$cantidad_dias = 1;
 			}
-			debug_to_console("gasto_dias.cantida_total_meses.cantidad_dias: " . $cantidad_dias);
+			
 			$meses_gasto[$cantida_total_meses][0] = $anho;
 			$meses_gasto[$cantida_total_meses][1] = $mes;
 			$meses_gasto[$cantida_total_meses][2] = $cantidad_dias;
@@ -1910,9 +1797,6 @@ function gasto_dias($lista_dias, $tipo_dias) {
  * [2] → Detalle por mes
  */
 function calcular_maximos($lista_dias, $tipo_dias) {
-	//print_r($lista_dias);
-	debug_to_console("calcular_maximos.parametro.lista_dias " . $lista_dias . ", parametro.tipo_dias: " .$tipo_dias );
-	
 	$resultado = array();
 	$meses_gasto = array();
 	$cantida_total_meses = 0;
@@ -1926,8 +1810,6 @@ function calcular_maximos($lista_dias, $tipo_dias) {
 	$mes_registrado = 0;
 	$feriados = lista_feriados();
 	foreach ($lista_dias as $valor) {
-		//debug_to_console("calcular_maximos.lista_dias.valor1: " . $valor);
-		debug_to_console("calcular_maximos.lista_dias.valor2: " . date('w', strtotime($valor)));
 		if (((date('w', strtotime($valor)) != 6) and (date('w', strtotime($valor)) != 0) and array_search($valor, $feriados, true) === FALSE) OR $corridos == 1) {
 			if ($anho == 0) {
 				$cantida_total_meses = $cantida_total_meses + 1;
@@ -1985,7 +1867,6 @@ function calcular_maximos($lista_dias, $tipo_dias) {
 				$meses_gasto[$cantida_total_meses][1] = $mes;
 				$meses_gasto[$cantida_total_meses][2] = $maximo_mes;	
 			}
-			debug_to_console("calcular_maximos.maximo_mes: " . $maximo_mes . ", anho: " . $anho . ", mes: " . $mes);
 		}
 		
 	}
@@ -1999,49 +1880,43 @@ function calcular_maximos($lista_dias, $tipo_dias) {
 
 
 
-
-
-
 $resultado_maximo = array();
-
-/**
- * ============================================================
- * 📊 OBTENER CONFIGURACIÓN DEL PERMISO
- * ============================================================
- * Consulta cantidades de dias permitidos por permiso.
- */
-//$sql_cantidades = "SELECT tip_cantidad_maxima_mes,tip_cantidad_maxima_anho,tip_dias 
-//												FROM tipos_ocurrencias 
-//												WHERE tip_cod = " . $motivo_id;
-//debug_to_console("sql_cantidades: " . $sql_cantidades);
-//$resultados_cantidades = CustomQuery($sql_cantidades); //Deprecado
-//$fila_cantidades = db_fetch_array($resultados_cantidades);
 
 // Generar lista de días del permiso solicitado
 $lista_dias = lista_dias($values['fecha_desde'], $values['fecha_hasta']);
 
 // Calcular consumo
-//$resultado_maximo = calcular_maximos($lista_dias, $fila_cantidades['tip_dias']);
 $resultado_maximo = calcular_maximos($lista_dias, $tip_dias);
-//debug_to_console("resultado_maximo[2]: " . count($resultado_maximo[2]) );
 
-//$tip_cantidad_maxima_mes = $fila_cantidades["tip_cantidad_maxima_mes"];
-//$tip_cantidad_maxima_anho = $fila_cantidades["tip_cantidad_maxima_anho"];
-//debug_to_console("tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . " tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
 
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE FERIADOS/FIN DE SEMANA
+ * - Valida que un permiso solicitado no sea en feriado o 
+ * fin de semana.
+ * ============================================================
+ */
 if (count($resultado_maximo[2]) <= 0) {
 	$message = generarMensajeError(
-		"📋 <strong>Error en Fecha de Permiso</strong><br>",
-		"<ul>
-			<li> No se puede cargar un Permiso en día Feriado o Fin de semana, Verifique la fecha!</li>
-			</ul>",
-		[]
+		"No se pudo registrar la solicitud.",
+		"Las fechas seleccionadas deben corresponder a días laborables.",
+		[
+			"<strong>Los permisos del tipo '$tip_descripcion', solo pueden solicitarse en días laborables.</strong>",
+			"<strong>Las fechas ingresadas coinciden con feriados, sábados o domingos.</strong>",
+			"<strong>Por favor, selecciona una fecha laboral válida.</strong>"
+		],
+		"<br><b>Verifica las fechas ingresadas e intenta nuevamente.</b>"
 	);
 	return false;
 }
+/**
+ * ============================================================
+ * 🚫 FIN DE VALIDACIÓN DE FERIADOS/FIN DE SEMANA
+ * ============================================================
+ */
+
 
 foreach ($resultado_maximo[2] as $valores_mes) {
-	//debug_to_console("valores_mes[0]: " . $valores_mes[0] . " valores_mes[1]: " . $valores_mes[1] );
 	if ($valores_mes[1] == 1){
 		$desc_mes = "Enero";
 	} else if($valores_mes[1] == 2) {
@@ -2075,37 +1950,41 @@ foreach ($resultado_maximo[2] as $valores_mes) {
  * 🚫 VALIDACIÓN DE LÍMITE MENSUAL
  * ============================================================
  */
-debug_to_console("resultado_maximo[0]: " . $resultado_maximo[0] . " tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes );
-//if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
 if ($resultado_maximo[0] > $tip_cantidad_maxima_mes) {
-	//$message = generarMensajeError(
-	//	"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
-	//	"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> 
-	//		<ul>
-	//		<li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $fila_cantidades['tip_cantidad_maxima_mes'] . " </li>
-	//		<li> Cantidad actual: " . $resultado_maximo[0] . "</li>
-	//		</ul>",
-	//	[]
-	//);
+	/**
+	 * ============================================================
+	 * 🚫 VALIDACIÓN 1:
+	 * La solicitud actual NO puede exceder por sí sola
+	 * el máximo mensual permitido.
+	 * ============================================================
+	 */
+	$diasSolicitados = $resultado_maximo[0];
 	$message = generarMensajeError(
-		"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
-		"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> 
-			<ul>
-			<li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $tip_cantidad_maxima_mes . " </li>
-			<li> Cantidad actual: " . $resultado_maximo[0] . "</li>
-			</ul>",
-		[]
+		"No se pudo registrar la solicitud.",
+		"La cantidad de días solicitados supera el máximo permitido para este tipo de permiso.",
+		[
+			"<strong>Tipo de permiso: $tip_descripcion</strong>",
+			"<strong>El máximo de días permitidos por mes para este tipo de permiso es de: $tip_cantidad_maxima_mes</strong>",
+			"<strong>La cantidad de días que solicitaste es de: $diasSolicitados</strong>"
+		],
+		"<br><b>Reduce la cantidad de días seleccionados e intenta nuevamente.</b>"
 	);
 	return false;
 } else {
 	foreach ($resultado_maximo[2] as $valores_mes) {
-		
 		/**
-		 * ============================================================
-		 * 🔁 VALIDACIÓN CONTRA HISTORIAL (BD)
-		 * ============================================================
-		 * Suma lo ya utilizado + lo solicitado
-		 */
+		* ============================================================
+		* 🚫 VALIDACIÓN 2:
+		* Validar acumulado histórico del funcionario en el mes.
+		* Se suma:
+		* - días ya utilizados
+		* - días de la nueva solicitud
+		*
+		*
+		*	🔁 VALIDACIÓN CONTRA HISTORIAL (BD)
+		*	- Suma lo ya utilizado + lo solicitado
+		* ============================================================
+		*/
 		$sql_total_meses = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS total_dias
 														FROM (
 																SELECT *, 
@@ -2117,35 +1996,41 @@ if ($resultado_maximo[0] > $tip_cantidad_maxima_mes) {
 														AND det_anho_gasto = " . $valores_mes[0]."
 														AND det_mes_gasto = " . $valores_mes[1]."
 														AND det_cod_persona = " . $values['id_funcionario']."";
-		//debug_to_console("sql_total_meses-else: " . $sql_total_meses);
 		$resultado_total_meses = CustomQuery($sql_total_meses); // Deprecado
 		$fila_total_mes = db_fetch_array($resultado_total_meses);
 		
-		//debug_to_console("tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . ", total_dias: " . $fila_total_mes["total_dias"] . ", valores_mes: " . $valores_mes[2]);
 		// ⛔ Validar contra límite
-		//if ($fila_cantidades["tip_cantidad_maxima_mes"] < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
 		if ($tip_cantidad_maxima_mes < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+			$diasYaUtilizados = $fila_total_mes["total_dias"];
+			$diasSolicitados = $valores_mes[2];
+			$totalFinal = $diasYaUtilizados + $diasSolicitados;
 			$message = generarMensajeError(
-				"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
-				"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'.<br> 
-					<ul>
-						<li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de:  ".$tip_cantidad_maxima_mes."</il> 
-						<li>La Cantidad utilizada en el mes de ".$desc_mes." es de: ".($fila_total_mes["total_dias"]+$valores_mes[2]) . "</li>
-					</ul>",
-				[]
+				"No se pudo registrar la solicitud.",
+				"El permiso solicitado supera el límite mensual permitido para '$tip_descripcion'.",
+				[
+					"<strong>El máximo de días permitidos por mes para este tipo de permiso es de: $tip_cantidad_maxima_mes</strong>",
+					"<strong>La cantidad de días ya utilizados en $desc_mes es de: $diasYaUtilizados</strong>",
+					"<strong>La cantidad de días que solicitaste es de: $diasSolicitados</strong>",
+					"<strong>El total acumulado ya es de: $totalFinal días</strong>"
+				],
+				"<br><b>Reduce la cantidad de días solicitados o verifica tus permisos anteriores.</b>"
 			);
+
 			return false;
 		}
 	}
 }
-
-//ESTOY CARGANDO PERMISOS CON FECHA DE HOY Y NO ME BLOQUEA NADA, PORQUE ME PERMITE CARGAR SIENDO QUE DEBE VALIDAR QUE NO SE CARGUE MAS DEL PERMITIDO
+/**
+ * ============================================================
+ * 🚫 FIN DE VALIDACIÓN DE LÍMITE MENSUAL
+ * ============================================================
+ */
 
 
 
 /**
  * ============================================================
- * 🚫 VALIDACIÓN ANUAL
+ * 🚫 VALIDACIÓN DE LÍMITE ANUAL
  * ============================================================
  */
 $cantidad_anhos = 0;
@@ -2171,9 +2056,7 @@ foreach ($resultado_maximo[2] as $valores_anho) {
 $valor_anho[1] = $cantidad_anhos;
 $valor_anho[0] = $anho_actual;
 array_push($lista_anhos_valores, $valor_anho);
-	
 foreach($lista_anhos_valores as $gastados_anho) {
-
 	$sql_suma = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS suma_anho
 									FROM (
 										SELECT *, 
@@ -2184,104 +2067,114 @@ foreach($lista_anhos_valores as $gastados_anho) {
 									WHERE (ocu_tipo = ".$motivo_id." OR ocu_cod_tipo_sumatoria = ".$motivo_id.")
 									AND det_anho_gasto = ".$valores_mes[0]."
 									AND det_cod_persona = ".$values['id_funcionario']."";
-	//debug_to_console("sql_suma: " . $sql_suma);
 	$resultado_suma = CustomQuery($sql_suma);
 	$fila_suma = db_fetch_array($resultado_suma);
-	//if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $fila_cantidades['tip_cantidad_maxima_anho']) {
 	if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $tip_cantidad_maxima_anho) {
-		$valor = $fila_suma['suma_anho'] + $gastados_anho[1];
-		//$message = generarMensajeError(
-		//	"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
-		//	"Cantidad máxima por año:".$fila_cantidades['tip_cantidad_maxima_anho']." Cantidad Actual: ".$valor,
-		//	[]
-		//);
+		$diasConsumidos = $fila_suma['suma_anho'];
+		$diasSolicitados = $gastados_anho[1];
+		$totalAnual = $diasConsumidos + $diasSolicitados;
 		$message = generarMensajeError(
-			"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
-			"Cantidad máxima por año:".$tip_cantidad_maxima_anho." Cantidad Actual: ".$valor,
-			[]
+			"No se pudo registrar la solicitud.",
+			"El permiso solicitado supera el límite anual permitido para '$tip_descripcion'.",
+			[
+				"<strong>El máximo de días permitidos por año para este tipo de permiso es de: $tip_cantidad_maxima_anho</strong>",
+				"<strong>La cantidad de días ya utilizados en el año ".$gastados_anho[0]." es de: $diasConsumidos</strong>",
+				"<strong>La cantidad de días que solicitaste es de: $diasSolicitados</strong>",
+				"<strong>El total acumulado anual ya es de: $totalAnual días</strong>"
+			],
+			"<br><b>Verifica tus permisos utilizados durante el año.</b>"
 		);
 		return false;
+
 	}
 }
-
+/**
+ * ============================================================
+ * 🚫 FIN DE VALIDACIÓN DE LÍMITE ANUAL
+ * ============================================================
+ */
 $_SESSION['lista_anhos_valores'] = $resultado_maximo[2];
 
 
 
-
-
-
-
-
-
-/*
-//$fecha_desde = $values["fecha_desde"];
-//$hora_desde = $values["hora_desde"];
-//debug_to_console("fecha_desde: " . $fecha_desde . " hora_desde: " . $hora_desde);
-//fecha_desde: 2026-05-08 00:00:00 hora_desde: 07:00:00
-
-//$fechaObj = new DateTime($fecha_desde);
-//debug_to_console("fechaObj: " . $fechaObj->format('Y-m-d') );
-
-//$fecha_desde_obj = new DateTime($values["fecha_desde"]);
-//debug_to_console("fecha_desde_obj: " . $fecha_desde_obj->format('Y-m-d') );
-
-//$fecha_desde_obj = new DateTime($values["fecha_desde"]);
-//$fecha_desde_obj_string = $fecha_desde_obj->format('Y-m-d') . ' '. $hora_desde;
-//debug_to_console("fecha_desde_obj_string: " . $fecha_desde_obj_string );
-
-//$fecha_desde_obj = new DateTime($values["fecha_desde"]);
-//$fecha_desde_obj_string = $fecha_desde_obj->format('Y-m-d') . ' '. $values["hora_desde"];
-//$fechaHoraEvento = new DateTime($fecha_desde_obj_string);
-//debug_to_console("fechaHoraEvento: " . $fechaHoraEvento->format('Y-m-d H:i:s') );
-
-
-$fecha_desde_obj = new DateTime($values["fecha_desde"]);
-$fecha_desde_obj_string = $fecha_desde_obj->format('Y-m-d') . ' '. $values["hora_desde"];
-$fechaHoraEvento = new DateTime($fecha_desde_obj_string);// CONSTRUIR FECHA/HORA DEL EVENTO
-$fechaHoraActual = new DateTime();// FECHA/HORA ACTUAL
-debug_to_console("fechaHoraActual: " . $fechaHoraActual->format('Y-m-d H:i:s') );
-debug_to_console("fechaHoraEvento: " . $fechaHoraEvento->format('Y-m-d H:i:s') );
-// DIFERENCIA EN SEGUNDOS
-debug_to_console("fechaHoraActualTimestamp: " . $fechaHoraActual->getTimestamp() );
-debug_to_console("fechaHoraEventoTimestamp: " . $fechaHoraEvento->getTimestamp() );
-$diferenciaSegundos = $fechaHoraActual->getTimestamp() - $fechaHoraEvento->getTimestamp();
-debug_to_console("diferenciaSegundos: " . $diferenciaSegundos );
-// CONVERTIR A HORAS
-$horasTranscurridas = $diferenciaSegundos / 3600;
-debug_to_console("horasTranscurridas: " . $horasTranscurridas );
-// VALIDAR LIMITE
-
-if ($motivo_id == 25) { //REPOSO MEDICO
-	if (intval($horasTranscurridas) > 24) {
-		//$mensaje = "<b>Tiempo máximo excedido.</b><br><br>";
-		//$mensaje .= "El tipo de permiso: <b>" . $dataTipo["tip_descripcion"] . "</b><br>";
-		//$mensaje .= "solo puede presentarse dentro de <b>" . $horasPermitidas . " horas</b> posteriores al evento.<br><br>";
-		//$mensaje .= "Tiempo transcurrido: <b>" . round($horasTranscurridas, 2) . " horas</b>.";
-		//$message = $mensaje;
-		//return false;
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE GÉNERO DEL FUNCIONARIO
+ * Si el $tip_genero_permitido existe y es distinto del 
+ * valor 'AMBOS', el permiso se debe validar con el sexo 
+ * del funcionario que esta queriendo cargar el registro.
+ * ============================================================
+ */
+if ( !empty($tip_genero_permitido) && $tip_genero_permitido <> 'AMBOS' ) {
+	$sexoFuncionario = $values["sex_descripcion"];
+	if ($tip_genero_permitido != $sexoFuncionario) {
 		$message = generarMensajeError(
-			"📋 <strong>Límite de tiempo de presentacion a DGTH alcanzado[48] Hs.</strong><br>",
-			"Límite de tiempo de presentacion a DGTH para el Motivo '$tip_descripcion'<br> 
-<ul>
-<li>
-El Límite de tiempo de presentacion a DGTH para el Motivo '$tip_descripcion' es 
-de: <b>48 horas Posteriores Producida o Acaecida la ausencia</b> 
-</li>
-<li> Tiempo transcurrido: " . intval($horasTranscurridas) . " horas</li>
-</ul>",
-			[]
+			"No se pudo registrar la solicitud.",
+			"El tipo de permiso seleccionado posee restricción de género.",
+			[
+				"<strong>Tipo de permiso: $tip_descripcion</strong>",
+				"<strong>Este permiso solo puede ser solicitado por funcionarios del género: $tip_genero_permitido</strong>"
+			],
+			"<br><b>Verifica el tipo de permiso seleccionado.</b>"
 		);
+		return false;
+	}
+}
+/**
+ * ============================================================
+ * 🚫 FIN VALIDACIÓN DE GÉNERO
+ * ============================================================
+ */
+
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE LÍMITE DE TIEMPO DE PRESENTACION A DGTH
+ *
+ * Si el tipo de permiso tiene $tip_presentacion_cantidad 
+ * entonces el permiso tiene límite de presentación y se debe 
+ * validar.
+ * ============================================================
+ */
+if ( isset($tip_presentacion_cantidad) && intval($tip_presentacion_cantidad) > 0 ) {
+	
+	// FECHA/HORA DEL EVENTO
+	$fecha_desde_datetime = new DateTime($values["fecha_desde"]);
+	$fecha_desde = $fecha_desde_datetime->format('Y-m-d') . ' '. $values["hora_desde"];
+	$fechaHoraEvento = new DateTime($fecha_desde);
+	
+	// FECHA/HORA ACTUAL
+	$fechaHoraActual = new DateTime();
+	
+	// DIFERENCIA EN SEGUNDOS
+	$diferenciaSegundos = $fechaHoraActual->getTimestamp() - $fechaHoraEvento->getTimestamp();
+	
+	// CONVERTIR A HORAS
+	$horasTranscurridas = $diferenciaSegundos / 3600;
+	
+	// VALIDAR LÍMITE
+	if ( intval($horasTranscurridas) > intval($tip_presentacion_cantidad) ) {
+		$message = generarMensajeError(
+			"No se pudo registrar la solicitud.",
+			"El tiempo máximo de presentación a DGTH fue excedido.",
+			[
+				"<strong>Tipo de permiso: $tip_descripcion</strong>",
+				"<strong>Tiempo máximo permitido: ". $tip_presentacion_cantidad . " horas</strong>",
+				"<strong>Tiempo transcurrido: ". intval($horasTranscurridas) . " horas</strong>"
+			],
+			"<br><b>La solicitud ya excede el tiempo permitido de presentación.</b>"
+		);
+
 		return false;
 	}
 	
 }
-
-return false;
-*/
-
-
-
+/**
+ * ============================================================
+ * 🚫 FIN VALIDACIÓN DE PRESENTACIÓN A DGTH
+ * ============================================================
+ */
 
 
 return true;
@@ -2537,7 +2430,12 @@ $sqlMotivoDesc = "SELECT *
 $rsMotivoDesc = DB::Query($sqlMotivoDesc);
 $dataMotivoDesc = $rsMotivoDesc->fetchAssoc();
 $tip_descripcion = $dataMotivoDesc["tip_descripcion"];
-//debug_to_console("tip_descripcion: " . $tip_descripcion);
+$tip_dias = $dataMotivoDesc["tip_dias"];
+$tip_cantidad_maxima_mes = $dataMotivoDesc["tip_cantidad_maxima_mes"];
+$tip_cantidad_maxima_anho = $dataMotivoDesc["tip_cantidad_maxima_anho"];
+$tip_presentacion_cantidad = $dataMotivoDesc["tip_presentacion_cantidad"];
+$tip_genero_permitido = $dataMotivoDesc["tip_genero_permitido"];
+debug_to_console("tip_descripcion: " . $tip_descripcion . ", tip_dias: " . $tip_dias . ", tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . ", tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
 
 
 /**
@@ -2724,22 +2622,53 @@ $resultado_maximo = array();
  * ============================================================
  * Consulta cantidades de dias permitidos por permiso.
  */
-$sql_cantidades = "SELECT tip_cantidad_maxima_mes,tip_cantidad_maxima_anho,tip_dias 
-											FROM tipos_ocurrencias 
-											WHERE tip_cod = " . $motivo_id;
+//$sql_cantidades = "SELECT tip_cantidad_maxima_mes,tip_cantidad_maxima_anho,tip_dias 
+//											FROM tipos_ocurrencias 
+//											WHERE tip_cod = " . $motivo_id;
 //debug_to_console("sql_cantidades: " . $sql_cantidades);
-$resultados_cantidades = CustomQuery($sql_cantidades);
-$fila_cantidades = db_fetch_array($resultados_cantidades);
+//$resultados_cantidades = CustomQuery($sql_cantidades);
+//$fila_cantidades = db_fetch_array($resultados_cantidades);
 
 // Generar lista de días del permiso solicitado
 $lista_dias = lista_dias($values['fecha_desde'], $values['fecha_hasta']);
 
 // Calcular consumo
-$resultado_maximo = calcular_maximos($lista_dias, $fila_cantidades['tip_dias']);
+//$resultado_maximo = calcular_maximos($lista_dias, $fila_cantidades['tip_dias']);
+$resultado_maximo = calcular_maximos($lista_dias, $tip_dias);
 
-$tip_cantidad_maxima_mes = $fila_cantidades["tip_cantidad_maxima_mes"];
-$tip_cantidad_maxima_anho = $fila_cantidades["tip_cantidad_maxima_anho"];
+//$tip_cantidad_maxima_mes = $fila_cantidades["tip_cantidad_maxima_mes"];
+//$tip_cantidad_maxima_anho = $fila_cantidades["tip_cantidad_maxima_anho"];
 //debug_to_console("tip_cantidad_maxima_mes: " . $tip_cantidad_maxima_mes . " tip_cantidad_maxima_anho: " . $tip_cantidad_maxima_anho);
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE FERIADOS/FIN DE SEMANA
+ * - Valida que un permiso solicitado no sea en feriado o 
+ * fin de semana.
+ * ============================================================
+ */
+if (count($resultado_maximo[2]) <= 0) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"Las fechas seleccionadas deben corresponder a días laborables.",
+		[
+			"<strong>Los permisos del tipo '$tip_descripcion', solo pueden solicitarse en días laborables.</strong>",
+			"<strong>Las fechas ingresadas coinciden con feriados, sábados o domingos.</strong>",
+			"<strong>Por favor, selecciona una fecha laboral válida.</strong>"
+		],
+		"<br><b>Verifica las fechas ingresadas e intenta nuevamente.</b>"
+	);
+	return false;
+}
+/**
+ * ============================================================
+ * 🚫 FIN DE VALIDACIÓN DE FERIADOS/FIN DE SEMANA
+ * ============================================================
+ */
+
+
+
 
 foreach ($resultado_maximo[2] as $valores_mes) {
 	//debug_to_console("valores_mes[0]: " . $valores_mes[0] . " valores_mes[1]: " . $valores_mes[1] );
@@ -2776,23 +2705,51 @@ foreach ($resultado_maximo[2] as $valores_mes) {
  * 🚫 VALIDACIÓN DE LÍMITE MENSUAL
  * ============================================================
  */
-//debug_to_console("resultado_maximo[0]: " . $resultado_maximo[0] . " fila_cantidades: " . $fila_cantidades['tip_cantidad_maxima_mes'] );
-if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
+//if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
+if ($resultado_maximo[0] > $tip_cantidad_maxima_mes) {
+	/**
+	 * ============================================================
+	 * 🚫 VALIDACIÓN 1:
+	 * La solicitud actual NO puede exceder por sí sola
+	 * el máximo mensual permitido.
+	 * ============================================================
+	 */
+	//$message = generarMensajeError(
+	//	"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+	//	"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> <ul><li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $fila_cantidades['tip_cantidad_maxima_mes'] . " </li><li> Cantidad actual: " . $resultado_maximo[0] . "</li></ul>",
+	//	[]
+	//);
+	//return false;
+	
+	$diasSolicitados = $resultado_maximo[0];
 	$message = generarMensajeError(
-		"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
-		"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'<br> <ul><li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de: " . $fila_cantidades['tip_cantidad_maxima_mes'] . " </li><li> Cantidad actual: " . $resultado_maximo[0] . "</li></ul>",
-		[]
+		"No se pudo registrar la solicitud.",
+		"La cantidad de días solicitados supera el máximo permitido para este tipo de permiso.",
+		[
+			"<strong>Tipo de permiso: $tip_descripcion</strong>",
+			"<strong>El máximo de días permitidos por mes para este tipo de permiso es de: $tip_cantidad_maxima_mes</strong>",
+			"<strong>La cantidad de días que solicitaste es de: $diasSolicitados</strong>"
+		],
+		"<br><b>Reduce la cantidad de días seleccionados e intenta nuevamente.</b>"
 	);
 	return false;
+	
 } else {
 	foreach ($resultado_maximo[2] as $valores_mes) {
 		
 		/**
-		 * ============================================================
-		 * 🔁 VALIDACIÓN CONTRA HISTORIAL (BD)
-		 * ============================================================
-		 * Suma lo ya utilizado + lo solicitado
-		 */
+		* ============================================================
+		* 🚫 VALIDACIÓN 2:
+		* Validar acumulado histórico del funcionario en el mes.
+		* Se suma:
+		* - días ya utilizados
+		* - días de la nueva solicitud
+		*
+		*
+		*	🔁 VALIDACIÓN CONTRA HISTORIAL (BD)
+		*	- Suma lo ya utilizado + lo solicitado
+		* ============================================================
+		*/
 		$sql_total_meses = "SELECT COALESCE(SUM(det_dias_gastados), 0) AS total_dias
 														FROM (
 																SELECT *, 
@@ -2805,16 +2762,34 @@ if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
 														AND det_mes_gasto = " . $valores_mes[1]."
 														AND det_cod_persona = " . $values['id_funcionario']."";
 		//debug_to_console("sql_total_meses: " . $sql_total_meses);
-		$resultado_total_meses = CustomQuery($sql_total_meses);
+		$resultado_total_meses = CustomQuery($sql_total_meses); // Deprecado
 		$fila_total_mes = db_fetch_array($resultado_total_meses);
 		
 		// ⛔ Validar contra límite
-		if ($fila_cantidades["tip_cantidad_maxima_mes"] < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+		//if ($fila_cantidades["tip_cantidad_maxima_mes"] < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+		//	$message = generarMensajeError(
+		//		"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
+		//		"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'.<br> <ul><li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de:  ".$tip_cantidad_maxima_mes."</il> <li>La Cantidad utilizada en el mes de ".$desc_mes." es de: ".($fila_total_mes["total_dias"]+$valores_mes[2]) . "</li></ul>",
+		//		[]
+		//	);
+		//	return false;
+		//}
+		if ($tip_cantidad_maxima_mes < ($fila_total_mes["total_dias"] + $valores_mes[2])) {
+			$diasYaUtilizados = $fila_total_mes["total_dias"];
+			$diasSolicitados = $valores_mes[2];
+			$totalFinal = $diasYaUtilizados + $diasSolicitados;
 			$message = generarMensajeError(
-				"📋 <strong>Límite mensual alcanzado[$tip_cantidad_maxima_mes]</strong><br>",
-				"Cantidad máxima alcanzada para el Motivo '$tip_descripcion'.<br> <ul><li>La Cantidad máxima del mes para el Motivo '$tip_descripcion' es de:  ".$tip_cantidad_maxima_mes."</il> <li>La Cantidad utilizada en el mes de ".$desc_mes." es de: ".($fila_total_mes["total_dias"]+$valores_mes[2]) . "</li></ul>",
-				[]
+				"No se pudo registrar la solicitud.",
+				"El permiso solicitado supera el límite mensual permitido para '$tip_descripcion'.",
+				[
+					"<strong>El máximo de días permitidos por mes para este tipo de permiso es de: $tip_cantidad_maxima_mes</strong>",
+					"<strong>La cantidad de días ya utilizados en $desc_mes es de: $diasYaUtilizados</strong>",
+					"<strong>La cantidad de días que solicitaste es de: $diasSolicitados</strong>",
+					"<strong>El total acumulado ya es de: $totalFinal días</strong>"
+				],
+				"<br><b>Reduce la cantidad de días solicitados o verifica tus permisos anteriores.</b>"
 			);
+
 			return false;
 		}
 	}
@@ -2823,7 +2798,7 @@ if ($resultado_maximo[0] > $fila_cantidades['tip_cantidad_maxima_mes']) {
 
 /**
  * ============================================================
- * 🚫 VALIDACIÓN ANUAL
+ * 🚫 VALIDACIÓN DE LÍMITE ANUAL
  * ============================================================
  */
 $cantidad_anhos = 0;
@@ -2863,18 +2838,119 @@ foreach($lista_anhos_valores as $gastados_anho) {
 									AND det_cod_persona = ".$values['id_funcionario']."";
 	$resultado_suma = CustomQuery($sql_suma);
 	$fila_suma = db_fetch_array($resultado_suma);
-	if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $fila_cantidades['tip_cantidad_maxima_anho']) {
-		$valor = $fila_suma['suma_anho'] + $gastados_anho[1];
+	//if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $fila_cantidades['tip_cantidad_maxima_anho']) {
+	//	$valor = $fila_suma['suma_anho'] + $gastados_anho[1];
+	//	$message = generarMensajeError(
+	//		"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
+	//		"<ul><li>La Cantidad máxima por año para el Motivo '$tip_descripcion' es de: ".$fila_cantidades['tip_cantidad_maxima_anho']."</il> <li>Cantidad Actual de solicitudes: ".$valor."</li></ul>",
+	//		[]
+	//	);
+	//	return false;
+	//}
+	if (($fila_suma['suma_anho'] + $gastados_anho[1]) > $tip_cantidad_maxima_anho) {
+		$diasConsumidos = $fila_suma['suma_anho'];
+		$diasSolicitados = $gastados_anho[1];
+		$totalAnual = $diasConsumidos + $diasSolicitados;
 		$message = generarMensajeError(
-			"📋 <strong>Límite anual alcanzado[$tip_cantidad_maxima_anho]</strong>",
-			"<ul><li>La Cantidad máxima por año para el Motivo '$tip_descripcion' es de: ".$fila_cantidades['tip_cantidad_maxima_anho']."</il> <li>Cantidad Actual de solicitudes: ".$valor."</li></ul>",
-			[]
+			"No se pudo registrar la solicitud.",
+			"El permiso solicitado supera el límite anual permitido para '$tip_descripcion'.",
+			[
+				"<strong>El máximo de días permitidos por año para este tipo de permiso es de: $tip_cantidad_maxima_anho</strong>",
+				"<strong>La cantidad de días ya utilizados en el año ".$gastados_anho[0]." es de: $diasConsumidos</strong>",
+				"<strong>La cantidad de días que solicitaste es de: $diasSolicitados</strong>",
+				"<strong>El total acumulado anual ya es de: $totalAnual días</strong>"
+			],
+			"<br><b>Verifica tus permisos utilizados durante el año.</b>"
 		);
 		return false;
+
 	}
 }
 
 $_SESSION['lista_anhos_valores'] = $resultado_maximo[2];
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE GÉNERO DEL FUNCIONARIO
+ * Si el $tip_genero_permitido existe y es distinto del 
+ * valor 'AMBOS', el permiso se debe validar con el sexo 
+ * del funcionario que esta queriendo cargar el registro.
+ * ============================================================
+ */
+if ( !empty($tip_genero_permitido) && $tip_genero_permitido <> 'AMBOS' ) {
+	$sexoFuncionario = $values["sex_descripcion"];
+	if ($tip_genero_permitido != $sexoFuncionario) {
+		$message = generarMensajeError(
+			"No se pudo registrar la solicitud.",
+			"El tipo de permiso seleccionado posee restricción de género.",
+			[
+				"<strong>Tipo de permiso: $tip_descripcion</strong>",
+				"<strong>Este permiso solo puede ser solicitado por funcionarios del género: $tip_genero_permitido</strong>"
+			],
+			"<br><b>Verifica el tipo de permiso seleccionado.</b>"
+		);
+		return false;
+	}
+}
+/**
+ * ============================================================
+ * 🚫 FIN VALIDACIÓN DE GÉNERO
+ * ============================================================
+ */
+
+
+/**
+ * ============================================================
+ * 🚫 VALIDACIÓN DE LÍMITE DE TIEMPO DE PRESENTACION A DGTH
+ *
+ * Si el tipo de permiso tiene $tip_presentacion_cantidad 
+ * entonces el permiso tiene límite de presentación y se debe 
+ * validar.
+ * ============================================================
+ */
+if ( isset($tip_presentacion_cantidad) && intval($tip_presentacion_cantidad) > 0 ) {
+	
+	// FECHA/HORA DEL EVENTO
+	$fecha_desde_datetime = new DateTime($values["fecha_desde"]);
+	$fecha_desde = $fecha_desde_datetime->format('Y-m-d') . ' '. $values["hora_desde"];
+	$fechaHoraEvento = new DateTime($fecha_desde);
+	
+	// FECHA/HORA ACTUAL
+	$fechaHoraActual = new DateTime();
+	
+	// DIFERENCIA EN SEGUNDOS
+	$diferenciaSegundos = $fechaHoraActual->getTimestamp() - $fechaHoraEvento->getTimestamp();
+	
+	// CONVERTIR A HORAS
+	$horasTranscurridas = $diferenciaSegundos / 3600;
+	
+	// VALIDAR LÍMITE
+	if ( intval($horasTranscurridas) > intval($tip_presentacion_cantidad) ) {
+		$message = generarMensajeError(
+			"No se pudo registrar la solicitud.",
+			"El tiempo máximo de presentación a DGTH fue excedido.",
+			[
+				"<strong>Tipo de permiso: $tip_descripcion</strong>",
+				"<strong>Tiempo máximo permitido: ". $tip_presentacion_cantidad . " horas</strong>",
+				"<strong>Tiempo transcurrido: ". intval($horasTranscurridas) . " horas</strong>"
+			],
+			"<br><b>La solicitud ya excede el tiempo permitido de presentación.</b>"
+		);
+
+		return false;
+	}
+	
+}
+/**
+ * ============================================================
+ * 🚫 FIN VALIDACIÓN DE PRESENTACIÓN A DGTH
+ * ============================================================
+ */
+
+
+
+
 
 
 

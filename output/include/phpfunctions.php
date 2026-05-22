@@ -1351,7 +1351,7 @@ function GetUploadFolderExpression($field, $file, $table )
 {
 	if($table=="rrhh_permisos.permisos_funcionarios" && $field=="archivo_adjunto")
 	{
-		$folder = $_SERVER['DOCUMENT_ROOT']. "/permisos_file";;
+		file;
 		return $folder;
 	}
 	return "";

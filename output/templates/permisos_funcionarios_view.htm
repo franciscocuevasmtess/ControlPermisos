@@ -1185,7 +1185,6 @@
 	{$cell_grid_c12}
 	class=" r-ori-vert"
 	
-			data-single
 				data-fullwidth
 		
 	ocolspan="3"		data-cellId="grid_c12" data-pageid="{$pageid}"
@@ -1214,6 +1213,27 @@
 
 
 {END id_fieldblock}
+											
+{BEGIN archivo_adjunto_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_archivo_adjunto}  r-vertical-field" data-fieldname="archivo_adjunto" data-signal-error-for="archivo_adjunto{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="archivo_adjunto" data-fieldname="archivo_adjunto" data-compact >
+
+		<div class="col-md-12">
+	
+	<label class="" for="{$labelfor_archivo_adjunto}">
+		
+		{BEGIN archivo_adjunto_label}{$label rrhh_permisos_permisos_funcionarios archivo_adjunto }{END archivo_adjunto_label}
+	</label>
+	<div class="" >
+		{$archivo_adjunto_value}	</div>
+
+		</div>
+		
+</div>
+
+
+{END archivo_adjunto_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c12}

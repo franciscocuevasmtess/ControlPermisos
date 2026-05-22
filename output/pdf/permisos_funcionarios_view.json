@@ -923,6 +923,9 @@ pdfDocument = {
 				
 			{"hidden":"{$item_hide_view_id}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios id }","bold":true},{"text":{$id_pdfvalue}}],"margin":[0,0,0,15]},
 				
+				
+			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel rrhh_permisos_permisos_funcionarios archivo_adjunto }","bold":true},{"text":{$archivo_adjunto_pdfvalue}}],"margin":[0,0,0,15]},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',

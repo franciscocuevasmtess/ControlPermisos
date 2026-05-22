@@ -258,6 +258,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_id}</span>
 						</div>
 		{END searchCtrlBlock_id}
+																{BEGIN searchCtrlBlock_sex_descripcion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_sex_descripcion}" {$filterRow_attrs_sex_descripcion}>
+			<label>{$label rrhh_permisos_permisos_funcionarios sex_descripcion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_sex_descripcion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_sex_descripcion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_sex_descripcion}</span>
+						</div>
+		{END searchCtrlBlock_sex_descripcion}
 																{BEGIN searchCtrlBlock_decidido_por}
 
 
@@ -991,7 +1004,10 @@
 					[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="observacion"]:before {
 		content: "{$label rrhh_permisos_permisos_funcionarios observacion}";
 	}
-									[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_solicitud"]:before {
+				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="archivo_adjunto"]:before {
+		content: "{$label rrhh_permisos_permisos_funcionarios archivo_adjunto}";
+	}
+							[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_solicitud"]:before {
 		content: "{$label rrhh_permisos_permisos_funcionarios fecha_solicitud}";
 	}
 				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="resultado_decision"]:before {
@@ -1015,7 +1031,7 @@
 				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="decidido_por"]:before {
 		content: "{$label rrhh_permisos_permisos_funcionarios decidido_por}";
 	}
-	}
+		}
 </style>
 <table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-striped table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
 	cellpadding="0"
@@ -1147,6 +1163,40 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field19}
+	<th
+	
+	{$cell_grid_headcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$archivo_adjunto_class}	"
+
+			data-field="archivo_adjunto"
+	
+	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN archivo_adjunto_fieldheadercolumn}
+	{BEGIN archivo_adjunto_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label16" {$item_grid_field_label16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="archivo_adjunto" data-fieldname="archivo_adjunto" 
+
+			{$archivo_adjunto_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label rrhh_permisos_permisos_funcionarios archivo_adjunto }</span>
+					{$arrow_icon_archivo_adjunto}
+			</span>
+	</span>
+	{END archivo_adjunto_fieldheader}
+{END archivo_adjunto_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field19}
 							</tr>
 											<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
 									{$gridHeader_class}
@@ -1762,6 +1812,21 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field18}
+									{BEGIN cellblock_grid_headcell_field20}
+	<th
+	
+	{$cell_grid_headcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_field20}
 							</tr>
 															
 					{END grid_header}
@@ -2199,6 +2264,27 @@
 {END intentos_correccion_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field16}
+	<td
+	
+	{$cell_grid_cell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$archivo_adjunto_class}	"
+
+			data-field="archivo_adjunto"
+	
+	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN archivo_adjunto_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field18" {$item_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="archivo_adjunto" data-fieldname="archivo_adjunto" data-default-width >
+{$archivo_adjunto_value}
+</span>
+{END archivo_adjunto_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field16}
 							</tr>
 										
 											{END grid_row}
@@ -2321,7 +2407,7 @@
 	{$cell_grid_footcell_field10}
 	{$recordattrs}
 	class="
-		 r-ori-vert			"
+		 r-ori-vert		 {$archivo_adjunto_class}	"
 
 	
 	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="permisos_funcionarios_list"	
@@ -2495,6 +2581,21 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field16}
+									{BEGIN cellblock_grid_footcell_field17}
+	<td
+	
+	{$cell_grid_footcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="permisos_funcionarios_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field17}
 							</tr>
 					
 					</tfoot>

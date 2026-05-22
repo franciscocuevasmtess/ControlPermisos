@@ -142,6 +142,9 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelspermisos_funcionarios["Spanish"]["decidido_por"] = "👨‍💼 Decidido por (Jefe)";
 	$fieldToolTipspermisos_funcionarios["Spanish"]["decidido_por"] = "";
 	$placeHolderspermisos_funcionarios["Spanish"]["decidido_por"] = "";
+	$fieldLabelspermisos_funcionarios["Spanish"]["sex_descripcion"] = "Sex Descripcion";
+	$fieldToolTipspermisos_funcionarios["Spanish"]["sex_descripcion"] = "";
+	$placeHolderspermisos_funcionarios["Spanish"]["sex_descripcion"] = "";
 	$pageTitlespermisos_funcionarios["Spanish"]["add"] = "FORMULARIO DE PERMISOS Y JUSTIFICACIONES";
 	$pageTitlespermisos_funcionarios["Spanish"]["view"] = "SOLICIUTD DE PERMISOS Y JUSTIFICACIONES NUMERO: {%id}";
 	$pageTitlespermisos_funcionarios["Spanish"]["edit"] = "FORMULARIO DE PERMISOS Y JUSTIFICACIONES, EDITAR [{%id}]";
@@ -301,6 +304,7 @@ $tdatapermisos_funcionarios[".googleLikeFields"][] = "fecha_decision";
 $tdatapermisos_funcionarios[".googleLikeFields"][] = "rrhh_fecha_decision";
 $tdatapermisos_funcionarios[".googleLikeFields"][] = "intentos_correccion";
 $tdatapermisos_funcionarios[".googleLikeFields"][] = "decidido_por";
+$tdatapermisos_funcionarios[".googleLikeFields"][] = "sex_descripcion";
 
 
 
@@ -335,7 +339,7 @@ $tdatapermisos_funcionarios[".orderindexes"] = array();
 			$tdatapermisos_funcionarios[".orderindexes"][] = array(1, (0 ? "ASC" : "DESC"), "pf.id");
 
 
-$tdatapermisos_funcionarios[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por";
+$tdatapermisos_funcionarios[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion";
 $tdatapermisos_funcionarios[".sqlFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
 $tdatapermisos_funcionarios[".sqlWhereExpr"] = "";
 $tdatapermisos_funcionarios[".sqlTail"] = "";
@@ -2211,7 +2215,7 @@ $tdatapermisos_funcionarios[".hideMobileList"] = array();
 
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "tip_descripcion";
 
 	
 	
@@ -2938,8 +2942,7 @@ $tdatapermisos_funcionarios[".hideMobileList"] = array();
 		$edata["maxNumberOfFiles"] = 10;
 
 	
-		$edata["maxTotalFilesSize"] = 3000;
-
+	
 	
 	
 	
@@ -2966,7 +2969,6 @@ $tdatapermisos_funcionarios[".hideMobileList"] = array();
 	$fdata["isSeparate"] = false;
 
 
-	$fdata["Absolute"] = true;
 
 
 // the field's search options settings
@@ -5910,6 +5912,143 @@ $tdatapermisos_funcionarios[".hideMobileList"] = array();
 
 	$tdatapermisos_funcionarios["decidido_por"] = $fdata;
 		$tdatapermisos_funcionarios[".searchableFields"][] = "decidido_por";
+//	sex_descripcion
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 40;
+	$fdata["strName"] = "sex_descripcion";
+	$fdata["GoodName"] = "sex_descripcion";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("rrhh_permisos_permisos_funcionarios","sex_descripcion");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "sex_descripcion";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "''";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatapermisos_funcionarios["sex_descripcion"] = $fdata;
+		$tdatapermisos_funcionarios[".searchableFields"][] = "sex_descripcion";
 
 
 $tables_data["rrhh_permisos.permisos_funcionarios"]=&$tdatapermisos_funcionarios;
@@ -5954,7 +6093,7 @@ function createSqlQuery_permisos_funcionarios()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por";
+$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "ORDER BY pf.id DESC";
@@ -6516,145 +6655,157 @@ $proto82["m_alias"] = "";
 $obj = new SQLFieldListItem($proto82);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto84=array();
-$proto84["m_link"] = "SQLL_MAIN";
-			$proto85=array();
-$proto85["m_strName"] = "rrhh_permisos.permisos_funcionarios";
-$proto85["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto85["m_columns"] = array();
-$proto85["m_columns"][] = "id";
-$proto85["m_columns"][] = "id_funcionario";
-$proto85["m_columns"][] = "tipo_vinculacion";
-$proto85["m_columns"][] = "dependencia_id";
-$proto85["m_columns"][] = "fecha_desde";
-$proto85["m_columns"][] = "hora_desde";
-$proto85["m_columns"][] = "fecha_hasta";
-$proto85["m_columns"][] = "hora_hasta";
-$proto85["m_columns"][] = "motivo_id";
-$proto85["m_columns"][] = "comision_servicios";
-$proto85["m_columns"][] = "comision_servicios_descripcion";
-$proto85["m_columns"][] = "observacion";
-$proto85["m_columns"][] = "estado";
-$proto85["m_columns"][] = "fecha_actualizacion";
-$proto85["m_columns"][] = "archivo_adjunto";
-$proto85["m_columns"][] = "solicitado_por";
-$proto85["m_columns"][] = "fecha_solicitud";
-$proto85["m_columns"][] = "fecha_decision";
-$proto85["m_columns"][] = "decidido_por";
-$proto85["m_columns"][] = "resultado_decision";
-$proto85["m_columns"][] = "horas_compensar";
-$proto85["m_columns"][] = "acompensar";
-$proto85["m_columns"][] = "rrhh_decidido_por";
-$proto85["m_columns"][] = "rrhh_fecha_decision";
-$proto85["m_columns"][] = "rrhh_resultado_decision";
-$proto85["m_columns"][] = "rrhh_motivo_rechazo";
-$proto85["m_columns"][] = "ocu_cod";
-$proto85["m_columns"][] = "intentos_correccion";
-$obj = new SQLTable($proto85);
+						$proto84=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
 
-$proto84["m_table"] = $obj;
-$proto84["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
-$proto84["m_alias"] = "pf";
+$proto84["m_sql"] = "''";
 $proto84["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto86=array();
-$proto86["m_sql"] = "";
-$proto86["m_uniontype"] = "SQLL_UNKNOWN";
+$proto84["m_expr"]=$obj;
+$proto84["m_alias"] = "sex_descripcion";
+$obj = new SQLFieldListItem($proto84);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto86=array();
+$proto86["m_link"] = "SQLL_MAIN";
+			$proto87=array();
+$proto87["m_strName"] = "rrhh_permisos.permisos_funcionarios";
+$proto87["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto87["m_columns"] = array();
+$proto87["m_columns"][] = "id";
+$proto87["m_columns"][] = "id_funcionario";
+$proto87["m_columns"][] = "tipo_vinculacion";
+$proto87["m_columns"][] = "dependencia_id";
+$proto87["m_columns"][] = "fecha_desde";
+$proto87["m_columns"][] = "hora_desde";
+$proto87["m_columns"][] = "fecha_hasta";
+$proto87["m_columns"][] = "hora_hasta";
+$proto87["m_columns"][] = "motivo_id";
+$proto87["m_columns"][] = "comision_servicios";
+$proto87["m_columns"][] = "comision_servicios_descripcion";
+$proto87["m_columns"][] = "observacion";
+$proto87["m_columns"][] = "estado";
+$proto87["m_columns"][] = "fecha_actualizacion";
+$proto87["m_columns"][] = "archivo_adjunto";
+$proto87["m_columns"][] = "solicitado_por";
+$proto87["m_columns"][] = "fecha_solicitud";
+$proto87["m_columns"][] = "fecha_decision";
+$proto87["m_columns"][] = "decidido_por";
+$proto87["m_columns"][] = "resultado_decision";
+$proto87["m_columns"][] = "horas_compensar";
+$proto87["m_columns"][] = "acompensar";
+$proto87["m_columns"][] = "rrhh_decidido_por";
+$proto87["m_columns"][] = "rrhh_fecha_decision";
+$proto87["m_columns"][] = "rrhh_resultado_decision";
+$proto87["m_columns"][] = "rrhh_motivo_rechazo";
+$proto87["m_columns"][] = "ocu_cod";
+$proto87["m_columns"][] = "intentos_correccion";
+$obj = new SQLTable($proto87);
+
+$proto86["m_table"] = $obj;
+$proto86["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
+$proto86["m_alias"] = "pf";
+$proto86["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto88=array();
+$proto88["m_sql"] = "";
+$proto88["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto86["m_column"]=$obj;
-$proto86["m_contained"] = array();
-$proto86["m_strCase"] = "";
-$proto86["m_havingmode"] = false;
-$proto86["m_inBrackets"] = false;
-$proto86["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto86);
+$proto88["m_column"]=$obj;
+$proto88["m_contained"] = array();
+$proto88["m_strCase"] = "";
+$proto88["m_havingmode"] = false;
+$proto88["m_inBrackets"] = false;
+$proto88["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto88);
 
-$proto84["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto84);
+$proto86["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto86);
 
 $proto0["m_fromlist"][]=$obj;
-												$proto88=array();
-$proto88["m_link"] = "SQLL_LEFTJOIN";
-			$proto89=array();
-$proto89["m_strName"] = "public.personales";
-$proto89["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto89["m_columns"] = array();
-$proto89["m_columns"][] = "per_cod";
-$proto89["m_columns"][] = "categoria_cat_codigo";
-$proto89["m_columns"][] = "departamentos_dep_cod";
-$proto89["m_columns"][] = "dependencias_dep_cod";
-$proto89["m_columns"][] = "paises_pai_cod";
-$proto89["m_columns"][] = "ciudades_ciu_cod";
-$proto89["m_columns"][] = "profesiones_pro_cod";
-$proto89["m_columns"][] = "per_profesional";
-$proto89["m_columns"][] = "tipo_funcionario_tfun_cod";
-$proto89["m_columns"][] = "per_institucion_origen";
-$proto89["m_columns"][] = "cargos_car_cod";
-$proto89["m_columns"][] = "per_nombre";
-$proto89["m_columns"][] = "per_apellido";
-$proto89["m_columns"][] = "per_ci";
-$proto89["m_columns"][] = "per_sexo";
-$proto89["m_columns"][] = "per_nacimiento";
-$proto89["m_columns"][] = "per_est_civil";
-$proto89["m_columns"][] = "per_gruposangre";
-$proto89["m_columns"][] = "per_pcd";
-$proto89["m_columns"][] = "per_domicilio";
-$proto89["m_columns"][] = "per_barrio";
-$proto89["m_columns"][] = "per_teleparticular";
-$proto89["m_columns"][] = "per_telecelular";
-$proto89["m_columns"][] = "per_email_part";
-$proto89["m_columns"][] = "per_email_instit";
-$proto89["m_columns"][] = "per_ruc";
-$proto89["m_columns"][] = "per_contacto_eme";
-$proto89["m_columns"][] = "per_tele_emer";
-$proto89["m_columns"][] = "per_ingreso";
-$proto89["m_columns"][] = "per_nombramiento";
-$proto89["m_columns"][] = "per_estado";
-$proto89["m_columns"][] = "per_usuario";
-$proto89["m_columns"][] = "per_sede";
-$obj = new SQLTable($proto89);
+												$proto90=array();
+$proto90["m_link"] = "SQLL_LEFTJOIN";
+			$proto91=array();
+$proto91["m_strName"] = "public.personales";
+$proto91["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto91["m_columns"] = array();
+$proto91["m_columns"][] = "per_cod";
+$proto91["m_columns"][] = "categoria_cat_codigo";
+$proto91["m_columns"][] = "departamentos_dep_cod";
+$proto91["m_columns"][] = "dependencias_dep_cod";
+$proto91["m_columns"][] = "paises_pai_cod";
+$proto91["m_columns"][] = "ciudades_ciu_cod";
+$proto91["m_columns"][] = "profesiones_pro_cod";
+$proto91["m_columns"][] = "per_profesional";
+$proto91["m_columns"][] = "tipo_funcionario_tfun_cod";
+$proto91["m_columns"][] = "per_institucion_origen";
+$proto91["m_columns"][] = "cargos_car_cod";
+$proto91["m_columns"][] = "per_nombre";
+$proto91["m_columns"][] = "per_apellido";
+$proto91["m_columns"][] = "per_ci";
+$proto91["m_columns"][] = "per_sexo";
+$proto91["m_columns"][] = "per_nacimiento";
+$proto91["m_columns"][] = "per_est_civil";
+$proto91["m_columns"][] = "per_gruposangre";
+$proto91["m_columns"][] = "per_pcd";
+$proto91["m_columns"][] = "per_domicilio";
+$proto91["m_columns"][] = "per_barrio";
+$proto91["m_columns"][] = "per_teleparticular";
+$proto91["m_columns"][] = "per_telecelular";
+$proto91["m_columns"][] = "per_email_part";
+$proto91["m_columns"][] = "per_email_instit";
+$proto91["m_columns"][] = "per_ruc";
+$proto91["m_columns"][] = "per_contacto_eme";
+$proto91["m_columns"][] = "per_tele_emer";
+$proto91["m_columns"][] = "per_ingreso";
+$proto91["m_columns"][] = "per_nombramiento";
+$proto91["m_columns"][] = "per_estado";
+$proto91["m_columns"][] = "per_usuario";
+$proto91["m_columns"][] = "per_sede";
+$obj = new SQLTable($proto91);
 
-$proto88["m_table"] = $obj;
-$proto88["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto88["m_alias"] = "p";
-$proto88["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto90=array();
-$proto90["m_sql"] = "p.per_cod = pf.id_funcionario";
-$proto90["m_uniontype"] = "SQLL_UNKNOWN";
+$proto90["m_table"] = $obj;
+$proto90["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
+$proto90["m_alias"] = "p";
+$proto90["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto92=array();
+$proto92["m_sql"] = "p.per_cod = pf.id_funcionario";
+$proto92["m_uniontype"] = "SQLL_UNKNOWN";
 						$obj = new SQLField(array(
 	"m_strName" => "per_cod",
 	"m_strTable" => "p",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto90["m_column"]=$obj;
-$proto90["m_contained"] = array();
-$proto90["m_strCase"] = "= pf.id_funcionario";
-$proto90["m_havingmode"] = false;
-$proto90["m_inBrackets"] = false;
-$proto90["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto90);
+$proto92["m_column"]=$obj;
+$proto92["m_contained"] = array();
+$proto92["m_strCase"] = "= pf.id_funcionario";
+$proto92["m_havingmode"] = false;
+$proto92["m_inBrackets"] = false;
+$proto92["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto92);
 
-$proto88["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto88);
+$proto90["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto90);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
 $proto0["m_orderby"] = array();
-												$proto92=array();
+												$proto94=array();
 						$obj = new SQLField(array(
 	"m_strName" => "id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto92["m_column"]=$obj;
-$proto92["m_bAsc"] = 0;
-$proto92["m_nColumn"] = 0;
-$obj = new SQLOrderByItem($proto92);
+$proto94["m_column"]=$obj;
+$proto94["m_bAsc"] = 0;
+$proto94["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto94);
 
 $proto0["m_orderby"][]=$obj;					
 $proto0["m_srcTableName"]="rrhh_permisos.permisos_funcionarios";		
@@ -6668,7 +6819,7 @@ $queryData_permisos_funcionarios = createSqlQuery_permisos_funcionarios();
 	
 		;
 
-																																							
+																																								
 
 $tdatapermisos_funcionarios[".sqlquery"] = $queryData_permisos_funcionarios;
 
