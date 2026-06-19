@@ -320,7 +320,7 @@
 		 
 		<span data-itemtype="text" data-itemid="text13" {$item_text13} data-pageid="{$pageid}" data-small > 
 	<div style="background:#e7f3ff;padding:12px;border-radius:8px;margin-bottom:15px;">
-  ℹ️ Complete el formulario para solicitar un permiso laboral.  
+  ℹ️ Complete el formulario para solicitar un comisionamiento.  
   Todos los campos marcados(*) son obligatorios.
 </div></span>
 		</div>					</div>
@@ -374,9 +374,9 @@
 	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
 	class="r-edit-form" cellpadding="0" cellspacing="0" 
 	{$grid_hiddenattr} 
-		data-form-width="2"
+		data-form-width="3"
 		
-		data-v-width="4"
+		data-v-width="6"
 	>
 	<tbody>
 										<tr {$row_grid_0} >
@@ -390,8 +390,8 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c15" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c15" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -484,28 +484,6 @@
 
 {END per_ci_fieldblock}
 											
-{BEGIN descripcion_dependencia_edit_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_descripcion_dependencia_edit}  r-vertical-field" 
-	data-signal-error-for="descripcion_dependencia_edit{$id}" {$required_attr_descripcion_dependencia_edit}
-	data-itemtype="integrated_edit_field" data-itemid="descripcion_dependencia_edit" {$item_descripcion_dependencia_edit} data-pageid="{$pageid}" data-field="descripcion_dependencia_edit" data-fieldname="descripcion_dependencia_edit" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_descripcion_dependencia_edit}">
-		{BEGIN descripcion_dependencia_edit_label}{$label comisionamiento descripcion_dependencia_edit }{END descripcion_dependencia_edit_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$descripcion_dependencia_edit_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="descripcion_dependencia_edit" {$tooltipAttr comisionamiento descripcion_dependencia_edit } >
-		<div class="text-muted" >
-		{$tooltip comisionamiento descripcion_dependencia_edit }		</div>
-	</div>
-</div>
-
-
-{END descripcion_dependencia_edit_fieldblock}
-											
 {BEGIN descripcion_dependencia_fieldblock}
 
 
@@ -561,8 +539,8 @@
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c18" data-pageid="{$pageid}"
-		data-v-cell="2"
+	ocolspan="2"		data-cellId="grid_c18" data-pageid="{$pageid}"
+		data-v-cell="4"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -663,51 +641,6 @@
 														<tr {$row_grid_2} >
 										
 
-{BEGIN cellblock_grid_c16}
-<td
-	{$cell_grid_c16}
-	class=" r-ori-vert"
-	
-				data-fullwidth
-		
-	ocolspan="2"		data-cellId="grid_c16" data-pageid="{$pageid}"
-		data-v-cell="4"
-		
->
-	<div edit-form-cell class="clearfix">
-				<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-small > 
-	<h3>📝 TIPO DE PERMISO / JUSTIFICACION</h3><br><hr></span>
-											
-{BEGIN motivo_id_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_motivo_id}  r-vertical-field" 
-	data-signal-error-for="motivo_id{$id}" {$required_attr_motivo_id}
-	data-itemtype="integrated_edit_field" data-itemid="edit_motivo_id" {$item_edit_motivo_id} data-pageid="{$pageid}" data-field="motivo_id" data-fieldname="motivo_id" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_motivo_id}">
-		{BEGIN motivo_id_label}{$label comisionamiento motivo_id }{END motivo_id_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$motivo_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="motivo_id" {$tooltipAttr comisionamiento motivo_id } >
-		<div class="text-muted" >
-		{$tooltip comisionamiento motivo_id }		</div>
-	</div>
-</div>
-
-
-{END motivo_id_fieldblock}
-	
-								</td>
-			{END cellblock_grid_c16}
-								</tr>
-	 
-	 
-														<tr {$row_grid_3} >
-										
-
 {BEGIN cellblock_grid_c1}
 <td
 	{$cell_grid_c1}
@@ -716,20 +649,20 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c1" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c1" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text4" {$item_text4} data-pageid="{$pageid}" data-small > 
-	<h3>📅 PERIODO DEL PERMISO 🕒</h3><br><hr></span>
+	<h3>📅 PERIODO DEL COMISIONAMIENTO 🕒</h3><br><hr></span>
 	
 								</td>
 			{END cellblock_grid_c1}
 								</tr>
 	 
 	 
-														<tr {$row_grid_4} >
+														<tr {$row_grid_3} >
 										
 
 {BEGIN cellblock_grid_c}
@@ -738,13 +671,13 @@
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c" data-pageid="{$pageid}"
+			data-cellId="grid_c" data-pageid="{$pageid}" data-page="comisionamiento_edit"
 		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
-	<h4><strong>📅 Fecha de inicio del permiso</strong><span class="ql-cursor">﻿</span></h4></span>
+	<h4><strong>📅 Fecha de inicio del comisionamiento</strong><span class="ql-cursor">﻿</span></h4></span>
 											
 {BEGIN fecha_desde_fieldblock}
 
@@ -801,13 +734,13 @@
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c2" data-pageid="{$pageid}"
-		data-v-cell="2"
+	ocolspan="2"		data-cellId="grid_c2" data-pageid="{$pageid}" data-page="comisionamiento_edit"
+		data-v-cell="4"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-small > 
-	<h4><strong>📅 Fecha de fin del permiso</strong><span class="ql-cursor">﻿</span></h4></span>
+	<h4><strong>📅 Fecha de fin del comisionamiento</strong><span class="ql-cursor">﻿</span></h4></span>
 											
 {BEGIN fecha_hasta_fieldblock}
 
@@ -858,7 +791,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_5} >
+														<tr {$row_grid_4} >
 										
 
 {BEGIN cellblock_grid_c14}
@@ -869,20 +802,20 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c14" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c14" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
 				<span data-itemtype="text" data-itemid="text5" {$item_text5} data-pageid="{$pageid}" data-small > 
-	<small> 📌 Indique el período exacto en el que se ausentará.</small></span>
+	<small> 📌 Indique el período exacto del comisionamiento.</small></span>
 	
 								</td>
 			{END cellblock_grid_c14}
 								</tr>
 	 
 	 
-														<tr {$row_grid_6} >
+														<tr {$row_grid_5} >
 										
 
 {BEGIN cellblock_grid_c5}
@@ -893,8 +826,8 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c5" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c5" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -906,57 +839,18 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_7} >
+														<tr {$row_grid_6} >
 										
 
 {BEGIN cellblock_grid_c4}
 <td
 	{$cell_grid_c4}
-	class="r-align-right r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c4" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-				
-{BEGIN comision_servicios_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_comision_servicios}  r-vertical-field" 
-	data-signal-error-for="comision_servicios{$id}" {$required_attr_comision_servicios}
-	data-itemtype="integrated_edit_field" data-itemid="edit_comision_servicios" {$item_edit_comision_servicios} data-pageid="{$pageid}" data-field="comision_servicios" data-fieldname="comision_servicios" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_comision_servicios}">
-		{BEGIN comision_servicios_label}{$label comisionamiento comision_servicios }{END comision_servicios_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$comision_servicios_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="comision_servicios" {$tooltipAttr comisionamiento comision_servicios } >
-		<div class="text-muted" >
-		{$tooltip comisionamiento comision_servicios }		</div>
-	</div>
-</div>
-
-
-{END comision_servicios_fieldblock}
-	
-								</td>
-			{END cellblock_grid_c4}
-			 
-																
-
-{BEGIN cellblock_grid_c6}
-<td
-	{$cell_grid_c6}
 	class=" r-ori-vert"
 	
-			
-			data-cellId="grid_c6" data-pageid="{$pageid}"
-		data-v-cell="2"
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c4" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -986,11 +880,11 @@
 	<small> 📌 En caso de traslado indique lugar, institución o motivo de la comisión</small></span>
 	
 								</td>
-			{END cellblock_grid_c6}
+			{END cellblock_grid_c4}
 								</tr>
 	 
 	 
-														<tr {$row_grid_8} >
+														<tr {$row_grid_7} >
 										
 
 {BEGIN cellblock_grid_c10}
@@ -1000,8 +894,8 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c10" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c10" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -1053,11 +947,10 @@
 
 
 {END archivo_adjunto_fieldblock}
-											<span data-itemtype="text" data-itemid="text9" {$item_text9} data-pageid="{$pageid}" data-small > 
-	<small>📌 Adjunte documentos de respaldo si el permiso lo requiere (certificado médico, nota, etc.).</small></span>
 											<span data-itemtype="text" data-itemid="text15" {$item_text15} data-pageid="{$pageid}" data-small > 
-	<div style="font-size:12px;color:#6c757d;margin-top:5px;">
-  Formatos permitidos: PDF, JPG, PNG.
+	<small>📌 Adjunte documentos de respaldo si el comisionamiento lo requiere (certificado médico, nota, etc.).</small>
+<div style="font-size:12px;color:#6c757d;margin-top:5px;">
+  Formatos permitidos: PDF, JPG, PNG, DOC, DOCX, JPEG, JPG, PDF, PNG, TXT
 </div></span>
 	
 								</td>
@@ -1065,7 +958,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_9} >
+														<tr {$row_grid_8} >
 										
 
 {BEGIN cellblock_grid_c11}
@@ -1075,8 +968,8 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c11" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c11" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -1114,7 +1007,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_10} >
+														<tr {$row_grid_9} >
 										
 
 {BEGIN cellblock_grid_c3}
@@ -1125,8 +1018,8 @@
 			data-single
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c3" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -1138,7 +1031,7 @@
 								</tr>
 	 
 	 
-														<tr {$row_grid_11} >
+														<tr {$row_grid_10} >
 										
 
 {BEGIN cellblock_grid_c7}
@@ -1218,6 +1111,81 @@
 	
 								</td>
 			{END cellblock_grid_c8}
+			 
+																
+
+{BEGIN cellblock_grid_c9}
+<td
+	{$cell_grid_c9}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c9" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN rrhh_resultado_decision_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_rrhh_resultado_decision}  r-vertical-field" 
+	data-signal-error-for="rrhh_resultado_decision{$id}" {$required_attr_rrhh_resultado_decision}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="rrhh_resultado_decision" data-fieldname="rrhh_resultado_decision" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_rrhh_resultado_decision}">
+		{BEGIN rrhh_resultado_decision_label}{$label comisionamiento rrhh_resultado_decision }{END rrhh_resultado_decision_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$rrhh_resultado_decision_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="rrhh_resultado_decision" {$tooltipAttr comisionamiento rrhh_resultado_decision } >
+		<div class="text-muted" >
+		{$tooltip comisionamiento rrhh_resultado_decision }		</div>
+	</div>
+</div>
+
+
+{END rrhh_resultado_decision_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c9}
+								</tr>
+	 
+	 
+														<tr {$row_grid_11} >
+										
+
+{BEGIN cellblock_grid_c16}
+<td
+	{$cell_grid_c16}
+	class="r-align-center r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+	ocolspan="3"		data-cellId="grid_c16" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-small > 
+	<style>
+.footer-sistema{
+    text-align:center;
+    font-size:11px;
+    color:#888;
+    padding:10px;
+    border-top:1px solid #ddd;
+    background:#f8f9fa;
+}
+</style>
+<div class="footer-sistema">
+    Sistema Desarrollado por la Dirección de Tecnologías de la Información y la Comunicación(DTIC) - MTESS <br>©2026 MTESS · Versión 1.0.0</div></span>
+	
+								</td>
+			{END cellblock_grid_c16}
 								</tr>
 	 
 	 
@@ -1231,8 +1199,8 @@
 	
 				data-fullwidth
 		
-	ocolspan="2"		data-cellId="grid_c13" data-pageid="{$pageid}"
-		data-v-cell="4"
+	ocolspan="3"		data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="6"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -1303,6 +1271,94 @@
 
 {END dependencia_id_fieldblock}
 											
+{BEGIN decidido_por_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_decidido_por}  r-vertical-field" 
+	data-signal-error-for="decidido_por{$id}" {$required_attr_decidido_por}
+	data-itemtype="integrated_edit_field" data-itemid="edit_decidido_por" {$item_edit_decidido_por} data-pageid="{$pageid}" data-field="decidido_por" data-fieldname="decidido_por" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_decidido_por}">
+		{BEGIN decidido_por_label}{$label comisionamiento decidido_por }{END decidido_por_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$decidido_por_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="decidido_por" {$tooltipAttr comisionamiento decidido_por } >
+		<div class="text-muted" >
+		{$tooltip comisionamiento decidido_por }		</div>
+	</div>
+</div>
+
+
+{END decidido_por_fieldblock}
+											
+{BEGIN motivo_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_motivo_id}  r-vertical-field" 
+	data-signal-error-for="motivo_id{$id}" {$required_attr_motivo_id}
+	data-itemtype="integrated_edit_field" data-itemid="edit_motivo_id" {$item_edit_motivo_id} data-pageid="{$pageid}" data-field="motivo_id" data-fieldname="motivo_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_motivo_id}">
+		{BEGIN motivo_id_label}{$label comisionamiento motivo_id }{END motivo_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$motivo_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="motivo_id" {$tooltipAttr comisionamiento motivo_id } >
+		<div class="text-muted" >
+		{$tooltip comisionamiento motivo_id }		</div>
+	</div>
+</div>
+
+
+{END motivo_id_fieldblock}
+											
+{BEGIN comision_servicios_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_comision_servicios}  r-vertical-field" 
+	data-signal-error-for="comision_servicios{$id}" {$required_attr_comision_servicios}
+	data-itemtype="integrated_edit_field" data-itemid="edit_comision_servicios" {$item_edit_comision_servicios} data-pageid="{$pageid}" data-field="comision_servicios" data-fieldname="comision_servicios" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_comision_servicios}">
+		{BEGIN comision_servicios_label}{$label comisionamiento comision_servicios }{END comision_servicios_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$comision_servicios_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="comision_servicios" {$tooltipAttr comisionamiento comision_servicios } >
+		<div class="text-muted" >
+		{$tooltip comisionamiento comision_servicios }		</div>
+	</div>
+</div>
+
+
+{END comision_servicios_fieldblock}
+											
+{BEGIN descripcion_dependencia_edit_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_descripcion_dependencia_edit}  r-vertical-field" 
+	data-signal-error-for="descripcion_dependencia_edit{$id}" {$required_attr_descripcion_dependencia_edit}
+	data-itemtype="integrated_edit_field" data-itemid="descripcion_dependencia_edit" {$item_descripcion_dependencia_edit} data-pageid="{$pageid}" data-field="descripcion_dependencia_edit" data-fieldname="descripcion_dependencia_edit" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_descripcion_dependencia_edit}">
+		{BEGIN descripcion_dependencia_edit_label}{$label comisionamiento descripcion_dependencia_edit }{END descripcion_dependencia_edit_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$descripcion_dependencia_edit_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="descripcion_dependencia_edit" {$tooltipAttr comisionamiento descripcion_dependencia_edit } >
+		<div class="text-muted" >
+		{$tooltip comisionamiento descripcion_dependencia_edit }		</div>
+	</div>
+</div>
+
+
+{END descripcion_dependencia_edit_fieldblock}
+											
 {BEGIN tipo_vinculacion_fieldblock}
 
 
@@ -1324,6 +1380,28 @@
 
 
 {END tipo_vinculacion_fieldblock}
+											
+{BEGIN id_funcionario_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id_funcionario}  r-vertical-field" 
+	data-signal-error-for="id_funcionario{$id}" {$required_attr_id_funcionario}
+	data-itemtype="integrated_edit_field" data-itemid="edit_id_funcionario" {$item_edit_id_funcionario} data-pageid="{$pageid}" data-field="id_funcionario" data-fieldname="id_funcionario" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_id_funcionario}">
+		{BEGIN id_funcionario_label}{$label comisionamiento id_funcionario }{END id_funcionario_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$id_funcionario_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="id_funcionario" {$tooltipAttr comisionamiento id_funcionario } >
+		<div class="text-muted" >
+		{$tooltip comisionamiento id_funcionario }		</div>
+	</div>
+</div>
+
+
+{END id_funcionario_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c13}

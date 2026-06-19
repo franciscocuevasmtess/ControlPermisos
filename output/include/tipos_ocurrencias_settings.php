@@ -6,11 +6,11 @@ $tdatatipos_ocurrencias[".OwnerID"] = "";
 $tdatatipos_ocurrencias[".OriginalTable"] = "public.tipos_ocurrencias";
 
 
-$tdatatipos_ocurrencias[".pagesByType"] = my_json_decode( "{}" );
+$tdatatipos_ocurrencias[".pagesByType"] = my_json_decode( "{\"search\":[\"search\"]}" );
 $tdatatipos_ocurrencias[".originalPagesByType"] = $tdatatipos_ocurrencias[".pagesByType"];
-$tdatatipos_ocurrencias[".pages"] = types2pages( my_json_decode( "{}" ) );
+$tdatatipos_ocurrencias[".pages"] = types2pages( my_json_decode( "{\"search\":[\"search\"]}" ) );
 $tdatatipos_ocurrencias[".originalPages"] = $tdatatipos_ocurrencias[".pages"];
-$tdatatipos_ocurrencias[".defaultPages"] = my_json_decode( "{}" );
+$tdatatipos_ocurrencias[".defaultPages"] = my_json_decode( "{\"search\":\"search\"}" );
 $tdatatipos_ocurrencias[".originalDefaultPages"] = $tdatatipos_ocurrencias[".defaultPages"];
 
 //	field labels
@@ -73,6 +73,15 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelstipos_ocurrencias["Spanish"]["tip_horario_compensatorio"] = "Tip Horario Compensatorio";
 	$fieldToolTipstipos_ocurrencias["Spanish"]["tip_horario_compensatorio"] = "";
 	$placeHolderstipos_ocurrencias["Spanish"]["tip_horario_compensatorio"] = "";
+	$fieldLabelstipos_ocurrencias["Spanish"]["tip_presentacion_cantidad"] = "Tip Presentacion Cantidad";
+	$fieldToolTipstipos_ocurrencias["Spanish"]["tip_presentacion_cantidad"] = "";
+	$placeHolderstipos_ocurrencias["Spanish"]["tip_presentacion_cantidad"] = "";
+	$fieldLabelstipos_ocurrencias["Spanish"]["tip_presentacion_referencia"] = "Tip Presentacion Referencia";
+	$fieldToolTipstipos_ocurrencias["Spanish"]["tip_presentacion_referencia"] = "";
+	$placeHolderstipos_ocurrencias["Spanish"]["tip_presentacion_referencia"] = "";
+	$fieldLabelstipos_ocurrencias["Spanish"]["tip_genero_permitido"] = "Tip Genero Permitido";
+	$fieldToolTipstipos_ocurrencias["Spanish"]["tip_genero_permitido"] = "";
+	$placeHolderstipos_ocurrencias["Spanish"]["tip_genero_permitido"] = "";
 	if (count($fieldToolTipstipos_ocurrencias["Spanish"]))
 		$tdatatipos_ocurrencias[".isUseToolTips"] = true;
 }
@@ -206,6 +215,9 @@ $tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_compensacion";
 $tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_estado";
 $tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_cod_tipo_sumatoria";
 $tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_horario_compensatorio";
+$tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_presentacion_cantidad";
+$tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_presentacion_referencia";
+$tdatatipos_ocurrencias[".googleLikeFields"][] = "tip_genero_permitido";
 
 
 
@@ -239,7 +251,7 @@ $tdatatipos_ocurrencias[".strOrderBy"] = $tstrOrderBy;
 $tdatatipos_ocurrencias[".orderindexes"] = array();
 
 
-$tdatatipos_ocurrencias[".sqlHead"] = "SELECT tip_cod,  	tip_descripcion,  	tip_cantidad_maxima_mes,  	tip_cantidad_maxima_anho,  	tip_dias,  	tip_codigo,  	tip_horas_extras,  	tip_sin_horas,  	tip_asistencia,  	tip_llegada_tardia,  	tip_salida_temprana,  	tip_asueto,  	tip_compensacion,  	tip_estado,  	tip_cod_tipo_sumatoria,  	tip_horario_compensatorio";
+$tdatatipos_ocurrencias[".sqlHead"] = "SELECT tip_cod,  	tip_descripcion,  	tip_cantidad_maxima_mes,  	tip_cantidad_maxima_anho,  	tip_dias,  	tip_codigo,  	tip_horas_extras,  	tip_sin_horas,  	tip_asistencia,  	tip_llegada_tardia,  	tip_salida_temprana,  	tip_asueto,  	tip_compensacion,  	tip_estado,  	tip_cod_tipo_sumatoria,  	tip_horario_compensatorio,  	tip_presentacion_cantidad,  	tip_presentacion_referencia,  	tip_genero_permitido";
 $tdatatipos_ocurrencias[".sqlFrom"] = "FROM \"public\".tipos_ocurrencias";
 $tdatatipos_ocurrencias[".sqlWhereExpr"] = "";
 $tdatatipos_ocurrencias[".sqlTail"] = "";
@@ -2514,6 +2526,422 @@ $tdatatipos_ocurrencias[".hideMobileList"] = array();
 
 	$tdatatipos_ocurrencias["tip_horario_compensatorio"] = $fdata;
 		$tdatatipos_ocurrencias[".searchableFields"][] = "tip_horario_compensatorio";
+//	tip_presentacion_cantidad
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 17;
+	$fdata["strName"] = "tip_presentacion_cantidad";
+	$fdata["GoodName"] = "tip_presentacion_cantidad";
+	$fdata["ownerTable"] = "public.tipos_ocurrencias";
+	$fdata["Label"] = GetFieldLabel("public_tipos_ocurrencias","tip_presentacion_cantidad");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "tip_presentacion_cantidad";
+
+		$fdata["sourceSingle"] = "tip_presentacion_cantidad";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "tip_presentacion_cantidad";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatipos_ocurrencias["tip_presentacion_cantidad"] = $fdata;
+		$tdatatipos_ocurrencias[".searchableFields"][] = "tip_presentacion_cantidad";
+//	tip_presentacion_referencia
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 18;
+	$fdata["strName"] = "tip_presentacion_referencia";
+	$fdata["GoodName"] = "tip_presentacion_referencia";
+	$fdata["ownerTable"] = "public.tipos_ocurrencias";
+	$fdata["Label"] = GetFieldLabel("public_tipos_ocurrencias","tip_presentacion_referencia");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "tip_presentacion_referencia";
+
+		$fdata["sourceSingle"] = "tip_presentacion_referencia";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "tip_presentacion_referencia";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatipos_ocurrencias["tip_presentacion_referencia"] = $fdata;
+		$tdatatipos_ocurrencias[".searchableFields"][] = "tip_presentacion_referencia";
+//	tip_genero_permitido
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 19;
+	$fdata["strName"] = "tip_genero_permitido";
+	$fdata["GoodName"] = "tip_genero_permitido";
+	$fdata["ownerTable"] = "public.tipos_ocurrencias";
+	$fdata["Label"] = GetFieldLabel("public_tipos_ocurrencias","tip_genero_permitido");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "tip_genero_permitido";
+
+		$fdata["sourceSingle"] = "tip_genero_permitido";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "tip_genero_permitido";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatipos_ocurrencias["tip_genero_permitido"] = $fdata;
+		$tdatatipos_ocurrencias[".searchableFields"][] = "tip_genero_permitido";
 
 
 $tables_data["public.tipos_ocurrencias"]=&$tdatatipos_ocurrencias;
@@ -2558,7 +2986,7 @@ function createSqlQuery_tipos_ocurrencias()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "tip_cod,  	tip_descripcion,  	tip_cantidad_maxima_mes,  	tip_cantidad_maxima_anho,  	tip_dias,  	tip_codigo,  	tip_horas_extras,  	tip_sin_horas,  	tip_asistencia,  	tip_llegada_tardia,  	tip_salida_temprana,  	tip_asueto,  	tip_compensacion,  	tip_estado,  	tip_cod_tipo_sumatoria,  	tip_horario_compensatorio";
+$proto0["m_strFieldList"] = "tip_cod,  	tip_descripcion,  	tip_cantidad_maxima_mes,  	tip_cantidad_maxima_anho,  	tip_dias,  	tip_codigo,  	tip_horas_extras,  	tip_sin_horas,  	tip_asistencia,  	tip_llegada_tardia,  	tip_salida_temprana,  	tip_asueto,  	tip_compensacion,  	tip_estado,  	tip_cod_tipo_sumatoria,  	tip_horario_compensatorio,  	tip_presentacion_cantidad,  	tip_presentacion_referencia,  	tip_genero_permitido";
 $proto0["m_strFrom"] = "FROM \"public\".tipos_ocurrencias";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -2822,52 +3250,97 @@ $proto36["m_alias"] = "";
 $obj = new SQLFieldListItem($proto36);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto38=array();
-$proto38["m_link"] = "SQLL_MAIN";
-			$proto39=array();
-$proto39["m_strName"] = "public.tipos_ocurrencias";
-$proto39["m_srcTableName"] = "public.tipos_ocurrencias";
-$proto39["m_columns"] = array();
-$proto39["m_columns"][] = "tip_cod";
-$proto39["m_columns"][] = "tip_descripcion";
-$proto39["m_columns"][] = "tip_cantidad_maxima_mes";
-$proto39["m_columns"][] = "tip_cantidad_maxima_anho";
-$proto39["m_columns"][] = "tip_dias";
-$proto39["m_columns"][] = "tip_codigo";
-$proto39["m_columns"][] = "tip_horas_extras";
-$proto39["m_columns"][] = "tip_sin_horas";
-$proto39["m_columns"][] = "tip_asistencia";
-$proto39["m_columns"][] = "tip_llegada_tardia";
-$proto39["m_columns"][] = "tip_salida_temprana";
-$proto39["m_columns"][] = "tip_asueto";
-$proto39["m_columns"][] = "tip_compensacion";
-$proto39["m_columns"][] = "tip_estado";
-$proto39["m_columns"][] = "tip_cod_tipo_sumatoria";
-$proto39["m_columns"][] = "tip_horario_compensatorio";
-$obj = new SQLTable($proto39);
+						$proto38=array();
+			$obj = new SQLField(array(
+	"m_strName" => "tip_presentacion_cantidad",
+	"m_strTable" => "public.tipos_ocurrencias",
+	"m_srcTableName" => "public.tipos_ocurrencias"
+));
 
-$proto38["m_table"] = $obj;
-$proto38["m_sql"] = "\"public\".tipos_ocurrencias";
-$proto38["m_alias"] = "";
+$proto38["m_sql"] = "tip_presentacion_cantidad";
 $proto38["m_srcTableName"] = "public.tipos_ocurrencias";
-$proto40=array();
-$proto40["m_sql"] = "";
-$proto40["m_uniontype"] = "SQLL_UNKNOWN";
+$proto38["m_expr"]=$obj;
+$proto38["m_alias"] = "";
+$obj = new SQLFieldListItem($proto38);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto40=array();
+			$obj = new SQLField(array(
+	"m_strName" => "tip_presentacion_referencia",
+	"m_strTable" => "public.tipos_ocurrencias",
+	"m_srcTableName" => "public.tipos_ocurrencias"
+));
+
+$proto40["m_sql"] = "tip_presentacion_referencia";
+$proto40["m_srcTableName"] = "public.tipos_ocurrencias";
+$proto40["m_expr"]=$obj;
+$proto40["m_alias"] = "";
+$obj = new SQLFieldListItem($proto40);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto42=array();
+			$obj = new SQLField(array(
+	"m_strName" => "tip_genero_permitido",
+	"m_strTable" => "public.tipos_ocurrencias",
+	"m_srcTableName" => "public.tipos_ocurrencias"
+));
+
+$proto42["m_sql"] = "tip_genero_permitido";
+$proto42["m_srcTableName"] = "public.tipos_ocurrencias";
+$proto42["m_expr"]=$obj;
+$proto42["m_alias"] = "";
+$obj = new SQLFieldListItem($proto42);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto44=array();
+$proto44["m_link"] = "SQLL_MAIN";
+			$proto45=array();
+$proto45["m_strName"] = "public.tipos_ocurrencias";
+$proto45["m_srcTableName"] = "public.tipos_ocurrencias";
+$proto45["m_columns"] = array();
+$proto45["m_columns"][] = "tip_cod";
+$proto45["m_columns"][] = "tip_descripcion";
+$proto45["m_columns"][] = "tip_cantidad_maxima_mes";
+$proto45["m_columns"][] = "tip_cantidad_maxima_anho";
+$proto45["m_columns"][] = "tip_dias";
+$proto45["m_columns"][] = "tip_codigo";
+$proto45["m_columns"][] = "tip_horas_extras";
+$proto45["m_columns"][] = "tip_sin_horas";
+$proto45["m_columns"][] = "tip_asistencia";
+$proto45["m_columns"][] = "tip_llegada_tardia";
+$proto45["m_columns"][] = "tip_salida_temprana";
+$proto45["m_columns"][] = "tip_asueto";
+$proto45["m_columns"][] = "tip_compensacion";
+$proto45["m_columns"][] = "tip_estado";
+$proto45["m_columns"][] = "tip_cod_tipo_sumatoria";
+$proto45["m_columns"][] = "tip_horario_compensatorio";
+$proto45["m_columns"][] = "tip_presentacion_cantidad";
+$proto45["m_columns"][] = "tip_presentacion_referencia";
+$proto45["m_columns"][] = "tip_genero_permitido";
+$obj = new SQLTable($proto45);
+
+$proto44["m_table"] = $obj;
+$proto44["m_sql"] = "\"public\".tipos_ocurrencias";
+$proto44["m_alias"] = "";
+$proto44["m_srcTableName"] = "public.tipos_ocurrencias";
+$proto46=array();
+$proto46["m_sql"] = "";
+$proto46["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto40["m_column"]=$obj;
-$proto40["m_contained"] = array();
-$proto40["m_strCase"] = "";
-$proto40["m_havingmode"] = false;
-$proto40["m_inBrackets"] = false;
-$proto40["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto40);
+$proto46["m_column"]=$obj;
+$proto46["m_contained"] = array();
+$proto46["m_strCase"] = "";
+$proto46["m_havingmode"] = false;
+$proto46["m_inBrackets"] = false;
+$proto46["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto46);
 
-$proto38["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto38);
+$proto44["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto44);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -2883,7 +3356,7 @@ $queryData_tipos_ocurrencias = createSqlQuery_tipos_ocurrencias();
 	
 		;
 
-																
+																			
 
 $tdatatipos_ocurrencias[".sqlquery"] = $queryData_tipos_ocurrencias;
 

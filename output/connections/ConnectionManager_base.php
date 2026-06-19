@@ -251,6 +251,7 @@ class ConnectionManager_Base
 		$connectionsIds["public.usuarios"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["comisionamiento"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["public.personales"] = "dbtalentos_at_192_168_123_51";
+		$connectionsIds["vacacion"] = "dbtalentos_at_192_168_123_51";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

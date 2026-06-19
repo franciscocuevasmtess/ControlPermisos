@@ -205,6 +205,16 @@ pdfDocument = {
 			"%",
 						{END row_grid_11}
 			 
+								{BEGIN row_grid_12}
+						
+			"%",
+						{END row_grid_12}
+			 
+								{BEGIN row_grid_13}
+						
+			"%",
+						{END row_grid_13}
+			 
 				],
 	
 		body: [
@@ -416,7 +426,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h3>📅 PERIODO DEL PERMISO 🕒</h3><br><hr>","hidden":"{$item_hide_text4}","isHtml":true},
+			{"text":"<h3>📅 PERIODO DEL COMISIONAMIENTO 🕒</h3><br><hr>","hidden":"{$item_hide_text4}","isHtml":true},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -461,7 +471,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h4><strong>📅 Fecha de inicio del permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text}","isHtml":true},
+			{"text":"<h4><strong>📅 Fecha de inicio del comisionamiento</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text}","isHtml":true},
 				
 				
 			{"hidden":"{$item_hide_view_fecha_desde}","stack":[{"text":"{$jslabel comisionamiento fecha_desde }","bold":true},{"text":{$fecha_desde_pdfvalue}}],"margin":[0,0,0,15]},
@@ -486,6 +496,9 @@ pdfDocument = {
 		
 	//	dynamic colspan/rowspan
 
+					{BEGIN colspan_grid_c13}
+			colSpan: {$colspan_grid_c13},
+			{END colspan_grid_c13}
 		
 		
 	
@@ -494,7 +507,7 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"text":"<h4><strong>📅 Fecha de fin del permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text1}","isHtml":true},
+			{"text":"<h4><strong>📅 Fecha de fin del comisionamiento</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text1}","isHtml":true},
 				
 				
 			{"hidden":"{$item_hide_view_fecha_hasta}","stack":[{"text":"{$jslabel comisionamiento fecha_hasta }","bold":true},{"text":{$fecha_hasta_pdfvalue}}],"margin":[0,0,0,15]},
@@ -510,37 +523,14 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c13}
-																							{BEGIN cellblock_grid_c14}
-{
-	cellId: 'c14',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
-				
-			{"text":"<h4><strong>🔢 Cantidad de días de permiso</strong><span class=\"ql-cursor\">﻿</span></h4>","hidden":"{$item_hide_text8}","isHtml":true},
-				
-				
-			{"hidden":"{$item_hide_view_cantidad_dias_permiso}","stack":[{"text":"{$jslabel comisionamiento cantidad_dias_permiso }","bold":true},{"text":{$cantidad_dias_permiso_pdfvalue}}],"margin":[0,0,0,15]},
-				
-		  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c14}
-											],
+																		{ 
+				cellId: 'c13',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
 				{END row_grid_4}
 						{BEGIN row_grid_5}
 				[
@@ -601,36 +591,9 @@ pdfDocument = {
 		
 	//	dynamic colspan/rowspan
 
-		
-		
-	
-			
-	
-			"stack": [
-		
-				
-			{"hidden":"{$item_hide_view_comision_servicios}","stack":[{"text":"{$jslabel comisionamiento comision_servicios }","bold":true},{"text":{$comision_servicios_pdfvalue}}],"margin":[0,0,0,15]},
-				
-		  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c15}
-																							{BEGIN cellblock_grid_c21}
-{
-	cellId: 'c21',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-					{BEGIN colspan_grid_c21}
-			colSpan: {$colspan_grid_c21},
-			{END colspan_grid_c21}
+					{BEGIN colspan_grid_c15}
+			colSpan: {$colspan_grid_c15},
+			{END colspan_grid_c15}
 		
 		
 	
@@ -648,11 +611,18 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_c21}
+{END cellblock_grid_c15}
 																		{ 
-				cellId: 'c21',
+				cellId: 'c15',
 				row:  0,
 				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c15',
+				row:  0,
+				col:  2,
 				text: '',
 				compensateColspan: true
 			},
@@ -682,9 +652,6 @@ pdfDocument = {
 				
 			{"text":"<h3>💬 OBSERVACIONES Y DOCUMENTOS</h3><br><hr>","hidden":"{$item_hide_text6}","isHtml":true},
 				
-				
-			{"hidden":"{$item_hide_view_observacion}","stack":[{"text":"{$jslabel comisionamiento observacion }","bold":true},{"text":{$observacion_pdfvalue}}],"margin":[0,0,0,15]},
-				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
@@ -710,6 +677,74 @@ pdfDocument = {
 							],
 				{END row_grid_7}
 						{BEGIN row_grid_8}
+				[
+																{BEGIN cellblock_grid_c5}
+{
+	cellId: 'c5',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_view_observacion}","stack":[{"text":"{$jslabel comisionamiento observacion }","bold":true},{"text":{$observacion_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c5}
+																							{BEGIN cellblock_grid_c6}
+{
+	cellId: 'c6',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c6}
+			colSpan: {$colspan_grid_c6},
+			{END colspan_grid_c6}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel comisionamiento archivo_adjunto }","bold":true},{"text":{$archivo_adjunto_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c6}
+																		{ 
+				cellId: 'c6',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_8}
+						{BEGIN row_grid_9}
 				[
 																{BEGIN cellblock_grid_c8}
 {
@@ -759,8 +794,8 @@ pdfDocument = {
 				compensateColspan: true
 			},
 							],
-				{END row_grid_8}
-						{BEGIN row_grid_9}
+				{END row_grid_9}
+						{BEGIN row_grid_10}
 				[
 																{BEGIN cellblock_grid_c9}
 {
@@ -844,8 +879,8 @@ pdfDocument = {
 
 {END cellblock_grid_c}
 											],
-				{END row_grid_9}
-						{BEGIN row_grid_10}
+				{END row_grid_10}
+						{BEGIN row_grid_11}
 				[
 																{BEGIN cellblock_grid_c16}
 {
@@ -895,8 +930,56 @@ pdfDocument = {
 				compensateColspan: true
 			},
 							],
-				{END row_grid_10}
-						{BEGIN row_grid_11}
+				{END row_grid_11}
+						{BEGIN row_grid_12}
+				[
+																{BEGIN cellblock_grid_c14}
+{
+	cellId: 'c14',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_c14}
+			colSpan: {$colspan_grid_c14},
+			{END colspan_grid_c14}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<style>\n.footer-sistema{\n    text-align:center;\n    font-size:11px;\n    color:#888;\n    padding:10px;\n    border-top:1px solid #ddd;\n    background:#f8f9fa;\n}\n</style>\n<div class=\"footer-sistema\">\n    Sistema Desarrollado por la Dirección de Tecnologías de la Información y la Comunicación(DTIC) - MTESS <br>©2026 MTESS · Versión 1.0.0</div>","hidden":"{$item_hide_text8}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'center',
+     
+      
+      },
+
+{END cellblock_grid_c14}
+																		{ 
+				cellId: 'c14',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'c14',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_12}
+						{BEGIN row_grid_13}
 				[
 																{BEGIN cellblock_grid_c12}
 {
@@ -919,6 +1002,9 @@ pdfDocument = {
 		
 				
 			{"hidden":"{$item_hide_view_id}","stack":[{"text":"{$jslabel comisionamiento id }","bold":true},{"text":{$id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_view_decidido_por}","stack":[{"text":"{$jslabel comisionamiento decidido_por }","bold":true},{"text":{$decidido_por_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -943,7 +1029,7 @@ pdfDocument = {
 				compensateColspan: true
 			},
 							],
-				{END row_grid_11}
+				{END row_grid_13}
 		
 		]
 	}

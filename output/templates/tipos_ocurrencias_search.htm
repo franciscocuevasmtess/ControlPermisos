@@ -1,0 +1,568 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_tipos_ocurrencias search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN tip_cod_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_cod}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_cod{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="tip_cod" data-fieldname="tip_cod" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_cod}">
+		{$label public_tipos_ocurrencias tip_cod }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_cod}
+	</div>
+	<div class="r-search-field">
+		{$tip_cod_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_cod_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_cod_fieldblock}
+											
+{BEGIN tip_descripcion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_descripcion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_descripcion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="tip_descripcion" data-fieldname="tip_descripcion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_descripcion}">
+		{$label public_tipos_ocurrencias tip_descripcion }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_descripcion}
+	</div>
+	<div class="r-search-field">
+		{$tip_descripcion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_descripcion_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_descripcion_fieldblock}
+											
+{BEGIN tip_cantidad_maxima_mes_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_cantidad_maxima_mes}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_cantidad_maxima_mes{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="tip_cantidad_maxima_mes" data-fieldname="tip_cantidad_maxima_mes" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_cantidad_maxima_mes}">
+		{$label public_tipos_ocurrencias tip_cantidad_maxima_mes }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_cantidad_maxima_mes}
+	</div>
+	<div class="r-search-field">
+		{$tip_cantidad_maxima_mes_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_cantidad_maxima_mes_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_cantidad_maxima_mes_fieldblock}
+											
+{BEGIN tip_cantidad_maxima_anho_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_cantidad_maxima_anho}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_cantidad_maxima_anho{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="tip_cantidad_maxima_anho" data-fieldname="tip_cantidad_maxima_anho" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_cantidad_maxima_anho}">
+		{$label public_tipos_ocurrencias tip_cantidad_maxima_anho }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_cantidad_maxima_anho}
+	</div>
+	<div class="r-search-field">
+		{$tip_cantidad_maxima_anho_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_cantidad_maxima_anho_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_cantidad_maxima_anho_fieldblock}
+											
+{BEGIN tip_dias_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_dias}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_dias{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="tip_dias" data-fieldname="tip_dias" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_dias}">
+		{$label public_tipos_ocurrencias tip_dias }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_dias}
+	</div>
+	<div class="r-search-field">
+		{$tip_dias_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_dias_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_dias_fieldblock}
+											
+{BEGIN tip_codigo_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_codigo}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_codigo{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="tip_codigo" data-fieldname="tip_codigo" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_codigo}">
+		{$label public_tipos_ocurrencias tip_codigo }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_codigo}
+	</div>
+	<div class="r-search-field">
+		{$tip_codigo_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_codigo_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_codigo_fieldblock}
+											
+{BEGIN tip_horas_extras_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_horas_extras}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_horas_extras{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="tip_horas_extras" data-fieldname="tip_horas_extras" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_horas_extras}">
+		{$label public_tipos_ocurrencias tip_horas_extras }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_horas_extras}
+	</div>
+	<div class="r-search-field">
+		{$tip_horas_extras_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_horas_extras_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_horas_extras_fieldblock}
+											
+{BEGIN tip_sin_horas_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_sin_horas}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_sin_horas{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="tip_sin_horas" data-fieldname="tip_sin_horas" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_sin_horas}">
+		{$label public_tipos_ocurrencias tip_sin_horas }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_sin_horas}
+	</div>
+	<div class="r-search-field">
+		{$tip_sin_horas_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_sin_horas_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_sin_horas_fieldblock}
+											
+{BEGIN tip_asistencia_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_asistencia}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_asistencia{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="tip_asistencia" data-fieldname="tip_asistencia" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_asistencia}">
+		{$label public_tipos_ocurrencias tip_asistencia }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_asistencia}
+	</div>
+	<div class="r-search-field">
+		{$tip_asistencia_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_asistencia_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_asistencia_fieldblock}
+											
+{BEGIN tip_llegada_tardia_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_llegada_tardia}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_llegada_tardia{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="tip_llegada_tardia" data-fieldname="tip_llegada_tardia" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_llegada_tardia}">
+		{$label public_tipos_ocurrencias tip_llegada_tardia }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_llegada_tardia}
+	</div>
+	<div class="r-search-field">
+		{$tip_llegada_tardia_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_llegada_tardia_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_llegada_tardia_fieldblock}
+											
+{BEGIN tip_salida_temprana_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_salida_temprana}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_salida_temprana{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="tip_salida_temprana" data-fieldname="tip_salida_temprana" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_salida_temprana}">
+		{$label public_tipos_ocurrencias tip_salida_temprana }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_salida_temprana}
+	</div>
+	<div class="r-search-field">
+		{$tip_salida_temprana_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_salida_temprana_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_salida_temprana_fieldblock}
+											
+{BEGIN tip_asueto_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_asueto}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_asueto{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="tip_asueto" data-fieldname="tip_asueto" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_asueto}">
+		{$label public_tipos_ocurrencias tip_asueto }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_asueto}
+	</div>
+	<div class="r-search-field">
+		{$tip_asueto_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_asueto_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_asueto_fieldblock}
+											
+{BEGIN tip_compensacion_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_compensacion}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_compensacion{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="tip_compensacion" data-fieldname="tip_compensacion" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_compensacion}">
+		{$label public_tipos_ocurrencias tip_compensacion }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_compensacion}
+	</div>
+	<div class="r-search-field">
+		{$tip_compensacion_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_compensacion_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_compensacion_fieldblock}
+											
+{BEGIN tip_estado_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_estado}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_estado{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="tip_estado" data-fieldname="tip_estado" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_estado}">
+		{$label public_tipos_ocurrencias tip_estado }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_estado}
+	</div>
+	<div class="r-search-field">
+		{$tip_estado_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_estado_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_estado_fieldblock}
+											
+{BEGIN tip_cod_tipo_sumatoria_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_cod_tipo_sumatoria}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_cod_tipo_sumatoria{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="tip_cod_tipo_sumatoria" data-fieldname="tip_cod_tipo_sumatoria" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_cod_tipo_sumatoria}">
+		{$label public_tipos_ocurrencias tip_cod_tipo_sumatoria }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_cod_tipo_sumatoria}
+	</div>
+	<div class="r-search-field">
+		{$tip_cod_tipo_sumatoria_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_cod_tipo_sumatoria_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_cod_tipo_sumatoria_fieldblock}
+											
+{BEGIN tip_horario_compensatorio_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_horario_compensatorio}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_horario_compensatorio{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="tip_horario_compensatorio" data-fieldname="tip_horario_compensatorio" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_horario_compensatorio}">
+		{$label public_tipos_ocurrencias tip_horario_compensatorio }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_horario_compensatorio}
+	</div>
+	<div class="r-search-field">
+		{$tip_horario_compensatorio_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_horario_compensatorio_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_horario_compensatorio_fieldblock}
+											
+{BEGIN tip_presentacion_cantidad_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_presentacion_cantidad}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_presentacion_cantidad{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field16" {$item_integrated_search_field16} data-pageid="{$pageid}" data-field="tip_presentacion_cantidad" data-fieldname="tip_presentacion_cantidad" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_presentacion_cantidad}">
+		{$label public_tipos_ocurrencias tip_presentacion_cantidad }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_presentacion_cantidad}
+	</div>
+	<div class="r-search-field">
+		{$tip_presentacion_cantidad_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_presentacion_cantidad_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_presentacion_cantidad_fieldblock}
+											
+{BEGIN tip_presentacion_referencia_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_presentacion_referencia}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_presentacion_referencia{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field17" {$item_integrated_search_field17} data-pageid="{$pageid}" data-field="tip_presentacion_referencia" data-fieldname="tip_presentacion_referencia" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_presentacion_referencia}">
+		{$label public_tipos_ocurrencias tip_presentacion_referencia }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_presentacion_referencia}
+	</div>
+	<div class="r-search-field">
+		{$tip_presentacion_referencia_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_presentacion_referencia_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_presentacion_referencia_fieldblock}
+											
+{BEGIN tip_genero_permitido_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tip_genero_permitido}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="tip_genero_permitido{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field18" {$item_integrated_search_field18} data-pageid="{$pageid}" data-field="tip_genero_permitido" data-fieldname="tip_genero_permitido" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_tip_genero_permitido}">
+		{$label public_tipos_ocurrencias tip_genero_permitido }	</label>
+	<div class="r-search-option">
+		{$searchtype_tip_genero_permitido}
+	</div>
+	<div class="r-search-field">
+		{$tip_genero_permitido_editcontrol}	</div>
+	<div class="r-search-field">
+		{$tip_genero_permitido_editcontrol1}
+	</div>
+	
+</div>
+
+{END tip_genero_permitido_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Buscar			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reiniciar			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Volver a la lista			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancelar			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

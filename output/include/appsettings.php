@@ -755,9 +755,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "1214_1777031130";
+$projectBuildKey = "1532_1780333742";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "1214";
+$projectBuildNumber = "1532";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -791,6 +791,7 @@ $tableCaptions["Spanish"]["rrhh_permisos_solicitudes_vacaciones"] = "Solicitudes
 $tableCaptions["Spanish"]["public_usuarios"] = "Usuarios";
 $tableCaptions["Spanish"]["comisionamiento"] = "Comisionamiento";
 $tableCaptions["Spanish"]["public_personales"] = "Personales";
+$tableCaptions["Spanish"]["vacacion"] = "Vacacion";
 
 
 $globalEvents = new class_GlobalEvents;
@@ -875,8 +876,6 @@ if(mlang_getcurrentlang()=="Spanish")
 
 $globalSettings["showDetailedError"] = true;
 
-$globalSettings["smsCodeLength"] = 6;
-$globalSettings["smsMaskLength"] = 4;
 
 
 $globalSettings["mapMarkerCount"] = 50;

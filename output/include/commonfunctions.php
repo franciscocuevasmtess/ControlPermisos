@@ -219,6 +219,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("personales" == $shortTName )
 		return true;
+	if ("vacacion" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -341,6 +343,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.personales";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("vacacion");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="vacacion";
+	}
 	return $arr;
 }
 
@@ -358,6 +369,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.usuarios";
 	$arr[]="comisionamiento";
 	$arr[]="public.personales";
+	$arr[]="vacacion";
 	return $arr;
 }
 
@@ -1015,6 +1027,11 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.personales" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="vacacion" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

@@ -1004,10 +1004,7 @@
 					[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="observacion"]:before {
 		content: "{$label rrhh_permisos_permisos_funcionarios observacion}";
 	}
-				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="archivo_adjunto"]:before {
-		content: "{$label rrhh_permisos_permisos_funcionarios archivo_adjunto}";
-	}
-							[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_solicitud"]:before {
+									[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fecha_solicitud"]:before {
 		content: "{$label rrhh_permisos_permisos_funcionarios fecha_solicitud}";
 	}
 				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="resultado_decision"]:before {
@@ -1115,21 +1112,6 @@
 	
 	</th>
 	{END cellblock_grid_headcell_icons13}
-									{BEGIN cellblock_grid_cell_field18}
-	<th
-	
-	{$cell_grid_cell_field18}
-	{$recordattrs}
-	class="
-		 r-ori-vert			"
-
-	
-	data-cellId="grid_cell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	
-	</th>
-	{END cellblock_grid_cell_field18}
 									{BEGIN cellblock_grid_headcell_field11}
 	<th
 	
@@ -1154,49 +1136,33 @@
 	{$cell_grid_headcell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert			"
+		r-align-center r-ori-vert			"
 
 	
 	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
+	 
+		<span data-itemtype="text" data-itemid="text4" {$item_text4} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
+	🔹Documentos Adjuntos</span>
 	
 	</th>
 	{END cellblock_grid_headcell_field14}
-									{BEGIN cellblock_grid_headcell_field19}
+									{BEGIN cellblock_grid_headcell_field23}
 	<th
 	
-	{$cell_grid_headcell_field19}
+	{$cell_grid_headcell_field23}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$archivo_adjunto_class}	"
+		 r-ori-vert			"
 
-			data-field="archivo_adjunto"
 	
-	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field23" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
-
-	 
-		{BEGIN archivo_adjunto_fieldheadercolumn}
-	{BEGIN archivo_adjunto_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="grid_field_label16" {$item_grid_field_label16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="archivo_adjunto" data-fieldname="archivo_adjunto" 
-
-			{$archivo_adjunto_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label rrhh_permisos_permisos_funcionarios archivo_adjunto }</span>
-					{$arrow_icon_archivo_adjunto}
-			</span>
-	</span>
-	{END archivo_adjunto_fieldheader}
-{END archivo_adjunto_fieldheadercolumn}
 
 	
 	</th>
-	{END cellblock_grid_headcell_field19}
+	{END cellblock_grid_headcell_field23}
 							</tr>
 											<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
 									{$gridHeader_class}
@@ -1809,24 +1775,27 @@
 	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
+	 
+		<span data-itemtype="text" data-itemid="text5" {$item_text5} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
+	📎 Archivos adjuntos</span>
 	
 	</th>
 	{END cellblock_grid_headcell_field18}
-									{BEGIN cellblock_grid_headcell_field20}
+									{BEGIN cellblock_grid_headcell_field24}
 	<th
 	
-	{$cell_grid_headcell_field20}
+	{$cell_grid_headcell_field24}
 	{$recordattrs}
 	class="
 		 r-ori-vert			"
 
 	
-	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field24" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	
 	</th>
-	{END cellblock_grid_headcell_field20}
+	{END cellblock_grid_headcell_field24}
 							</tr>
 															
 					{END grid_header}
@@ -1855,7 +1824,7 @@
 		{BEGIN edit_column}
 {BEGIN edit_link}
 <span data-itemtype="grid_edit" data-itemid="grid_edit" {$item_grid_edit} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
-	<a type="button" title="Modificar Solicitud Permiso" class="btn-link   
+	<a type="button" title="Modificar Solicitud de Permiso" class="btn-link   
 	 glyphicon glyphicon-pencil" href="permisos_funcionarios_edit.php?{$editlink}" {$editlink_attrs} title="Editar" >		
 				
 								</a>
@@ -1866,7 +1835,7 @@
 		{BEGIN view_column}
 {BEGIN view_link}
 <span data-itemtype="grid_view" data-itemid="grid_view" {$item_grid_view} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
-	<a type="button" title="Ver Solicitud Permiso" class="btn-link   
+	<a type="button" title="Ver Detalles de la Solicitud de permiso" class="btn-link   
 	 glyphicon glyphicon-eye-open" href="permisos_funcionarios_view.php?{$editlink}" {$viewlink_attrs} title="Ver" >		
 				
 								</a>
@@ -2249,32 +2218,11 @@
 	{$cell_grid_cell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$intentos_correccion_class}	"
-
-			data-field="intentos_correccion"
-	
-	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN intentos_correccion_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="list_intentos_correccion" {$item_list_intentos_correccion} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="intentos_correccion" data-fieldname="intentos_correccion" data-default-width >
-{$intentos_correccion_value}
-</span>
-{END intentos_correccion_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field14}
-									{BEGIN cellblock_grid_cell_field16}
-	<td
-	
-	{$cell_grid_cell_field16}
-	{$recordattrs}
-	class="
 		 r-ori-vert		 {$archivo_adjunto_class}	"
 
 			data-field="archivo_adjunto"
 	
-	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2284,7 +2232,28 @@
 </span>
 {END archivo_adjunto_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field16}
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_headcell_field25}
+	<td
+	
+	{$cell_grid_headcell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$intentos_correccion_class}	"
+
+			data-field="intentos_correccion"
+	
+	data-cellId="grid_headcell_field25" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN intentos_correccion_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="list_intentos_correccion" {$item_list_intentos_correccion} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="intentos_correccion" data-fieldname="intentos_correccion" data-default-width >
+{$intentos_correccion_value}
+</span>
+{END intentos_correccion_fieldcolumn}	
+	</td>
+	{END cellblock_grid_headcell_field25}
 							</tr>
 										
 											{END grid_row}
@@ -2407,7 +2376,7 @@
 	{$cell_grid_footcell_field10}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$archivo_adjunto_class}	"
+		 r-ori-vert			"
 
 	
 	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="permisos_funcionarios_list"	
@@ -2581,21 +2550,21 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field16}
-									{BEGIN cellblock_grid_footcell_field17}
+									{BEGIN cellblock_grid_headcell_field26}
 	<td
 	
-	{$cell_grid_footcell_field17}
+	{$cell_grid_headcell_field26}
 	{$recordattrs}
 	class="
 		 r-ori-vert			"
 
 	
-	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="permisos_funcionarios_list"	
+	data-cellId="grid_headcell_field26" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="permisos_funcionarios_list"	
 	>
 
 	
 	</td>
-	{END cellblock_grid_footcell_field17}
+	{END cellblock_grid_headcell_field26}
 							</tr>
 					
 					</tfoot>

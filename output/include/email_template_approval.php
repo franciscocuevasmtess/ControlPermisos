@@ -19,8 +19,8 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
     $motivo = isset($datosPermiso['motivo']) ? htmlspecialchars($datosPermiso['motivo']) : 'N/A';
     $observacion = isset($datosPermiso['observacion']) ? htmlspecialchars($datosPermiso['observacion']) : '';
     $dependencia = isset($datosPermiso['dependencia']) ? htmlspecialchars($datosPermiso['dependencia']) : 'N/A';
-
     $tipoSolicitud = $datosPermiso['tipo_solicitud'];
+    $archivo = $datosPermiso['archivo'];
 
     // ========================================================================
     // PARTE 2: FORMATEAR FECHAS CON HORA
@@ -44,10 +44,10 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
     } elseif ($tipoSolicitud === 'vacaciones') {
         $titulo = 'Aprobación de Vacaciones';
         $encabezado = 'Solicitud de Aprobación de Vacaciones';
-    } //else {
-        //$titulo = 'Aprobación de Permiso';
-        //$encabezado = 'Solicitud de Aprobación de Permiso';
-    //}
+    } else {
+        $titulo = 'Aprobación de Comisión de Servicios';
+        $encabezado = 'Solicitud de Comisión de Servicios';
+    }
 
 
 
@@ -211,6 +211,60 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
                 <div class="info-label">Observación:</div>
                 <div class="info-value">' . $observacion . '</div>
             </div>';
+    }
+
+
+    /*
+     * Archivo adjunto solo para permisos 
+     * Excluye vacaciones
+     * Si no hay archivo adjunto, no se muestra nada
+     * El archivo no se puede descargar desde el correo, solo se puede ver el nombre del archivo
+     * Si hay archivo adjunto, se muestra el nombre del archivo y un enlace para descargarlo    
+     * IMPORTANTE: Cambiar esta URL por la URL real del sistema.
+     * Debe ser una URL accesible desde el correo.
+    */
+    if (!empty($archivo) && $tipoSolicitud !== 'vacaciones') {
+        $archivoHtml = '';
+
+        $archivos = json_decode($archivo, true);
+
+        if (is_array($archivos)) {
+            foreach ($archivos as $item) {
+                if (!empty($item["name"])) {
+                    $rutaArchivo = basename($item["name"]);
+                    $nombreVisible = !empty($item["usrName"]) ? $item["usrName"] : basename($rutaArchivo);
+
+                    /*
+                     * IMPORTANTE:
+                     * Cambiar esta URL por la URL real del sistema.
+                     * Debe ser una URL accesible desde el correo.
+                    */
+                    // Desarrollo
+                    $baseUrl = "https://desarrollo.mtess.gov.py/fcuevas/control_permisos/";
+                    // Produccion
+                    //$baseUrl = "https://permisos.mtess.gov.py/permisos_file/";
+
+                    $urlArchivo = $baseUrl . $rutaArchivo;
+
+                    $archivoHtml .= '
+                        <a href="' . htmlspecialchars($urlArchivo) . '" 
+                            target="_blank"
+                            style="display:inline-block; background-color:#1976d2; color:#ffffff; padding:10px 18px; text-decoration:none; border-radius:5px; font-weight:bold;">
+                            Descargar archivo: ' . htmlspecialchars($nombreVisible) . '
+                        </a>';
+                }
+            }
+        } else {
+            $archivoHtml = htmlspecialchars($archivo);
+        }
+
+        if (!empty($archivoHtml)) {
+            $html .= '
+                <div class="info-row">
+                    <div class="info-label">Archivo adjunto:</div>
+                    <div class="info-value">' . $archivoHtml . '</div>
+                </div>';
+        }
     }
 
     // Botones de acción

@@ -2928,6 +2928,8 @@ $tdatapermisos_funcionarios[".hideMobileList"] = array();
 						$edata["acceptFileTypesHtml"] .= ",.docx";
 			$edata["acceptFileTypes"][] = strtoupper("gif");
 						$edata["acceptFileTypesHtml"] .= ",.gif";
+			$edata["acceptFileTypes"][] = strtoupper("jpeg");
+						$edata["acceptFileTypesHtml"] .= ",.jpeg";
 			$edata["acceptFileTypes"][] = strtoupper("jpg");
 						$edata["acceptFileTypesHtml"] .= ",.jpg";
 			$edata["acceptFileTypes"][] = strtoupper("pdf");
@@ -2942,7 +2944,8 @@ $tdatapermisos_funcionarios[".hideMobileList"] = array();
 		$edata["maxNumberOfFiles"] = 10;
 
 	
-	
+		$edata["maxTotalFilesSize"] = 3000;
+
 	
 	
 	
@@ -6702,6 +6705,7 @@ $proto87["m_columns"][] = "rrhh_resultado_decision";
 $proto87["m_columns"][] = "rrhh_motivo_rechazo";
 $proto87["m_columns"][] = "ocu_cod";
 $proto87["m_columns"][] = "intentos_correccion";
+$proto87["m_columns"][] = "vac_dias_pedidos";
 $obj = new SQLTable($proto87);
 
 $proto86["m_table"] = $obj;

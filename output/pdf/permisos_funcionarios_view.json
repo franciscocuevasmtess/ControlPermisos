@@ -1021,6 +1021,39 @@ pdfDocument = {
       },
 
 											],
+						[
+																{
+	cellId: 'c',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"<style>\n.footer-sistema{\n    text-align:center;\n    font-size:11px;\n    color:#888;\n    padding:10px;\n    border-top:1px solid #ddd;\n    background:#f8f9fa;\n}\n</style>\n<div class=\"footer-sistema\">\n    Sistema Desarrollado por la Dirección de Tecnologías de la Información y la Comunicación(DTIC) - MTESS <br>©2026 MTESS · Versión 1.0.0</div>","hidden":"{$item_hide_text11}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'center',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
 		
 		]
 	}

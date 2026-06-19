@@ -117,11 +117,12 @@ var car_descri = Runner.getControl(pageid, 'car_descri');       // Cargo actual
 var sed_descripcion = Runner.getControl(pageid, 'sed_descripcion'); // Sede laboral
 
 // 🕐 Datos de fecha y hora del permiso
-var hora_desde = Runner.getControl(pageid, 'hora_desde');
-var hora_hasta = Runner.getControl(pageid, 'hora_hasta');
 var observacion = Runner.getControl(pageid, 'observacion');
 var email_jefe = Runner.getControl(pageid, 'email_jefe');
 var motivo_id = Runner.getControl(pageid, 'motivo_id');
+var motivoDescripcion = $("#value_motivo_id_" + pageid + " option:selected").text();
+var vac_dias_pedidos = Runner.getControl(pageid, 'vac_dias_pedidos');
+
 
 // 📅 FORMATEO DE FECHAS PARA VISUALIZACIÓN (DD/MM/YYYY)
 // Nota: Los meses en JS van de 0-11, por eso se suma +1 al getMonth()
@@ -173,12 +174,10 @@ if (faltantesPerfil.length > 0) {
  * Verifica que los campos obligatorios de la solicitud estén completos
  */
 var faltantesFormulario = validarCampos([
-	{ control: motivo_id, label: "Tipo de permiso o justificación" },
+	//{ control: motivo_id, label: "Tipo de permiso o justificación" },
 	{ control: email_jefe, label: "Correo del superior inmediato" },
 	{ control: Runner.getControl(pageid, 'fecha_desde'), label: "Fecha desde" },
-	{ control: hora_desde, label: "Hora de inicio" },
-	{ control: Runner.getControl(pageid, 'fecha_hasta'), label: "Fecha hasta" },
-	{ control: hora_hasta, label: "Hora de fin" }
+	{ control: Runner.getControl(pageid, 'fecha_hasta'), label: "Fecha hasta" }
 ]);
 
 if (faltantesFormulario.length > 0) {
@@ -230,9 +229,9 @@ var resumenHTML = `
 	<b>Sede Laboral:</b> ${sed_descripcion ? sed_descripcion.getValue() : ''} <br>
 	<hr>
 	<b>ℹ️ Revise los datos antes de enviar la solicitud.</b> <br>
-	<b>Tipo Permiso:</b> ${motivo_id.getDisplayValue() ? motivo_id.getDisplayValue() : ''} <br>
-	<b>Desde:</b> ${fecha_desde ? fecha_desde + " - " + hora_desde.getValue() : ''} <br>
-	<b>Hasta:</b> ${fecha_hasta ? fecha_hasta + " - " + hora_hasta.getValue() : ''} <br>
+	<b>Tipo Permiso:</b> ${motivoDescripcion} <br>
+	<b>Desde:</b> ${fecha_desde ? fecha_desde : ''} <br>
+	<b>Hasta:</b> ${fecha_hasta ? fecha_hasta : ''} <br>
 	<b>Observacion:</b> ${observacion.getValue()} <br>
 	<b>Correo electrónico del superior inmediato:</b> ${email_jefe ? email_jefe.getValue() : ''} <br>
 </div>

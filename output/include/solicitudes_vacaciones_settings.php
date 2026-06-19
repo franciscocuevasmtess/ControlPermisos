@@ -264,7 +264,7 @@ $tdatasolicitudes_vacaciones[".orderindexes"] = array();
 
 $tdatasolicitudes_vacaciones[".sqlHead"] = "SELECT sv.id,  	sv.id_funcionario,  	p.per_ci,  	p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  	sv.tipo_vinculacion,  	sv.dependencia_id,  	sv.fecha_desde,  	sv.fecha_hasta,  	sv.total_dias_habiles,  	sv.observacion,  	sv.estado,  	sv.fecha_solicitud,  	sv.usuario_creador,  	sv.fecha_actualizacion,  	sv.usuario_actualizacion,  	'' AS descripcion_dependencia,  	'' AS descripcion_dependencia_edit,  	'' AS descripcion_tipo_vinculacion,  	'' AS email_jefe,  	'' AS email_jefe_id,  	'' AS nombre_completo_edit";
 $tdatasolicitudes_vacaciones[".sqlFrom"] = "FROM rrhh_permisos.solicitudes_vacaciones sv   		LEFT JOIN public.personales p ON sv.id_funcionario = p.per_cod";
-$tdatasolicitudes_vacaciones[".sqlWhereExpr"] = "";
+$tdatasolicitudes_vacaciones[".sqlWhereExpr"] = "(sv.id = '9999')";
 $tdatasolicitudes_vacaciones[".sqlTail"] = "";
 
 
@@ -3320,21 +3320,23 @@ $proto0=array();
 $proto0["m_strHead"] = "SELECT";
 $proto0["m_strFieldList"] = "sv.id,  	sv.id_funcionario,  	p.per_ci,  	p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  	sv.tipo_vinculacion,  	sv.dependencia_id,  	sv.fecha_desde,  	sv.fecha_hasta,  	sv.total_dias_habiles,  	sv.observacion,  	sv.estado,  	sv.fecha_solicitud,  	sv.usuario_creador,  	sv.fecha_actualizacion,  	sv.usuario_actualizacion,  	'' AS descripcion_dependencia,  	'' AS descripcion_dependencia_edit,  	'' AS descripcion_tipo_vinculacion,  	'' AS email_jefe,  	'' AS email_jefe_id,  	'' AS nombre_completo_edit";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.solicitudes_vacaciones sv   		LEFT JOIN public.personales p ON sv.id_funcionario = p.per_cod";
-$proto0["m_strWhere"] = "";
+$proto0["m_strWhere"] = "(sv.id = '9999')";
 $proto0["m_strOrderBy"] = "";
 	
 		;
 			$proto0["cipherer"] = null;
 $proto2=array();
-$proto2["m_sql"] = "";
+$proto2["m_sql"] = "sv.id = '9999'";
 $proto2["m_uniontype"] = "SQLL_UNKNOWN";
-	$obj = new SQLNonParsed(array(
-	"m_sql" => ""
+						$obj = new SQLField(array(
+	"m_strName" => "id",
+	"m_strTable" => "sv",
+	"m_srcTableName" => "rrhh_permisos.solicitudes_vacaciones"
 ));
 
 $proto2["m_column"]=$obj;
 $proto2["m_contained"] = array();
-$proto2["m_strCase"] = "";
+$proto2["m_strCase"] = "= '9999'";
 $proto2["m_havingmode"] = false;
 $proto2["m_inBrackets"] = false;
 $proto2["m_useAlias"] = false;

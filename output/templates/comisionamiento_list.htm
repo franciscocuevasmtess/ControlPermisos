@@ -258,6 +258,32 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_id}</span>
 						</div>
 		{END searchCtrlBlock_id}
+																{BEGIN searchCtrlBlock_intentos_correccion}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_intentos_correccion}" {$filterRow_attrs_intentos_correccion}>
+			<label>{$label comisionamiento intentos_correccion }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_intentos_correccion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_intentos_correccion}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_intentos_correccion}</span>
+						</div>
+		{END searchCtrlBlock_intentos_correccion}
+																{BEGIN searchCtrlBlock_decidido_por}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_decidido_por}" {$filterRow_attrs_decidido_por}>
+			<label>{$label comisionamiento decidido_por }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_decidido_por}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_decidido_por}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_decidido_por}</span>
+						</div>
+		{END searchCtrlBlock_decidido_por}
 																{BEGIN searchCtrlBlock_rrhh_fecha_decision}
 
 
@@ -908,7 +934,7 @@
 	<a type="button" title="" class="btn btn-primary   
 	" {$addlink_attrs} href="comisionamiento_add.php{$stateLink_full}" >
 					<span class="glyphicon glyphicon-plus"></span>
-							Solicitar permiso			</a>
+							Cargar Comision de Servicios			</a>
 </span>
 {END add_link}
 			{END firstAboveGridCell}	
@@ -971,10 +997,7 @@
 				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="resultado_decision"]:before {
 		content: "{$label comisionamiento resultado_decision}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="horas_compensar"]:before {
-		content: "{$label comisionamiento horas_compensar}";
-	}
-					[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_resultado_decision"]:before {
+						[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_resultado_decision"]:before {
 		content: "{$label comisionamiento rrhh_resultado_decision}";
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_motivo_rechazo"]:before {
@@ -986,7 +1009,10 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="rrhh_fecha_decision"]:before {
 		content: "{$label comisionamiento rrhh_fecha_decision}";
 	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="decidido_por"]:before {
+		content: "{$label comisionamiento decidido_por}";
 	}
+		}
 </style>
 <table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-striped table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
 	cellpadding="0"
@@ -1084,10 +1110,25 @@
 
 	 
 		<span data-itemtype="text" data-itemid="text3" {$item_text3} data-pageid="{$pageid}" data-record-id="{$recId}" data-small > 
-	🔹Decisión de RRHH (final)</span>
+	🔹Decisión final de Recursos Humanos (RRHH)</span>
 	
 	</th>
 	{END cellblock_grid_headcell_field11}
+									{BEGIN cellblock_grid_headcell_field1}
+	<th
+	
+	{$cell_grid_headcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_field1}
 							</tr>
 											<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
 									{$gridHeader_class}
@@ -1450,40 +1491,6 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field2}
-									{BEGIN cellblock_grid_headcell_field1}
-	<th
-	
-	{$cell_grid_headcell_field1}
-	{$recordattrs}
-	class="
-		r-align-center r-ori-vert		 {$horas_compensar_class}	"
-
-			data-field="horas_compensar"
-	
-	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN horas_compensar_fieldheadercolumn}
-	{BEGIN horas_compensar_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="grid_field_label" {$item_grid_field_label} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="horas_compensar" data-fieldname="horas_compensar" 
-
-			{$horas_compensar_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label comisionamiento horas_compensar }</span>
-					{$arrow_icon_horas_compensar}
-			</span>
-	</span>
-	{END horas_compensar_fieldheader}
-{END horas_compensar_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field1}
 									{BEGIN cellblock_grid_headcell_field3}
 	<th
 	
@@ -1524,11 +1531,45 @@
 	{$cell_grid_headcell_field9}
 	{$recordattrs}
 	class="
-		r-align-center r-ori-vert		 {$fecha_decision_class}	"
+		r-align-center r-ori-vert		 {$decidido_por_class}	"
+
+			data-field="decidido_por"
+	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN decidido_por_fieldheadercolumn}
+	{BEGIN decidido_por_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label15" {$item_grid_field_label15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="decidido_por" data-fieldname="decidido_por" 
+
+			{$decidido_por_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label comisionamiento decidido_por }</span>
+					{$arrow_icon_decidido_por}
+			</span>
+	</span>
+	{END decidido_por_fieldheader}
+{END decidido_por_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field18}
+	<th
+	
+	{$cell_grid_headcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$fecha_decision_class}	"
 
 			data-field="fecha_decision"
 	
-	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1551,7 +1592,7 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field9}
+	{END cellblock_grid_headcell_field18}
 									{BEGIN cellblock_grid_headcell_field13}
 	<th
 	
@@ -1654,6 +1695,21 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field17}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
 							</tr>
 															
 					{END grid_header}
@@ -1923,27 +1979,6 @@
 {END observacion_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field2}
-									{BEGIN cellblock_grid_cell_field1}
-	<td
-	
-	{$cell_grid_cell_field1}
-	{$recordattrs}
-	class="
-		r-align-center r-ori-vert		 {$horas_compensar_class}	"
-
-			data-field="horas_compensar"
-	
-	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN horas_compensar_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="grid_field" {$item_grid_field} data-pageid="{$pageid}" data-page="comisionamiento_list" data-record-id="{$recId}" data-field="horas_compensar" data-fieldname="horas_compensar" data-default-width >
-{$horas_compensar_value}
-</span>
-{END horas_compensar_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field1}
 									{BEGIN cellblock_grid_cell_field3}
 	<td
 	
@@ -1971,11 +2006,32 @@
 	{$cell_grid_cell_field9}
 	{$recordattrs}
 	class="
-		r-align-center r-ori-vert		 {$fecha_decision_class}	"
+		r-align-center r-ori-vert		 {$decidido_por_class}	"
+
+			data-field="decidido_por"
+	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN decidido_por_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field17" {$item_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="decidido_por" data-fieldname="decidido_por" data-default-width >
+{$decidido_por_value}
+</span>
+{END decidido_por_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_headcell_field19}
+	<td
+	
+	{$cell_grid_headcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$fecha_decision_class}	"
 
 			data-field="fecha_decision"
 	
-	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1985,7 +2041,7 @@
 </span>
 {END fecha_decision_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field9}
+	{END cellblock_grid_headcell_field19}
 									{BEGIN cellblock_grid_cell_field17}
 	<td
 	
@@ -2049,6 +2105,27 @@
 {END rrhh_motivo_rechazo_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field1}
+	<td
+	
+	{$cell_grid_cell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$intentos_correccion_class}	"
+
+			data-field="intentos_correccion"
+	
+	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN intentos_correccion_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="list_intentos_correccion" {$item_list_intentos_correccion} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="intentos_correccion" data-fieldname="intentos_correccion" data-default-width >
+{$intentos_correccion_value}
+</span>
+{END intentos_correccion_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field1}
 							</tr>
 										
 											{END grid_row}
@@ -2225,21 +2302,6 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field2}
-									{BEGIN cellblock_grid_footcell_field1}
-	<td
-	
-	{$cell_grid_footcell_field1}
-	{$recordattrs}
-	class="
-		 r-ori-vert			"
-
-	
-	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="comisionamiento_list"	
-	>
-
-	
-	</td>
-	{END cellblock_grid_footcell_field1}
 									{BEGIN cellblock_grid_footcell_field3}
 	<td
 	
@@ -2270,6 +2332,21 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field9}
+									{BEGIN cellblock_grid_headcell_field20}
+	<td
+	
+	{$cell_grid_headcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_headcell_field20}
 									{BEGIN cellblock_grid_footcell_field11}
 	<td
 	
@@ -2315,6 +2392,21 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field14}
+									{BEGIN cellblock_grid_footcell_field1}
+	<td
+	
+	{$cell_grid_footcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="comisionamiento_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field1}
 							</tr>
 					
 					</tfoot>

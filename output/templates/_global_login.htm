@@ -74,31 +74,18 @@ Inicie sesión en su cuenta</span>
 				<div class="row">
 			 
 				<div 
-	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
 	class=" r-ori-vert			col-md-12
 	
 ">
 		{BEGIN firstAboveGridCell}
 		 
-		<div class="alert alert-success" data-itemtype="twofactor_message" data-itemid="twofactor_message" {$item_twofactor_message} data-pageid="{$pageid}" > 
-	{$twofactor_message}
-</div>
-			{END firstAboveGridCell}	
-	</div>					</div>
-			 
-				<div class="row">
-			 
-				<div 
-	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
-	class=" r-ori-vert			col-md-12
-	
-">
-		 
 		{BEGIN message_block}
 <div data-itemtype="login_message" data-itemid="login_message" {$item_login_message} data-pageid="{$pageid}" class="alert {$message_class}" role="alert">
 {$message}
 	</div>
-{END message_block}		</div>					</div>
+{END message_block}			{END firstAboveGridCell}	
+	</div>					</div>
 			</div>		
 {END above-grid_block}
 									{BEGIN grid_block}
@@ -134,66 +121,12 @@ Inicie sesión en su cuenta</span>
 											<tr {$row_grid_2} >
 									<td 
 	class=" r-ori-vert			"
-	colspan="2"		 
-	data-cellId="grid_c3" data-pageid="{$pageid}">
- 
-{BEGIN twofactor_code_message}
-<span data-itemtype="auth_code_message" data-itemid="auth_code_message" {$item_auth_code_message} data-pageid="{$pageid}" data-small >
-Código de seguridad</span>
-{END twofactor_code_message}
- 
-<div class="r-edit-field" data-itemtype="auth_code" data-itemid="auth_code" {$item_auth_code} data-pageid="{$pageid}" id="userCodeField{$id}" >
-	<input class="form-control" id="userCode{$id}" type="text">
-</div>
-	</td>
-							</tr>
-											<tr {$row_grid_3} >
-									<td 
-	class="r-align-right			"
-	colspan="2"		 
-	data-cellId="grid_c11" data-pageid="{$pageid}" data-page="_global_login">
- 
-{BEGIN twofactor_altemail}
-<span data-itemtype="auth_altemail" data-itemid="auth_altemail" {$item_auth_altemail} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-link   
-	" data-action="change2f" data-method=0 >
-					<span class="fa fa-envelope-o"></span>
-							Email			</a>
-</span>
-{END twofactor_altemail}
- 
-{BEGIN twofactor_altphone}
-<span data-itemtype="auth_altphone" data-itemid="auth_altphone" {$item_auth_altphone} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-link   
-	" data-action="change2f" data-method=1 >
-					<span class="fa fa-phone"></span>
-							Mensaje de texto			</a>
-</span>
-{END twofactor_altphone}
- 
-{BEGIN twofactor_altapp}
-<span data-itemtype="auth_altapp" data-itemid="auth_altapp" {$item_auth_altapp} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-link   
-	" data-action="change2f" data-method=2 >
-					<span class="fa fa-mobile-phone"></span>
-							Aplicación autenticadora			</a>
-</span>
-{END twofactor_altapp}
-</td>
-							</tr>
-											<tr {$row_grid_4} >
-									<td 
-	class=" r-ori-vert			"
 			 
 	data-cellId="grid_c4" data-pageid="{$pageid}">
  
 <div class="checkbox r-edit-field" data-itemtype="remember_password" data-itemid="remember_password" {$item_remember_password} data-pageid="{$pageid}" >
 	<label>
 		<input type="checkbox" id="remember_password{$id}" name="remember_password" value="1" {$rememberbox_attrs}> Recordarme	</label>
-</div> 
-<div class="checkbox r-edit-field" data-itemtype="remember_machine" data-itemid="remember_machine" {$item_remember_machine} data-pageid="{$pageid}" >
-	<label>
-		<input type="checkbox" id="remember_machine{$id}" name="remember_machine" value="1" {$remembermachine_attrs}> Recuerda esta computadora	</label>
 </div></td>
 									<td 
 	class="r-align-right r-ori-vert			"
@@ -234,7 +167,7 @@ Código de seguridad</span>
 							</tr>
 											<tr {$row_footer_1} >
 									<td 
-	class="			"
+	class=" r-ori-vert			"
 			 
 	data-cellId="footer_c1" data-pageid="{$pageid}">
  
@@ -245,26 +178,6 @@ Código de seguridad</span>
 							Aceptar			</a>
 </span>
 {END signin_button}
- 
-{BEGIN continue_button}
-<span data-itemtype="continue_login_button" data-itemid="continue_login_button" {$item_continue_login_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-primary   
-	" {$continuebutton_attrs} >
-							Continuar			</a>
-</span>
-{END continue_button}
- 
-<span data-itemtype="verify_button" data-itemid="verify_button" {$item_verify_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-primary   
-	" id="verifyCode{$id}" {$verifyButtonClass} >
-							Verificar			</a>
-</span>
- 
-<span data-itemtype="resend_button" data-itemid="resend_button" {$item_resend_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-default   
-	" id="resendCode{$id}" {$resendButtonClass} >
-							Reenviar codigo			</a>
-</span>
 </td>
 									<td 
 	class="r-align-right r-ori-vert			"

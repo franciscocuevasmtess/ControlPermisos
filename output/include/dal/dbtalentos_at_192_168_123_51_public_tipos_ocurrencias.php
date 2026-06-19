@@ -16,6 +16,9 @@ $dalTabletipos_ocurrencias["tip_compensacion"] = array("type"=>2,"varname"=>"tip
 $dalTabletipos_ocurrencias["tip_estado"] = array("type"=>200,"varname"=>"tip_estado", "name" => "tip_estado", "autoInc" => "0");
 $dalTabletipos_ocurrencias["tip_cod_tipo_sumatoria"] = array("type"=>3,"varname"=>"tip_cod_tipo_sumatoria", "name" => "tip_cod_tipo_sumatoria", "autoInc" => "0");
 $dalTabletipos_ocurrencias["tip_horario_compensatorio"] = array("type"=>2,"varname"=>"tip_horario_compensatorio", "name" => "tip_horario_compensatorio", "autoInc" => "0");
+$dalTabletipos_ocurrencias["tip_presentacion_cantidad"] = array("type"=>3,"varname"=>"tip_presentacion_cantidad", "name" => "tip_presentacion_cantidad", "autoInc" => "0");
+$dalTabletipos_ocurrencias["tip_presentacion_referencia"] = array("type"=>3,"varname"=>"tip_presentacion_referencia", "name" => "tip_presentacion_referencia", "autoInc" => "0");
+$dalTabletipos_ocurrencias["tip_genero_permitido"] = array("type"=>200,"varname"=>"tip_genero_permitido", "name" => "tip_genero_permitido", "autoInc" => "0");
 $dalTabletipos_ocurrencias["tip_cod"]["key"]=true;
 
 $dal_info["dbtalentos_at_192_168_123_51_public_tipos_ocurrencias"] = &$dalTabletipos_ocurrencias;

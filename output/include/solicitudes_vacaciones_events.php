@@ -1137,10 +1137,6 @@ function BeforeShowList(&$xt, &$templatefile, $pageObject)
 {
 
 		
-
-// Place event code here.
-// Use "Add Action" button to add code snippets.
-
 //$pageObject->hideItem("add");  // Oculta el boton para crear una nueva solicitud de vacaciones.
 $pageObject->hideItem("grid_edit"); // Oculta el boton para editar una nueva solicitud de vacaciones.
 $pageObject->hideItem("grid_view"); // Oculta el boton para ver detalles

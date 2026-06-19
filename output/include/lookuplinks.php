@@ -173,6 +173,34 @@ function InitLookupLinks()
 			$lookupTableLinks["public.sedes"]["personales.per_sede"] = array();
 		}
 		$lookupTableLinks["public.sedes"]["personales.per_sede"]["edit"] = array("table" => "public.personales", "field" => "per_sede", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.tipo_funcionario"] ) ) {
+			$lookupTableLinks["public.tipo_funcionario"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.tipo_funcionario"]["vacacion.tipo_vinculacion"] )) {
+			$lookupTableLinks["public.tipo_funcionario"]["vacacion.tipo_vinculacion"] = array();
+		}
+		$lookupTableLinks["public.tipo_funcionario"]["vacacion.tipo_vinculacion"]["edit"] = array("table" => "vacacion", "field" => "tipo_vinculacion", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.dependencias"] ) ) {
+			$lookupTableLinks["public.dependencias"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.dependencias"]["vacacion.dependencia_id"] )) {
+			$lookupTableLinks["public.dependencias"]["vacacion.dependencia_id"] = array();
+		}
+		$lookupTableLinks["public.dependencias"]["vacacion.dependencia_id"]["edit"] = array("table" => "vacacion", "field" => "dependencia_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.tipos_ocurrencias"] ) ) {
+			$lookupTableLinks["public.tipos_ocurrencias"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.tipos_ocurrencias"]["vacacion.motivo_id"] )) {
+			$lookupTableLinks["public.tipos_ocurrencias"]["vacacion.motivo_id"] = array();
+		}
+		$lookupTableLinks["public.tipos_ocurrencias"]["vacacion.motivo_id"]["edit"] = array("table" => "vacacion", "field" => "motivo_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.personales"] ) ) {
+			$lookupTableLinks["public.personales"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.personales"]["vacacion.decidido_por"] )) {
+			$lookupTableLinks["public.personales"]["vacacion.decidido_por"] = array();
+		}
+		$lookupTableLinks["public.personales"]["vacacion.decidido_por"]["edit"] = array("table" => "vacacion", "field" => "decidido_por", "page" => "edit");
 }
 
 ?>

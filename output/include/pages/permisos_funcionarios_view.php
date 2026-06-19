@@ -56,7 +56,8 @@
 'print' => false ),
 'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'above-grid' => array(  ),
 'below-grid' => array( 'view_back_list',
-'view_close' ),
+'view_close',
+'text11' ),
 'supertop' => array( 'expand_menu_button',
 'collapse_button',
 'breadcrumb',
@@ -101,11 +102,10 @@
 'view_cantidad_permisos_mes',
 'text10',
 'view_rrhh_motivo_rechazo' ) ),
-'formXtTags' => array( 'above-grid' => array(  ),
-'below-grid' => array( 'back_button',
-'close_button' ) ),
+'formXtTags' => array( 'above-grid' => array(  ) ),
 'itemForms' => array( 'view_back_list' => 'below-grid',
 'view_close' => 'below-grid',
+'text11' => 'below-grid',
 'expand_menu_button' => 'supertop',
 'collapse_button' => 'supertop',
 'breadcrumb' => 'supertop',
@@ -265,7 +265,8 @@
 'text7',
 'text8',
 'text9',
-'text10' ),
+'text10',
+'text11' ),
 'username_button' => array( 'username_button' ),
 'loginform_login' => array( 'loginform_login' ),
 'userinfo_link' => array( 'userinfo_link' ),
@@ -450,12 +451,18 @@
 'below-grid' => array( 'modelId' => 'view-below-grid',
 'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ),
 array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
+'section' => '' ),
+array( 'section' => '',
+'cells' => array( array( 'cell' => 'c',
+'colspan' => 2 ) ) ) ),
 'cells' => array( 'c1' => array( 'model' => 'c1',
 'items' => array( 'view_back_list',
 'view_close' ) ),
 'c2' => array( 'model' => 'c2',
-'items' => array(  ) ) ),
+'items' => array(  ) ),
+'c' => array( 'model' => 'c1',
+'items' => array( 'text11' ),
+'align' => 'center' ) ),
 'deferredItems' => array(  ),
 'recsPerRow' => 1 ),
 'supertop' => array( 'modelId' => 'leftbar-top-edit',
@@ -758,6 +765,21 @@ array( 'section' => '',
 'integrated_edit_field1' => array( 'field' => 'archivo_adjunto',
 'type' => 'integrated_edit_field',
 'orientation' => 0 ),
+'text11' => array( 'type' => 'text',
+'label' => array( 'text' => '<style>
+.footer-sistema{
+    text-align:center;
+    font-size:11px;
+    color:#888;
+    padding:10px;
+    border-top:1px solid #ddd;
+    background:#f8f9fa;
+}
+</style>
+<div class="footer-sistema">
+    Sistema Desarrollado por la Dirección de Tecnologías de la Información y la Comunicación(DTIC) - MTESS <br>©2026 MTESS · Versión 1.0.0</div>',
+'type' => 0 ),
+'editedByRte' => false ),
 'expand_button' => array( 'type' => 'expand_button' ) ),
 'dbProps' => array(  ),
 'version' => 14,

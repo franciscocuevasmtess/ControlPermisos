@@ -37,40 +37,40 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelscomisionamiento["Spanish"]["per_apellido"] = "Per Apellido";
 	$fieldToolTipscomisionamiento["Spanish"]["per_apellido"] = "";
 	$placeHolderscomisionamiento["Spanish"]["per_apellido"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["per_ci"] = "Cédula de identidad";
+	$fieldLabelscomisionamiento["Spanish"]["per_ci"] = "🆔 Cédula de identidad";
 	$fieldToolTipscomisionamiento["Spanish"]["per_ci"] = "";
-	$placeHolderscomisionamiento["Spanish"]["per_ci"] = "Ingrese número de Documento";
-	$fieldLabelscomisionamiento["Spanish"]["tipo_vinculacion"] = "Tipo de Vinculación";
+	$placeHolderscomisionamiento["Spanish"]["per_ci"] = "";
+	$fieldLabelscomisionamiento["Spanish"]["tipo_vinculacion"] = "🔗 Tipo de Vinculación";
 	$fieldToolTipscomisionamiento["Spanish"]["tipo_vinculacion"] = "";
 	$placeHolderscomisionamiento["Spanish"]["tipo_vinculacion"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["nombre_completo"] = "Nombre Completo";
+	$fieldLabelscomisionamiento["Spanish"]["nombre_completo"] = "🧾Nombre Completo";
 	$fieldToolTipscomisionamiento["Spanish"]["nombre_completo"] = "";
 	$placeHolderscomisionamiento["Spanish"]["nombre_completo"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["dependencia_id"] = "Dependencia";
+	$fieldLabelscomisionamiento["Spanish"]["dependencia_id"] = "🏛️ Dependencia";
 	$fieldToolTipscomisionamiento["Spanish"]["dependencia_id"] = "";
 	$placeHolderscomisionamiento["Spanish"]["dependencia_id"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["fecha_desde"] = "Fecha desde";
-	$fieldToolTipscomisionamiento["Spanish"]["fecha_desde"] = "Seleccione el día en que inicia el permiso.";
+	$fieldLabelscomisionamiento["Spanish"]["fecha_desde"] = "📅 Fecha desde";
+	$fieldToolTipscomisionamiento["Spanish"]["fecha_desde"] = "Seleccione el día en que inicia el comisionamiento.";
 	$placeHolderscomisionamiento["Spanish"]["fecha_desde"] = "";
 	$fieldLabelscomisionamiento["Spanish"]["hora_desde"] = "🕒 Hora de inicio";
-	$fieldToolTipscomisionamiento["Spanish"]["hora_desde"] = "Seleccione la hora en que inicia el permiso.";
+	$fieldToolTipscomisionamiento["Spanish"]["hora_desde"] = "Seleccione la hora en que inicia el comisionamiento.";
 	$placeHolderscomisionamiento["Spanish"]["hora_desde"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["fecha_hasta"] = "Fecha hasta";
-	$fieldToolTipscomisionamiento["Spanish"]["fecha_hasta"] = "Seleccione el último día del permiso.";
+	$fieldLabelscomisionamiento["Spanish"]["fecha_hasta"] = "📅 Fecha hasta";
+	$fieldToolTipscomisionamiento["Spanish"]["fecha_hasta"] = "Seleccione el último día del comisionamiento.";
 	$placeHolderscomisionamiento["Spanish"]["fecha_hasta"] = "";
 	$fieldLabelscomisionamiento["Spanish"]["hora_hasta"] = "🕒 Hora de fin";
-	$fieldToolTipscomisionamiento["Spanish"]["hora_hasta"] = "Seleccione la hora de finalización del permiso.";
+	$fieldToolTipscomisionamiento["Spanish"]["hora_hasta"] = "Seleccione la hora de finalización del comisionamiento.";
 	$placeHolderscomisionamiento["Spanish"]["hora_hasta"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["motivo_id"] = "Tipo de permiso o justificación";
+	$fieldLabelscomisionamiento["Spanish"]["motivo_id"] = "📝 Tipo de permiso o justificación";
 	$fieldToolTipscomisionamiento["Spanish"]["motivo_id"] = "Indique el motivo por el cual solicita el permiso.";
 	$placeHolderscomisionamiento["Spanish"]["motivo_id"] = "Seleccione el motivo de su solicitud";
 	$fieldLabelscomisionamiento["Spanish"]["comision_servicios"] = "¿Es comisión de servicios?";
 	$fieldToolTipscomisionamiento["Spanish"]["comision_servicios"] = "";
 	$placeHolderscomisionamiento["Spanish"]["comision_servicios"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["comision_servicios_descripcion"] = "Descripción de la comisión de servicios";
+	$fieldLabelscomisionamiento["Spanish"]["comision_servicios_descripcion"] = "<h4><strong>📄 Descripción de la comisión de servicios </strong><span class=\"ql-cursor\">﻿</span></h4>";
 	$fieldToolTipscomisionamiento["Spanish"]["comision_servicios_descripcion"] = "";
 	$placeHolderscomisionamiento["Spanish"]["comision_servicios_descripcion"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["observacion"] = "Observaciones adicionales";
+	$fieldLabelscomisionamiento["Spanish"]["observacion"] = "💬 Observaciones adicionales";
 	$fieldToolTipscomisionamiento["Spanish"]["observacion"] = "";
 	$placeHolderscomisionamiento["Spanish"]["observacion"] = "";
 	$fieldLabelscomisionamiento["Spanish"]["estado"] = "Estado";
@@ -82,16 +82,16 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelscomisionamiento["Spanish"]["email_jefe"] = "📧  Correo electrónico del superior inmediato";
 	$fieldToolTipscomisionamiento["Spanish"]["email_jefe"] = "";
 	$placeHolderscomisionamiento["Spanish"]["email_jefe"] = "correo@mtess.gov.py";
-	$fieldLabelscomisionamiento["Spanish"]["descripcion_dependencia"] = "Dependencia";
+	$fieldLabelscomisionamiento["Spanish"]["descripcion_dependencia"] = "🏛️ Dependencia";
 	$fieldToolTipscomisionamiento["Spanish"]["descripcion_dependencia"] = "";
 	$placeHolderscomisionamiento["Spanish"]["descripcion_dependencia"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["descripcion_tipo_vinculacion"] = "Tipo de Vinculación";
+	$fieldLabelscomisionamiento["Spanish"]["descripcion_tipo_vinculacion"] = "🔗 Tipo de Vinculación";
 	$fieldToolTipscomisionamiento["Spanish"]["descripcion_tipo_vinculacion"] = "";
 	$placeHolderscomisionamiento["Spanish"]["descripcion_tipo_vinculacion"] = "";
 	$fieldLabelscomisionamiento["Spanish"]["solicitado_por"] = "Solicitado Por";
 	$fieldToolTipscomisionamiento["Spanish"]["solicitado_por"] = "";
 	$placeHolderscomisionamiento["Spanish"]["solicitado_por"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["fecha_solicitud"] = "Fecha de la Solicitud";
+	$fieldLabelscomisionamiento["Spanish"]["fecha_solicitud"] = "📅 Fecha de la Solicitud";
 	$fieldToolTipscomisionamiento["Spanish"]["fecha_solicitud"] = "";
 	$placeHolderscomisionamiento["Spanish"]["fecha_solicitud"] = "";
 	$fieldLabelscomisionamiento["Spanish"]["email_jefe_id"] = "Email Jefe Id";
@@ -112,30 +112,39 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelscomisionamiento["Spanish"]["rrhh_resultado_decision"] = "🏢 Aprobación de Recursos Humanos";
 	$fieldToolTipscomisionamiento["Spanish"]["rrhh_resultado_decision"] = "";
 	$placeHolderscomisionamiento["Spanish"]["rrhh_resultado_decision"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["rrhh_motivo_rechazo"] = "Motivo de Rechazo(RRHH)";
+	$fieldLabelscomisionamiento["Spanish"]["rrhh_motivo_rechazo"] = "📝 Motivo de Rechazo (RRHH)";
 	$fieldToolTipscomisionamiento["Spanish"]["rrhh_motivo_rechazo"] = "";
 	$placeHolderscomisionamiento["Spanish"]["rrhh_motivo_rechazo"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["antiguedad_laboral"] = "Antiguedad Laboral";
+	$fieldLabelscomisionamiento["Spanish"]["antiguedad_laboral"] = "⏳ Antiguedad Laboral";
 	$fieldToolTipscomisionamiento["Spanish"]["antiguedad_laboral"] = "";
 	$placeHolderscomisionamiento["Spanish"]["antiguedad_laboral"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["car_descri"] = "Cargo Actual";
+	$fieldLabelscomisionamiento["Spanish"]["car_descri"] = "💼 Cargo Actual";
 	$fieldToolTipscomisionamiento["Spanish"]["car_descri"] = "";
 	$placeHolderscomisionamiento["Spanish"]["car_descri"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["sed_descripcion"] = "Sede Laboral";
+	$fieldLabelscomisionamiento["Spanish"]["sed_descripcion"] = "📍 Sede Laboral";
 	$fieldToolTipscomisionamiento["Spanish"]["sed_descripcion"] = "";
 	$placeHolderscomisionamiento["Spanish"]["sed_descripcion"] = "";
 	$fieldLabelscomisionamiento["Spanish"]["cantidad_dias_permiso"] = "";
 	$fieldToolTipscomisionamiento["Spanish"]["cantidad_dias_permiso"] = "";
 	$placeHolderscomisionamiento["Spanish"]["cantidad_dias_permiso"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["cantidad_permisos_mes"] = "Cantidad de permisos solicitados en el mes";
+	$fieldLabelscomisionamiento["Spanish"]["cantidad_permisos_mes"] = "📊 Cantidad de comisionamientos solicitados en el mes";
 	$fieldToolTipscomisionamiento["Spanish"]["cantidad_permisos_mes"] = "";
 	$placeHolderscomisionamiento["Spanish"]["cantidad_permisos_mes"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["fecha_decision"] = "Fecha de Aprobación del jefe";
+	$fieldLabelscomisionamiento["Spanish"]["fecha_decision"] = "📅 Fecha de Aprobación del jefe";
 	$fieldToolTipscomisionamiento["Spanish"]["fecha_decision"] = "";
 	$placeHolderscomisionamiento["Spanish"]["fecha_decision"] = "";
-	$fieldLabelscomisionamiento["Spanish"]["rrhh_fecha_decision"] = "Fecha de Aprobación RRHH";
+	$fieldLabelscomisionamiento["Spanish"]["rrhh_fecha_decision"] = "📅 Fecha de Aprobación (RRHH)";
 	$fieldToolTipscomisionamiento["Spanish"]["rrhh_fecha_decision"] = "";
 	$placeHolderscomisionamiento["Spanish"]["rrhh_fecha_decision"] = "";
+	$fieldLabelscomisionamiento["Spanish"]["decidido_por"] = "👨‍💼 Decidido por (Jefe)";
+	$fieldToolTipscomisionamiento["Spanish"]["decidido_por"] = "";
+	$placeHolderscomisionamiento["Spanish"]["decidido_por"] = "";
+	$fieldLabelscomisionamiento["Spanish"]["intentos_correccion"] = "Intentos Correccion";
+	$fieldToolTipscomisionamiento["Spanish"]["intentos_correccion"] = "";
+	$placeHolderscomisionamiento["Spanish"]["intentos_correccion"] = "";
+	$pageTitlescomisionamiento["Spanish"]["add"] = "SOLICITUD DE COMISION DE SERVICIOS";
+	$pageTitlescomisionamiento["Spanish"]["view"] = "SOLICIUTD DE COMISIONAMIENTO NUMERO: {%id}";
+	$pageTitlescomisionamiento["Spanish"]["edit"] = "FORMULARIO DE COMISION DE SERVICIOS, EDITAR [{%id}]";
 	if (count($fieldToolTipscomisionamiento["Spanish"]))
 		$tdatacomisionamiento[".isUseToolTips"] = true;
 }
@@ -290,6 +299,8 @@ $tdatacomisionamiento[".googleLikeFields"][] = "cantidad_permisos_mes";
 $tdatacomisionamiento[".googleLikeFields"][] = "cantidad_dias_permiso";
 $tdatacomisionamiento[".googleLikeFields"][] = "fecha_decision";
 $tdatacomisionamiento[".googleLikeFields"][] = "rrhh_fecha_decision";
+$tdatacomisionamiento[".googleLikeFields"][] = "decidido_por";
+$tdatacomisionamiento[".googleLikeFields"][] = "intentos_correccion";
 
 
 
@@ -324,9 +335,9 @@ $tdatacomisionamiento[".orderindexes"] = array();
 			$tdatacomisionamiento[".orderindexes"][] = array(1, (0 ? "ASC" : "DESC"), "pf.id");
 
 
-$tdatacomisionamiento[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision";
+$tdatacomisionamiento[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.decidido_por,  pf.intentos_correccion";
 $tdatacomisionamiento[".sqlFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$tdatacomisionamiento[".sqlWhereExpr"] = "";
+$tdatacomisionamiento[".sqlWhereExpr"] = "(pf.motivo_id = '10')";
 $tdatacomisionamiento[".sqlTail"] = "";
 
 
@@ -2196,8 +2207,7 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 	$edata["LinkFieldType"] = 3;
 	$edata["DisplayField"] = "tip_descripcion";
 
-				$edata["LookupWhere"] = "tip_descripcion in('Permiso por Adopción', 'Omisión de Registro de Entrada y/o Salida', 'Acompañamiento familiar por consulta médica', 'Permiso Particular', 'Licencia Sindical', 'Permiso por Paternidad', 'Permiso por Duelo', 'Permiso por Capacitación', 'Permiso por Matrimonio', 'Permiso Académico', 'Acompañamiento Familiar', 'Consulta y/o Estudios Médicos', 'Examén Ginecologíco/Mamografía/Urologico', 'Reposo Médico', 'Permiso por Maternidad', 'Permiso particular a compensar', 'Permiso particular justificado', 'Permiso particular parcial a compensar', 'Permiso particular parcial justificado', 'Llegada tardía a compensar', 'Omisión de registro de entrada', 'Omisión de registro de salida', 'Consulta médica', 'Acompañamiento familiar por reposo')";
-
+	
 
 	
 	$edata["LookupOrderBy"] = "";
@@ -2372,7 +2382,8 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
 	
-	
+		$edata["autoUpdatable"] = true;
+
 //	End validation
 
 	
@@ -2857,7 +2868,7 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 
 	
 	
-				$fdata["UploadFolder"] = "files";
+		$fdata["UploadCodeExpression"] = true;
 
 //  Begin View Formats
 	$fdata["ViewFormats"] = array();
@@ -2906,12 +2917,31 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 	
 	
 	
-			$edata["acceptFileTypesHtml"] = "";
+			$edata["acceptFileTypes"] = array();
+			$edata["acceptFileTypes"][] = strtoupper("doc");
+						$edata["acceptFileTypesHtml"] = ".doc";
+			$edata["acceptFileTypes"][] = strtoupper("docx");
+						$edata["acceptFileTypesHtml"] .= ",.docx";
+			$edata["acceptFileTypes"][] = strtoupper("gif");
+						$edata["acceptFileTypesHtml"] .= ",.gif";
+			$edata["acceptFileTypes"][] = strtoupper("jpeg");
+						$edata["acceptFileTypesHtml"] .= ",.jpeg";
+			$edata["acceptFileTypes"][] = strtoupper("jpg");
+						$edata["acceptFileTypesHtml"] .= ",.jpg";
+			$edata["acceptFileTypes"][] = strtoupper("pdf");
+						$edata["acceptFileTypesHtml"] .= ",.pdf";
+			$edata["acceptFileTypes"][] = strtoupper("png");
+						$edata["acceptFileTypesHtml"] .= ",.png";
+			$edata["acceptFileTypes"][] = strtoupper("rtf");
+						$edata["acceptFileTypesHtml"] .= ",.rtf";
+			$edata["acceptFileTypes"][] = strtoupper("txt");
+						$edata["acceptFileTypesHtml"] .= ",.txt";
 
-		$edata["maxNumberOfFiles"] = 1;
+		$edata["maxNumberOfFiles"] = 10;
 
 	
-	
+		$edata["maxTotalFilesSize"] = 3000;
+
 	
 	
 	
@@ -4404,7 +4434,7 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -4428,10 +4458,8 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -5578,6 +5606,284 @@ $tdatacomisionamiento[".hideMobileList"] = array();
 
 	$tdatacomisionamiento["rrhh_fecha_decision"] = $fdata;
 		$tdatacomisionamiento[".searchableFields"][] = "rrhh_fecha_decision";
+//	decidido_por
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 38;
+	$fdata["strName"] = "decidido_por";
+	$fdata["GoodName"] = "decidido_por";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("comisionamiento","decidido_por");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "decidido_por";
+
+		$fdata["sourceSingle"] = "decidido_por";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.decidido_por";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatacomisionamiento["decidido_por"] = $fdata;
+		$tdatacomisionamiento[".searchableFields"][] = "decidido_por";
+//	intentos_correccion
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 39;
+	$fdata["strName"] = "intentos_correccion";
+	$fdata["GoodName"] = "intentos_correccion";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("comisionamiento","intentos_correccion");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "intentos_correccion";
+
+		$fdata["sourceSingle"] = "intentos_correccion";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.intentos_correccion";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatacomisionamiento["intentos_correccion"] = $fdata;
+		$tdatacomisionamiento[".searchableFields"][] = "intentos_correccion";
 
 
 $tables_data["comisionamiento"]=&$tdatacomisionamiento;
@@ -5622,23 +5928,25 @@ function createSqlQuery_comisionamiento()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision";
+$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.decidido_por,  pf.intentos_correccion";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto0["m_strWhere"] = "";
+$proto0["m_strWhere"] = "(pf.motivo_id = '10')";
 $proto0["m_strOrderBy"] = "ORDER BY pf.id DESC";
 	
 		;
 			$proto0["cipherer"] = null;
 $proto2=array();
-$proto2["m_sql"] = "";
+$proto2["m_sql"] = "pf.motivo_id = '10'";
 $proto2["m_uniontype"] = "SQLL_UNKNOWN";
-	$obj = new SQLNonParsed(array(
-	"m_sql" => ""
+						$obj = new SQLField(array(
+	"m_strName" => "motivo_id",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "comisionamiento"
 ));
 
 $proto2["m_column"]=$obj;
 $proto2["m_contained"] = array();
-$proto2["m_strCase"] = "";
+$proto2["m_strCase"] = "= '10'";
 $proto2["m_havingmode"] = false;
 $proto2["m_inBrackets"] = false;
 $proto2["m_useAlias"] = false;
@@ -6156,123 +6464,86 @@ $proto78["m_alias"] = "";
 $obj = new SQLFieldListItem($proto78);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto80=array();
-$proto80["m_link"] = "SQLL_MAIN";
-			$proto81=array();
-$proto81["m_strName"] = "rrhh_permisos.permisos_funcionarios";
-$proto81["m_srcTableName"] = "comisionamiento";
-$proto81["m_columns"] = array();
-$proto81["m_columns"][] = "id";
-$proto81["m_columns"][] = "id_funcionario";
-$proto81["m_columns"][] = "tipo_vinculacion";
-$proto81["m_columns"][] = "dependencia_id";
-$proto81["m_columns"][] = "fecha_desde";
-$proto81["m_columns"][] = "hora_desde";
-$proto81["m_columns"][] = "fecha_hasta";
-$proto81["m_columns"][] = "hora_hasta";
-$proto81["m_columns"][] = "motivo_id";
-$proto81["m_columns"][] = "comision_servicios";
-$proto81["m_columns"][] = "comision_servicios_descripcion";
-$proto81["m_columns"][] = "observacion";
-$proto81["m_columns"][] = "estado";
-$proto81["m_columns"][] = "fecha_actualizacion";
-$proto81["m_columns"][] = "archivo_adjunto";
-$proto81["m_columns"][] = "solicitado_por";
-$proto81["m_columns"][] = "fecha_solicitud";
-$proto81["m_columns"][] = "fecha_decision";
-$proto81["m_columns"][] = "decidido_por";
-$proto81["m_columns"][] = "resultado_decision";
-$proto81["m_columns"][] = "horas_compensar";
-$proto81["m_columns"][] = "acompensar";
-$proto81["m_columns"][] = "rrhh_decidido_por";
-$proto81["m_columns"][] = "rrhh_fecha_decision";
-$proto81["m_columns"][] = "rrhh_resultado_decision";
-$proto81["m_columns"][] = "rrhh_motivo_rechazo";
-$proto81["m_columns"][] = "ocu_cod";
-$proto81["m_columns"][] = "intentos_correccion";
-$obj = new SQLTable($proto81);
+						$proto80=array();
+			$obj = new SQLField(array(
+	"m_strName" => "decidido_por",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "comisionamiento"
+));
 
-$proto80["m_table"] = $obj;
-$proto80["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
-$proto80["m_alias"] = "pf";
+$proto80["m_sql"] = "pf.decidido_por";
 $proto80["m_srcTableName"] = "comisionamiento";
-$proto82=array();
-$proto82["m_sql"] = "";
-$proto82["m_uniontype"] = "SQLL_UNKNOWN";
+$proto80["m_expr"]=$obj;
+$proto80["m_alias"] = "";
+$obj = new SQLFieldListItem($proto80);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto82=array();
+			$obj = new SQLField(array(
+	"m_strName" => "intentos_correccion",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "comisionamiento"
+));
+
+$proto82["m_sql"] = "pf.intentos_correccion";
+$proto82["m_srcTableName"] = "comisionamiento";
+$proto82["m_expr"]=$obj;
+$proto82["m_alias"] = "";
+$obj = new SQLFieldListItem($proto82);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto84=array();
+$proto84["m_link"] = "SQLL_MAIN";
+			$proto85=array();
+$proto85["m_strName"] = "rrhh_permisos.permisos_funcionarios";
+$proto85["m_srcTableName"] = "comisionamiento";
+$proto85["m_columns"] = array();
+$proto85["m_columns"][] = "id";
+$proto85["m_columns"][] = "id_funcionario";
+$proto85["m_columns"][] = "tipo_vinculacion";
+$proto85["m_columns"][] = "dependencia_id";
+$proto85["m_columns"][] = "fecha_desde";
+$proto85["m_columns"][] = "hora_desde";
+$proto85["m_columns"][] = "fecha_hasta";
+$proto85["m_columns"][] = "hora_hasta";
+$proto85["m_columns"][] = "motivo_id";
+$proto85["m_columns"][] = "comision_servicios";
+$proto85["m_columns"][] = "comision_servicios_descripcion";
+$proto85["m_columns"][] = "observacion";
+$proto85["m_columns"][] = "estado";
+$proto85["m_columns"][] = "fecha_actualizacion";
+$proto85["m_columns"][] = "archivo_adjunto";
+$proto85["m_columns"][] = "solicitado_por";
+$proto85["m_columns"][] = "fecha_solicitud";
+$proto85["m_columns"][] = "fecha_decision";
+$proto85["m_columns"][] = "decidido_por";
+$proto85["m_columns"][] = "resultado_decision";
+$proto85["m_columns"][] = "horas_compensar";
+$proto85["m_columns"][] = "acompensar";
+$proto85["m_columns"][] = "rrhh_decidido_por";
+$proto85["m_columns"][] = "rrhh_fecha_decision";
+$proto85["m_columns"][] = "rrhh_resultado_decision";
+$proto85["m_columns"][] = "rrhh_motivo_rechazo";
+$proto85["m_columns"][] = "ocu_cod";
+$proto85["m_columns"][] = "intentos_correccion";
+$proto85["m_columns"][] = "vac_dias_pedidos";
+$obj = new SQLTable($proto85);
+
+$proto84["m_table"] = $obj;
+$proto84["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
+$proto84["m_alias"] = "pf";
+$proto84["m_srcTableName"] = "comisionamiento";
+$proto86=array();
+$proto86["m_sql"] = "";
+$proto86["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto82["m_column"]=$obj;
-$proto82["m_contained"] = array();
-$proto82["m_strCase"] = "";
-$proto82["m_havingmode"] = false;
-$proto82["m_inBrackets"] = false;
-$proto82["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto82);
-
-$proto80["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto80);
-
-$proto0["m_fromlist"][]=$obj;
-												$proto84=array();
-$proto84["m_link"] = "SQLL_LEFTJOIN";
-			$proto85=array();
-$proto85["m_strName"] = "public.personales";
-$proto85["m_srcTableName"] = "comisionamiento";
-$proto85["m_columns"] = array();
-$proto85["m_columns"][] = "per_cod";
-$proto85["m_columns"][] = "categoria_cat_codigo";
-$proto85["m_columns"][] = "departamentos_dep_cod";
-$proto85["m_columns"][] = "dependencias_dep_cod";
-$proto85["m_columns"][] = "paises_pai_cod";
-$proto85["m_columns"][] = "ciudades_ciu_cod";
-$proto85["m_columns"][] = "profesiones_pro_cod";
-$proto85["m_columns"][] = "per_profesional";
-$proto85["m_columns"][] = "tipo_funcionario_tfun_cod";
-$proto85["m_columns"][] = "per_institucion_origen";
-$proto85["m_columns"][] = "cargos_car_cod";
-$proto85["m_columns"][] = "per_nombre";
-$proto85["m_columns"][] = "per_apellido";
-$proto85["m_columns"][] = "per_ci";
-$proto85["m_columns"][] = "per_sexo";
-$proto85["m_columns"][] = "per_nacimiento";
-$proto85["m_columns"][] = "per_est_civil";
-$proto85["m_columns"][] = "per_gruposangre";
-$proto85["m_columns"][] = "per_pcd";
-$proto85["m_columns"][] = "per_domicilio";
-$proto85["m_columns"][] = "per_barrio";
-$proto85["m_columns"][] = "per_teleparticular";
-$proto85["m_columns"][] = "per_telecelular";
-$proto85["m_columns"][] = "per_email_part";
-$proto85["m_columns"][] = "per_email_instit";
-$proto85["m_columns"][] = "per_ruc";
-$proto85["m_columns"][] = "per_contacto_eme";
-$proto85["m_columns"][] = "per_tele_emer";
-$proto85["m_columns"][] = "per_ingreso";
-$proto85["m_columns"][] = "per_nombramiento";
-$proto85["m_columns"][] = "per_estado";
-$proto85["m_columns"][] = "per_usuario";
-$proto85["m_columns"][] = "per_sede";
-$obj = new SQLTable($proto85);
-
-$proto84["m_table"] = $obj;
-$proto84["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto84["m_alias"] = "p";
-$proto84["m_srcTableName"] = "comisionamiento";
-$proto86=array();
-$proto86["m_sql"] = "p.per_cod = pf.id_funcionario";
-$proto86["m_uniontype"] = "SQLL_UNKNOWN";
-						$obj = new SQLField(array(
-	"m_strName" => "per_cod",
-	"m_strTable" => "p",
-	"m_srcTableName" => "comisionamiento"
-));
-
 $proto86["m_column"]=$obj;
 $proto86["m_contained"] = array();
-$proto86["m_strCase"] = "= pf.id_funcionario";
+$proto86["m_strCase"] = "";
 $proto86["m_havingmode"] = false;
 $proto86["m_inBrackets"] = false;
 $proto86["m_useAlias"] = false;
@@ -6282,19 +6553,85 @@ $proto84["m_joinon"] = $obj;
 $obj = new SQLFromListItem($proto84);
 
 $proto0["m_fromlist"][]=$obj;
+												$proto88=array();
+$proto88["m_link"] = "SQLL_LEFTJOIN";
+			$proto89=array();
+$proto89["m_strName"] = "public.personales";
+$proto89["m_srcTableName"] = "comisionamiento";
+$proto89["m_columns"] = array();
+$proto89["m_columns"][] = "per_cod";
+$proto89["m_columns"][] = "categoria_cat_codigo";
+$proto89["m_columns"][] = "departamentos_dep_cod";
+$proto89["m_columns"][] = "dependencias_dep_cod";
+$proto89["m_columns"][] = "paises_pai_cod";
+$proto89["m_columns"][] = "ciudades_ciu_cod";
+$proto89["m_columns"][] = "profesiones_pro_cod";
+$proto89["m_columns"][] = "per_profesional";
+$proto89["m_columns"][] = "tipo_funcionario_tfun_cod";
+$proto89["m_columns"][] = "per_institucion_origen";
+$proto89["m_columns"][] = "cargos_car_cod";
+$proto89["m_columns"][] = "per_nombre";
+$proto89["m_columns"][] = "per_apellido";
+$proto89["m_columns"][] = "per_ci";
+$proto89["m_columns"][] = "per_sexo";
+$proto89["m_columns"][] = "per_nacimiento";
+$proto89["m_columns"][] = "per_est_civil";
+$proto89["m_columns"][] = "per_gruposangre";
+$proto89["m_columns"][] = "per_pcd";
+$proto89["m_columns"][] = "per_domicilio";
+$proto89["m_columns"][] = "per_barrio";
+$proto89["m_columns"][] = "per_teleparticular";
+$proto89["m_columns"][] = "per_telecelular";
+$proto89["m_columns"][] = "per_email_part";
+$proto89["m_columns"][] = "per_email_instit";
+$proto89["m_columns"][] = "per_ruc";
+$proto89["m_columns"][] = "per_contacto_eme";
+$proto89["m_columns"][] = "per_tele_emer";
+$proto89["m_columns"][] = "per_ingreso";
+$proto89["m_columns"][] = "per_nombramiento";
+$proto89["m_columns"][] = "per_estado";
+$proto89["m_columns"][] = "per_usuario";
+$proto89["m_columns"][] = "per_sede";
+$obj = new SQLTable($proto89);
+
+$proto88["m_table"] = $obj;
+$proto88["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
+$proto88["m_alias"] = "p";
+$proto88["m_srcTableName"] = "comisionamiento";
+$proto90=array();
+$proto90["m_sql"] = "p.per_cod = pf.id_funcionario";
+$proto90["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "per_cod",
+	"m_strTable" => "p",
+	"m_srcTableName" => "comisionamiento"
+));
+
+$proto90["m_column"]=$obj;
+$proto90["m_contained"] = array();
+$proto90["m_strCase"] = "= pf.id_funcionario";
+$proto90["m_havingmode"] = false;
+$proto90["m_inBrackets"] = false;
+$proto90["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto90);
+
+$proto88["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto88);
+
+$proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
 $proto0["m_orderby"] = array();
-												$proto88=array();
+												$proto92=array();
 						$obj = new SQLField(array(
 	"m_strName" => "id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "comisionamiento"
 ));
 
-$proto88["m_column"]=$obj;
-$proto88["m_bAsc"] = 0;
-$proto88["m_nColumn"] = 0;
-$obj = new SQLOrderByItem($proto88);
+$proto92["m_column"]=$obj;
+$proto92["m_bAsc"] = 0;
+$proto92["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto92);
 
 $proto0["m_orderby"][]=$obj;					
 $proto0["m_srcTableName"]="comisionamiento";		
@@ -6308,7 +6645,7 @@ $queryData_comisionamiento = createSqlQuery_comisionamiento();
 	
 		;
 
-																																					
+																																							
 
 $tdatacomisionamiento[".sqlquery"] = $queryData_comisionamiento;
 

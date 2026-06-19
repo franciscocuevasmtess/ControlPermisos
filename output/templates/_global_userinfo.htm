@@ -344,90 +344,6 @@
 										<tr {$row_grid_0} >
 										
 
-{BEGIN cellblock_grid_2factor_label}
-<td
-	{$cell_grid_2factor_label}
-	class=" r-ori-vert"
-	
-			
-			data-cellId="grid_2factor_label" data-pageid="{$pageid}"
-		data-v-cell="4"
-		
->
-	<div edit-form-cell class="clearfix">
-				<span data-itemtype="twofactor_label" data-itemid="twofactor_label" {$item_twofactor_label} data-pageid="{$pageid}" data-page="_global_userinfo" data-small >
-Autenticación de dos factores</span>
-											<span data-itemtype="twofactor_comment" data-itemid="twofactor_comment" {$item_twofactor_comment} data-pageid="{$pageid}" data-small >
-Seleccione su método preferido para recibir el código de autenticación</span>
-											<span data-itemtype="twofactor_setup_comment" data-itemid="twofactor_setup_comment" {$item_twofactor_setup_comment} data-pageid="{$pageid}" data-small >
-Para completar el registro seleccione su método preferido para recibir el código de autenticación</span>
-	
-								</td>
-			{END cellblock_grid_2factor_label}
-								</tr>
-	 
-	 
-														<tr {$row_grid_1} >
-										
-
-{BEGIN cellblock_grid_2factor}
-<td
-	{$cell_grid_2factor}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_2factor" data-pageid="{$pageid}"
-		data-v-cell="4"
-		
->
-	<div edit-form-cell class="clearfix">
-				<div data-itemtype="twofactor_settings" data-itemid="twofactor_settings" {$item_twofactor_settings} data-pageid="{$pageid}">
-<div class="r-2fa-message"></div>
-</div>	
-								</td>
-			{END cellblock_grid_2factor}
-								</tr>
-	 
-	 
-														<tr {$row_grid_2} >
-										
-
-{BEGIN cellblock_grid_2factor_buttons}
-<td
-	{$cell_grid_2factor_buttons}
-	class=""
-	
-				data-fullwidth
-		
-			data-cellId="grid_2factor_buttons" data-pageid="{$pageid}"
-		data-v-cell="4"
-		
->
-	<div edit-form-cell class="clearfix">
-				{BEGIN twofactor_continue}
-<span data-itemtype="twofactor_continue" data-itemid="twofactor_continue" {$item_twofactor_continue} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-primary   
-	" data-action="twof_continue" >
-							Continuar			</a>
-</span>
-{END twofactor_continue}
-											{BEGIN twofactor_skip}
-<span data-itemtype="twofactor_skip" data-itemid="twofactor_skip" {$item_twofactor_skip} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-default   
-	" data-action="twof_skip" >
-							No habilite la autenticación de dos factores			</a>
-</span>
-{END twofactor_skip}
-	
-								</td>
-			{END cellblock_grid_2factor_buttons}
-								</tr>
-	 
-	 
-														<tr {$row_grid_3} >
-										
-
 {BEGIN cellblock_grid_fields_message}
 <td
 	{$cell_grid_fields_message}
@@ -451,7 +367,7 @@ Perfil</span>
 								</tr>
 	 
 	 
-														<tr {$row_grid_4} >
+														<tr {$row_grid_1} >
 										
 
 {BEGIN cellblock_grid_fields}
@@ -494,7 +410,7 @@ Perfil</span>
 								</tr>
 	 
 	 
-														<tr {$row_grid_5} >
+														<tr {$row_grid_2} >
 										
 
 {BEGIN cellblock_grid_buttons}

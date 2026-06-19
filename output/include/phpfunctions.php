@@ -1253,6 +1253,121 @@ switch ($data["resultado_decision"]) {
 };
 		return $value;
 	}
+				if($table=="vacacion" && $field=="resultado_decision")
+	{
+		/*
+if ($data["resultado_decision"] == 'RECHAZADO' ) {  
+     $color="red";  
+}
+
+if ($data["resultado_decision"] == 'PENDIENTE' ) {  
+     //$color="yellow"; 
+}
+if ($data["resultado_decision"]== 'APROBADO' ) {  
+     $color="green";  
+}
+$value="<span style='color: " . $color . "'>" .$value . "</span>"; 
+*/
+switch ($data["resultado_decision"]) {
+
+    case "PENDIENTE":
+        $value = '
+        <span style="
+            background-color:#fff3cd;
+            color:#856404;
+            padding:4px 10px;
+            border-radius:12px;
+            font-weight:600;
+            font-size:12px;
+            display:inline-block;
+        ">
+            ⏳ Pendiente
+        </span>';
+        break;
+
+    case "APROBADO":
+        $value = '
+        <span style="
+            background-color:#d4edda;
+            color:#155724;
+            padding:4px 10px;
+            border-radius:12px;
+            font-weight:600;
+            font-size:12px;
+            display:inline-block;
+        ">
+            ✅ Aprobado
+        </span>';
+        break;
+
+    case "RECHAZADO":
+        $value = '
+        <span style="
+            background-color:#f8d7da;
+            color:#721c24;
+            padding:4px 10px;
+            border-radius:12px;
+            font-weight:600;
+            font-size:12px;
+            display:inline-block;
+        ">
+            ❌ Rechazado
+        </span>';
+        break;
+}
+;
+		return $value;
+	}
+				if($table=="vacacion" && $field=="rrhh_resultado_decision")
+	{
+		switch ($data["rrhh_resultado_decision"]) {
+	case "PENDIENTE":
+		$value = '
+		<span style="
+			background-color:#e6e6e6;
+            color:#856404;
+            padding:4px 10px;
+            border-radius:12px;
+            font-weight:600;
+            font-size:12px;
+            display:inline-block;
+		">
+			⏳ Pendiente
+		</span>';
+		break;
+	
+	case "APROBADO":
+		$value = '
+		<span style="
+			background-color:#d4edda;
+            color:#155724;
+            padding:4px 10px;
+            border-radius:12px;
+            font-weight:600;
+            font-size:12px;
+            display:inline-block;
+		">
+			✅ Aprobado
+        </span>';
+        break;
+	
+	case "RECHAZADO":
+		$value = '
+		<span style="
+            background-color:#f8d7da;
+            color:#721c24;
+            padding:4px 10px;
+            border-radius:12px;
+            font-weight:600;
+            font-size:12px;
+            display:inline-block;
+        ">
+			❌ Rechazado
+        </span>';
+        break;
+};
+		return $value;
+	}
 	return $value;
 }
 
@@ -1270,6 +1385,11 @@ function fileCustomExpression($file, $data, $field, $ptype, $table )
 		return $value;
 	}
 				if($table=="comisionamiento" && $field=="archivo_adjunto")
+	{
+		;
+		return $value;
+	}
+				if($table=="vacacion" && $field=="archivo_adjunto")
 	{
 		;
 		return $value;
@@ -1330,6 +1450,34 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return "15:00";
 	}
+				if($table=="comisionamiento" && $field=="motivo_id")
+	{
+		return 10;
+	}
+				if($table=="comisionamiento" && $field=="comision_servicios")
+	{
+		return 1;
+	}
+				if($table=="vacacion" && $field=="fecha_desde")
+	{
+		return now();
+	}
+				if($table=="vacacion" && $field=="hora_desde")
+	{
+		return "07:00";
+	}
+				if($table=="vacacion" && $field=="fecha_hasta")
+	{
+		return now();
+	}
+				if($table=="vacacion" && $field=="hora_hasta")
+	{
+		return "15:00";
+	}
+				if($table=="vacacion" && $field=="motivo_id")
+	{
+		return 1;
+	}
 	return "";
 }
 
@@ -1341,6 +1489,10 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 	global $strTableName;
 	if(!$table)
 		$table=$strTableName;
+				if($table=="comisionamiento" && $field=="comision_servicios")
+	{
+		return 1;
+	}
 	return "";
 }
 
@@ -1351,7 +1503,17 @@ function GetUploadFolderExpression($field, $file, $table )
 {
 	if($table=="rrhh_permisos.permisos_funcionarios" && $field=="archivo_adjunto")
 	{
-		file;
+		$folder = $_SERVER['DOCUMENT_ROOT']. "/permisos_file";;
+		return $folder;
+	}
+	if($table=="comisionamiento" && $field=="archivo_adjunto")
+	{
+		$folder = $_SERVER['DOCUMENT_ROOT']. "/permisos_file";;
+		return $folder;
+	}
+	if($table=="vacacion" && $field=="archivo_adjunto")
+	{
+		$folder = "files";;
 		return $folder;
 	}
 	return "";

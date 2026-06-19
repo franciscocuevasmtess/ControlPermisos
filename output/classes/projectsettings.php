@@ -3594,6 +3594,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "comisionamiento" ] = "comisionamiento";
 	$projectEntities[ "public.personales" ] = array( "url" => "personales", "type" => 0 );
 	$projectEntitiesReverse[ "personales" ] = "public.personales";
+	$projectEntities[ "vacacion" ] = array( "url" => "vacacion", "type" => 1 );
+	$projectEntitiesReverse[ "vacacion" ] = "vacacion";
 }
 
 function findTable( $table ) {

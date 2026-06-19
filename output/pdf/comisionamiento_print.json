@@ -175,6 +175,12 @@ pdfDocument = {
 										{BEGIN col_grid_36}
 					"%",
 					{END col_grid_36}
+										{BEGIN col_grid_37}
+					"%",
+					{END col_grid_37}
+										{BEGIN col_grid_38}
+					"%",
+					{END col_grid_38}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -322,7 +328,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento id }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel comisionamiento id }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -351,7 +357,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento id_funcionario }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+			{"text":"{$jslabel comisionamiento id_funcionario }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -380,7 +386,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento per_nombre }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+			{"text":"{$jslabel comisionamiento per_nombre }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -409,7 +415,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento per_apellido }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+			{"text":"{$jslabel comisionamiento per_apellido }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -438,7 +444,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento per_ci }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel comisionamiento per_ci }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -467,7 +473,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
+			{"text":"{$jslabel comisionamiento tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -496,7 +502,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento nombre_completo }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
+			{"text":"{$jslabel comisionamiento nombre_completo }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -525,7 +531,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento dependencia_id }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
+			{"text":"{$jslabel comisionamiento dependencia_id }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -554,7 +560,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento fecha_desde }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
+			{"text":"{$jslabel comisionamiento fecha_desde }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -583,7 +589,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento hora_desde }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
+			{"text":"{$jslabel comisionamiento hora_desde }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -612,7 +618,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento fecha_hasta }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
+			{"text":"{$jslabel comisionamiento fecha_hasta }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -641,7 +647,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento hora_hasta }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
+			{"text":"{$jslabel comisionamiento hora_hasta }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -670,7 +676,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento motivo_id }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
+			{"text":"{$jslabel comisionamiento motivo_id }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -699,7 +705,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento comision_servicios }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
+			{"text":"{$jslabel comisionamiento comision_servicios }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -728,7 +734,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento comision_servicios_descripcion }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
+			{"text":"{$jslabel comisionamiento comision_servicios_descripcion }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -757,7 +763,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento observacion }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
+			{"text":"{$jslabel comisionamiento observacion }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -786,7 +792,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento estado }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
+			{"text":"{$jslabel comisionamiento estado }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -815,7 +821,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento archivo_adjunto }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
+			{"text":"{$jslabel comisionamiento archivo_adjunto }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -844,7 +850,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento email_jefe }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
+			{"text":"{$jslabel comisionamiento email_jefe }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -873,7 +879,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
+			{"text":"{$jslabel comisionamiento descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field58}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -902,7 +908,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
+			{"text":"{$jslabel comisionamiento descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field59}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -931,7 +937,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento solicitado_por }","hidden":"{$item_hide_simple_grid_field58}","bold":true},
+			{"text":"{$jslabel comisionamiento solicitado_por }","hidden":"{$item_hide_simple_grid_field60}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -960,7 +966,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento fecha_solicitud }","hidden":"{$item_hide_simple_grid_field59}","bold":true},
+			{"text":"{$jslabel comisionamiento fecha_solicitud }","hidden":"{$item_hide_simple_grid_field61}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -989,7 +995,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento email_jefe_id }","hidden":"{$item_hide_simple_grid_field60}","bold":true},
+			{"text":"{$jslabel comisionamiento email_jefe_id }","hidden":"{$item_hide_simple_grid_field62}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1018,7 +1024,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento resultado_decision }","hidden":"{$item_hide_simple_grid_field61}","bold":true},
+			{"text":"{$jslabel comisionamiento resultado_decision }","hidden":"{$item_hide_simple_grid_field63}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1047,7 +1053,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento horas_compensar }","hidden":"{$item_hide_simple_grid_field62}","bold":true},
+			{"text":"{$jslabel comisionamiento horas_compensar }","hidden":"{$item_hide_simple_grid_field64}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1076,7 +1082,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field63}","bold":true},
+			{"text":"{$jslabel comisionamiento nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field65}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1105,7 +1111,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field64}","bold":true},
+			{"text":"{$jslabel comisionamiento descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field66}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1134,7 +1140,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento rrhh_resultado_decision }","hidden":"{$item_hide_simple_grid_field65}","bold":true},
+			{"text":"{$jslabel comisionamiento rrhh_resultado_decision }","hidden":"{$item_hide_simple_grid_field67}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1163,7 +1169,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento rrhh_motivo_rechazo }","hidden":"{$item_hide_simple_grid_field66}","bold":true},
+			{"text":"{$jslabel comisionamiento rrhh_motivo_rechazo }","hidden":"{$item_hide_simple_grid_field68}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1192,7 +1198,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento antiguedad_laboral }","hidden":"{$item_hide_simple_grid_field67}","bold":true},
+			{"text":"{$jslabel comisionamiento antiguedad_laboral }","hidden":"{$item_hide_simple_grid_field69}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1221,7 +1227,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento car_descri }","hidden":"{$item_hide_simple_grid_field68}","bold":true},
+			{"text":"{$jslabel comisionamiento car_descri }","hidden":"{$item_hide_simple_grid_field70}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1250,7 +1256,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento sed_descripcion }","hidden":"{$item_hide_simple_grid_field69}","bold":true},
+			{"text":"{$jslabel comisionamiento sed_descripcion }","hidden":"{$item_hide_simple_grid_field71}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1279,7 +1285,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento cantidad_dias_permiso }","hidden":"{$item_hide_simple_grid_field70}","bold":true},
+			{"text":"{$jslabel comisionamiento cantidad_dias_permiso }","hidden":"{$item_hide_simple_grid_field72}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1308,7 +1314,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento cantidad_permisos_mes }","hidden":"{$item_hide_simple_grid_field71}","bold":true},
+			{"text":"{$jslabel comisionamiento cantidad_permisos_mes }","hidden":"{$item_hide_simple_grid_field73}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1337,7 +1343,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento fecha_decision }","hidden":"{$item_hide_simple_grid_field72}","bold":true},
+			{"text":"{$jslabel comisionamiento fecha_decision }","hidden":"{$item_hide_simple_grid_field74}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1366,7 +1372,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel comisionamiento rrhh_fecha_decision }","hidden":"{$item_hide_simple_grid_field73}","bold":true},
+			{"text":"{$jslabel comisionamiento rrhh_fecha_decision }","hidden":"{$item_hide_simple_grid_field75}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1376,6 +1382,64 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field36}
+																							{BEGIN cellblock_grid_headcell_field37}
+{
+	cellId: 'headcell_field37',
+	col:0,
+	row:0,
+			fieldName: 'decidido_por',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel comisionamiento decidido_por }","hidden":"{$item_hide_simple_grid_field76}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$decidido_por_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field37}
+																							{BEGIN cellblock_grid_headcell_field38}
+{
+	cellId: 'headcell_field38',
+	col:0,
+	row:0,
+			fieldName: 'intentos_correccion',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel comisionamiento intentos_correccion }","hidden":"{$item_hide_simple_grid_field77}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$intentos_correccion_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field38}
 											],
 				{END row_grid_0}
 		
@@ -2458,6 +2522,64 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field36}
+																							{BEGIN cellblock_grid_cell_field37}
+{
+	cellId: 'cell_field37',
+	col:0,
+	row:0,
+			fieldName: 'decidido_por',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$decidido_por_pdfvalue},"hidden":"{$item_hide_simple_grid_field37}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$decidido_por_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field37}
+																							{BEGIN cellblock_grid_cell_field38}
+{
+	cellId: 'cell_field38',
+	col:0,
+	row:0,
+			fieldName: 'intentos_correccion',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$intentos_correccion_pdfvalue},"hidden":"{$item_hide_simple_grid_field38}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$intentos_correccion_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field38}
 											],
 				{END row_grid_1}
 		
@@ -3429,6 +3551,58 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field36}
+																							{BEGIN cellblock_grid_footcell_field37}
+{
+	cellId: 'footcell_field37',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field37}
+																							{BEGIN cellblock_grid_footcell_field38}
+{
+	cellId: 'footcell_field38',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field38}
 											],
 				{END row_grid_2}
 		

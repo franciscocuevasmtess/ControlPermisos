@@ -72,7 +72,6 @@ function mostrarConfirmacion(htmlResumen) {
 	});
 }
 
-
 /**
  * 🧩 FUNCIÓN: validarCampos
  * Propósito: Validar genéricamente que los controles tengan valor
