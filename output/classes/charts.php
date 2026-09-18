@@ -386,8 +386,6 @@ class Chart
 			return true;
 		if("public.tipos_ocurrencias" == $this->chrt_array['tables'][0])
 			return true;
-		if("rrhh_permisos.solicitudes_vacaciones" == $this->chrt_array['tables'][0])
-			return true;
 		if("public.usuarios" == $this->chrt_array['tables'][0])
 			return true;
 		if("rrhh_permisos.permisos_funcionarios" == $this->chrt_array['tables'][0])
@@ -395,6 +393,8 @@ class Chart
 		if("public.personales" == $this->chrt_array['tables'][0])
 			return true;
 		if("rrhh_permisos.permisos_funcionarios" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.anhos" == $this->chrt_array['tables'][0])
 			return true;
 		return false;
 	}

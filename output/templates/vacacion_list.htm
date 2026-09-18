@@ -258,6 +258,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_id}</span>
 						</div>
 		{END searchCtrlBlock_id}
+																{BEGIN searchCtrlBlock_vac_periodo_solicitado}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_vac_periodo_solicitado}" {$filterRow_attrs_vac_periodo_solicitado}>
+			<label>{$label vacacion vac_periodo_solicitado }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_vac_periodo_solicitado}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_vac_periodo_solicitado}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_vac_periodo_solicitado}</span>
+						</div>
+		{END searchCtrlBlock_vac_periodo_solicitado}
 																{BEGIN searchCtrlBlock_vac_dias_pedidos}
 
 
@@ -1028,7 +1041,7 @@
 				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="vac_dias_pedidos"]:before {
 		content: "{$label vacacion vac_dias_pedidos}";
 	}
-	}
+		}
 </style>
 <table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-striped table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
 	cellpadding="0"

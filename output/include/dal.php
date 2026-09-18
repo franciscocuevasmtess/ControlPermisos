@@ -47,6 +47,7 @@ function DBLookup($sql)
   */
 class tDAL
 {
+	var $tbldbtalentos_at_192_168_123_51_public_anhos;
 	var $tbldbtalentos_at_192_168_123_51_public_cargos;
 	var $tbldbtalentos_at_192_168_123_51_public_ciudades;
 	var $tbldbtalentos_at_192_168_123_51_public_departamentos;
@@ -61,7 +62,6 @@ class tDAL
 	var $tbldbtalentos_at_192_168_123_51_public_tipos_ocurrencias;
 	var $tbldbtalentos_at_192_168_123_51_public_usuarios;
 	var $tbldbtalentos_at_192_168_123_51_rrhh_permisos_permisos_funcionarios;
-	var $tbldbtalentos_at_192_168_123_51_rrhh_permisos_solicitudes_vacaciones;
 	var $lstTables;
 	var $Table = array();
 
@@ -69,6 +69,7 @@ class tDAL
 	{
 		if($this->lstTables)
 			return;
+		$this->lstTables[] = array("name" => "anhos", "varname" => "dbtalentos_at_192_168_123_51_public_anhos", "altvarname" => "anhos", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "cargos", "varname" => "dbtalentos_at_192_168_123_51_public_cargos", "altvarname" => "cargos", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "ciudades", "varname" => "dbtalentos_at_192_168_123_51_public_ciudades", "altvarname" => "ciudades", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "departamentos", "varname" => "dbtalentos_at_192_168_123_51_public_departamentos", "altvarname" => "departamentos", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
@@ -83,7 +84,6 @@ class tDAL
 		$this->lstTables[] = array("name" => "tipos_ocurrencias", "varname" => "dbtalentos_at_192_168_123_51_public_tipos_ocurrencias", "altvarname" => "tipos_ocurrencias", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "usuarios", "varname" => "dbtalentos_at_192_168_123_51_public_usuarios", "altvarname" => "usuarios", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "public", "connName" => "dbtalentos2 at 192.168.123.51");
 		$this->lstTables[] = array("name" => "permisos_funcionarios", "varname" => "dbtalentos_at_192_168_123_51_rrhh_permisos_permisos_funcionarios", "altvarname" => "permisos_funcionarios", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "rrhh_permisos", "connName" => "dbtalentos2 at 192.168.123.51");
-		$this->lstTables[] = array("name" => "solicitudes_vacaciones", "varname" => "dbtalentos_at_192_168_123_51_rrhh_permisos_solicitudes_vacaciones", "altvarname" => "solicitudes_vacaciones", "connId" => "dbtalentos_at_192_168_123_51", "schema" => "rrhh_permisos", "connName" => "dbtalentos2 at 192.168.123.51");
 	}
 
 	/**

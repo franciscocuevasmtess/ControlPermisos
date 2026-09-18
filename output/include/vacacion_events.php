@@ -219,6 +219,8 @@ $pageObject->hideItem("add_motivo_id"); // Oculta el campo motivo_id
 
 $pageObject->hideItem("add_vac_dias_pedidos"); // Oculta el campo vac_dias_pedidos
 
+$pageObject->hideItem("add_vac_periodo_solicitado"); // Oculta el campo de vacaciones periodo
+
 
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
@@ -359,13 +361,13 @@ require_once(getabspath("include/email_utils.php"));
  * @param mixed  $data    Datos a mostrar
  * @param string $context Texto descriptivo del contexto
  */
-function debug_to_console($data, $context = 'Debug in Console') {
-	ob_start();
-	$output  = 'console.info(\'' . $context . ':\');';
-	$output .= 'console.log(' . json_encode($data) . ');';
-	$output  = sprintf('<script>%s</script>', $output);
-	echo $output;
-}
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
 
 
 /*==============================================================
@@ -400,7 +402,7 @@ $email_jefe = $values["email_jefe"];
 $email_jefe_id = $values["email_jefe_id"];
 $nombreDependencia = $values["descripcion_dependencia"];
 $vac_dias_pedidos = $values["vac_dias_pedidos"];
-
+$vac_periodo_solicitado = $values["vac_periodo_solicitado"];
 
 /*==============================================================
 =            OBTENER DESCRIPCIÓN DEL MOTIVO                    =
@@ -410,7 +412,7 @@ $sqlMotivo = DB::PrepareSQL(
 FROM public.tipos_ocurrencias 
 WHERE tip_cod = ':1'", $values["motivo_id"]
 );
-debug_to_console("sqlMotivo: " . $sqlMotivo);
+//debug_to_console("sqlMotivo: " . $sqlMotivo);
 $resultMotivo = DB::Query($sqlMotivo);
 $rowMotivo = $resultMotivo->fetchAssoc();
 $nombreMotivo = $rowMotivo ? $rowMotivo['tip_descripcion'] : 'No especificado';
@@ -426,22 +428,23 @@ try {
 	--------------------------------------------*/
 	$sqlInsertPermisosFuncionarios = DB::PrepareSQL(
 		"INSERT INTO rrhh_permisos.permisos_funcionarios (id_funcionario,
-																											tipo_vinculacion,
-																											dependencia_id,
-																											fecha_desde,
-																											hora_desde,
-																											fecha_hasta,
-																											hora_hasta,
-																											motivo_id,
-																											observacion,
-																											estado,
-																											archivo_adjunto,
-																											solicitado_por,
-																											fecha_solicitud,
-																											resultado_decision,
-																											rrhh_resultado_decision,
-																											vac_dias_pedidos) 
-		VALUES (':1',':2',':3',':4',':5',':6',':7',':8',':9',':10',':11',':12',NOW(),':13',':14',':15')
+																															tipo_vinculacion,
+																															dependencia_id,
+																															fecha_desde,
+																															hora_desde,
+																															fecha_hasta,
+																															hora_hasta,
+																															motivo_id,
+																															observacion,
+																															estado,
+																															archivo_adjunto,
+																															solicitado_por,
+																															fecha_solicitud,
+																															resultado_decision,
+																															rrhh_resultado_decision,
+																															vac_dias_pedidos,
+																															vac_periodo_solicitado) 
+		VALUES (':1',':2',':3',':4',':5',':6',':7',':8',':9',':10',':11',':12',NOW(),':13',':14',':15',':16')
 				RETURNING id",
 				$id_funcionario,
 				$tipo_vinculacion,
@@ -457,14 +460,15 @@ try {
 				$currentUserData["usu_cod"],
 				$estado,
 				$estado,
-				$vac_dias_pedidos
+				$vac_dias_pedidos,
+				$vac_periodo_solicitado
 	);
-	debug_to_console("sqlInsertPermisosFuncionarios: ". $sqlInsertPermisosFuncionarios);
+	//debug_to_console("sqlInsertPermisosFuncionarios: ". $sqlInsertPermisosFuncionarios);
 	
 	$resultPermisosFuncionarios = DB::Query($sqlInsertPermisosFuncionarios);
 	$row_permisos_funcionarios = $resultPermisosFuncionarios->fetchAssoc();
 	$permiso_funcionario_id = $row_permisos_funcionarios['id'];
-	debug_to_console("Permiso generado con ID: ".$permiso_funcionario_id);
+	//debug_to_console("Permiso generado con ID: ".$permiso_funcionario_id);
 	
 	/*
 	// ============================================================================
@@ -498,16 +502,16 @@ try {
 
 	if ($emailEnviado) {
 		error_log("Correo enviado para permiso ID: " . $permiso_funcionario_id);
-		debug_to_console("Correo enviado para permiso ID: " . $permiso_funcionario_id);
+		//debug_to_console("Correo enviado para permiso ID: " . $permiso_funcionario_id);
 	} else {
 		error_log("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
-		debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
+		//debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
 	}
 
 } catch (Exception $e) {
 	// Si ocurre un error en el correo, NO se revierte la inserción del permiso.
 	error_log("Excepción al enviar correo: " . $e->getMessage());
-	debug_to_console("Excepción al enviar correo: " . $e->getMessage());
+	//debug_to_console("Excepción al enviar correo: " . $e->getMessage());
 }
 
 ;		
@@ -1172,7 +1176,7 @@ $html_exitoso = '
     <p style="margin: 8px 0; color:#155724; font-size: 18px;">
        Tu solicitud de vacaciones fue registrada correctamente y enviada a tu superior inmediato para su revisión.
     </p>
-		<a href="permisos_funcionarios_list.php" style="
+		<a href="vacacion_list.php" style="
         display: inline-block;
         margin-top: 12px;
         padding: 8px 14px;
@@ -1460,13 +1464,13 @@ function BeforeAdd(&$values, &$sqlValues, &$message, $inline, $pageObject)
  * @param mixed  $data    Datos a mostrar
  * @param string $context Texto descriptivo del contexto
  */
-//function debug_to_console($data, $context = 'Debug in Console') {
-//	ob_start();
-//	$output  = 'console.info(\'' . $context . ':\');';
-//	$output .= 'console.log(' . json_encode($data) . ');';
-//	$output  = sprintf('<script>%s</script>', $output);
-//	echo $output;
-//}
+function debug_to_console($data, $context = 'Debug in Console') {
+	ob_start();
+	$output  = 'console.info(\'' . $context . ':\');';
+	$output .= 'console.log(' . json_encode($data) . ');';
+	$output  = sprintf('<script>%s</script>', $output);
+	echo $output;
+}
 
 
 /**
@@ -1533,10 +1537,10 @@ foreach ($camposRequeridos as $campo => $label) {
 
 if (!empty($faltantes)) {
 	$message = generarMensajeError(
-		"No es posible enviar la solicitud de comisión.",
+		"No es posible enviar la solicitud de vacación.",
 		"Faltan completar los siguientes datos de tu perfil:",
 		$faltantesPerfil,
-		"<br><b>Por favor, comunícate con la Dirección General de Talentos Humanos para actualizar tu información.</b>"
+		"<br><b>Por favor, comunícate con la Dirección General de Talentos Humanos(DGTH) para actualizar tu información.</b>"
 	);
 	
 	return false; // ⛔ DETIENE TODO
@@ -1587,12 +1591,14 @@ if (!empty($faltantesFormulario)) {
 
 
 $motivo_id = $values["motivo_id"];
-//debug_to_console("motivo_id: " . $motivo_id);
+$id_funcionario = $values["id_funcionario"];
+debug_to_console("motivo_id: " . $motivo_id);
+//debug_to_console("id_funcionario: " . $id_funcionario);
 
 // Obtener la descripcion del tipo de permiso para un mensaje más claro para el usuario.
 $sqlMotivoDesc = "SELECT * 
-										FROM public.tipos_ocurrencias 
-										WHERE tip_cod = $motivo_id";
+											FROM public.tipos_ocurrencias 
+											WHERE tip_cod = $motivo_id";
 //debug_to_console("sqlMotivoDesc: " . $rsMotivoDesc);
 $rsMotivoDesc = DB::Query($sqlMotivoDesc);
 $dataMotivoDesc = $rsMotivoDesc->fetchAssoc();
@@ -1629,7 +1635,7 @@ function lista_dias($inicio, $fin) {
 }
 
 /**
- * Obtiene lista de feriados desde BD
+ * Obtiene lista de feriados desde la Base de Datos.
  */
 function lista_feriados() {
 	$lista_feriados = array();
@@ -1657,8 +1663,215 @@ function contar_dias($lista_dias) {
 
 $listado = lista_dias($values['fecha_desde'], $values['fecha_hasta']);
 $values['vac_dias_pedidos'] = contar_dias($listado);
-debug_to_console("vac_dias_pedidos: ".$values['vac_dias_pedidos']);
+$vac_dias_pedidos = $values['vac_dias_pedidos'];
+//debug_to_console("vac_dias_pedidos: ".$values['vac_dias_pedidos']);
 
+// Asigna periodo segun la fecha-desde ingresada.
+$values['vac_periodo_solicitado'] = (int)date("Y", strtotime($values['fecha_desde']));
+
+
+
+/**/
+// VALIDACION DE FECHA DE INGRESO
+// Obtener la fecha de ingreso del funcionario
+$sqlPersonales = "SELECT p.per_ingreso
+											FROM public.personales p
+											WHERE p.per_cod = $id_funcionario";
+debug_to_console("sqlPersonales: " . $sqlPersonales);
+$rsPersonales = DB::Query($sqlPersonales);
+$dataPersonales = $rsPersonales->fetchAssoc();
+$per_ingreso = $dataPersonales["per_ingreso"];
+//debug_to_console("per_ingreso: " . $per_ingreso);
+
+// Verificar que exista la fecha de ingreso
+if (empty($per_ingreso)) {
+	$message = generarMensajeError(
+		"No es posible enviar la solicitud de vacación.",
+		"Faltan completar los siguientes datos de tu perfil",
+		[
+			"<strong>El funcionario no tiene registrada una fecha de ingreso.</strong>"
+		],
+		"<br><b>Por favor, comunícate con la Dirección General de Talentos Humanos(DGTH) para actualizar tu información.</b>"
+	);
+	return false;
+}
+// FIN VALIDACION DE FECHA DE INGRESO
+
+
+
+
+// VALIDACION DE ANTIGUEDAD DEL FUNCIONARIO
+// Calcular la antigüedad
+$fechaIngreso = new DateTime($per_ingreso);
+$fechaActual = new DateTime();
+
+$antiguedad = $fechaIngreso->diff($fechaActual)->y;
+//debug_to_console("antiguedad: " . $antiguedad);
+
+// Validar el año mínimo
+// Debe tener al menos 1 año.
+if ($antiguedad < 1) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"Aún no posee la antigüedad requerida",
+		[
+			"<strong>El funcionario aún no posee la antigüedad mínima de un (1) año para solicitar vacaciones.</strong>"
+		]
+	);
+	return false;
+}
+// FIN VALIDACION DEL ANTIGUEDAD DEL FUNCIONARIO
+
+
+
+// VALIDACION DE DIAS PERMITIDOS
+// Calcular los días permitidos
+/*$diasPermitidos = 0;
+if ($antiguedad >= 1 && $antiguedad <= 5) {
+	$diasPermitidos = 12;
+} elseif($antiguedad >= 6 && $antiguedad <= 10) {
+	$diasPermitidos = 18;
+} else {
+	$diasPermitidos = 30;
+}*/
+function obtenerDiasVacaciones($antiguedad) {
+	if($antiguedad >= 1 && $antiguedad <= 5)
+		return 12;
+	if($antiguedad >= 6 && $antiguedad <= 10)
+		return 18;
+	
+	return 30;
+}
+$diasPermitidos = obtenerDiasVacaciones($antiguedad);
+//debug_to_console("diasPermitidos: " . $diasPermitidos);
+
+// No superar los días permitidos
+// Esta es la continuación natural de la validación de antigüedad.
+if ($values["vac_dias_pedidos"] > $diasPermitidos) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"La solicitud supera los días permitidos",
+		[
+			"<strong>Según su antigüedad laboral ($antiguedad años), le corresponden $diasPermitidos días hábiles de vacaciones. </strong>",
+			"<strong>La solicitud realizada es de $vac_dias_pedidos días hábiles.</strong>"
+		],
+		"<br><b>Reduce la cantidad de días e intenta nuevamente.</b>"
+	);
+	return false;	
+}
+// FIN VALIDACION DE DIAS PERMITIDOS
+
+
+
+
+
+// VALIDACION DEL MINIMO DE CINCO(5) DIAS HABILES
+// Mínimo cinco días hábiles
+if ($values["vac_dias_pedidos"] < 5) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"La solicitud no alcanza la cantidad de días minimos",
+		[
+			"<strong>Las vacaciones deberán usufructuarse por un mínimo de cinco (5) días hábiles consecutivos.</strong>"
+		],
+		"<br><b>Aumenta la cantidad de días e intenta nuevamente.</b>"
+	);
+	return false;
+}
+// FIN VALIDACION DEL MINIMO DE CINCO(5) DIAS HABILES
+
+
+
+// VALIDACION DE INICIO DE VACACIONES EN DIA LUNES
+// Debe iniciar un lunes
+// FALTA INTEGRAR LA PERTE DE FERIADOS
+$diaSemana = date("N", strtotime($values["fecha_desde"]));
+if ($diaSemana != 1) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"La solicitud debe iniciar en dia lunes",
+		[
+			"<strong>Las vacaciones deberán iniciar un día lunes.</strong>"
+		],
+		"<br><b>Verifique la fecha de inicio e intente nuevamente.</b>"
+	);
+	return false;
+}
+// VALIDACION DE INICIO DE VACACIONES EN DIA LUNES
+
+
+
+
+// VALIDACION DE PRESENTACION CON DIEZ(10) DIAS HABILES
+// Presentación con diez días hábiles
+$listado2 = lista_dias(date("Y-m-d"), $values['fecha_desde']);
+$diasHabiles = contar_dias($listado2);
+//debug_to_console("diasHabiles: " . $diasHabiles);
+if ($diasHabiles < 10) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"La solicitud debe presentarse de forma anticipada.",
+		[
+			"<strong>La solicitud de vacaciones debe presentarse con una anticipación mínima de diez (10) días hábiles.</strong>"
+		],
+		"<br><b>Verifique las fechas e intente nuevamente.</b>"
+	);
+	return false;
+}
+// FIN VALIDACION DE PRESENTACION CON DIEZ(10) DIAS HABILES
+
+
+
+
+// Paso 10
+//$anioActual = (int)date("Y");
+//$periodo = (int)$values["vac_periodo"];
+//debug_to_console("anioActual: " . $anioActual);
+//debug_to_console("periodo: " . $periodo);
+//debug_to_console($periodo . " < " . ($anioActual - 1) . " || " . $periodo . " > " . $anioActual);
+
+//if ($periodo < ($anioActual - 1) || $periodo > $anioActual) {
+//	$message = generarMensajeError(
+//		"No se pudo registrar la solicitud.",
+//		"La solicitud no corresponde al periodo permitido.",
+//		[
+//			"<strong>Solo es posible solicitar vacaciones correspondientes al período actual o al período inmediatamente anterior.</strong>"
+//		],
+//		"<br><b>Verifique el periodo seleccionado e intente nuevamente.</b>"
+//	);
+//	return false;
+//}
+
+
+// VALIDAR SUPERPOSICIONES DE SOLICITUD DE VACACIONES
+// Validar que un funcionario no tenga otra solicitud de vacaciones que se 
+// superponga con las fechas solicitadas.
+$fecha_desde = $values['fecha_desde'];
+$fecha_hasta = $values['fecha_hasta'];
+$sqlPermisosFuncionarios = "SELECT pf.*
+																	FROM rrhh_permisos.permisos_funcionarios pf
+																	WHERE pf.id_funcionario = $id_funcionario
+																	AND pf.motivo_id::integer = $motivo_id
+																	AND pf.estado IN ('PENDIENTE')
+																	AND (
+																		pf.fecha_desde >= '$fecha_desde'
+																		AND pf.fecha_hasta <= '$fecha_hasta'
+																	)";
+//debug_to_console("sqlPermisosFuncionarios: " . $sqlPermisosFuncionarios);
+$rsPermisosFuncionarios = DB::Query($sqlPermisosFuncionarios);
+if ($rsPermisosFuncionarios && $dataPermisosFuncionarios = $rsPermisosFuncionarios->fetchAssoc()) {
+	$message = generarMensajeError(
+		"No se pudo registrar la solicitud.",
+		"Ya existe una solicitud de vacaciones para el período seleccionado.",
+		[
+			"<strong>Las fechas solicitadas se superponen con otra solicitud de vacaciones registrada en el sistema.</strong>"
+		],
+		"<br><b>Revise las fechas seleccionadas e intente nuevamente.</b>"
+	);
+	return false;
+}
+// VALIDAR SUPERPOSICIONES DE SOLICITUD DE VACACIONES
+/**/
 
 
 return true;
@@ -2627,6 +2840,9 @@ function BeforeShowView(&$xt, &$templatefile, &$values, $pageObject)
 //	echo $output;
 //}
 
+// Oculta el id de permiso de el formulario.
+$pageObject->hideItem("view_id");
+
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
 
@@ -2666,50 +2882,49 @@ $pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"
 
 
 // Query para obtener el conteo de cantidad de permisos por mes.
-$sqlTotalPermisos = DB::PrepareSQL(
-"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
-				COUNT(*) AS cantidad_permisos_mes
-FROM rrhh_permisos.permisos_funcionarios
-WHERE id_funcionario = ':1'
-AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
-AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
-GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
-);
+//$sqlTotalPermisos = DB::PrepareSQL(
+//"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
+//				COUNT(*) AS cantidad_permisos_mes
+//FROM rrhh_permisos.permisos_funcionarios
+//WHERE id_funcionario = ':1'
+//AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
+//AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
+//GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
+//);
 //debug_to_console("sqlTotalPermisos: " . $sqlTotalPermisos);
-$resultTotalPermisos = DB::Query($sqlTotalPermisos);
-$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
-if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
-	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
-} else {
-	$cantidad_permisos_mes = 0;
-}
+//$resultTotalPermisos = DB::Query($sqlTotalPermisos);
+//$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
+//if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
+//	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
+//} else {
+//	$cantidad_permisos_mes = 0;
+//}
 //debug_to_console("mes_nombre: " . $rowTotalPermisos['mes_nombre'] . ", total_permisos: " . $rowTotalPermisos['cantidad_permisos_mes']);
-$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
+//$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
 
-// Oculta el id de permiso de el formulario.
-$pageObject->hideItem("view_id");
+
 
 // Calcular la cantidad de días entre dos fechas.
-$sqlTotalDias = DB::PrepareSQL(
-"SELECT id,
-    id_funcionario,
-    fecha_desde,
-    fecha_hasta,
-    (fecha_hasta - fecha_desde) AS dias_diferencia,
-    (fecha_hasta - fecha_desde) + 1 AS dias_totales
-FROM rrhh_permisos.permisos_funcionarios
-WHERE permisos_funcionarios.id = ':1'", $values["id"]
-);
+//$sqlTotalDias = DB::PrepareSQL(
+//"SELECT id,
+//					id_funcionario,
+//					fecha_desde,
+//					fecha_hasta,
+//					(fecha_hasta - fecha_desde) AS dias_diferencia,
+//					(fecha_hasta - fecha_desde) + 1 AS dias_totales
+//FROM rrhh_permisos.permisos_funcionarios
+//WHERE permisos_funcionarios.id = ':1'", $values["id"]
+//);
 //debug_to_console("sqlTotalDias: " . $sqlTotalDias);
-$resultTotalDias = DB::Query($sqlTotalDias);
-$rowTotalDias = $resultTotalDias->fetchAssoc();
+//$resultTotalDias = DB::Query($sqlTotalDias);
+//$rowTotalDias = $resultTotalDias->fetchAssoc();
 // Voy a usar la columna de 'dias_totales' porque la columna de 'dias_diferencia', si
 // el permiso es en el dia muestra cero(0), y para evitar confusiones al usuario 
 // uso esa columna del query. 
-$dias_totales = $rowTotalDias['dias_totales'];
+//$dias_totales = $rowTotalDias['dias_totales'];
 
 //debug_to_console("dias_totales: " . $dias_totales);
-$pageObject->setProxyValue("dias_totales", $dias_totales);
+//$pageObject->setProxyValue("dias_totales", $dias_totales);
 
 ;		
 } // function BeforeShowView

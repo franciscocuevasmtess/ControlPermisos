@@ -372,10 +372,6 @@ class AuditTrailTable
 		{
 			return false;
 		}
-		if($table=="rrhh_permisos.solicitudes_vacaciones")
-		{
-			return false;
-		}
 		if($table=="public.usuarios")
 		{
 			return false;
@@ -389,6 +385,10 @@ class AuditTrailTable
 			return false;
 		}
 		if($table=="vacacion")
+		{
+			return false;
+		}
+		if($table=="public.anhos")
 		{
 			return false;
 		}
@@ -716,10 +716,6 @@ class AuditTrailFile
 		{
 			return false;
 		}
-		if($table=="rrhh_permisos.solicitudes_vacaciones")
-		{
-			return false;
-		}
 		if($table=="public.usuarios")
 		{
 			return false;
@@ -733,6 +729,10 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="vacacion")
+		{
+			return false;
+		}
+		if($table=="public.anhos")
 		{
 			return false;
 		}

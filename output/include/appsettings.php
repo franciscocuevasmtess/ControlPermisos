@@ -755,9 +755,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "1532_1780333742";
+$projectBuildKey = "1596_1784210604";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "1532";
+$projectBuildNumber = "1596";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -787,11 +787,11 @@ $tableCaptions["Spanish"]["rrhh_permisos_permisos_funcionarios"] = "Permisos Fun
 $tableCaptions["Spanish"]["public_dependencias"] = "Dependencias";
 $tableCaptions["Spanish"]["public_tipo_funcionario"] = "Tipo Funcionario";
 $tableCaptions["Spanish"]["public_tipos_ocurrencias"] = "Tipos Ocurrencias";
-$tableCaptions["Spanish"]["rrhh_permisos_solicitudes_vacaciones"] = "Solicitudes Vacaciones";
 $tableCaptions["Spanish"]["public_usuarios"] = "Usuarios";
 $tableCaptions["Spanish"]["comisionamiento"] = "Comisionamiento";
 $tableCaptions["Spanish"]["public_personales"] = "Personales";
 $tableCaptions["Spanish"]["vacacion"] = "Vacacion";
+$tableCaptions["Spanish"]["public_anhos"] = "Anhos";
 
 
 $globalEvents = new class_GlobalEvents;

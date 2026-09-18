@@ -29,6 +29,7 @@ $dalTablepermisos_funcionarios["rrhh_motivo_rechazo"] = array("type"=>201,"varna
 $dalTablepermisos_funcionarios["ocu_cod"] = array("type"=>3,"varname"=>"ocu_cod", "name" => "ocu_cod", "autoInc" => "0");
 $dalTablepermisos_funcionarios["intentos_correccion"] = array("type"=>3,"varname"=>"intentos_correccion", "name" => "intentos_correccion", "autoInc" => "0");
 $dalTablepermisos_funcionarios["vac_dias_pedidos"] = array("type"=>3,"varname"=>"vac_dias_pedidos", "name" => "vac_dias_pedidos", "autoInc" => "0");
+$dalTablepermisos_funcionarios["vac_periodo_solicitado"] = array("type"=>3,"varname"=>"vac_periodo_solicitado", "name" => "vac_periodo_solicitado", "autoInc" => "0");
 $dalTablepermisos_funcionarios["id"]["key"]=true;
 
 $dal_info["dbtalentos_at_192_168_123_51_rrhh_permisos_permisos_funcionarios"] = &$dalTablepermisos_funcionarios;

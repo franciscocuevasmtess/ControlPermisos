@@ -247,11 +247,11 @@ class ConnectionManager_Base
 		$connectionsIds["public.dependencias"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["public.tipo_funcionario"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["public.tipos_ocurrencias"] = "dbtalentos_at_192_168_123_51";
-		$connectionsIds["rrhh_permisos.solicitudes_vacaciones"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["public.usuarios"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["comisionamiento"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["public.personales"] = "dbtalentos_at_192_168_123_51";
 		$connectionsIds["vacacion"] = "dbtalentos_at_192_168_123_51";
+		$connectionsIds["public.anhos"] = "dbtalentos_at_192_168_123_51";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

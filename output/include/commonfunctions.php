@@ -211,8 +211,6 @@ function checkTableName($shortTName )
 		return true;
 	if ("tipos_ocurrencias" == $shortTName )
 		return true;
-	if ("solicitudes_vacaciones" == $shortTName )
-		return true;
 	if ("usuarios" == $shortTName )
 		return true;
 	if ("comisionamiento" == $shortTName )
@@ -220,6 +218,8 @@ function checkTableName($shortTName )
 	if ("personales" == $shortTName )
 		return true;
 	if ("vacacion" == $shortTName )
+		return true;
+	if ("anhos" == $shortTName )
 		return true;
 	return false;
 }
@@ -309,15 +309,6 @@ function GetTablesList($pdfMode = false)
 	}
 	$tableAvailable = true;
 	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("rrhh_permisos.solicitudes_vacaciones");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="rrhh_permisos.solicitudes_vacaciones";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
 		$strPerm = GetUserPermissions("public.usuarios");
 		$tableAvailable = ( strpos($strPerm, "P") !== false
 			|| $pdfMode && strpos($strPerm, "S") !== false );
@@ -352,6 +343,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="vacacion";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.anhos");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.anhos";
+	}
 	return $arr;
 }
 
@@ -365,11 +365,11 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.dependencias";
 	$arr[]="public.tipo_funcionario";
 	$arr[]="public.tipos_ocurrencias";
-	$arr[]="rrhh_permisos.solicitudes_vacaciones";
 	$arr[]="public.usuarios";
 	$arr[]="comisionamiento";
 	$arr[]="public.personales";
 	$arr[]="vacacion";
+	$arr[]="public.anhos";
 	return $arr;
 }
 
@@ -1011,11 +1011,6 @@ function GetUserPermissionsStatic( $table )
 //	default permissions
 		return "ADESPI".$extraPerm;
 	}
-	if( $table=="rrhh_permisos.solicitudes_vacaciones" )
-	{
-//	default permissions
-		return "AEDSPI".$extraPerm;
-	}
 	if( $table=="public.usuarios" )
 	{
 //	default permissions
@@ -1032,6 +1027,11 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="vacacion" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.anhos" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

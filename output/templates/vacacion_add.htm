@@ -1019,6 +1019,28 @@
 
 
 {END vac_dias_pedidos_fieldblock}
+											
+{BEGIN vac_periodo_solicitado_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_vac_periodo_solicitado}  r-vertical-field" 
+	data-signal-error-for="vac_periodo_solicitado{$id}" {$required_attr_vac_periodo_solicitado}
+	data-itemtype="integrated_edit_field" data-itemid="add_vac_periodo_solicitado" {$item_add_vac_periodo_solicitado} data-pageid="{$pageid}" data-field="vac_periodo_solicitado" data-fieldname="vac_periodo_solicitado" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_vac_periodo_solicitado}">
+		{BEGIN vac_periodo_solicitado_label}{$label vacacion vac_periodo_solicitado }{END vac_periodo_solicitado_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$vac_periodo_solicitado_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="vac_periodo_solicitado" {$tooltipAttr vacacion vac_periodo_solicitado } >
+		<div class="text-muted" >
+		{$tooltip vacacion vac_periodo_solicitado }		</div>
+	</div>
+</div>
+
+
+{END vac_periodo_solicitado_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c28}

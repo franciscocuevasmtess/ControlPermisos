@@ -433,6 +433,7 @@ $nombreMotivo = $rowMotivo ? $rowMotivo['tip_descripcion'] : 'No especificado';
 =            INSERCIÓN DEL PERMISO Y ENVÍO DE CORREO           =
 ==============================================================*/
 try {
+
 	/*--------------------------------------------
 	| Insertar permiso en la base de datos
 	--------------------------------------------*/
@@ -482,6 +483,7 @@ try {
 	/*-----------------------------------------------------
 	| Preparar datos del permiso para el correo electrónico
 	------------------------------------------------------*/
+	
 	$datosPermiso = array(
 					'nombre_funcionario' => trim($nombre_completo),
 					'fecha_desde' => $fecha_desde,
@@ -2100,6 +2102,7 @@ function obtenerFechaReintegro($idFuncionario, $fechaDesde) {
  * Obtener la fecha base según el tipo
 */
 function obtenerFechaBasePresentacion($codigoTipoReferencia, $values) {
+	
 	switch($codigoTipoReferencia) {
 		/**
 		 * POSTERIOR AL EVENTO
@@ -2184,6 +2187,7 @@ if (!empty($tip_presentacion_cantidad) && intval($tip_presentacion_cantidad) > 0
 		$diferenciaSegundos = $fechaActual->getTimestamp() - $fechaBase->getTimestamp();
 		$horasTranscurridas = floor($diferenciaSegundos / 3600);
 		
+		//debug_to_console("fechaActual: " . $fechaActual->format('Y-m-d H:i:s') . " fechaLimite: " . $fechaLimite->format('Y-m-d H:i:s'));
 		if ( $fechaActual > $fechaLimite ) {
 			$message = generarMensajeError(
 				"No se pudo registrar la solicitud.",

@@ -1474,11 +1474,9 @@ class Security
 			$userId = Security::getUserName();
 						storageSet( "OwnerID", $userId );
 			storageSet( "_rrhh_permisos.permisos_funcionarios_OwnerID", $userId );
-						storageSet( "_rrhh_permisos.solicitudes_vacaciones_OwnerID", $userId );
 		} else {
 						storageSet( "OwnerID", $data["usu_personal"] );
 			storageSet( "_rrhh_permisos.permisos_funcionarios_OwnerID", $data["usu_personal"] );
-						storageSet( "_rrhh_permisos.solicitudes_vacaciones_OwnerID", $data["usu_personal"] );
 		}
 	}
 

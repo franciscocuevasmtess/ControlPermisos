@@ -6528,6 +6528,7 @@ $proto85["m_columns"][] = "rrhh_motivo_rechazo";
 $proto85["m_columns"][] = "ocu_cod";
 $proto85["m_columns"][] = "intentos_correccion";
 $proto85["m_columns"][] = "vac_dias_pedidos";
+$proto85["m_columns"][] = "vac_periodo_solicitado";
 $obj = new SQLTable($proto85);
 
 $proto84["m_table"] = $obj;

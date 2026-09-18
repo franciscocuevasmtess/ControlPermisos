@@ -145,7 +145,12 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelsvacacion["Spanish"]["vac_dias_pedidos"] = "🏷️ Cantidad de días";
 	$fieldToolTipsvacacion["Spanish"]["vac_dias_pedidos"] = "";
 	$placeHoldersvacacion["Spanish"]["vac_dias_pedidos"] = "";
+	$fieldLabelsvacacion["Spanish"]["vac_periodo_solicitado"] = "Vac Periodo Solicitado";
+	$fieldToolTipsvacacion["Spanish"]["vac_periodo_solicitado"] = "";
+	$placeHoldersvacacion["Spanish"]["vac_periodo_solicitado"] = "";
 	$pageTitlesvacacion["Spanish"]["add"] = "🌴 FORMULARIO DE SOLICITUD DE VACACIONES";
+	$pageTitlesvacacion["Spanish"]["view"] = "SOLICIUTD DE VACACIONES NUMERO: {%id}";
+	$pageTitlesvacacion["Spanish"]["edit"] = "🌴 FORMULARIO DE SOLICITUD DE VACACIONES, EDITAR [{%id}]";
 	if (count($fieldToolTipsvacacion["Spanish"]))
 		$tdatavacacion[".isUseToolTips"] = true;
 }
@@ -303,6 +308,7 @@ $tdatavacacion[".googleLikeFields"][] = "intentos_correccion";
 $tdatavacacion[".googleLikeFields"][] = "decidido_por";
 $tdatavacacion[".googleLikeFields"][] = "sex_descripcion";
 $tdatavacacion[".googleLikeFields"][] = "vac_dias_pedidos";
+$tdatavacacion[".googleLikeFields"][] = "vac_periodo_solicitado";
 
 
 
@@ -337,7 +343,7 @@ $tdatavacacion[".orderindexes"] = array();
 			$tdatavacacion[".orderindexes"][] = array(1, (0 ? "ASC" : "DESC"), "pf.id");
 
 
-$tdatavacacion[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos";
+$tdatavacacion[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos,  pf.vac_periodo_solicitado";
 $tdatavacacion[".sqlFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
 $tdatavacacion[".sqlWhereExpr"] = "(pf.motivo_id = '1')";
 $tdatavacacion[".sqlTail"] = "";
@@ -6065,6 +6071,145 @@ $tdatavacacion[".hideMobileList"] = array();
 
 	$tdatavacacion["vac_dias_pedidos"] = $fdata;
 		$tdatavacacion[".searchableFields"][] = "vac_dias_pedidos";
+//	vac_periodo_solicitado
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 41;
+	$fdata["strName"] = "vac_periodo_solicitado";
+	$fdata["GoodName"] = "vac_periodo_solicitado";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("vacacion","vac_periodo_solicitado");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "vac_periodo_solicitado";
+
+		$fdata["sourceSingle"] = "vac_periodo_solicitado";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.vac_periodo_solicitado";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatavacacion["vac_periodo_solicitado"] = $fdata;
+		$tdatavacacion[".searchableFields"][] = "vac_periodo_solicitado";
 
 
 $tables_data["vacacion"]=&$tdatavacacion;
@@ -6109,7 +6254,7 @@ function createSqlQuery_vacacion()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos";
+$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos,  pf.vac_periodo_solicitado";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
 $proto0["m_strWhere"] = "(pf.motivo_id = '1')";
 $proto0["m_strOrderBy"] = "ORDER BY pf.id DESC";
@@ -6687,146 +6832,161 @@ $proto84["m_alias"] = "";
 $obj = new SQLFieldListItem($proto84);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto86=array();
-$proto86["m_link"] = "SQLL_MAIN";
-			$proto87=array();
-$proto87["m_strName"] = "rrhh_permisos.permisos_funcionarios";
-$proto87["m_srcTableName"] = "vacacion";
-$proto87["m_columns"] = array();
-$proto87["m_columns"][] = "id";
-$proto87["m_columns"][] = "id_funcionario";
-$proto87["m_columns"][] = "tipo_vinculacion";
-$proto87["m_columns"][] = "dependencia_id";
-$proto87["m_columns"][] = "fecha_desde";
-$proto87["m_columns"][] = "hora_desde";
-$proto87["m_columns"][] = "fecha_hasta";
-$proto87["m_columns"][] = "hora_hasta";
-$proto87["m_columns"][] = "motivo_id";
-$proto87["m_columns"][] = "comision_servicios";
-$proto87["m_columns"][] = "comision_servicios_descripcion";
-$proto87["m_columns"][] = "observacion";
-$proto87["m_columns"][] = "estado";
-$proto87["m_columns"][] = "fecha_actualizacion";
-$proto87["m_columns"][] = "archivo_adjunto";
-$proto87["m_columns"][] = "solicitado_por";
-$proto87["m_columns"][] = "fecha_solicitud";
-$proto87["m_columns"][] = "fecha_decision";
-$proto87["m_columns"][] = "decidido_por";
-$proto87["m_columns"][] = "resultado_decision";
-$proto87["m_columns"][] = "horas_compensar";
-$proto87["m_columns"][] = "acompensar";
-$proto87["m_columns"][] = "rrhh_decidido_por";
-$proto87["m_columns"][] = "rrhh_fecha_decision";
-$proto87["m_columns"][] = "rrhh_resultado_decision";
-$proto87["m_columns"][] = "rrhh_motivo_rechazo";
-$proto87["m_columns"][] = "ocu_cod";
-$proto87["m_columns"][] = "intentos_correccion";
-$proto87["m_columns"][] = "vac_dias_pedidos";
-$obj = new SQLTable($proto87);
+						$proto86=array();
+			$obj = new SQLField(array(
+	"m_strName" => "vac_periodo_solicitado",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "vacacion"
+));
 
-$proto86["m_table"] = $obj;
-$proto86["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
-$proto86["m_alias"] = "pf";
+$proto86["m_sql"] = "pf.vac_periodo_solicitado";
 $proto86["m_srcTableName"] = "vacacion";
-$proto88=array();
-$proto88["m_sql"] = "";
-$proto88["m_uniontype"] = "SQLL_UNKNOWN";
+$proto86["m_expr"]=$obj;
+$proto86["m_alias"] = "";
+$obj = new SQLFieldListItem($proto86);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto88=array();
+$proto88["m_link"] = "SQLL_MAIN";
+			$proto89=array();
+$proto89["m_strName"] = "rrhh_permisos.permisos_funcionarios";
+$proto89["m_srcTableName"] = "vacacion";
+$proto89["m_columns"] = array();
+$proto89["m_columns"][] = "id";
+$proto89["m_columns"][] = "id_funcionario";
+$proto89["m_columns"][] = "tipo_vinculacion";
+$proto89["m_columns"][] = "dependencia_id";
+$proto89["m_columns"][] = "fecha_desde";
+$proto89["m_columns"][] = "hora_desde";
+$proto89["m_columns"][] = "fecha_hasta";
+$proto89["m_columns"][] = "hora_hasta";
+$proto89["m_columns"][] = "motivo_id";
+$proto89["m_columns"][] = "comision_servicios";
+$proto89["m_columns"][] = "comision_servicios_descripcion";
+$proto89["m_columns"][] = "observacion";
+$proto89["m_columns"][] = "estado";
+$proto89["m_columns"][] = "fecha_actualizacion";
+$proto89["m_columns"][] = "archivo_adjunto";
+$proto89["m_columns"][] = "solicitado_por";
+$proto89["m_columns"][] = "fecha_solicitud";
+$proto89["m_columns"][] = "fecha_decision";
+$proto89["m_columns"][] = "decidido_por";
+$proto89["m_columns"][] = "resultado_decision";
+$proto89["m_columns"][] = "horas_compensar";
+$proto89["m_columns"][] = "acompensar";
+$proto89["m_columns"][] = "rrhh_decidido_por";
+$proto89["m_columns"][] = "rrhh_fecha_decision";
+$proto89["m_columns"][] = "rrhh_resultado_decision";
+$proto89["m_columns"][] = "rrhh_motivo_rechazo";
+$proto89["m_columns"][] = "ocu_cod";
+$proto89["m_columns"][] = "intentos_correccion";
+$proto89["m_columns"][] = "vac_dias_pedidos";
+$proto89["m_columns"][] = "vac_periodo_solicitado";
+$obj = new SQLTable($proto89);
+
+$proto88["m_table"] = $obj;
+$proto88["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
+$proto88["m_alias"] = "pf";
+$proto88["m_srcTableName"] = "vacacion";
+$proto90=array();
+$proto90["m_sql"] = "";
+$proto90["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto88["m_column"]=$obj;
-$proto88["m_contained"] = array();
-$proto88["m_strCase"] = "";
-$proto88["m_havingmode"] = false;
-$proto88["m_inBrackets"] = false;
-$proto88["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto88);
+$proto90["m_column"]=$obj;
+$proto90["m_contained"] = array();
+$proto90["m_strCase"] = "";
+$proto90["m_havingmode"] = false;
+$proto90["m_inBrackets"] = false;
+$proto90["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto90);
 
-$proto86["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto86);
+$proto88["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto88);
 
 $proto0["m_fromlist"][]=$obj;
-												$proto90=array();
-$proto90["m_link"] = "SQLL_LEFTJOIN";
-			$proto91=array();
-$proto91["m_strName"] = "public.personales";
-$proto91["m_srcTableName"] = "vacacion";
-$proto91["m_columns"] = array();
-$proto91["m_columns"][] = "per_cod";
-$proto91["m_columns"][] = "categoria_cat_codigo";
-$proto91["m_columns"][] = "departamentos_dep_cod";
-$proto91["m_columns"][] = "dependencias_dep_cod";
-$proto91["m_columns"][] = "paises_pai_cod";
-$proto91["m_columns"][] = "ciudades_ciu_cod";
-$proto91["m_columns"][] = "profesiones_pro_cod";
-$proto91["m_columns"][] = "per_profesional";
-$proto91["m_columns"][] = "tipo_funcionario_tfun_cod";
-$proto91["m_columns"][] = "per_institucion_origen";
-$proto91["m_columns"][] = "cargos_car_cod";
-$proto91["m_columns"][] = "per_nombre";
-$proto91["m_columns"][] = "per_apellido";
-$proto91["m_columns"][] = "per_ci";
-$proto91["m_columns"][] = "per_sexo";
-$proto91["m_columns"][] = "per_nacimiento";
-$proto91["m_columns"][] = "per_est_civil";
-$proto91["m_columns"][] = "per_gruposangre";
-$proto91["m_columns"][] = "per_pcd";
-$proto91["m_columns"][] = "per_domicilio";
-$proto91["m_columns"][] = "per_barrio";
-$proto91["m_columns"][] = "per_teleparticular";
-$proto91["m_columns"][] = "per_telecelular";
-$proto91["m_columns"][] = "per_email_part";
-$proto91["m_columns"][] = "per_email_instit";
-$proto91["m_columns"][] = "per_ruc";
-$proto91["m_columns"][] = "per_contacto_eme";
-$proto91["m_columns"][] = "per_tele_emer";
-$proto91["m_columns"][] = "per_ingreso";
-$proto91["m_columns"][] = "per_nombramiento";
-$proto91["m_columns"][] = "per_estado";
-$proto91["m_columns"][] = "per_usuario";
-$proto91["m_columns"][] = "per_sede";
-$obj = new SQLTable($proto91);
+												$proto92=array();
+$proto92["m_link"] = "SQLL_LEFTJOIN";
+			$proto93=array();
+$proto93["m_strName"] = "public.personales";
+$proto93["m_srcTableName"] = "vacacion";
+$proto93["m_columns"] = array();
+$proto93["m_columns"][] = "per_cod";
+$proto93["m_columns"][] = "categoria_cat_codigo";
+$proto93["m_columns"][] = "departamentos_dep_cod";
+$proto93["m_columns"][] = "dependencias_dep_cod";
+$proto93["m_columns"][] = "paises_pai_cod";
+$proto93["m_columns"][] = "ciudades_ciu_cod";
+$proto93["m_columns"][] = "profesiones_pro_cod";
+$proto93["m_columns"][] = "per_profesional";
+$proto93["m_columns"][] = "tipo_funcionario_tfun_cod";
+$proto93["m_columns"][] = "per_institucion_origen";
+$proto93["m_columns"][] = "cargos_car_cod";
+$proto93["m_columns"][] = "per_nombre";
+$proto93["m_columns"][] = "per_apellido";
+$proto93["m_columns"][] = "per_ci";
+$proto93["m_columns"][] = "per_sexo";
+$proto93["m_columns"][] = "per_nacimiento";
+$proto93["m_columns"][] = "per_est_civil";
+$proto93["m_columns"][] = "per_gruposangre";
+$proto93["m_columns"][] = "per_pcd";
+$proto93["m_columns"][] = "per_domicilio";
+$proto93["m_columns"][] = "per_barrio";
+$proto93["m_columns"][] = "per_teleparticular";
+$proto93["m_columns"][] = "per_telecelular";
+$proto93["m_columns"][] = "per_email_part";
+$proto93["m_columns"][] = "per_email_instit";
+$proto93["m_columns"][] = "per_ruc";
+$proto93["m_columns"][] = "per_contacto_eme";
+$proto93["m_columns"][] = "per_tele_emer";
+$proto93["m_columns"][] = "per_ingreso";
+$proto93["m_columns"][] = "per_nombramiento";
+$proto93["m_columns"][] = "per_estado";
+$proto93["m_columns"][] = "per_usuario";
+$proto93["m_columns"][] = "per_sede";
+$obj = new SQLTable($proto93);
 
-$proto90["m_table"] = $obj;
-$proto90["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto90["m_alias"] = "p";
-$proto90["m_srcTableName"] = "vacacion";
-$proto92=array();
-$proto92["m_sql"] = "p.per_cod = pf.id_funcionario";
-$proto92["m_uniontype"] = "SQLL_UNKNOWN";
+$proto92["m_table"] = $obj;
+$proto92["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
+$proto92["m_alias"] = "p";
+$proto92["m_srcTableName"] = "vacacion";
+$proto94=array();
+$proto94["m_sql"] = "p.per_cod = pf.id_funcionario";
+$proto94["m_uniontype"] = "SQLL_UNKNOWN";
 						$obj = new SQLField(array(
 	"m_strName" => "per_cod",
 	"m_strTable" => "p",
 	"m_srcTableName" => "vacacion"
 ));
 
-$proto92["m_column"]=$obj;
-$proto92["m_contained"] = array();
-$proto92["m_strCase"] = "= pf.id_funcionario";
-$proto92["m_havingmode"] = false;
-$proto92["m_inBrackets"] = false;
-$proto92["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto92);
+$proto94["m_column"]=$obj;
+$proto94["m_contained"] = array();
+$proto94["m_strCase"] = "= pf.id_funcionario";
+$proto94["m_havingmode"] = false;
+$proto94["m_inBrackets"] = false;
+$proto94["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto94);
 
-$proto90["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto90);
+$proto92["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto92);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
 $proto0["m_orderby"] = array();
-												$proto94=array();
+												$proto96=array();
 						$obj = new SQLField(array(
 	"m_strName" => "id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "vacacion"
 ));
 
-$proto94["m_column"]=$obj;
-$proto94["m_bAsc"] = 0;
-$proto94["m_nColumn"] = 0;
-$obj = new SQLOrderByItem($proto94);
+$proto96["m_column"]=$obj;
+$proto96["m_bAsc"] = 0;
+$proto96["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto96);
 
 $proto0["m_orderby"][]=$obj;					
 $proto0["m_srcTableName"]="vacacion";		
@@ -6840,7 +7000,7 @@ $queryData_vacacion = createSqlQuery_vacacion();
 	
 		;
 
-																																								
+																																									
 
 $tdatavacacion[".sqlquery"] = $queryData_vacacion;
 

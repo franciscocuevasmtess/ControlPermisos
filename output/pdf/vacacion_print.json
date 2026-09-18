@@ -184,6 +184,9 @@ pdfDocument = {
 										{BEGIN col_grid_39}
 					"%",
 					{END col_grid_39}
+										{BEGIN col_grid_40}
+					"%",
+					{END col_grid_40}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -331,7 +334,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion id }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel vacacion id }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -360,7 +363,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion id_funcionario }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel vacacion id_funcionario }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -389,7 +392,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion per_nombre }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
+			{"text":"{$jslabel vacacion per_nombre }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -418,7 +421,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion per_apellido }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
+			{"text":"{$jslabel vacacion per_apellido }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -447,7 +450,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion per_ci }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
+			{"text":"{$jslabel vacacion per_ci }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -476,7 +479,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
+			{"text":"{$jslabel vacacion tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -505,7 +508,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion nombre_completo }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
+			{"text":"{$jslabel vacacion nombre_completo }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -534,7 +537,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion dependencia_id }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
+			{"text":"{$jslabel vacacion dependencia_id }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -563,7 +566,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion fecha_desde }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
+			{"text":"{$jslabel vacacion fecha_desde }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -592,7 +595,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion hora_desde }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
+			{"text":"{$jslabel vacacion hora_desde }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -621,7 +624,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion fecha_hasta }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
+			{"text":"{$jslabel vacacion fecha_hasta }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -650,7 +653,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion hora_hasta }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
+			{"text":"{$jslabel vacacion hora_hasta }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -679,7 +682,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion motivo_id }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
+			{"text":"{$jslabel vacacion motivo_id }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -708,7 +711,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion comision_servicios }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
+			{"text":"{$jslabel vacacion comision_servicios }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -737,7 +740,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion comision_servicios_descripcion }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
+			{"text":"{$jslabel vacacion comision_servicios_descripcion }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -766,7 +769,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion observacion }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
+			{"text":"{$jslabel vacacion observacion }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -795,7 +798,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion estado }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
+			{"text":"{$jslabel vacacion estado }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -824,7 +827,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion archivo_adjunto }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
+			{"text":"{$jslabel vacacion archivo_adjunto }","hidden":"{$item_hide_simple_grid_field58}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -853,7 +856,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion email_jefe }","hidden":"{$item_hide_simple_grid_field58}","bold":true},
+			{"text":"{$jslabel vacacion email_jefe }","hidden":"{$item_hide_simple_grid_field59}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -882,7 +885,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field59}","bold":true},
+			{"text":"{$jslabel vacacion descripcion_dependencia }","hidden":"{$item_hide_simple_grid_field60}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -911,7 +914,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field60}","bold":true},
+			{"text":"{$jslabel vacacion descripcion_tipo_vinculacion }","hidden":"{$item_hide_simple_grid_field61}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -940,7 +943,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion solicitado_por }","hidden":"{$item_hide_simple_grid_field61}","bold":true},
+			{"text":"{$jslabel vacacion solicitado_por }","hidden":"{$item_hide_simple_grid_field62}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -969,7 +972,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion fecha_solicitud }","hidden":"{$item_hide_simple_grid_field62}","bold":true},
+			{"text":"{$jslabel vacacion fecha_solicitud }","hidden":"{$item_hide_simple_grid_field63}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -998,7 +1001,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion email_jefe_id }","hidden":"{$item_hide_simple_grid_field63}","bold":true},
+			{"text":"{$jslabel vacacion email_jefe_id }","hidden":"{$item_hide_simple_grid_field64}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1027,7 +1030,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion resultado_decision }","hidden":"{$item_hide_simple_grid_field64}","bold":true},
+			{"text":"{$jslabel vacacion resultado_decision }","hidden":"{$item_hide_simple_grid_field65}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1056,7 +1059,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion horas_compensar }","hidden":"{$item_hide_simple_grid_field65}","bold":true},
+			{"text":"{$jslabel vacacion horas_compensar }","hidden":"{$item_hide_simple_grid_field66}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1085,7 +1088,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field66}","bold":true},
+			{"text":"{$jslabel vacacion nombre_completo_edit }","hidden":"{$item_hide_simple_grid_field67}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1114,7 +1117,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field67}","bold":true},
+			{"text":"{$jslabel vacacion descripcion_dependencia_edit }","hidden":"{$item_hide_simple_grid_field68}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1143,7 +1146,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion rrhh_resultado_decision }","hidden":"{$item_hide_simple_grid_field68}","bold":true},
+			{"text":"{$jslabel vacacion rrhh_resultado_decision }","hidden":"{$item_hide_simple_grid_field69}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1172,7 +1175,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion rrhh_motivo_rechazo }","hidden":"{$item_hide_simple_grid_field69}","bold":true},
+			{"text":"{$jslabel vacacion rrhh_motivo_rechazo }","hidden":"{$item_hide_simple_grid_field70}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1201,7 +1204,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion antiguedad_laboral }","hidden":"{$item_hide_simple_grid_field70}","bold":true},
+			{"text":"{$jslabel vacacion antiguedad_laboral }","hidden":"{$item_hide_simple_grid_field71}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1230,7 +1233,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion car_descri }","hidden":"{$item_hide_simple_grid_field71}","bold":true},
+			{"text":"{$jslabel vacacion car_descri }","hidden":"{$item_hide_simple_grid_field72}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1259,7 +1262,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion sed_descripcion }","hidden":"{$item_hide_simple_grid_field72}","bold":true},
+			{"text":"{$jslabel vacacion sed_descripcion }","hidden":"{$item_hide_simple_grid_field73}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1288,7 +1291,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion cantidad_dias_permiso }","hidden":"{$item_hide_simple_grid_field73}","bold":true},
+			{"text":"{$jslabel vacacion cantidad_dias_permiso }","hidden":"{$item_hide_simple_grid_field74}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1317,7 +1320,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion fecha_decision }","hidden":"{$item_hide_simple_grid_field74}","bold":true},
+			{"text":"{$jslabel vacacion fecha_decision }","hidden":"{$item_hide_simple_grid_field75}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1346,7 +1349,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion rrhh_fecha_decision }","hidden":"{$item_hide_simple_grid_field75}","bold":true},
+			{"text":"{$jslabel vacacion rrhh_fecha_decision }","hidden":"{$item_hide_simple_grid_field76}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1375,7 +1378,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion intentos_correccion }","hidden":"{$item_hide_simple_grid_field76}","bold":true},
+			{"text":"{$jslabel vacacion intentos_correccion }","hidden":"{$item_hide_simple_grid_field77}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1404,7 +1407,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion decidido_por }","hidden":"{$item_hide_simple_grid_field77}","bold":true},
+			{"text":"{$jslabel vacacion decidido_por }","hidden":"{$item_hide_simple_grid_field78}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1433,7 +1436,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion sex_descripcion }","hidden":"{$item_hide_simple_grid_field78}","bold":true},
+			{"text":"{$jslabel vacacion sex_descripcion }","hidden":"{$item_hide_simple_grid_field79}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1462,7 +1465,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel vacacion vac_dias_pedidos }","hidden":"{$item_hide_simple_grid_field79}","bold":true},
+			{"text":"{$jslabel vacacion vac_dias_pedidos }","hidden":"{$item_hide_simple_grid_field80}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1472,6 +1475,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field39}
+																							{BEGIN cellblock_grid_headcell_field40}
+{
+	cellId: 'headcell_field40',
+	col:0,
+	row:0,
+			fieldName: 'vac_periodo_solicitado',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel vacacion vac_periodo_solicitado }","hidden":"{$item_hide_simple_grid_field81}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$vac_periodo_solicitado_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field40}
 											],
 				{END row_grid_0}
 		
@@ -2641,6 +2673,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field39}
+																							{BEGIN cellblock_grid_cell_field40}
+{
+	cellId: 'cell_field40',
+	col:0,
+	row:0,
+			fieldName: 'vac_periodo_solicitado',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$vac_periodo_solicitado_pdfvalue},"hidden":"{$item_hide_simple_grid_field33}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$vac_periodo_solicitado_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field40}
 											],
 				{END row_grid_1}
 		
@@ -3690,6 +3751,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field39}
+																							{BEGIN cellblock_grid_footcell_field40}
+{
+	cellId: 'footcell_field40',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field40}
 											],
 				{END row_grid_2}
 		

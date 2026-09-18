@@ -68,20 +68,6 @@ function InitLookupLinks()
 			$lookupTableLinks["public.personales"]["permisos_funcionarios.decidido_por"] = array();
 		}
 		$lookupTableLinks["public.personales"]["permisos_funcionarios.decidido_por"]["edit"] = array("table" => "rrhh_permisos.permisos_funcionarios", "field" => "decidido_por", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.tipo_funcionario"] ) ) {
-			$lookupTableLinks["public.tipo_funcionario"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.tipo_funcionario"]["solicitudes_vacaciones.tipo_vinculacion"] )) {
-			$lookupTableLinks["public.tipo_funcionario"]["solicitudes_vacaciones.tipo_vinculacion"] = array();
-		}
-		$lookupTableLinks["public.tipo_funcionario"]["solicitudes_vacaciones.tipo_vinculacion"]["edit"] = array("table" => "rrhh_permisos.solicitudes_vacaciones", "field" => "tipo_vinculacion", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.dependencias"] ) ) {
-			$lookupTableLinks["public.dependencias"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.dependencias"]["solicitudes_vacaciones.dependencia_id"] )) {
-			$lookupTableLinks["public.dependencias"]["solicitudes_vacaciones.dependencia_id"] = array();
-		}
-		$lookupTableLinks["public.dependencias"]["solicitudes_vacaciones.dependencia_id"]["edit"] = array("table" => "rrhh_permisos.solicitudes_vacaciones", "field" => "dependencia_id", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.roles"] ) ) {
 			$lookupTableLinks["public.roles"] = array();
 		}

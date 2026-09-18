@@ -3586,8 +3586,6 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "tipo_funcionario" ] = "public.tipo_funcionario";
 	$projectEntities[ "public.tipos_ocurrencias" ] = array( "url" => "tipos_ocurrencias", "type" => 0 );
 	$projectEntitiesReverse[ "tipos_ocurrencias" ] = "public.tipos_ocurrencias";
-	$projectEntities[ "rrhh_permisos.solicitudes_vacaciones" ] = array( "url" => "solicitudes_vacaciones", "type" => 0 );
-	$projectEntitiesReverse[ "solicitudes_vacaciones" ] = "rrhh_permisos.solicitudes_vacaciones";
 	$projectEntities[ "public.usuarios" ] = array( "url" => "usuarios", "type" => 0 );
 	$projectEntitiesReverse[ "usuarios" ] = "public.usuarios";
 	$projectEntities[ "comisionamiento" ] = array( "url" => "comisionamiento", "type" => 1 );
@@ -3596,6 +3594,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "personales" ] = "public.personales";
 	$projectEntities[ "vacacion" ] = array( "url" => "vacacion", "type" => 1 );
 	$projectEntitiesReverse[ "vacacion" ] = "vacacion";
+	$projectEntities[ "public.anhos" ] = array( "url" => "anhos", "type" => 0 );
+	$projectEntitiesReverse[ "anhos" ] = "public.anhos";
 }
 
 function findTable( $table ) {

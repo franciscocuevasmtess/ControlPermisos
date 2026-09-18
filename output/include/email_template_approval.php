@@ -240,9 +240,9 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
                      * Debe ser una URL accesible desde el correo.
                     */
                     // Desarrollo
-                    $baseUrl = "https://desarrollo.mtess.gov.py/fcuevas/control_permisos/";
+                    //$baseUrl = "https://desarrollo.mtess.gov.py/fcuevas/control_permisos/";
                     // Produccion
-                    //$baseUrl = "https://permisos.mtess.gov.py/permisos_file/";
+                    $baseUrl = "https://permisos.mtess.gov.py/permisos_file/";
 
                     $urlArchivo = $baseUrl . $rutaArchivo;
 
