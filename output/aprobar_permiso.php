@@ -9,7 +9,7 @@
 // PARTE 1: IMPORTAR LIBRERÍAS NECESARIAS
 // ============================================================================
 require_once("include/dbcommon.php");
-
+require_once(getabspath("include/email_utils.php"));
 
 
 /*==============================================================
@@ -68,11 +68,56 @@ try {
     // ========================================================================
     // DB::PrepareSQL() previene SQL injection
     // ':1' es un placeholder que se reemplaza con $permisoId
-    $sqlVerificar = DB::PrepareSQL("SELECT * 
-                                    FROM rrhh_permisos.permisos_funcionarios 
-                                    WHERE id = ':1'", $permisoId);
+    //$sqlVerificar = DB::PrepareSQL("SELECT * 
+    //                                FROM rrhh_permisos.permisos_funcionarios 
+    //                                WHERE id = ':1'", $permisoId);
+    //$resultVerificar = DB::Query($sqlVerificar);
+    //$permiso = $resultVerificar->fetchAssoc();
+    $sqlVerificar = DB::PrepareSQL(
+        "SELECT pf.*,
+                TRIM(COALESCE(p.per_nombre, '') || ' ' || COALESCE(p.per_apellido, '')) AS nombre_funcionario,
+                TRIM(COALESCE(p.per_email_instit, '')) AS email_funcionario,
+                d.dep_descripcion AS dependencia,
+                t.tip_descripcion AS motivo
+        FROM rrhh_permisos.permisos_funcionarios pf
+            LEFT JOIN public.personales p ON p.per_cod = pf.id_funcionario
+            LEFT JOIN public.dependencias d ON d.dep_cod = pf.dependencia_id
+            LEFT JOIN public.tipos_ocurrencias t ON t.tip_cod::text = TRIM(pf.motivo_id)
+        WHERE pf.id = ':1'",
+        $permisoId
+    );
     $resultVerificar = DB::Query($sqlVerificar);
+
+    if (!$resultVerificar) {
+        throw new Exception("No se pudo consultar la solicitud.");
+    }
+
     $permiso = $resultVerificar->fetchAssoc();
+
+
+    /**/
+    $nombreJefe = "Jefatura inmediata";
+    if ($email_jefe_id > 0) {
+        $sqlJefe = DB::PrepareSQL(
+            "SELECT TRIM(COALESCE(per_nombre, '') || ' ' || COALESCE(per_apellido, '')) AS nombre_jefe
+            FROM public.personales
+            WHERE per_cod = ':1'",
+            $email_jefe_id
+        );
+
+        $resultJefe = DB::Query($sqlJefe);
+        if ($resultJefe) {
+            $rowJefe = $resultJefe->fetchAssoc();
+
+            if ($rowJefe && !empty(trim($rowJefe["nombre_jefe"]))) {
+                $nombreJefe = trim($rowJefe["nombre_jefe"]);
+            }
+        }
+    }
+    /**/
+
+
+
 
     // Si no existe el permiso, mostrar error
     if (!$permiso) {
@@ -116,6 +161,71 @@ try {
 
     // Ejecutar la actualización
     DB::Exec($sqlAprobar);
+
+
+    /**/
+    /*==============================================================
+    =       NOTIFICAR APROBACIÓN AL FUNCIONARIO                   =
+    ==============================================================*/
+    try {
+        $emailFuncionario = isset($permiso["email_funcionario"]) ? trim((string)$permiso["email_funcionario"]) : "";
+        if ($emailFuncionario !== "" && filter_var($emailFuncionario, FILTER_VALIDATE_EMAIL)) {
+            $datosAprobacion = array(
+                "nombre_funcionario" => trim($permiso["nombre_funcionario"]),
+                "nombre_jefe" => $nombreJefe,
+                "fecha_desde" => $permiso["fecha_desde"],
+                "hora_desde" => $permiso["hora_desde"],
+                "fecha_hasta" => $permiso["fecha_hasta"],
+                "hora_hasta" => $permiso["hora_hasta"],
+                "motivo" => $permiso["motivo"],
+                "observacion" => $permiso["observacion"],
+                "dependencia" => $permiso["dependencia"]
+            );
+
+            $emailEnviado = EmailUtils::enviarNotificacionAprobacionJefe($datosAprobacion, $emailFuncionario);
+            if ($emailEnviado) {
+                error_log(
+                    "ControlPermisos - Notificación de aprobación "
+                        . "del jefe enviada correctamente. "
+                        . "Permiso ID: " . $permisoId
+                        . " - Destinatario: "
+                        . $emailFuncionario
+                );
+            } else {
+                error_log(
+                    "ControlPermisos - No se pudo enviar "
+                        . "la notificación de aprobación. "
+                        . "Permiso ID: " . $permisoId
+                        . " - Destinatario: "
+                        . $emailFuncionario
+                );
+            }
+        } else {
+            error_log(
+                "ControlPermisos - Aprobación registrada "
+                    . "SIN notificación. "
+                    . "Funcionario sin correo institucional válido. "
+                    . "Permiso ID: " . $permisoId
+                    . " - Funcionario: "
+                    . $permiso["id_funcionario"]
+                    . " - Email: ["
+                    . $emailFuncionario
+                    . "]"
+            );
+        }
+    } catch (Throwable $e) {
+        // La aprobación ya quedó registrada.
+        // Un error de email NO debe deshacerla.
+        error_log(
+            "ControlPermisos - Error enviando correo "
+                . "de aprobación del jefe. "
+                . "Permiso ID: " . $permisoId
+                . " - Error: "
+                . $e->getMessage()
+        );
+    }
+    /**/
+
 
 
 

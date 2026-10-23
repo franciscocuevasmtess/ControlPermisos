@@ -46,7 +46,15 @@ class class_GlobalEvents extends eventsBase
 function BeforeLogin(&$username, &$password, &$message, $pageObject, &$values)
 {
 
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		function debug_to_console($data, $context = 'Debug in Console') {
+	ob_start();
+	$output  = 'console.info(\'' . $context . ':\');';
+	$output .= 'console.log(' . json_encode($data) . ');';
+	$output  = sprintf('<script>%s</script>', $output);
+	echo $output;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$loginType = $_POST['loginType'];
 	$username = pg_escape_string($_POST['username']); 
 	$password = $_POST['password']; 
@@ -54,6 +62,7 @@ function BeforeLogin(&$username, &$password, &$message, $pageObject, &$values)
 	if ($loginType == "normal") {
 		return true; 
 	} elseif ($loginType == "correo") {
+		debug_to_console("loginType: correo");
 		// Extraer solo el nombre de usuario sin el dominio
 		$cleanUsername = explode('@', $username)[0];
 		
@@ -89,7 +98,7 @@ function BeforeLogin(&$username, &$password, &$message, $pageObject, &$values)
 				$password = $personal['usu_contrasenha'];
 				ldap_close($ldap_conn); 
 				$_SESSION['error_ldap']	= false;
-				
+				debug_to_console("bf-usu_usuario: ".$username);
 				return true; 
 			} else {
 				$message = "Error: No se encontró el correo en la base de datos.";

@@ -779,8 +779,8 @@
 	class=" r-ori-vert"
 	
 			
-	ocolspan="2"		data-cellId="grid_c2" data-pageid="{$pageid}"
-		data-v-cell="4"
+			data-cellId="grid_c2" data-pageid="{$pageid}"
+		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -833,6 +833,47 @@
 	
 								</td>
 			{END cellblock_grid_c2}
+			 
+																
+
+{BEGIN cellblock_grid_c4}
+<td
+	{$cell_grid_c4}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c4" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text6" {$item_text6} data-pageid="{$pageid}" data-small > 
+	<h4><strong>📅 Días hábiles solicitados</strong><span class="ql-cursor">﻿</span></h4></span>
+											
+{BEGIN vac_dias_pedidos_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_vac_dias_pedidos}  r-vertical-field" 
+	data-signal-error-for="vac_dias_pedidos{$id}" {$required_attr_vac_dias_pedidos}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="vac_dias_pedidos" data-fieldname="vac_dias_pedidos" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_vac_dias_pedidos}">
+		{BEGIN vac_dias_pedidos_label}{$label vacacion vac_dias_pedidos }{END vac_dias_pedidos_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$vac_dias_pedidos_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="vac_dias_pedidos" {$tooltipAttr vacacion vac_dias_pedidos } >
+		<div class="text-muted" >
+		{$tooltip vacacion vac_dias_pedidos }		</div>
+	</div>
+</div>
+
+
+{END vac_dias_pedidos_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c4}
 								</tr>
 	 
 	 

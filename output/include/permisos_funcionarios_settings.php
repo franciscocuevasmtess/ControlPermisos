@@ -341,7 +341,7 @@ $tdatapermisos_funcionarios[".orderindexes"] = array();
 
 $tdatapermisos_funcionarios[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion";
 $tdatapermisos_funcionarios[".sqlFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$tdatapermisos_funcionarios[".sqlWhereExpr"] = "";
+$tdatapermisos_funcionarios[".sqlWhereExpr"] = "(pf.motivo_id <> '1')  AND (pf.motivo_id <> '10')";
 $tdatapermisos_funcionarios[".sqlTail"] = "";
 
 
@@ -6098,20 +6098,56 @@ $proto0=array();
 $proto0["m_strHead"] = "SELECT";
 $proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_permisos_mes,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto0["m_strWhere"] = "";
+$proto0["m_strWhere"] = "(pf.motivo_id <> '1')  AND (pf.motivo_id <> '10')";
 $proto0["m_strOrderBy"] = "ORDER BY pf.id DESC";
 	
 		;
 			$proto0["cipherer"] = null;
 $proto2=array();
-$proto2["m_sql"] = "";
-$proto2["m_uniontype"] = "SQLL_UNKNOWN";
+$proto2["m_sql"] = "(pf.motivo_id <> '1')  AND (pf.motivo_id <> '10')";
+$proto2["m_uniontype"] = "SQLL_AND";
 	$obj = new SQLNonParsed(array(
-	"m_sql" => ""
+	"m_sql" => "(pf.motivo_id <> '1')  AND (pf.motivo_id <> '10')"
 ));
 
 $proto2["m_column"]=$obj;
 $proto2["m_contained"] = array();
+						$proto4=array();
+$proto4["m_sql"] = "pf.motivo_id <> '1'";
+$proto4["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "motivo_id",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+));
+
+$proto4["m_column"]=$obj;
+$proto4["m_contained"] = array();
+$proto4["m_strCase"] = "<> '1'";
+$proto4["m_havingmode"] = false;
+$proto4["m_inBrackets"] = true;
+$proto4["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto4);
+
+			$proto2["m_contained"][]=$obj;
+						$proto6=array();
+$proto6["m_sql"] = "pf.motivo_id <> '10'";
+$proto6["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "motivo_id",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+));
+
+$proto6["m_column"]=$obj;
+$proto6["m_contained"] = array();
+$proto6["m_strCase"] = "<> '10'";
+$proto6["m_havingmode"] = false;
+$proto6["m_inBrackets"] = true;
+$proto6["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto6);
+
+			$proto2["m_contained"][]=$obj;
 $proto2["m_strCase"] = "";
 $proto2["m_havingmode"] = false;
 $proto2["m_inBrackets"] = false;
@@ -6119,59 +6155,31 @@ $proto2["m_useAlias"] = false;
 $obj = new SQLLogicalExpr($proto2);
 
 $proto0["m_where"] = $obj;
-$proto4=array();
-$proto4["m_sql"] = "";
-$proto4["m_uniontype"] = "SQLL_UNKNOWN";
+$proto8=array();
+$proto8["m_sql"] = "";
+$proto8["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto4["m_column"]=$obj;
-$proto4["m_contained"] = array();
-$proto4["m_strCase"] = "";
-$proto4["m_havingmode"] = false;
-$proto4["m_inBrackets"] = false;
-$proto4["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto4);
+$proto8["m_column"]=$obj;
+$proto8["m_contained"] = array();
+$proto8["m_strCase"] = "";
+$proto8["m_havingmode"] = false;
+$proto8["m_inBrackets"] = false;
+$proto8["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto8);
 
 $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
-						$proto6=array();
+						$proto10=array();
 			$obj = new SQLField(array(
 	"m_strName" => "id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto6["m_sql"] = "pf.id";
-$proto6["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto6["m_expr"]=$obj;
-$proto6["m_alias"] = "";
-$obj = new SQLFieldListItem($proto6);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto8=array();
-			$obj = new SQLField(array(
-	"m_strName" => "id_funcionario",
-	"m_strTable" => "pf",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
-));
-
-$proto8["m_sql"] = "pf.id_funcionario";
-$proto8["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto8["m_expr"]=$obj;
-$proto8["m_alias"] = "";
-$obj = new SQLFieldListItem($proto8);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto10=array();
-			$obj = new SQLField(array(
-	"m_strName" => "per_nombre",
-	"m_strTable" => "p",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
-));
-
-$proto10["m_sql"] = "p.per_nombre";
+$proto10["m_sql"] = "pf.id";
 $proto10["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -6180,12 +6188,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "per_apellido",
-	"m_strTable" => "p",
+	"m_strName" => "id_funcionario",
+	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto12["m_sql"] = "p.per_apellido";
+$proto12["m_sql"] = "pf.id_funcionario";
 $proto12["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -6193,25 +6201,27 @@ $obj = new SQLFieldListItem($proto12);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto14=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "p.per_nombre || ' ' || p.per_apellido"
+			$obj = new SQLField(array(
+	"m_strName" => "per_nombre",
+	"m_strTable" => "p",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto14["m_sql"] = "p.per_nombre || ' ' || p.per_apellido";
+$proto14["m_sql"] = "p.per_nombre";
 $proto14["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto14["m_expr"]=$obj;
-$proto14["m_alias"] = "nombre_completo";
+$proto14["m_alias"] = "";
 $obj = new SQLFieldListItem($proto14);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
 			$obj = new SQLField(array(
-	"m_strName" => "per_ci",
+	"m_strName" => "per_apellido",
 	"m_strTable" => "p",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto16["m_sql"] = "p.per_ci";
+$proto16["m_sql"] = "p.per_apellido";
 $proto16["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto16["m_expr"]=$obj;
 $proto16["m_alias"] = "";
@@ -6219,27 +6229,25 @@ $obj = new SQLFieldListItem($proto16);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto18=array();
-			$obj = new SQLField(array(
-	"m_strName" => "tipo_vinculacion",
-	"m_strTable" => "pf",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "p.per_nombre || ' ' || p.per_apellido"
 ));
 
-$proto18["m_sql"] = "pf.tipo_vinculacion";
+$proto18["m_sql"] = "p.per_nombre || ' ' || p.per_apellido";
 $proto18["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto18["m_expr"]=$obj;
-$proto18["m_alias"] = "";
+$proto18["m_alias"] = "nombre_completo";
 $obj = new SQLFieldListItem($proto18);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto20=array();
 			$obj = new SQLField(array(
-	"m_strName" => "dependencia_id",
-	"m_strTable" => "pf",
+	"m_strName" => "per_ci",
+	"m_strTable" => "p",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto20["m_sql"] = "pf.dependencia_id";
+$proto20["m_sql"] = "p.per_ci";
 $proto20["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto20["m_expr"]=$obj;
 $proto20["m_alias"] = "";
@@ -6248,12 +6256,12 @@ $obj = new SQLFieldListItem($proto20);
 $proto0["m_fieldlist"][]=$obj;
 						$proto22=array();
 			$obj = new SQLField(array(
-	"m_strName" => "fecha_desde",
+	"m_strName" => "tipo_vinculacion",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto22["m_sql"] = "pf.fecha_desde";
+$proto22["m_sql"] = "pf.tipo_vinculacion";
 $proto22["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto22["m_expr"]=$obj;
 $proto22["m_alias"] = "";
@@ -6262,12 +6270,12 @@ $obj = new SQLFieldListItem($proto22);
 $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
-	"m_strName" => "hora_desde",
+	"m_strName" => "dependencia_id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto24["m_sql"] = "pf.hora_desde";
+$proto24["m_sql"] = "pf.dependencia_id";
 $proto24["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
@@ -6276,12 +6284,12 @@ $obj = new SQLFieldListItem($proto24);
 $proto0["m_fieldlist"][]=$obj;
 						$proto26=array();
 			$obj = new SQLField(array(
-	"m_strName" => "fecha_hasta",
+	"m_strName" => "fecha_desde",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto26["m_sql"] = "pf.fecha_hasta";
+$proto26["m_sql"] = "pf.fecha_desde";
 $proto26["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto26["m_expr"]=$obj;
 $proto26["m_alias"] = "";
@@ -6290,12 +6298,12 @@ $obj = new SQLFieldListItem($proto26);
 $proto0["m_fieldlist"][]=$obj;
 						$proto28=array();
 			$obj = new SQLField(array(
-	"m_strName" => "hora_hasta",
+	"m_strName" => "hora_desde",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto28["m_sql"] = "pf.hora_hasta";
+$proto28["m_sql"] = "pf.hora_desde";
 $proto28["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto28["m_expr"]=$obj;
 $proto28["m_alias"] = "";
@@ -6304,12 +6312,12 @@ $obj = new SQLFieldListItem($proto28);
 $proto0["m_fieldlist"][]=$obj;
 						$proto30=array();
 			$obj = new SQLField(array(
-	"m_strName" => "motivo_id",
+	"m_strName" => "fecha_hasta",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto30["m_sql"] = "pf.motivo_id";
+$proto30["m_sql"] = "pf.fecha_hasta";
 $proto30["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto30["m_expr"]=$obj;
 $proto30["m_alias"] = "";
@@ -6318,12 +6326,12 @@ $obj = new SQLFieldListItem($proto30);
 $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
-	"m_strName" => "comision_servicios",
+	"m_strName" => "hora_hasta",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto32["m_sql"] = "pf.comision_servicios";
+$proto32["m_sql"] = "pf.hora_hasta";
 $proto32["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -6332,12 +6340,12 @@ $obj = new SQLFieldListItem($proto32);
 $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
-	"m_strName" => "comision_servicios_descripcion",
+	"m_strName" => "motivo_id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto34["m_sql"] = "pf.comision_servicios_descripcion";
+$proto34["m_sql"] = "pf.motivo_id";
 $proto34["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";
@@ -6346,12 +6354,12 @@ $obj = new SQLFieldListItem($proto34);
 $proto0["m_fieldlist"][]=$obj;
 						$proto36=array();
 			$obj = new SQLField(array(
-	"m_strName" => "observacion",
+	"m_strName" => "comision_servicios",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto36["m_sql"] = "pf.observacion";
+$proto36["m_sql"] = "pf.comision_servicios";
 $proto36["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto36["m_expr"]=$obj;
 $proto36["m_alias"] = "";
@@ -6360,12 +6368,12 @@ $obj = new SQLFieldListItem($proto36);
 $proto0["m_fieldlist"][]=$obj;
 						$proto38=array();
 			$obj = new SQLField(array(
-	"m_strName" => "estado",
+	"m_strName" => "comision_servicios_descripcion",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto38["m_sql"] = "pf.estado";
+$proto38["m_sql"] = "pf.comision_servicios_descripcion";
 $proto38["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto38["m_expr"]=$obj;
 $proto38["m_alias"] = "";
@@ -6374,12 +6382,12 @@ $obj = new SQLFieldListItem($proto38);
 $proto0["m_fieldlist"][]=$obj;
 						$proto40=array();
 			$obj = new SQLField(array(
-	"m_strName" => "archivo_adjunto",
+	"m_strName" => "observacion",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto40["m_sql"] = "pf.archivo_adjunto";
+$proto40["m_sql"] = "pf.observacion";
 $proto40["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto40["m_expr"]=$obj;
 $proto40["m_alias"] = "";
@@ -6387,26 +6395,30 @@ $obj = new SQLFieldListItem($proto40);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto42=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
+			$obj = new SQLField(array(
+	"m_strName" => "estado",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto42["m_sql"] = "''";
+$proto42["m_sql"] = "pf.estado";
 $proto42["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto42["m_expr"]=$obj;
-$proto42["m_alias"] = "email_jefe";
+$proto42["m_alias"] = "";
 $obj = new SQLFieldListItem($proto42);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto44=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
+			$obj = new SQLField(array(
+	"m_strName" => "archivo_adjunto",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto44["m_sql"] = "''";
+$proto44["m_sql"] = "pf.archivo_adjunto";
 $proto44["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto44["m_expr"]=$obj;
-$proto44["m_alias"] = "descripcion_dependencia";
+$proto44["m_alias"] = "";
 $obj = new SQLFieldListItem($proto44);
 
 $proto0["m_fieldlist"][]=$obj;
@@ -6418,58 +6430,56 @@ $proto0["m_fieldlist"][]=$obj;
 $proto46["m_sql"] = "''";
 $proto46["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto46["m_expr"]=$obj;
-$proto46["m_alias"] = "descripcion_tipo_vinculacion";
+$proto46["m_alias"] = "email_jefe";
 $obj = new SQLFieldListItem($proto46);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto48=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto48["m_sql"] = "''";
+$proto48["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto48["m_expr"]=$obj;
+$proto48["m_alias"] = "descripcion_dependencia";
+$obj = new SQLFieldListItem($proto48);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto50=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto50["m_sql"] = "''";
+$proto50["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto50["m_expr"]=$obj;
+$proto50["m_alias"] = "descripcion_tipo_vinculacion";
+$obj = new SQLFieldListItem($proto50);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto52=array();
 			$obj = new SQLField(array(
 	"m_strName" => "solicitado_por",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto48["m_sql"] = "pf.solicitado_por";
-$proto48["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto48["m_expr"]=$obj;
-$proto48["m_alias"] = "";
-$obj = new SQLFieldListItem($proto48);
+$proto52["m_sql"] = "pf.solicitado_por";
+$proto52["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto52["m_expr"]=$obj;
+$proto52["m_alias"] = "";
+$obj = new SQLFieldListItem($proto52);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto50=array();
+						$proto54=array();
 			$obj = new SQLField(array(
 	"m_strName" => "fecha_solicitud",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto50["m_sql"] = "pf.fecha_solicitud";
-$proto50["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto50["m_expr"]=$obj;
-$proto50["m_alias"] = "";
-$obj = new SQLFieldListItem($proto50);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto52=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
-));
-
-$proto52["m_sql"] = "''";
-$proto52["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto52["m_expr"]=$obj;
-$proto52["m_alias"] = "email_jefe_id";
-$obj = new SQLFieldListItem($proto52);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto54=array();
-			$obj = new SQLField(array(
-	"m_strName" => "resultado_decision",
-	"m_strTable" => "pf",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
-));
-
-$proto54["m_sql"] = "pf.resultado_decision";
+$proto54["m_sql"] = "pf.fecha_solicitud";
 $proto54["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto54["m_expr"]=$obj;
 $proto54["m_alias"] = "";
@@ -6477,92 +6487,94 @@ $obj = new SQLFieldListItem($proto54);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto56=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto56["m_sql"] = "''";
+$proto56["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto56["m_expr"]=$obj;
+$proto56["m_alias"] = "email_jefe_id";
+$obj = new SQLFieldListItem($proto56);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto58=array();
+			$obj = new SQLField(array(
+	"m_strName" => "resultado_decision",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+));
+
+$proto58["m_sql"] = "pf.resultado_decision";
+$proto58["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto58["m_expr"]=$obj;
+$proto58["m_alias"] = "";
+$obj = new SQLFieldListItem($proto58);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto60=array();
 			$obj = new SQLField(array(
 	"m_strName" => "horas_compensar",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto56["m_sql"] = "pf.horas_compensar";
-$proto56["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto56["m_expr"]=$obj;
-$proto56["m_alias"] = "";
-$obj = new SQLFieldListItem($proto56);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto58=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
-));
-
-$proto58["m_sql"] = "''";
-$proto58["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto58["m_expr"]=$obj;
-$proto58["m_alias"] = "nombre_completo_edit";
-$obj = new SQLFieldListItem($proto58);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto60=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
-));
-
-$proto60["m_sql"] = "''";
+$proto60["m_sql"] = "pf.horas_compensar";
 $proto60["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto60["m_expr"]=$obj;
-$proto60["m_alias"] = "descripcion_dependencia_edit";
+$proto60["m_alias"] = "";
 $obj = new SQLFieldListItem($proto60);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto62=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto62["m_sql"] = "''";
+$proto62["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto62["m_expr"]=$obj;
+$proto62["m_alias"] = "nombre_completo_edit";
+$obj = new SQLFieldListItem($proto62);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto64=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto64["m_sql"] = "''";
+$proto64["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto64["m_expr"]=$obj;
+$proto64["m_alias"] = "descripcion_dependencia_edit";
+$obj = new SQLFieldListItem($proto64);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto66=array();
 			$obj = new SQLField(array(
 	"m_strName" => "rrhh_resultado_decision",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto62["m_sql"] = "pf.rrhh_resultado_decision";
-$proto62["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto62["m_expr"]=$obj;
-$proto62["m_alias"] = "";
-$obj = new SQLFieldListItem($proto62);
+$proto66["m_sql"] = "pf.rrhh_resultado_decision";
+$proto66["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto66["m_expr"]=$obj;
+$proto66["m_alias"] = "";
+$obj = new SQLFieldListItem($proto66);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto64=array();
+						$proto68=array();
 			$obj = new SQLField(array(
 	"m_strName" => "rrhh_motivo_rechazo",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto64["m_sql"] = "pf.rrhh_motivo_rechazo";
-$proto64["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto64["m_expr"]=$obj;
-$proto64["m_alias"] = "";
-$obj = new SQLFieldListItem($proto64);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto66=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
-));
-
-$proto66["m_sql"] = "''";
-$proto66["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto66["m_expr"]=$obj;
-$proto66["m_alias"] = "antiguedad_laboral";
-$obj = new SQLFieldListItem($proto66);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto68=array();
-			$obj = new SQLNonParsed(array(
-	"m_sql" => "''"
-));
-
-$proto68["m_sql"] = "''";
+$proto68["m_sql"] = "pf.rrhh_motivo_rechazo";
 $proto68["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto68["m_expr"]=$obj;
-$proto68["m_alias"] = "car_descri";
+$proto68["m_alias"] = "";
 $obj = new SQLFieldListItem($proto68);
 
 $proto0["m_fieldlist"][]=$obj;
@@ -6574,7 +6586,7 @@ $proto0["m_fieldlist"][]=$obj;
 $proto70["m_sql"] = "''";
 $proto70["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto70["m_expr"]=$obj;
-$proto70["m_alias"] = "sed_descripcion";
+$proto70["m_alias"] = "antiguedad_laboral";
 $obj = new SQLFieldListItem($proto70);
 
 $proto0["m_fieldlist"][]=$obj;
@@ -6586,7 +6598,7 @@ $proto0["m_fieldlist"][]=$obj;
 $proto72["m_sql"] = "''";
 $proto72["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto72["m_expr"]=$obj;
-$proto72["m_alias"] = "cantidad_permisos_mes";
+$proto72["m_alias"] = "car_descri";
 $obj = new SQLFieldListItem($proto72);
 
 $proto0["m_fieldlist"][]=$obj;
@@ -6598,46 +6610,42 @@ $proto0["m_fieldlist"][]=$obj;
 $proto74["m_sql"] = "''";
 $proto74["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto74["m_expr"]=$obj;
-$proto74["m_alias"] = "cantidad_dias_permiso";
+$proto74["m_alias"] = "sed_descripcion";
 $obj = new SQLFieldListItem($proto74);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto76=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto76["m_sql"] = "''";
+$proto76["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto76["m_expr"]=$obj;
+$proto76["m_alias"] = "cantidad_permisos_mes";
+$obj = new SQLFieldListItem($proto76);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto78=array();
+			$obj = new SQLNonParsed(array(
+	"m_sql" => "''"
+));
+
+$proto78["m_sql"] = "''";
+$proto78["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto78["m_expr"]=$obj;
+$proto78["m_alias"] = "cantidad_dias_permiso";
+$obj = new SQLFieldListItem($proto78);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto80=array();
 			$obj = new SQLField(array(
 	"m_strName" => "fecha_decision",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto76["m_sql"] = "pf.fecha_decision";
-$proto76["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto76["m_expr"]=$obj;
-$proto76["m_alias"] = "";
-$obj = new SQLFieldListItem($proto76);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto78=array();
-			$obj = new SQLField(array(
-	"m_strName" => "rrhh_fecha_decision",
-	"m_strTable" => "pf",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
-));
-
-$proto78["m_sql"] = "pf.rrhh_fecha_decision";
-$proto78["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto78["m_expr"]=$obj;
-$proto78["m_alias"] = "";
-$obj = new SQLFieldListItem($proto78);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto80=array();
-			$obj = new SQLField(array(
-	"m_strName" => "intentos_correccion",
-	"m_strTable" => "pf",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
-));
-
-$proto80["m_sql"] = "pf.intentos_correccion";
+$proto80["m_sql"] = "pf.fecha_decision";
 $proto80["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto80["m_expr"]=$obj;
 $proto80["m_alias"] = "";
@@ -6646,12 +6654,12 @@ $obj = new SQLFieldListItem($proto80);
 $proto0["m_fieldlist"][]=$obj;
 						$proto82=array();
 			$obj = new SQLField(array(
-	"m_strName" => "decidido_por",
+	"m_strName" => "rrhh_fecha_decision",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto82["m_sql"] = "pf.decidido_por";
+$proto82["m_sql"] = "pf.rrhh_fecha_decision";
 $proto82["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
 $proto82["m_expr"]=$obj;
 $proto82["m_alias"] = "";
@@ -6659,136 +6667,98 @@ $obj = new SQLFieldListItem($proto82);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto84=array();
+			$obj = new SQLField(array(
+	"m_strName" => "intentos_correccion",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+));
+
+$proto84["m_sql"] = "pf.intentos_correccion";
+$proto84["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto84["m_expr"]=$obj;
+$proto84["m_alias"] = "";
+$obj = new SQLFieldListItem($proto84);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto86=array();
+			$obj = new SQLField(array(
+	"m_strName" => "decidido_por",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+));
+
+$proto86["m_sql"] = "pf.decidido_por";
+$proto86["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto86["m_expr"]=$obj;
+$proto86["m_alias"] = "";
+$obj = new SQLFieldListItem($proto86);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto88=array();
 			$obj = new SQLNonParsed(array(
 	"m_sql" => "''"
 ));
 
-$proto84["m_sql"] = "''";
-$proto84["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto84["m_expr"]=$obj;
-$proto84["m_alias"] = "sex_descripcion";
-$obj = new SQLFieldListItem($proto84);
+$proto88["m_sql"] = "''";
+$proto88["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto88["m_expr"]=$obj;
+$proto88["m_alias"] = "sex_descripcion";
+$obj = new SQLFieldListItem($proto88);
 
 $proto0["m_fieldlist"][]=$obj;
 $proto0["m_fromlist"] = array();
-												$proto86=array();
-$proto86["m_link"] = "SQLL_MAIN";
-			$proto87=array();
-$proto87["m_strName"] = "rrhh_permisos.permisos_funcionarios";
-$proto87["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto87["m_columns"] = array();
-$proto87["m_columns"][] = "id";
-$proto87["m_columns"][] = "id_funcionario";
-$proto87["m_columns"][] = "tipo_vinculacion";
-$proto87["m_columns"][] = "dependencia_id";
-$proto87["m_columns"][] = "fecha_desde";
-$proto87["m_columns"][] = "hora_desde";
-$proto87["m_columns"][] = "fecha_hasta";
-$proto87["m_columns"][] = "hora_hasta";
-$proto87["m_columns"][] = "motivo_id";
-$proto87["m_columns"][] = "comision_servicios";
-$proto87["m_columns"][] = "comision_servicios_descripcion";
-$proto87["m_columns"][] = "observacion";
-$proto87["m_columns"][] = "estado";
-$proto87["m_columns"][] = "fecha_actualizacion";
-$proto87["m_columns"][] = "archivo_adjunto";
-$proto87["m_columns"][] = "solicitado_por";
-$proto87["m_columns"][] = "fecha_solicitud";
-$proto87["m_columns"][] = "fecha_decision";
-$proto87["m_columns"][] = "decidido_por";
-$proto87["m_columns"][] = "resultado_decision";
-$proto87["m_columns"][] = "horas_compensar";
-$proto87["m_columns"][] = "acompensar";
-$proto87["m_columns"][] = "rrhh_decidido_por";
-$proto87["m_columns"][] = "rrhh_fecha_decision";
-$proto87["m_columns"][] = "rrhh_resultado_decision";
-$proto87["m_columns"][] = "rrhh_motivo_rechazo";
-$proto87["m_columns"][] = "ocu_cod";
-$proto87["m_columns"][] = "intentos_correccion";
-$proto87["m_columns"][] = "vac_dias_pedidos";
-$proto87["m_columns"][] = "vac_periodo_solicitado";
-$obj = new SQLTable($proto87);
+												$proto90=array();
+$proto90["m_link"] = "SQLL_MAIN";
+			$proto91=array();
+$proto91["m_strName"] = "rrhh_permisos.permisos_funcionarios";
+$proto91["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto91["m_columns"] = array();
+$proto91["m_columns"][] = "id";
+$proto91["m_columns"][] = "id_funcionario";
+$proto91["m_columns"][] = "tipo_vinculacion";
+$proto91["m_columns"][] = "dependencia_id";
+$proto91["m_columns"][] = "fecha_desde";
+$proto91["m_columns"][] = "hora_desde";
+$proto91["m_columns"][] = "fecha_hasta";
+$proto91["m_columns"][] = "hora_hasta";
+$proto91["m_columns"][] = "motivo_id";
+$proto91["m_columns"][] = "comision_servicios";
+$proto91["m_columns"][] = "comision_servicios_descripcion";
+$proto91["m_columns"][] = "observacion";
+$proto91["m_columns"][] = "estado";
+$proto91["m_columns"][] = "fecha_actualizacion";
+$proto91["m_columns"][] = "archivo_adjunto";
+$proto91["m_columns"][] = "solicitado_por";
+$proto91["m_columns"][] = "fecha_solicitud";
+$proto91["m_columns"][] = "fecha_decision";
+$proto91["m_columns"][] = "decidido_por";
+$proto91["m_columns"][] = "resultado_decision";
+$proto91["m_columns"][] = "horas_compensar";
+$proto91["m_columns"][] = "acompensar";
+$proto91["m_columns"][] = "rrhh_decidido_por";
+$proto91["m_columns"][] = "rrhh_fecha_decision";
+$proto91["m_columns"][] = "rrhh_resultado_decision";
+$proto91["m_columns"][] = "rrhh_motivo_rechazo";
+$proto91["m_columns"][] = "ocu_cod";
+$proto91["m_columns"][] = "intentos_correccion";
+$proto91["m_columns"][] = "vac_dias_pedidos";
+$proto91["m_columns"][] = "vac_periodo_solicitado";
+$obj = new SQLTable($proto91);
 
-$proto86["m_table"] = $obj;
-$proto86["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
-$proto86["m_alias"] = "pf";
-$proto86["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto88=array();
-$proto88["m_sql"] = "";
-$proto88["m_uniontype"] = "SQLL_UNKNOWN";
+$proto90["m_table"] = $obj;
+$proto90["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
+$proto90["m_alias"] = "pf";
+$proto90["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto92=array();
+$proto92["m_sql"] = "";
+$proto92["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto88["m_column"]=$obj;
-$proto88["m_contained"] = array();
-$proto88["m_strCase"] = "";
-$proto88["m_havingmode"] = false;
-$proto88["m_inBrackets"] = false;
-$proto88["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto88);
-
-$proto86["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto86);
-
-$proto0["m_fromlist"][]=$obj;
-												$proto90=array();
-$proto90["m_link"] = "SQLL_LEFTJOIN";
-			$proto91=array();
-$proto91["m_strName"] = "public.personales";
-$proto91["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto91["m_columns"] = array();
-$proto91["m_columns"][] = "per_cod";
-$proto91["m_columns"][] = "categoria_cat_codigo";
-$proto91["m_columns"][] = "departamentos_dep_cod";
-$proto91["m_columns"][] = "dependencias_dep_cod";
-$proto91["m_columns"][] = "paises_pai_cod";
-$proto91["m_columns"][] = "ciudades_ciu_cod";
-$proto91["m_columns"][] = "profesiones_pro_cod";
-$proto91["m_columns"][] = "per_profesional";
-$proto91["m_columns"][] = "tipo_funcionario_tfun_cod";
-$proto91["m_columns"][] = "per_institucion_origen";
-$proto91["m_columns"][] = "cargos_car_cod";
-$proto91["m_columns"][] = "per_nombre";
-$proto91["m_columns"][] = "per_apellido";
-$proto91["m_columns"][] = "per_ci";
-$proto91["m_columns"][] = "per_sexo";
-$proto91["m_columns"][] = "per_nacimiento";
-$proto91["m_columns"][] = "per_est_civil";
-$proto91["m_columns"][] = "per_gruposangre";
-$proto91["m_columns"][] = "per_pcd";
-$proto91["m_columns"][] = "per_domicilio";
-$proto91["m_columns"][] = "per_barrio";
-$proto91["m_columns"][] = "per_teleparticular";
-$proto91["m_columns"][] = "per_telecelular";
-$proto91["m_columns"][] = "per_email_part";
-$proto91["m_columns"][] = "per_email_instit";
-$proto91["m_columns"][] = "per_ruc";
-$proto91["m_columns"][] = "per_contacto_eme";
-$proto91["m_columns"][] = "per_tele_emer";
-$proto91["m_columns"][] = "per_ingreso";
-$proto91["m_columns"][] = "per_nombramiento";
-$proto91["m_columns"][] = "per_estado";
-$proto91["m_columns"][] = "per_usuario";
-$proto91["m_columns"][] = "per_sede";
-$obj = new SQLTable($proto91);
-
-$proto90["m_table"] = $obj;
-$proto90["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto90["m_alias"] = "p";
-$proto90["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
-$proto92=array();
-$proto92["m_sql"] = "p.per_cod = pf.id_funcionario";
-$proto92["m_uniontype"] = "SQLL_UNKNOWN";
-						$obj = new SQLField(array(
-	"m_strName" => "per_cod",
-	"m_strTable" => "p",
-	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
-));
-
 $proto92["m_column"]=$obj;
 $proto92["m_contained"] = array();
-$proto92["m_strCase"] = "= pf.id_funcionario";
+$proto92["m_strCase"] = "";
 $proto92["m_havingmode"] = false;
 $proto92["m_inBrackets"] = false;
 $proto92["m_useAlias"] = false;
@@ -6798,19 +6768,85 @@ $proto90["m_joinon"] = $obj;
 $obj = new SQLFromListItem($proto90);
 
 $proto0["m_fromlist"][]=$obj;
+												$proto94=array();
+$proto94["m_link"] = "SQLL_LEFTJOIN";
+			$proto95=array();
+$proto95["m_strName"] = "public.personales";
+$proto95["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto95["m_columns"] = array();
+$proto95["m_columns"][] = "per_cod";
+$proto95["m_columns"][] = "categoria_cat_codigo";
+$proto95["m_columns"][] = "departamentos_dep_cod";
+$proto95["m_columns"][] = "dependencias_dep_cod";
+$proto95["m_columns"][] = "paises_pai_cod";
+$proto95["m_columns"][] = "ciudades_ciu_cod";
+$proto95["m_columns"][] = "profesiones_pro_cod";
+$proto95["m_columns"][] = "per_profesional";
+$proto95["m_columns"][] = "tipo_funcionario_tfun_cod";
+$proto95["m_columns"][] = "per_institucion_origen";
+$proto95["m_columns"][] = "cargos_car_cod";
+$proto95["m_columns"][] = "per_nombre";
+$proto95["m_columns"][] = "per_apellido";
+$proto95["m_columns"][] = "per_ci";
+$proto95["m_columns"][] = "per_sexo";
+$proto95["m_columns"][] = "per_nacimiento";
+$proto95["m_columns"][] = "per_est_civil";
+$proto95["m_columns"][] = "per_gruposangre";
+$proto95["m_columns"][] = "per_pcd";
+$proto95["m_columns"][] = "per_domicilio";
+$proto95["m_columns"][] = "per_barrio";
+$proto95["m_columns"][] = "per_teleparticular";
+$proto95["m_columns"][] = "per_telecelular";
+$proto95["m_columns"][] = "per_email_part";
+$proto95["m_columns"][] = "per_email_instit";
+$proto95["m_columns"][] = "per_ruc";
+$proto95["m_columns"][] = "per_contacto_eme";
+$proto95["m_columns"][] = "per_tele_emer";
+$proto95["m_columns"][] = "per_ingreso";
+$proto95["m_columns"][] = "per_nombramiento";
+$proto95["m_columns"][] = "per_estado";
+$proto95["m_columns"][] = "per_usuario";
+$proto95["m_columns"][] = "per_sede";
+$obj = new SQLTable($proto95);
+
+$proto94["m_table"] = $obj;
+$proto94["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
+$proto94["m_alias"] = "p";
+$proto94["m_srcTableName"] = "rrhh_permisos.permisos_funcionarios";
+$proto96=array();
+$proto96["m_sql"] = "p.per_cod = pf.id_funcionario";
+$proto96["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "per_cod",
+	"m_strTable" => "p",
+	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
+));
+
+$proto96["m_column"]=$obj;
+$proto96["m_contained"] = array();
+$proto96["m_strCase"] = "= pf.id_funcionario";
+$proto96["m_havingmode"] = false;
+$proto96["m_inBrackets"] = false;
+$proto96["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto96);
+
+$proto94["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto94);
+
+$proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
 $proto0["m_orderby"] = array();
-												$proto94=array();
+												$proto98=array();
 						$obj = new SQLField(array(
 	"m_strName" => "id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "rrhh_permisos.permisos_funcionarios"
 ));
 
-$proto94["m_column"]=$obj;
-$proto94["m_bAsc"] = 0;
-$proto94["m_nColumn"] = 0;
-$obj = new SQLOrderByItem($proto94);
+$proto98["m_column"]=$obj;
+$proto98["m_bAsc"] = 0;
+$proto98["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto98);
 
 $proto0["m_orderby"][]=$obj;					
 $proto0["m_srcTableName"]="rrhh_permisos.permisos_funcionarios";		

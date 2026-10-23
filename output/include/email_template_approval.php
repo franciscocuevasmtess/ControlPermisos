@@ -37,7 +37,6 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
     }
 
 
-
     if ($tipoSolicitud === 'permiso') {
         $titulo = 'Aprobación de Permiso';
         $encabezado = 'Solicitud de Aprobación de Permiso';
@@ -48,7 +47,6 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
         $titulo = 'Aprobación de Comisión de Servicios';
         $encabezado = 'Solicitud de Comisión de Servicios';
     }
-
 
 
     // ========================================================================
@@ -204,15 +202,14 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
                 <div class="info-value">' . $motivo . '</div>
             </div>';
 
-    // Agregar observación solo si existe
-    if (!empty($observacion)) {
-        $html .= '
-            <div class="info-row">
-                <div class="info-label">Observación:</div>
-                <div class="info-value">' . $observacion . '</div>
-            </div>';
-    }
-
+            // Agregar observación solo si existe
+            if (!empty($observacion)) {
+                $html .= '
+                    <div class="info-row">
+                        <div class="info-label">Observación:</div>
+                        <div class="info-value">' . $observacion . '</div>
+                    </div>';
+            }
 
     /*
      * Archivo adjunto solo para permisos 

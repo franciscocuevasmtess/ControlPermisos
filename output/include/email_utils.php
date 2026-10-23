@@ -1,14 +1,23 @@
 <?php
 
 /**
- * Email Utilities Class
- * Clase utilitaria para el envío de correos electrónicos
+ * Clase utilitaria para el envío de correos electrónicos.
+ * 
+ * Contiene métodos para enviar correos electrónicos, generar plantillas
+ * de correos y manejar el envío de notificaciones.
+ * 
+ * @package ControlPermisos
  */
 
 class EmailUtils
 {
 
-    // Función auxiliar para depuración, muestra datos en la consola del navegador (útil en desarrollo).
+    /**
+     * Función auxiliar para depuración, muestra datos en la consola del navegador (útil en desarrollo).
+     * 
+     * @param mixed $data Datos a mostrar
+     * @param string $context Contexto del debug
+     */
     public static function debug_to_console($data, $context = 'Debug in Console')
     {
         ob_start();
@@ -92,11 +101,8 @@ class EmailUtils
      * @param string $emailJefe Email del jefe (temporal: franciscocuevas@mtess.gov.py)
      * @return bool True si se envió exitosamente
      */
-    public static function enviarNotificacionSolicitudPermiso(
-        $datosPermiso,
-        $permisoId,
-        $emailJefe
-    ) {
+    public static function enviarNotificacionSolicitudPermiso($datosPermiso, $permisoId, $emailJefe)
+    {
         // Obtener la URL base del sistema
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
         $host = $_SERVER['HTTP_HOST'];
@@ -117,6 +123,57 @@ class EmailUtils
         // Enviar el correo
         return self::sendHTMLEmail($emailJefe, $subject, $htmlBody);
     }
+
+
+    /**
+     * Genera el correo de notificación de rechazo realizado
+     * por el jefe inmediato.
+     */
+    public static function generarEmailRechazoJefe($datosRechazo)
+    {
+        require_once(__DIR__ . '/email_template_rechazo_jefe.php');
+        return generarPlantillaRechazoJefe($datosRechazo);
+    }
+
+
+    /**
+     * Envía al funcionario la notificación de que su jefe inmediato
+     * rechazó la solicitud.
+     */
+    public static function enviarNotificacionRechazoJefe($datosRechazo, $emailFuncionario)
+    {
+        $htmlBody = self::generarEmailRechazoJefe($datosRechazo);
+        $subject = "Solicitud de Permiso Rechazada - " . $datosRechazo["nombre_funcionario"];
+
+        return self::sendHTMLEmail($emailFuncionario, $subject, $htmlBody);
+    }
+
+
+    /**
+     * Genera la notificación de aprobación realizada
+     * por la jefatura inmediata.
+     */
+    public static function generarEmailAprobacionJefe($datosAprobacion)
+    {
+        require_once(__DIR__ . '/email_template_aprobacion_jefe.php');
+
+        return generarPlantillaAprobacionJefe($datosAprobacion);
+    }
+
+
+    /**
+     * Envía al funcionario la notificación de aprobación
+     * realizada por su jefatura inmediata.
+     */
+    public static function enviarNotificacionAprobacionJefe($datosAprobacion, $emailFuncionario)
+    {
+        $htmlBody = self::generarEmailAprobacionJefe($datosAprobacion);
+
+        $subject = "Solicitud de Permiso Aprobada por su Jefatura - " . $datosAprobacion["nombre_funcionario"];
+
+        return self::sendHTMLEmail($emailFuncionario, $subject, $htmlBody);
+    }
+
 
     /**
      * Formatea una fecha en formato legible
