@@ -39,6 +39,8 @@
 
 		$this->events["BeforeProcessEdit"]=true;
 
+		$this->events["BeforeShowList"]=true;
+
 
 	}
 
@@ -173,6 +175,9 @@ function BeforeShowAdd(&$xt, &$templatefile, $pageObject)
  */
 
 
+require_once(getabspath("include/view-vacacion-funciones.php"));
+
+
 /*==============================================================
 =            FUNCIÓN AUXILIAR PARA DEPURACIÓN                  =
 ==============================================================*/
@@ -221,6 +226,8 @@ $pageObject->hideItem("add_motivo_id"); // Oculta el campo motivo_id
 
 $pageObject->hideItem("add_vac_periodo_solicitado"); // Oculta el campo de vacaciones periodo
 
+$pageObject->hideItem("add_rrhh_decidido_por"); // Oculta el campo add_rrhh_decidido_por
+
 
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
@@ -261,6 +268,139 @@ $pageObject->setProxyValue("antiguedad_laboral", $dataDependencia["antiguedad_la
 $pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
 $pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
 $pageObject->setProxyValue("sex_descripcion", $dataDependencia["sex_descripcion"]);
+
+
+
+/*==============================================================
+=       RESUMEN DE SALDO DISPONIBLE DE VACACIONES             =
+==============================================================*/
+/*
+ * Se utiliza $userPersonal porque corresponde al per_cod
+ * del funcionario actualmente logueado.
+ *
+ * obtenerSaldosVacacionesPorPeriodo() ya tiene en cuenta:
+ * - períodos generados por antigüedad;
+ * - vacaciones históricas;
+ * - vacaciones_consumo;
+ * - solicitudes comprometidas;
+ * - vigencia de los períodos.
+ */
+$saldosVacacionesFuncionario = obtenerSaldosVacacionesPorPeriodo((int)$userPersonal);
+
+$totalSaldoVacaciones = 0;
+$periodosVigentesVacaciones = array();
+
+foreach ($saldosVacacionesFuncionario as $saldoPeriodo) {
+	/*
+	 * Mostrar únicamente períodos que todavía estén vigentes.
+	 */
+	if (empty($saldoPeriodo["vigente"])) {
+		continue;
+	}
+	
+	$periodo = isset($saldoPeriodo["periodo"]) ? (int)$saldoPeriodo["periodo"] : 0;
+	$saldoDias = isset($saldoPeriodo["saldo_dias"]) ? (int)$saldoPeriodo["saldo_dias"] : 0;
+	
+	/*
+	 * Nunca mostrar saldo negativo al funcionario.
+	 */
+	if ($saldoDias < 0) {
+		$saldoDias = 0;
+	}
+	
+	if ($periodo <= 0) {
+		continue;
+	}
+	
+	$periodosVigentesVacaciones[] = array("periodo" => $periodo, "saldo_dias" => $saldoDias);
+	$totalSaldoVacaciones += $saldoDias;
+}
+
+/*
+ * ============================================================
+ * CONSTRUIR PANEL HTML
+ * ============================================================
+ */
+$htmlSaldoVacaciones = '
+<div style="
+	border:1px solid #d8e1e8;
+	border-radius:8px;
+	background:#f8fafc;
+	padding:14px 16px;
+	height:100%;
+	box-sizing:border-box;
+">
+	<div style="
+		font-size:16px;
+		font-weight:600;
+		margin-bottom:10px;
+	">
+		🏖️ Saldo disponible de vacaciones
+	</div>';
+
+if (count($periodosVigentesVacaciones) > 0) {
+	foreach ($periodosVigentesVacaciones as $periodoVacacion) {
+		$htmlSaldoVacaciones .= '
+		<div style="
+			display:flex;
+			justify-content:space-between;
+			align-items:center;
+			padding:6px 0;
+			border-bottom:1px solid #e5e7eb;
+		">
+			<span>
+				<strong>Período ' . $periodoVacacion["periodo"] . '</strong>
+			</span>
+			<span>
+				' . $periodoVacacion["saldo_dias"] . ' día(s)
+			</span>
+		</div>';
+	}
+} else {
+	$htmlSaldoVacaciones .= '
+	<div style="padding:6px 0;">
+		No posee períodos vigentes de vacaciones.
+	</div>';
+}
+
+/*
+ * Total general disponible.
+ */
+$htmlSaldoVacaciones .= '
+	<div style="
+		margin-top:12px;
+		padding-top:10px;
+		border-top:2px solid #d8e1e8;
+		font-size:16px;
+	">
+		<strong>
+			Total disponible: ' . $totalSaldoVacaciones . ' día(s)
+		</strong>
+	</div>
+</div>';
+
+/*
+ * Pasamos el HTML al JavaScript OnLoad del formulario.
+ */
+$pageObject->setProxyValue("saldo_vacaciones_html", $htmlSaldoVacaciones);
+
+/*
+ * También dejamos disponibles los datos separados por si
+ * posteriormente queremos utilizarlos desde JavaScript.
+ */
+$pageObject->setProxyValue("saldo_vacaciones_total", $totalSaldoVacaciones);
+$pageObject->setProxyValue("saldo_vacaciones_periodos", json_encode($periodosVigentesVacaciones));
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Query para obtener TODOS los jefes posibles del usuario logueado.
@@ -385,18 +525,45 @@ $currentUserData = Security::currentUserData();
  * Estos valores luego serán insertados en la base de datos
  */
 $dependencia_id = $values["dependencia_id"];
-$id_funcionario = $values["id_funcionario"]; // per_cod
+$id_funcionario = $values["id_funcionario"];
+
 $fecha_desde = $values["fecha_desde"];
-//$hora_desde = $values["hora_desde"];
 $hora_desde = "00:00";
+
 $motivo_id = $values["motivo_id"];
 $observacion = $values["observacion"];
 $tipo_vinculacion = $values["tipo_vinculacion"];
 $nombre_completo = $values["nombre_completo"];
+
 $fecha_hasta = $values["fecha_hasta"];
-//$hora_hasta = $values["hora_hasta"];
 $hora_hasta = "23:59";
+
 $estado = "PENDIENTE"; // Estado inicial
+
+/*==============================================================
+=       DATOS DE VACACIÓN EXCEPCIONAL                          =
+==============================================================*/
+$valorExcepcionalCustom = isset($values["vacacion_excepcional"]) ? strtolower(trim((string)$values["vacacion_excepcional"])) : "";
+$esVacacionExcepcionalCustom = in_array(
+	$valorExcepcionalCustom,
+	array("1", "true", "t", "yes", "on"),
+	true
+);
+$motivoVacacionExcepcionalCustom = isset($values["vacacion_excepcional_motivo"])
+	? trim((string)$values["vacacion_excepcional_motivo"])
+	: "";
+$archivoVacacionExcepcionalCustom = isset($values["vacacion_excepcional_archivo"])
+	? trim((string)$values["vacacion_excepcional_archivo"])
+	: "";
+/*
+ * Por seguridad, si no es excepcional,
+ * no guardar datos propios de una excepción.
+ */
+if (!$esVacacionExcepcionalCustom) {
+	$motivoVacacionExcepcionalCustom = "";
+	$archivoVacacionExcepcionalCustom = "";
+}
+
 $archivo_adjunto = $values["archivo_adjunto"];
 $email_jefe = $values["email_jefe"];
 $email_jefe_id = $values["email_jefe_id"];
@@ -426,6 +593,7 @@ try {
 	/*--------------------------------------------
 	| Insertar vacacion en la base de datos
 	--------------------------------------------*/
+	/*
 	$sqlInsertPermisosFuncionarios = DB::PrepareSQL(
 		"INSERT INTO rrhh_permisos.permisos_funcionarios (id_funcionario,
 																															tipo_vinculacion,
@@ -469,8 +637,70 @@ try {
 	$row_permisos_funcionarios = $resultPermisosFuncionarios->fetchAssoc();
 	$permiso_funcionario_id = $row_permisos_funcionarios['id'];
 	//debug_to_console("Permiso generado con ID: ".$permiso_funcionario_id);
+	*/
+	$sqlInsertPermisosFuncionarios = DB::PrepareSQL(
+		"INSERT INTO rrhh_permisos.permisos_funcionarios (id_funcionario,
+																																	tipo_vinculacion,
+																																	dependencia_id,
+																																	fecha_desde,
+																																	hora_desde,
+																																	fecha_hasta,
+																																	hora_hasta,
+																																	motivo_id,
+																																	observacion,
+																																	estado,
+																																	solicitado_por,
+																																	fecha_solicitud,
+																																	resultado_decision,
+																																	rrhh_resultado_decision,
+																																	vac_dias_pedidos,
+																																	vac_periodo_solicitado,
+																																	vacacion_excepcional,
+																																	vacacion_excepcional_motivo,
+																																	vacacion_excepcional_archivo)
+			VALUES (':1', ':2', ':3', ':4', ':5', ':6', ':7', ':8', ':9', ':10', ':11', NOW(), ':12', ':13', ':14', ':15', ':16'::boolean, NULLIF(':17', ''), NULLIF(':18', ''))
+			RETURNING id",
+    $id_funcionario,
+    $tipo_vinculacion,
+    $dependencia_id,
+    $fecha_desde,
+    $hora_desde,
+    $fecha_hasta,
+    $hora_hasta,
+    $motivo_id,
+    $observacion,
+    $estado,
+    $currentUserData["usu_cod"],
+    $estado,
+    $estado,
+    $vac_dias_pedidos,
+    $vac_periodo_solicitado,
+    $esVacacionExcepcionalCustom ? "true" : "false",
+    $motivoVacacionExcepcionalCustom,
+    $archivoVacacionExcepcionalCustom
+	);
 	
-	/*
+	$resultPermisosFuncionarios = DB::Query($sqlInsertPermisosFuncionarios);
+	$row_permisos_funcionarios = $resultPermisosFuncionarios ? $resultPermisosFuncionarios->fetchAssoc() : false;
+	
+	if (!$row_permisos_funcionarios || empty($row_permisos_funcionarios["id"])) {
+		throw new Exception("No se pudo registrar la solicitud de vacaciones.");
+	}
+
+	$permiso_funcionario_id = (int)$row_permisos_funcionarios["id"];
+
+
+	
+
+
+
+
+
+
+
+
+
+/*
 	// ============================================================================
 	// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
 	// ============================================================================
@@ -488,8 +718,11 @@ try {
 					'dependencia' => $nombreDependencia,
 					'email_jefe_id' => $email_jefe_id,
 					'tipo_solicitud' => 'vacaciones',
-					'archivo' => $archivo_adjunto
-	);
+					'archivo' => $archivo_adjunto,
+					'vacacion_excepcional' => $esVacacionExcepcionalCustom,
+					'vacacion_excepcional_motivo' => $motivoVacacionExcepcionalCustom,
+					'vacacion_excepcional_archivo' => $archivoVacacionExcepcionalCustom,
+		);
 
 	/*--------------------------------------------
 	| Enviar correo de notificación							|
@@ -720,6 +953,12 @@ if (!isset($values["intentos_correccion"])) {
 	$values["intentos_correccion"] = $oldvalues["intentos_correccion"];
 }
 
+if (!isset($values["intentos_correccion_jefatura"])) {
+	$values["intentos_correccion_jefatura"] = isset($oldvalues["intentos_correccion_jefatura"])
+			? (int)$oldvalues["intentos_correccion_jefatura"]
+			: 0;
+}
+
 
 /*==============================================================
 =            OBTENER DESCRIPCIÓN DEL MOTIVO                    =
@@ -742,54 +981,17 @@ try {
 	/*--------------------------------------------
 	| Actualizar permiso en la base de datos
 	--------------------------------------------*/
-
-	// Construcción del SQL de actualización del permiso del funcionario
-	/* *** */
-	//$update_permiso_func = DB::PrepareSQL("UPDATE rrhh_permisos.permisos_funcionarios 
-	//																						SET tipo_vinculacion = ':1',
-	//																									dependencia_id = ':2',
-	//																									fecha_desde = ':3',
-	//																									hora_desde = ':4',
-	//																									fecha_hasta = ':5',
-	//																									hora_hasta = ':6',
-	//																									motivo_id = ':7',
-	//																									observacion = ':8',
-	//																									fecha_actualizacion = ':9',
-	//																									archivo_adjunto = ':10',
-	//																									intentos_correccion = ':11',
-	//																									rrhh_resultado_decision = ':12',
-	//																									rrhh_motivo_rechazo = ':13'
-	//																						WHERE id = ':14'",
-	//																									$values["tipo_vinculacion"],
-	//																									$values["dependencia_id"],
-	//																									$values["fecha_desde"],
-	//																									$values["hora_desde"],
-	//																									$values["fecha_hasta"],
-	//																									$values["hora_hasta"],
-	//																									$values["motivo_id"],
-	//																									$values["observacion"],
-	//																									now(),
-	//																									$values["archivo_adjunto"],
-	//																									$values["intentos_correccion"],
-	//																									$values["rrhh_resultado_decision"],
-	//																									$values["rrhh_motivo_rechazo"],
-	//																									$values["id"]);
-	// Ejecución del UPDATE en la base de datos
-	//DB::Exec($update_permiso_func);
-	/* *** */
-
+	
 	/*
 	 * ============================================================
 	 * IDENTIFICAR QUÉ TIPO DE EDICIÓN SE ESTÁ REALIZANDO
 	 * ============================================================
 	 */
-	$rechazadoPorJefatura =
-    strtoupper(trim((string)$oldvalues["estado"])) === "RECHAZADO"
+	$rechazadoPorJefatura = strtoupper(trim((string)$oldvalues["estado"])) === "RECHAZADO"
     && strtoupper(trim((string)$oldvalues["resultado_decision"])) === "RECHAZADO"
     && strtoupper(trim((string)$oldvalues["rrhh_resultado_decision"])) === "PENDIENTE";
 
-	$rechazadoPorRRHH =
-    strtoupper(trim((string)$oldvalues["estado"])) === "APROBADO"
+	$rechazadoPorRRHH = strtoupper(trim((string)$oldvalues["estado"])) === "APROBADO"
     && strtoupper(trim((string)$oldvalues["resultado_decision"])) === "APROBADO"
     && strtoupper(trim((string)$oldvalues["rrhh_resultado_decision"])) === "RECHAZADO";
 
@@ -805,45 +1007,22 @@ try {
 	}
 
 	/*
+	* Cuando el rechazo provino de DGTH/RRHH, al corregir la
+	* solicitud se mantiene vigente la aprobación de Jefatura,
+	* pero se limpia la decisión anterior de DGTH porque vuelve
+	* a quedar pendiente de una nueva revisión.
+	*/
+	$resetDecisionRRHHSql = "";
+	if ($rechazadoPorRRHH) {
+		$resetDecisionRRHHSql = ", rrhh_decidido_por = NULL, rrhh_fecha_decision = NULL";
+	}
+	
+	/*
 	 * ============================================================
 	 * ACTUALIZAR SOLICITUD
 	 * ============================================================
 	 */
-	//$update_permiso_func = DB::PrepareSQL(
-	//	"UPDATE rrhh_permisos.permisos_funcionarios
-	//		SET tipo_vinculacion = ':1',
-	//				dependencia_id = ':2',
-	//				fecha_desde = ':3',
-	//				hora_desde = ':4',
-	//				fecha_hasta = ':5',
-	//				hora_hasta = ':6',
-	//				motivo_id = ':7',
-	//				observacion = ':8',
-	//				fecha_actualizacion = NOW(),
-	//				archivo_adjunto = ':9',
-	//				intentos_correccion = ':10',
-	//				rrhh_resultado_decision = ':11',
-	//				rrhh_motivo_rechazo = ':12',
-	//				estado = ':13',
-	//				resultado_decision = ':14'
-	//		" . $resetDecisionJefeSql . "
-	//		WHERE id = ':15'",
-	//		$values["tipo_vinculacion"],
-	//		$values["dependencia_id"],
-	//		$values["fecha_desde"],
-	//		$values["hora_desde"],
-	//		$values["fecha_hasta"],
-	//		$values["hora_hasta"],
-	//		$values["motivo_id"],
-	//		$values["observacion"],
-	//		$values["archivo_adjunto"],
-	//		$values["intentos_correccion"],
-	//		$values["rrhh_resultado_decision"],
-	//		$values["rrhh_motivo_rechazo"],
-	//		$values["estado"],
-	//		$values["resultado_decision"],
-	//		$values["id"]
-	//);
+	/*
 	$update_permiso_func = DB::PrepareSQL(
 		"UPDATE rrhh_permisos.permisos_funcionarios
 			SET tipo_vinculacion = ':1',
@@ -857,49 +1036,90 @@ try {
 					fecha_actualizacion = NOW(),
 					archivo_adjunto = ':9',
 					intentos_correccion = ':10',
-					rrhh_resultado_decision = ':11',
-					rrhh_motivo_rechazo = ':12',
-					estado = ':13',
-					resultado_decision = ':14',
-					vac_dias_pedidos = ':15',
-					vac_periodo_solicitado = ':16'
-					" . $resetDecisionJefeSql . "
-			WHERE id = ':17'",
-				$values["tipo_vinculacion"],
-				$values["dependencia_id"],
-				$values["fecha_desde"],
-				$values["hora_desde"],
-				$values["fecha_hasta"],
-				$values["hora_hasta"],
-				$values["motivo_id"],
-				$values["observacion"],
-				$values["archivo_adjunto"],
-				$values["intentos_correccion"],
-				$values["rrhh_resultado_decision"],
-				$values["rrhh_motivo_rechazo"],
-				$values["estado"],
-				$values["resultado_decision"],
-				$values["vac_dias_pedidos"],
-				$values["vac_periodo_solicitado"],
-				$values["id"]
+					intentos_correccion_jefatura = ':11',
+					rrhh_resultado_decision = ':12',
+					rrhh_motivo_rechazo = ':13',
+					estado = ':14',
+					resultado_decision = ':15',
+					vac_dias_pedidos = ':16',
+					vac_periodo_solicitado = ':17'
+				" . $resetDecisionJefeSql . "
+				" . $resetDecisionRRHHSql . "
+		WHERE id = ':18'",
+			$values["tipo_vinculacion"],
+			$values["dependencia_id"],
+			$values["fecha_desde"],
+			$values["hora_desde"],
+			$values["fecha_hasta"],
+			$values["hora_hasta"],
+			$values["motivo_id"],
+			$values["observacion"],
+			$values["archivo_adjunto"],
+			$values["intentos_correccion"],
+			$values["intentos_correccion_jefatura"],
+			$values["rrhh_resultado_decision"],
+			$values["rrhh_motivo_rechazo"],
+			$values["estado"],
+			$values["resultado_decision"],
+			$values["vac_dias_pedidos"],
+			$values["vac_periodo_solicitado"],
+			$values["id"]
 	);
-	
+	*/
+	$update_permiso_func = DB::PrepareSQL(
+		"UPDATE rrhh_permisos.permisos_funcionarios
+			SET tipo_vinculacion = ':1',
+			dependencia_id = ':2',
+			fecha_desde = ':3',
+			hora_desde = ':4',
+			fecha_hasta = ':5',
+			hora_hasta = ':6',
+			motivo_id = ':7',
+			observacion = ':8',
+			fecha_actualizacion = NOW(),
+			intentos_correccion = ':9',
+			intentos_correccion_jefatura = ':10',
+			rrhh_resultado_decision = ':11',
+			rrhh_motivo_rechazo = ':12',
+			estado = ':13',
+			resultado_decision = ':14',
+			vac_dias_pedidos = ':15',
+			vac_periodo_solicitado = ':16',
+			vacacion_excepcional = ':17'::boolean,
+			vacacion_excepcional_motivo = NULLIF(':18', ''),
+			vacacion_excepcional_archivo = NULLIF(':19', '')
+			" . $resetDecisionJefeSql . "
+			" . $resetDecisionRRHHSql . "
+		WHERE id = ':20'",
+			$values["tipo_vinculacion"],
+			$values["dependencia_id"],
+			$values["fecha_desde"],
+			$values["hora_desde"],
+			$values["fecha_hasta"],
+			$values["hora_hasta"],
+			$values["motivo_id"],
+			$values["observacion"],
+			$values["intentos_correccion"],
+			$values["intentos_correccion_jefatura"],
+			$values["rrhh_resultado_decision"],
+			$values["rrhh_motivo_rechazo"],
+			$values["estado"],
+			$values["resultado_decision"],
+			$values["vac_dias_pedidos"],
+			$values["vac_periodo_solicitado"],
+			!empty($values["vacacion_excepcional"]) ? "true" : "false",
+			isset($values["vacacion_excepcional_motivo"]) ? $values["vacacion_excepcional_motivo"] : "",
+			isset($values["vacacion_excepcional_archivo"]) ? $values["vacacion_excepcional_archivo"] : "",
+			$values["id"]
+		);
 	$resultadoUpdate = DB::Exec($update_permiso_func);
 	
 	if (!$resultadoUpdate) {
-		throw new Exception("No se pudo actualizar la solicitud.");
+		throw new Exception("No se pudo actualizar la solicitud. Error PostgreSQL: " . DB::LastError());
 	}
 	
 	$permiso_funcionario_id = $values["id"];
 
-	
-
-
-	//debug_to_console("update_permiso_func: " . $update_permiso_func);
-	$permiso_funcionario_id = $values["id"];
-
-	
-	/* *** */
 	/*
 	 * ============================================================
 	* DETERMINAR SI CORRESPONDE REENVIAR AL JEFE
@@ -913,17 +1133,16 @@ try {
 	* NO se envía cuando:
 	* - RRHH rechazó una solicitud que el jefe ya había aprobado.
 	*/
-	$pendienteJefatura =
-		strtoupper(trim((string)$oldvalues["estado"])) === "PENDIENTE"
+	$pendienteJefatura = strtoupper(trim((string)$oldvalues["estado"])) === "PENDIENTE"
 		&& strtoupper(trim((string)$oldvalues["resultado_decision"])) === "PENDIENTE";
 	
 	$debeEnviarMailJefe = $rechazadoPorJefatura || $pendienteJefatura;
 
 	if ($debeEnviarMailJefe) {
-	//if ($enviar_mail_jefe == 1) {
 		// ============================================================================
 		// ENVÍO DE CORREO ELECTRÓNICO DE NOTIFICACIÓN
 		// ============================================================================
+		
 		/*-----------------------------------------------------
 		| Preparar datos del permiso para el correo electrónico
 		------------------------------------------------------*/
@@ -937,14 +1156,16 @@ try {
 						'observacion' => $observacion,
 						'dependencia' => $nombreDependencia,
 						'email_jefe_id' => $email_jefe_id,
-						//'tipo_solicitud' => 'permiso',
 						'tipo_solicitud' => 'vacaciones',
-						//'archivo' => $archivo_adjunto
-						'archivo' => isset($values["archivo_adjunto"])
-							? $values["archivo_adjunto"]
-							: $oldvalues["archivo_adjunto"]
-		);
-
+						'archivo' => isset($values["archivo_adjunto"]) ? $values["archivo_adjunto"] : $oldvalues["archivo_adjunto"],
+						'vacacion_excepcional' => empty($values["vacacion_excepcional"]),
+						'vacacion_excepcional_motivo' => isset($values["vacacion_excepcional_motivo"])
+            ? $values["vacacion_excepcional_motivo"]
+            : "",
+						'vacacion_excepcional_archivo' => isset($values["vacacion_excepcional_archivo"])
+            ? $values["vacacion_excepcional_archivo"]
+            : ""
+			);
 
 		/*--------------------------------------------
 		| Enviar correo de notificación
@@ -965,16 +1186,27 @@ try {
 			//debug_to_console("Error al enviar correo para permiso ID: " . $permiso_funcionario_id);
 		}
 	} // FIN '$enviar_mail_jefe == 1'
-	/* *** */
 
-
-	
 } catch (Exception $e) {
-	// Si ocurre un error en el correo, NO se revierte la inserción del permiso.
-	error_log("Excepción al enviar correo: " . $e->getMessage());
-	//debug_to_console("Excepción al enviar correo: " . $e->getMessage());
+	error_log("Error en Custom record update de Vacacion: " . $e->getMessage());
+	
+	$error = generarMensajeError(
+		"No se pudo actualizar la solicitud.",
+		"Ocurrió un error durante la actualización.",
+		[
+			"<strong>" . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8") . "</strong>"
+		],
+		"<br><b>La solicitud no fue modificada.</b>"
+	);
+
+	return false;
 }
 
+
+/*
+ * El registro ya fue actualizado manualmente por este evento.
+ */
+return false;
 
 ;		
 } // function CustomEdit
@@ -1086,6 +1318,8 @@ function BeforeShowEdit(&$xt, &$templatefile, $values, $pageObject)
 //	echo $output;
 //}
 
+require_once(getabspath("include/view-vacacion-funciones.php"));
+
 $pageObject->hideItem("edit_id"); // Oculta el campo id
 $pageObject->hideItem("edit_dependencia_id");
 $pageObject->hideItem("edit_email_jefe_id"); // Oculta el campo email_jefe_id
@@ -1103,6 +1337,8 @@ $pageObject->hideItem("edit_sex_descripcion"); // Oculta el campo sex_descripcio
 $pageObject->hideItem("integrated_edit_field1"); // Oculta el campo vac_periodo_solicitado
 $pageObject->hideItem("edit_hora_desde"); // Oculta el campo hora_desde
 $pageObject->hideItem("edit_hora_hasta"); // Oculta el campo hora_hasta
+$pageObject->hideField("rrhh_decidido_por"); // Oculta el campo rrhh_decidido_por
+$pageObject->hideField("rrhh_fecha_decision"); // Oculta el campo rrhh_fecha_decision
 
 // Obtener datos del usuario logueado en PHPRunner
 $currentUser = Security::currentUserData();
@@ -1165,26 +1401,115 @@ while ($row = db_fetch_array($resultEmail)) {
 // 👉 Pasamos TODO como JSON al frontend(JavaScript Onload event)
 $pageObject->setProxyValue("jefes_emails", json_encode($jefes));
 
-// Query para obtener el conteo de cantidad de permisos por mes.
-//$sqlTotalPermisos = DB::PrepareSQL(
-//"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
-//				COUNT(*) AS cantidad_permisos_mes
-//FROM rrhh_permisos.permisos_funcionarios
-//WHERE id_funcionario = ':1'
-//AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
-//AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
-//GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
-//);
-//debug_to_console("sqlTotalPermisos: " . $sqlTotalPermisos);
-//$resultTotalPermisos = DB::Query($sqlTotalPermisos);
-//$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
-//if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
-//	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
-//} else {
-//	$cantidad_permisos_mes = 0;
-//}
-//debug_to_console("mes_nombre: " . $rowTotalPermisos['mes_nombre'] . ", total_permisos: " . $rowTotalPermisos['cantidad_permisos_mes']);
-//$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
+
+/* =========================================================
+   RESUMEN DE SALDO DE VACACIONES - EDIT
+========================================================= */
+$idSolicitud = 0;
+
+if (isset($pageObject->keys["id"])) {
+	$idSolicitud = (int)$pageObject->keys["id"];
+}
+
+$idFuncionarioSaldo = 0;
+
+if ($idSolicitud > 0) {
+	$sqlSolicitudSaldo = DB::PrepareSQL(
+		"SELECT id_funcionario
+			FROM rrhh_permisos.permisos_funcionarios
+			WHERE id = ':1'",
+			$idSolicitud
+		);
+	$rsSolicitudSaldo = DB::Query($sqlSolicitudSaldo);
+	
+	if ($rsSolicitudSaldo && ($rowSolicitudSaldo = $rsSolicitudSaldo->fetchAssoc())) {
+		$idFuncionarioSaldo = (int)$rowSolicitudSaldo["id_funcionario"];
+	}
+}
+
+$saldoVacacionesHtml = "";
+if ($idFuncionarioSaldo > 0) {
+    /*
+     * En Edit excluimos la propia solicitud.
+     *
+     * Esto es importante porque, si la solicitud ya está
+     * reservando días, no queremos que el usuario vea
+     * esos mismos días descontados de su propio saldo
+     * mientras está editando.
+     */
+	$saldosVacaciones = obtenerSaldosVacacionesPorPeriodo($idFuncionarioSaldo, $idSolicitud);
+	$totalDisponible = 0;
+	
+	$saldoVacacionesHtml .= "
+		<div style='
+			background:#f8f9fa;
+			border:1px solid #dee2e6;
+			border-radius:10px;
+			padding:16px;
+			margin-bottom:15px;
+		'>
+			<div style='
+				font-size:16px;
+				font-weight:600;
+				margin-bottom:12px;
+			'>
+				🏖️ Saldo disponible de vacaciones
+			</div>
+		";
+	$hayPeriodos = false;
+	foreach ($saldosVacaciones as $saldoPeriodo) {
+		if (empty($saldoPeriodo["vigente"])) {
+			continue;
+		}
+		
+		$hayPeriodos = true;
+		$periodo = (int)$saldoPeriodo["periodo"];
+		$saldoDias = (int)$saldoPeriodo["saldo_dias"];
+		if ($saldoDias < 0) {
+			$saldoDias = 0;
+		}
+		
+		$totalDisponible += $saldoDias;
+		$saldoVacacionesHtml .= "
+			<div style='
+				display:flex;
+				justify-content:space-between;
+				align-items:center;
+				padding:7px 0;
+				border-bottom:1px solid #e9ecef;
+			'>
+				<span><strong>Período {$periodo}</strong></span>
+				<span>{$saldoDias} día(s)</span>
+			</div>
+			";
+	}
+	
+	if (!$hayPeriodos) {
+		$saldoVacacionesHtml .= "
+			<div style='padding:8px 0;'>
+				No posee períodos de vacaciones vigentes con información disponible.
+			</div>
+			";
+	}
+	
+	$saldoVacacionesHtml .= "
+		<div style='
+			margin-top:12px;
+			padding-top:10px;
+			border-top:2px solid #dee2e6;
+			font-weight:700;
+			display:flex;
+			justify-content:space-between;
+		'>
+			<span>Total disponible:</span>
+			<span>{$totalDisponible} día(s)</span>
+		</div>
+	</div>
+	";
+}
+
+$pageObject->setProxyValue("saldo_vacaciones_html", $saldoVacacionesHtml);
+
 
 ;		
 } // function BeforeShowEdit
@@ -1433,20 +1758,10 @@ $pageObject->setMessage($html_exitoso);
 function BeforeMoveNextList(&$data, &$row, &$record, $recordId, $pageObject)
 {
 
-		/*
-$pageObject->hideItem("grid_edit", $recordId); // Oculta inicialmente el boton de edicion.
-$pageObject->hideItem("list_intentos_correccion"); // Oculta el campo intentos de correcion(necesario para el 'edit')
-
-if ($data["resultado_decision"] == 'PENDIENTE'
-			OR ($data["rrhh_resultado_decision"] == 'RECHAZADO' AND $data["intentos_correccion"] < 1) ) {
-	$pageObject->showItem("grid_edit", $recordId); // Muestra el boton de edicion.
-} else {
-	$pageObject->hideItem("grid_edit", $recordId); // Oculta el boton de edicion.
-}
-*/
-
-$pageObject->hideItem("grid_edit", $recordId);
-$pageObject->hideItem("list_intentos_correccion");
+		
+$pageObject->hideItem("grid_edit", $recordId); // Oculta inicialmente el botoncito para editar.
+$pageObject->hideItem("list_intentos_correccion"); // Oculta el campo intentos_correccion
+$pageObject->hideItem("list_intentos_correccion_jefatura"); // Oculta el campo intentos_correccion_jefatura
 
 /*
  * ============================================================
@@ -1465,11 +1780,15 @@ $pageObject->hideItem("list_intentos_correccion");
  * Se conserva la regla existente de una corrección.
  */
 
-$pendienteJefatura = $data["estado"] == 'PENDIENTE' && $data["resultado_decision"] == 'PENDIENTE';
+$pendienteJefatura = $data["estado"] == "PENDIENTE"
+    && $data["resultado_decision"] == "PENDIENTE"
+    && $data["intentos_correccion_jefatura"] < 1;
 
 $rechazadoPorJefatura = $data["estado"] == 'RECHAZADO' 
-															&& $data["resultado_decision"] == 'RECHAZADO'
-															&& $data["rrhh_resultado_decision"] == 'PENDIENTE';
+    && $data["resultado_decision"] == 'RECHAZADO'
+    && $data["rrhh_resultado_decision"] == 'PENDIENTE'
+    && $data["intentos_correccion_jefatura"] < 1;
+
 $rechazadoPorRRHH = $data["estado"] == 'APROBADO'
 													&& $data["resultado_decision"] == 'APROBADO'
 													&& $data["rrhh_resultado_decision"] == 'RECHAZADO'
@@ -1545,6 +1864,37 @@ function AfterEdit(&$values, $where, &$oldvalues, &$keys, $inline, $pageObject)
 
 		$pageObject->setMessageType(1);
 
+/*
+ * Evitar el POST-Redirect-GET de PHPRunner.
+ *
+ * Después de corregir una solicitud rechazada por DGTH,
+ * su estado pasa a APROBADO / APROBADO / PENDIENTE y ya
+ * no puede volver a abrirse mediante Before process.
+ *
+ * Al detener el PRG, el mensaje de éxito puede mostrarse
+ * en la misma respuesta del guardado.
+ */
+$pageObject->stopPRG = true;
+
+/*
+ * Determinar a qué instancia fue reenviada la solicitud.
+ *
+ * Si el rechazo anterior fue de DGTH/RRHH, la aprobación
+ * de Jefatura continúa vigente y la solicitud vuelve
+ * directamente a DGTH.
+ */
+$correccionDespuesRechazoRRHH = strtoupper(trim((string)$oldvalues["estado"])) === "APROBADO"
+    && strtoupper(trim((string)$oldvalues["resultado_decision"])) === "APROBADO"
+    && strtoupper(trim((string)$oldvalues["rrhh_resultado_decision"])) === "RECHAZADO";
+
+if ($correccionDespuesRechazoRRHH) {
+    $textoMensajeExito = "Tu solicitud de vacaciones fue corregida correctamente y reenviada a la Dirección General de Talentos Humanos (DGTH) para una nueva revisión. La aprobación de tu superior inmediato se mantiene vigente.";
+} else {
+    $textoMensajeExito = "Tu solicitud de vacaciones fue actualizada correctamente y enviada a tu superior inmediato para su revisión.";
+}
+
+
+
 $html_exitoso = '
 <div style="
     border: 1px solid #28a745;
@@ -1555,14 +1905,14 @@ $html_exitoso = '
     margin: 15px 0;
 ">
     <h4 style="margin-top:0; color:#1e7e34;">
-        ✅ ¡Solicitud enviada con éxito!
+        ✅ ¡Solicitud actualizada con éxito!
     </h4>
 
     <p style="margin: 8px 0; color:#155724; font-size: 18px;">
-       Tu solicitud de permiso fue actualizada correctamente y enviada a tu superior inmediato para su revisión.
-    </p>
+			' . $textoMensajeExito . '
+		</p>
 
-    <a href="permisos_funcionarios_list.php" style="
+    <a href="vacacion_list.php" style="
         display: inline-block;
         margin-top: 12px;
         padding: 8px 14px;
@@ -1653,13 +2003,13 @@ function BeforeAdd(&$values, &$sqlValues, &$message, $inline, $pageObject)
  * @param mixed  $data    Datos a mostrar
  * @param string $context Texto descriptivo del contexto
  */
-function debug_to_console($data, $context = 'Debug in Console') {
-	ob_start();
-	$output  = 'console.info(\'' . $context . ':\');';
-	$output .= 'console.log(' . json_encode($data) . ');';
-	$output  = sprintf('<script>%s</script>', $output);
-	echo $output;
-}
+//function debug_to_console($data, $context = 'Debug in Console') {
+//	ob_start();
+//	$output  = 'console.info(\'' . $context . ':\');';
+//	$output .= 'console.log(' . json_encode($data) . ');';
+//	$output  = sprintf('<script>%s</script>', $output);
+//	echo $output;
+//}
 
 
 /*==============================================================
@@ -1705,17 +2055,6 @@ function generarMensajeError($titulo, $descripcion, $items = [], $footer = "") {
 		$footer
 	</div>";
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -1796,8 +2135,49 @@ if (!empty($faltantesFormulario)) {
  */
 
 
+
+
+/*
+ * ============================================================
+ * VALIDAR FUNCIONARIO AUTENTICADO
+ * ============================================================
+ *
+ * No confiar en id_funcionario recibido desde el formulario.
+ * Aunque el campo esté oculto, el POST puede ser manipulado.
+ */
+if (!Security::hasLogin()) {
+	$message = generarMensajeError(
+		"No es posible registrar la solicitud.",
+		"No se pudo identificar una sesión válida.",
+		[],
+		"Inicie sesión nuevamente e intente otra vez."
+	);
+	return false;
+}
+
+$currentUser = Security::currentUserData();
+$userPersonal = isset($currentUser["usu_personal"]) ? (int)$currentUser["usu_personal"] : 0;
+if ($userPersonal <= 0) {
+	$message = generarMensajeError(
+		"No es posible registrar la solicitud.",
+		"El usuario autenticado no tiene un funcionario asociado.",
+		[],
+		"Comuníquese con el administrador del sistema."
+	);
+	
+	return false;
+}
+
+/*
+ * Forzar en servidor el funcionario real de la sesión.
+ * Cualquier id_funcionario manipulado en el navegador queda ignorado.
+ */
+$values["id_funcionario"] = $userPersonal;
+
 $motivo_id = $values["motivo_id"];
-$id_funcionario = $values["id_funcionario"];
+//$id_funcionario = $values["id_funcionario"];
+$id_funcionario = $userPersonal;
+
 
 // Obtener la descripcion del tipo de permiso para un mensaje más claro para el usuario.
 $sqlMotivoDesc = "SELECT * 
@@ -1812,125 +2192,6 @@ $tip_cantidad_maxima_mes = $dataMotivoDesc["tip_cantidad_maxima_mes"];
 $tip_cantidad_maxima_anho = $dataMotivoDesc["tip_cantidad_maxima_anho"];
 $tip_presentacion_cantidad = $dataMotivoDesc["tip_presentacion_cantidad"];
 $tip_genero_permitido = $dataMotivoDesc["tip_genero_permitido"];
-
-/**
- * ============================================================
- * 📅 FUNCIONES AUXILIARES DE FECHAS
- * ============================================================
- */
-
-/**
- * Funcion que calcula dias entre fechas.
- * Genera un array con todas las fechas entre inicio y fin.
- */
-//function lista_dias($inicio, $fin) {
-//	$rango = array();
-//	if (is_string($inicio) === true) $inicio = strtotime($inicio);
-//	if (is_string($fin) === true ) $fin = strtotime($fin);
-//	if ($inicio > $fin) return createDateRangeArray($fin, $inicio);
-//	
-//	do {
-//		$rango[] = date('Y-m-d', $inicio);
-//		$inicio = strtotime("+ 1 day", $inicio);
-//	} while($inicio <= $fin);
-//	
-//	return $rango;
-//}
-//function lista_dias($inicio, $fin) {
-//	$rango = array();
-//	if (is_string($inicio)) {
-//		$inicio = strtotime($inicio);
-//	}
-	
-//	if (is_string($fin)) {
-//		$fin = strtotime($fin);
-//	}
-	
-	/*
-	 * Si alguna fecha no pudo convertirse correctamente,
-	 * devolver un arreglo vacío.
-	 */
-//	if ($inicio === false || $fin === false) {
-//		return array();
-//	}
-
-	/*
-	 * Si la fecha inicial es posterior a la final,
-	 * NO invertimos automáticamente el rango.
-	 *
-	 * Esto es importante, por ejemplo, para la validación
-	 * de anticipación cuando se intenta solicitar una fecha pasada.
-	 */
-//	if ($inicio > $fin) {
-//		return array();
-//	}
-
-//	do {
-//		$rango[] = date('Y-m-d', $inicio);
-//		$inicio = strtotime("+1 day", $inicio);
-//	} while ($inicio <= $fin);
-
-//	return $rango;
-//}
-
-/**
- * Obtiene lista de feriados desde la Base de Datos.
- */
-//function lista_feriados() {
-//	$lista_feriados = array();
-//	$sql_feriados = "SELECT fer_fecha FROM feriados";
-//	$resultado_feriados = CustomQuery($sql_feriados);
-//	while($feriado = db_fetch_array($resultado_feriados)) {
-//		array_push($lista_feriados, $feriado['fer_fecha']);
-//	}
-//	return $lista_feriados;
-//}
-
-/**
- * Cuenta los días hábiles entre un rango de fechas.
- * Excluye sábados, domingos y feriados.
- * param array $lista_dias Lista de fechas a evaluar
- * return int Cantidad de días hábiles.
- */
-//function contar_dias($lista_dias) {
-//	$feriados = lista_feriados();
-//	$contador = 0;
-	
-//	foreach ($lista_dias as $valor) {
-		/*
-		* Normalizar siempre la fecha a YYYY-MM-DD.
-		*/
-//		$fecha = date('Y-m-d', strtotime($valor));
-
-		/*
-		* ISO-8601:
-		* 1 = lunes
-		* ...
-		* 5 = viernes
-		* 6 = sábado
-		* 7 = domingo
-		*/
-//		$diaSemana = (int)date('N', strtotime($fecha));
-
-		/*
-		* Contar solamente:
-		*
-		* - lunes a viernes
-		* - que NO sean feriados
-		*/
-//		if ($diaSemana >= 1 && $diaSemana <= 5 && !in_array($fecha, $feriados, true)) {
-//			$contador++;
-//		}
-//	}
-//	
-//	return $contador;
-//}
-
-
-
-
-
-
 
 /* ============================================================
  * VALIDACIÓN DEL RANGO DE FECHAS
@@ -1955,13 +2216,6 @@ if ($fechaDesdeVacacionAdd > $fechaHastaVacacionAdd) {
 }
 
 
-
-
-
-
-//$listado = lista_dias($values['fecha_desde'], $values['fecha_hasta']);
-//$values['vac_dias_pedidos'] = contar_dias($listado);
-//$vac_dias_pedidos = $values['vac_dias_pedidos'];
 /* ============================================================
  * CÁLCULO OFICIAL DE DÍAS HÁBILES DE VACACIONES
  * ============================================================
@@ -2000,25 +2254,19 @@ $rowDiasHabilesVacacionesAdd = $rsDiasHabilesVacacionesAdd->fetchAssoc();
 $vac_dias_pedidos = $rowDiasHabilesVacacionesAdd ? (int)$rowDiasHabilesVacacionesAdd["dias_habiles"] : 0;
 $values["vac_dias_pedidos"] = $vac_dias_pedidos;
 
-
-
-
-
-
 // Asigna periodo segun la fecha-desde ingresada.
 $values['vac_periodo_solicitado'] = (int)date("Y", strtotime($values['fecha_desde']));
 
-
 /*
- * Validación de fecha de ingreso:
+ * VALIDACION DE FECHA DE INGRESO:
  * - Se obtiene la fecha de ingreso del funcionario desde la tabla 'personales'.
  * - Se verifica que la fecha de ingreso exista y no esté vacía.
  * - Si la fecha de ingreso no existe, se genera un mensaje de error y se detiene el proceso de solicitud.
  *  
 */
-$sqlPersonales = "SELECT p.per_ingreso
-										FROM public.personales p
-										WHERE p.per_cod = $id_funcionario";
+$sqlPersonales = "SELECT per_ingreso
+										FROM public.personales
+										WHERE per_cod = $id_funcionario";
 $rsPersonales = DB::Query($sqlPersonales);
 $dataPersonales = $rsPersonales->fetchAssoc();
 $per_ingreso = $dataPersonales["per_ingreso"];
@@ -2038,36 +2286,16 @@ if (empty($per_ingreso)) {
 /* *****FIN VALIDACION DE FECHA DE INGRESO*****  */
 
 
-
-
-
-
-
 /*
  * Validación de antigüedad:
  * - Se calcula la antigüedad del funcionario en años completos.
  * - Si la antigüedad es menor a 1 año, se genera un mensaje de error y se detiene el proceso de solicitud.
  */
-//$fechaIngreso = new DateTime($per_ingreso);
-//$fechaActual = new DateTime();
-//$antiguedad = $fechaIngreso->diff($fechaActual)->y;
-
-//$fechaIngreso = new DateTime($dataFuncionario["per_ingreso"]);
-//$fechaInicioVacacion = new DateTime($values["fecha_desde"]);
-//$fechaInicioVacacion->setTime(0, 0, 0);
-//$antiguedad = $fechaIngreso->diff($fechaInicioVacacion)->y;
-
-//$fechaIngreso = new DateTime($dataFuncionario["per_ingreso"]);
-//$fechaInicioVacacion = new DateTime($values["fecha_desde"]);
-//$fechaInicioVacacion->setTime(0, 0, 0);
-//$antiguedad = $fechaIngreso->diff($fechaInicioVacacion)->y;
-
 $fechaIngreso = new \DateTime((string)$per_ingreso);
 $fechaIngreso->setTime(0, 0, 0);
 $fechaInicioVacacion = new \DateTime((string)$values["fecha_desde"]);
 $fechaInicioVacacion->setTime(0, 0, 0);
 $antiguedad = $fechaIngreso->diff($fechaInicioVacacion)->y;
-
 
 if ($antiguedad < 1) {
 	$message = generarMensajeError(
@@ -2186,24 +2414,6 @@ if ($values["vac_dias_pedidos"] < 5) {
 
 
 /*
- * Validación de fecha de inicio:
- * - Se verifica que la fecha de inicio de las vacaciones sea un día lunes.
- * - Si la fecha de inicio no es un lunes, se genera un mensaje de error y se detiene el proceso de solicitud.
- */
-//$diaSemana = date("N", strtotime($values["fecha_desde"]));
-//if ($diaSemana != 1) {
-//	$message = generarMensajeError(
-//		"No se pudo registrar la solicitud.",
-//		"La solicitud debe iniciar en dia lunes",
-//		[
-//			"<strong>Las vacaciones deberán iniciar un día lunes.</strong>"
-//		],
-//		"<br><b>Verifique la fecha de inicio e intente nuevamente.</b>"
-//	);
-//	return false;
-//}
-
-/*
  * ============================================================
  * VALIDACIÓN DEL PRIMER DÍA HÁBIL DE LA SEMANA
  * ============================================================
@@ -2214,8 +2424,6 @@ if ($values["vac_dias_pedidos"] < 5) {
  * - si lunes y martes son feriados, puede iniciar el miércoles;
  * - y así sucesivamente.
  */
-//$fechaInicioVacacion = new DateTime($values["fecha_desde"]);
-//$fechaInicioVacacion->setTime(0, 0, 0);
 $fechaInicioVacacion = new \DateTime((string)$values["fecha_desde"]);
 $fechaInicioVacacion->setTime(0, 0, 0);
 
@@ -2301,32 +2509,78 @@ if ($inicioEsFeriado || $diasHabilesAnteriores > 0) {
 /* *****FIN VALIDACION DE FECHA DE INICIO*****  */
 
 
+
+
+/*==============================================================
+=       SOLICITUD EXCEPCIONAL / URGENTE DE VACACIONES         =
+==============================================================*/
+$valorExcepcional = isset($values["vacacion_excepcional"])
+	? strtolower(trim((string)$values["vacacion_excepcional"]))
+	: "";
+
+$esVacacionExcepcional = in_array(
+	$valorExcepcional,
+	array("1", "true", "t", "yes", "on"),
+	true
+);
+
+$motivoVacacionExcepcional = isset($values["vacacion_excepcional_motivo"])
+	? trim((string)$values["vacacion_excepcional_motivo"])
+	: "";
+
 /*
- * Validación de anticipación mínima:
- * - Se verifica que la solicitud de vacaciones se realice con al menos 10 días hábiles de anticipación.
- * - Si la solicitud no cumple con este requisito, se genera un mensaje de error y se detiene el proceso de solicitud.
+ * Normalizar lo que realmente se almacenará.
  */
-//$listado2 = lista_dias(date("Y-m-d"), $values['fecha_desde']);
-//$diasHabiles = contar_dias($listado2);
-//if ($diasHabiles < 10) {
-//	$message = generarMensajeError(
-//		"No se pudo registrar la solicitud.",
-//		"La solicitud debe presentarse de forma anticipada.",
-//		[
-//			"<strong>La solicitud de vacaciones debe presentarse con una anticipación mínima de diez (10) días hábiles.</strong>"
-//		],
-//		"<br><b>Verifique las fechas e intente nuevamente.</b>"
-//	);
-//	return false;
-//}
+$values["vacacion_excepcional"] = $esVacacionExcepcional ? 1 : 0;
+if ($esVacacionExcepcional) {
+	/*
+	* Para una solicitud excepcional el motivo sí es obligatorio.
+	* El archivo adjunto continúa siendo opcional.
+	*/
+	if ($motivoVacacionExcepcional === "") {
+		$message = generarMensajeError(
+			"No se pudo registrar la solicitud excepcional.",
+			"Debe indicar el motivo por el cual necesita presentar las vacaciones con carácter excepcional.",
+			[
+				"<strong>Explique brevemente la situación que justifica la solicitud.</strong>"
+			],
+			"<br><b>El documento justificativo es opcional.</b>"
+		);
+	
+		return false;
+	}
+	
+	$values["vacacion_excepcional_motivo"] = $motivoVacacionExcepcional;
+} else {
+	/*
+	* Si deja de ser excepcional, no conservar
+	* información propia de una excepción.
+	*/
+	$values["vacacion_excepcional_motivo"] = null;
+	$values["vacacion_excepcional_archivo"] = null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * ============================================================
  * VALIDACIÓN DE ANTICIPACIÓN MÍNIMA DE VACACIONES
  * ============================================================
  *
- * Se cuentan únicamente los días hábiles:
+ * Se requieren como mínimo 5 días hábiles de anticipación.
  *
+ * Se cuentan únicamente los días hábiles:
  * - posteriores a la fecha actual;
  * - anteriores a la fecha de inicio de las vacaciones.
  *
@@ -2334,15 +2588,10 @@ if ($inicioEsFeriado || $diasHabilesAnteriores > 0) {
  * - el día de hoy;
  * - el propio día de inicio.
  */
-//$fechaActualVacacion = new DateTime();
-//$fechaActualVacacion->setTime(0, 0, 0);
-//$fechaInicioAnticipacion = new DateTime($values["fecha_desde"]);
-//$fechaInicioAnticipacion->setTime(0, 0, 0);
 $fechaActualVacacion = new \DateTime();
 $fechaActualVacacion->setTime(0, 0, 0);
 $fechaInicioAnticipacion = new \DateTime((string)$values["fecha_desde"]);
 $fechaInicioAnticipacion->setTime(0, 0, 0);
-
 
 /*
  * La fecha de inicio necesariamente debe ser futura.
@@ -2377,9 +2626,7 @@ $sqlAnticipacionVacaciones = DB::PrepareSQL(
 	",
 	$values["fecha_desde"]
 );
-
 $rsAnticipacionVacaciones = DB::Query($sqlAnticipacionVacaciones);
-
 if (!$rsAnticipacionVacaciones) {
 	$message = generarMensajeError(
 		"No se pudo registrar la solicitud.",
@@ -2390,15 +2637,18 @@ if (!$rsAnticipacionVacaciones) {
 
 $rowAnticipacionVacaciones = $rsAnticipacionVacaciones->fetchAssoc();
 $diasHabilesAnticipacion = $rowAnticipacionVacaciones ? (int)$rowAnticipacionVacaciones["dias_habiles_anticipacion"] : 0;
-if ($diasHabilesAnticipacion < 10) {
+//if ($diasHabilesAnticipacion < 10) {
+//if ($diasHabilesAnticipacion < 5) {
+if (!$esVacacionExcepcional && $diasHabilesAnticipacion < 5) {
 	$message = generarMensajeError(
 		"No se pudo registrar la solicitud.",
 		"La solicitud no cumple con el plazo mínimo de anticipación.",
 		[
 			"<strong>Días hábiles de anticipación: " . $diasHabilesAnticipacion . "</strong>",
-			"<strong>Se requieren como mínimo 10 días hábiles de anticipación.</strong>"
+			"<strong>Se requieren como mínimo 5 días hábiles de anticipación.</strong>"
 		],
 		"<br><b>Seleccione una fecha de inicio posterior e intente nuevamente.</b>"
+		. "<br><b>Si corresponde a una situación excepcional, marque la opción de solicitud excepcional e indique el motivo.</b>"
 	);
 	return false;
 }
@@ -2413,32 +2663,12 @@ if ($diasHabilesAnticipacion < 10) {
  */
 $fecha_desde = $values['fecha_desde'];
 $fecha_hasta = $values['fecha_hasta'];
-//$sqlPermisosFuncionarios = "SELECT pf.*
-//															FROM rrhh_permisos.permisos_funcionarios pf
-//															WHERE pf.id_funcionario = $id_funcionario
-//															AND pf.motivo_id::integer = $motivo_id
-//															AND pf.estado IN ('PENDIENTE')
-//															AND (
-//																		pf.fecha_desde >= '$fecha_desde'
-//																		AND pf.fecha_hasta <= '$fecha_hasta'
-//															)";
-
-//$sqlPermisosFuncionarios = "SELECT pf.*
-//																	FROM rrhh_permisos.permisos_funcionarios pf
-//																	WHERE pf.id_funcionario = $id_funcionario
-//																	AND pf.motivo_id::integer = $motivo_id
-//																	AND pf.estado IN ('PENDIENTE')
-//																	AND (
-//																		pf.fecha_desde <= '$fecha_hasta'
-//																		AND 
-//																		pf.fecha_hasta >= '$fecha_desde'
-//																	)";
 
 $sqlPermisosFuncionarios = "SELECT pf.*
-																	FROM rrhh_permisos.permisos_funcionarios pf
-																	WHERE pf.id_funcionario = $id_funcionario
-																	AND pf.motivo_id::integer = $motivo_id
-																	AND (
+															FROM rrhh_permisos.permisos_funcionarios pf
+															WHERE pf.id_funcionario = $id_funcionario
+															AND pf.motivo_id::integer = $motivo_id
+															AND (
 																		(pf.estado = 'PENDIENTE' AND pf.resultado_decision = 'PENDIENTE')
 																		OR
 																		(
@@ -2446,8 +2676,8 @@ $sqlPermisosFuncionarios = "SELECT pf.*
 																			AND pf.resultado_decision = 'APROBADO'
 																			AND pf.rrhh_resultado_decision IN ('PENDIENTE', 'APROBADO')
 																		)
-																	)
-																	AND (pf.fecha_desde <= '$fecha_hasta' AND pf.fecha_hasta >= '$fecha_desde')";
+															)
+															AND (pf.fecha_desde <= '$fecha_hasta' AND pf.fecha_hasta >= '$fecha_desde')";
 $rsPermisosFuncionarios = DB::Query($sqlPermisosFuncionarios);
 if ($rsPermisosFuncionarios && $dataPermisosFuncionarios = $rsPermisosFuncionarios->fetchAssoc()) {
 	$message = generarMensajeError(
@@ -2545,28 +2775,47 @@ function BeforeEdit(&$values, &$sqlValues, $where, &$oldvalues, &$keys, &$messag
 
 		/******************************************************************************************
  * EVENTO: Before record updated (Edit Page)
- * MÓDULO: Permisos de Funcionarios
+ * MÓDULO: Solicitud de Vacaciones
  *
  * PROPÓSITO:
- * Este evento se ejecuta antes de actualizar un permiso.
+ * Este evento se ejecuta antes de actualizar una solicitud de vacaciones.
+ *
  * Se utiliza para:
  *
- * 1. Validar datos obligatorios del perfil del funcionario
- * 2. Validar campos requeridos del formulario
- * 3. Controlar la lógica de corrección de permisos rechazados por RRHH
+ * 1. Validar los datos obligatorios del funcionario.
+ * 2. Validar los campos y fechas de la solicitud.
+ * 3. Recalcular los días hábiles solicitados.
+ * 4. Validar antigüedad, saldo disponible y superposición de fechas.
+ * 5. Controlar la corrección posterior a un rechazo de Jefatura.
+ * 6. Controlar la corrección posterior a un rechazo de DGTH/RRHH.
  *
- * REGLA DE NEGOCIO CLAVE:
- * - Si un permiso es RECHAZADO por RRHH:
- *      → El funcionario puede corregirlo SOLO UNA VEZ
- *      → Se controla mediante el campo: intentos_correccion
- * - Luego de corregir:
- *      → El estado vuelve a "PENDIENTE"
- *      → El flujo reinicia
+ * REGLAS DE CORRECCIÓN:
+ *
+ * JEFATURA:
+ * - El funcionario puede corregir una solicitud rechazada por su superior
+ *   inmediato una sola vez.
+ * - Se controla mediante:
+ *      intentos_correccion_jefatura
+ *
+ * DGTH / RRHH:
+ * - El funcionario puede corregir una solicitud rechazada por DGTH/RRHH
+ *   una sola vez.
+ * - Se controla mediante:
+ *      intentos_correccion
+ *
+ * Ambos contadores son independientes.
+ *
+ * Al corregir un rechazo de Jefatura:
+ * - La solicitud vuelve a quedar pendiente de Jefatura.
+ *
+ * Al corregir un rechazo de DGTH/RRHH:
+ * - Se conserva la aprobación previa de Jefatura.
+ * - La solicitud vuelve a quedar pendiente únicamente de DGTH/RRHH.
  *
  * NOTA:
- * - $values = nuevos valores del formulario
- * - $oldvalues = valores actuales en la base de datos
- * - return false = cancela el guardado
+ * - $values    = nuevos valores enviados por el formulario.
+ * - $oldvalues = valores existentes antes de la edición.
+ * - return false cancela el guardado cuando alguna validación no se cumple.
  ******************************************************************************************/
 
 /*==============================================================
@@ -2630,6 +2879,47 @@ function generarMensajeError($titulo, $descripcion, $items = [], $footer = "") {
 		$footer
 	</div>";
 }
+
+/*
+ * ============================================================
+ * VALIDAR Y FORZAR FUNCIONARIO DE LA SESIÓN EN EDIT
+ * ============================================================
+ *
+ * No confiar en id_funcionario recibido desde el formulario.
+ */
+if (!Security::hasLogin()) {
+	$message = generarMensajeError(
+		"No es posible actualizar la solicitud.",
+		"No se pudo identificar una sesión válida.",
+		[],
+		"Inicie sesión nuevamente e intente otra vez."
+	);
+	return false;
+}
+
+$currentUser = Security::currentUserData();
+$userPersonal = isset($currentUser["usu_personal"]) ? (int)$currentUser["usu_personal"] : 0;
+$idFuncionarioOriginal = isset($oldvalues["id_funcionario"]) ? (int)$oldvalues["id_funcionario"] : 0;
+
+/*
+ * La solicitud debe pertenecer al funcionario autenticado.
+ */
+if ($userPersonal <= 0 || $idFuncionarioOriginal <= 0 || $userPersonal !== $idFuncionarioOriginal) {
+	$message = generarMensajeError(
+		"No es posible actualizar la solicitud.",
+		"La solicitud indicada no pertenece al funcionario autenticado."
+	);
+	return false;
+}
+
+/*
+ * Forzar nuevamente el funcionario correcto.
+ *
+ * Aunque el navegador envíe otro id_funcionario,
+ * el servidor utilizará siempre el funcionario de la sesión.
+ */
+$values["id_funcionario"] = $userPersonal;
+
 
 
 /**
@@ -2716,7 +3006,6 @@ if (!empty($faltantesFormulario)) {
 
 
 $motivo_id = $values["motivo_id"];
-//debug_to_console("motivo_id: " . $motivo_id);
 
 /*==============================================================
 =     CÁLCULO OFICIAL DE DÍAS HÁBILES DE VACACIONES - EDIT    =
@@ -2823,9 +3112,6 @@ if ($diasHabilesVacaciones <= 0) {
 
 $values["vac_dias_pedidos"] = $diasHabilesVacaciones;
 $values["vac_periodo_solicitado"] = (int)$fechaDesdeObj->format("Y");
-
-
-
 
 /*==============================================================
 =   VALIDACIÓN: MÍNIMO 5 DÍAS HÁBILES DE VACACIONES           =
@@ -2956,12 +3242,87 @@ if (!$inicioVacacionValido) {
 }
 
 
+/*==============================================================
+=     VALIDACIÓN DE SUPERPOSICIÓN DE VACACIONES - EDIT         =
+==============================================================*/
 
+/*
+ * Al editar una solicitud debemos impedir que el nuevo período
+ * se superponga con otra solicitud activa del mismo funcionario.
+ *
+ * IMPORTANTE:
+ * se excluye la propia solicitud que estamos editando.
+ */
 
+$idSolicitudActual = 0;
 
+if (isset($oldvalues["id"])) {
+	$idSolicitudActual = (int)$oldvalues["id"];
+} elseif (isset($values["id"])) {
+	$idSolicitudActual = (int)$values["id"];
+}
 
+if ($idSolicitudActual <= 0) {
+	$message = generarMensajeError(
+		"No se pudo actualizar la solicitud de vacaciones.",
+		"No fue posible identificar la solicitud que se está editando."
+	);
+	return false;
+}
 
+$idFuncionarioSuperposicion = (int)$values["id_funcionario"];
+$sqlSuperposicionVacaciones = "
+	SELECT pf.id,
+					pf.fecha_desde,
+					pf.fecha_hasta,
+					pf.estado,
+					pf.resultado_decision,
+					pf.rrhh_resultado_decision
+	FROM rrhh_permisos.permisos_funcionarios pf
+	WHERE pf.id_funcionario = " . $idFuncionarioSuperposicion . "
+	AND pf.motivo_id = '1'
+	AND pf.id <> " . $idSolicitudActual . "
+	AND (
+				(pf.estado = 'PENDIENTE' AND pf.resultado_decision = 'PENDIENTE')
+				OR
+				(
+					pf.estado = 'APROBADO'
+					AND pf.resultado_decision = 'APROBADO'
+					AND pf.rrhh_resultado_decision IN ('PENDIENTE', 'APROBADO')
+				)
+		  )
+	AND pf.fecha_desde <= '" . $fechaHastaVacacion . "'::date
+	AND pf.fecha_hasta >= '" . $fechaDesdeVacacion . "'::date
+	LIMIT 1
+";
 
+$rsSuperposicionVacaciones = DB::Query($sqlSuperposicionVacaciones);
+if (!$rsSuperposicionVacaciones) {
+	$message = generarMensajeError(
+		"No se pudo actualizar la solicitud de vacaciones.",
+		"No fue posible verificar si existen otras vacaciones superpuestas."
+	);
+	return false;
+}
+
+$rowSuperposicionVacaciones = $rsSuperposicionVacaciones->fetchAssoc();
+if ($rowSuperposicionVacaciones) {
+	$idSolicitudSuperpuesta = (int)$rowSuperposicionVacaciones["id"];
+	$fechaDesdeSuperpuesta = date("d/m/Y", strtotime($rowSuperposicionVacaciones["fecha_desde"]));
+	$fechaHastaSuperpuesta = date("d/m/Y", strtotime($rowSuperposicionVacaciones["fecha_hasta"]));
+	
+	$message = generarMensajeError(
+		"No se pudo actualizar la solicitud de vacaciones.",
+		"El período seleccionado se superpone con otra solicitud de vacaciones activa.",
+		[
+			"<strong>Solicitud existente: N.º " . $idSolicitudSuperpuesta . "</strong>",
+			"<strong>Período existente: " . $fechaDesdeSuperpuesta . " al " . $fechaHastaSuperpuesta . "</strong>",
+			"<strong>Nuevo período solicitado: " . date("d/m/Y", strtotime($fechaDesdeVacacion)) . " al " . date("d/m/Y", strtotime($fechaHastaVacacion)) . "</strong>"
+		],
+		"<br><b>Selecciona un período que no coincida con otra solicitud activa.</b>"
+	);
+	return false;
+}
 
 
 // Obtener la descripcion del tipo de permiso para un mensaje más claro para el usuario.
@@ -3152,7 +3513,6 @@ function calcular_maximos($lista_dias, $tipo_dias) {
 	return $resultado;
 
 }
-
 
 $resultado_maximo = array();
 
@@ -3394,130 +3754,170 @@ if ( !empty($tip_genero_permitido) && $tip_genero_permitido <> 'AMBOS' ) {
  */
 
 
-/**
- * ============================================================
- * 🚫 VALIDACIÓN DE LÍMITE DE TIEMPO DE PRESENTACION A DGTH
+/*
+ * En edición, la regla de anticipación se vuelve a validar
+ * solamente cuando el funcionario modifica la fecha de inicio.
  *
- * Si el tipo de permiso tiene $tip_presentacion_cantidad 
- * entonces el permiso tiene límite de presentación y se debe 
- * validar.
- * ============================================================
+ * Si fecha_desde permanece igual, significa que esa fecha
+ * ya fue validada cuando se presentó originalmente la solicitud.
  */
-/*if ( isset($tip_presentacion_cantidad) && intval($tip_presentacion_cantidad) > 0 ) {
-	
-	// FECHA/HORA DEL EVENTO
-	$fecha_desde_datetime = new DateTime($values["fecha_desde"]);
-	$fecha_desde = $fecha_desde_datetime->format('Y-m-d') . ' '. $values["hora_desde"];
-	$fechaHoraEvento = new DateTime($fecha_desde);
-	
-	// FECHA/HORA ACTUAL
-	$fechaHoraActual = new DateTime();
-	
-	// DIFERENCIA EN SEGUNDOS
-	$diferenciaSegundos = $fechaHoraActual->getTimestamp() - $fechaHoraEvento->getTimestamp();
-	
-	// CONVERTIR A HORAS
-	$horasTranscurridas = $diferenciaSegundos / 3600;
-	
-	// VALIDAR LÍMITE
-	if ( intval($horasTranscurridas) > intval($tip_presentacion_cantidad) ) {
+$fechaDesdeOriginalVacacion = "";
+if (isset($oldvalues["fecha_desde"]) && trim((string)$oldvalues["fecha_desde"]) !== "") {
+	$fechaDesdeOriginalVacacion = date("Y-m-d", strtotime($oldvalues["fecha_desde"]));
+}
+
+$fechaInicioVacacionFueModificada = ($fechaDesdeOriginalVacacion !== "" && $fechaDesdeOriginalVacacion !== $fechaDesdeVacacion);
+
+
+
+
+/*==============================================================
+=       SOLICITUD EXCEPCIONAL / URGENTE DE VACACIONES         =
+==============================================================*/
+$valorExcepcional = isset($values["vacacion_excepcional"])
+	? strtolower(trim((string)$values["vacacion_excepcional"]))
+	: "";
+
+$esVacacionExcepcional = in_array(
+	$valorExcepcional,
+	array("1", "true", "t", "yes", "on"),
+	true
+);
+
+$motivoVacacionExcepcional = isset($values["vacacion_excepcional_motivo"])
+	? trim((string)$values["vacacion_excepcional_motivo"])
+	: "";
+
+$values["vacacion_excepcional"] = $esVacacionExcepcional ? 1 : 0;
+
+if ($esVacacionExcepcional) {
+	// El motivo es obligatorio.
+	if ($motivoVacacionExcepcional === "") {
 		$message = generarMensajeError(
-			"No se pudo registrar la solicitud.",
-			"El tiempo máximo de presentación a DGTH fue excedido.",
-			[
-				"<strong>Tipo de permiso: $tip_descripcion</strong>",
-				"<strong>Tiempo máximo permitido: ". $tip_presentacion_cantidad . " horas</strong>",
-				"<strong>Tiempo transcurrido: ". intval($horasTranscurridas) . " horas</strong>"
-			],
-			"<br><b>La solicitud ya excede el tiempo permitido de presentación.</b>"
+			"No se pudo actualizar la solicitud excepcional.",
+			"Debe indicar el motivo de la solicitud excepcional de vacaciones.",
+			[],
+			"<br><b>El documento justificativo continúa siendo opcional.</b>"
 		);
 
 		return false;
 	}
 	
-}*/
+	$values["vacacion_excepcional_motivo"] = $motivoVacacionExcepcional;
+	
+	// Si no se cargó un nuevo archivo en Edit,conservar el justificativo anterior.
+	if (!isset($values["vacacion_excepcional_archivo"])
+				|| trim((string)$values["vacacion_excepcional_archivo"]) === "") {
+		$values["vacacion_excepcional_archivo"] = isset($oldvalues["vacacion_excepcional_archivo"])
+			? $oldvalues["vacacion_excepcional_archivo"]
+			: null;
+	}
+} else {
+	// Si el funcionario desmarca "Excepcional", limpiar todos los datos propios de la excepción.
+	$values["vacacion_excepcional_motivo"] = null;
+	$values["vacacion_excepcional_archivo"] = null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*==============================================================
-= VALIDACIÓN DE ANTICIPACIÓN PARA VACACIONES / OTROS PERMISOS =
+= VALIDACIÓN DE ANTICIPACIÓN PARA VACACIONES / OTROS PERMISOS  =
 ==============================================================*/
 
 /*
  * VACACIONES (tip_cod = 1)
  *
  * Regla específica:
- * debe existir una anticipación mínima de 10 días hábiles
+ * debe existir una anticipación mínima de 5 días hábiles
  * entre la fecha actual y la fecha de inicio solicitada.
  *
  * Para vacaciones NO se utiliza tip_presentacion_cantidad = 80.
  */
 if ((int)$motivo_id === 1) {
-	$fechaActualVacacion = new DateTime();
-	$fechaActualVacacion->setTime(0, 0, 0);
-	$fechaInicioVacacion = new DateTime($fechaDesdeVacacion);
-	$fechaInicioVacacion->setTime(0, 0, 0);
 	
-	/*
+	if ($fechaInicioVacacionFueModificada) {
+		$fechaActualVacacion = new DateTime();
+		$fechaActualVacacion->setTime(0, 0, 0);
+		$fechaInicioVacacion = new DateTime($fechaDesdeVacacion);
+		$fechaInicioVacacion->setTime(0, 0, 0);
+	
+		/*
 		* La fecha de inicio debe ser futura.
 		*/
-	if ($fechaInicioVacacion <= $fechaActualVacacion) {
-		$message = generarMensajeError(
-			"No se pudo actualizar la solicitud de vacaciones.",
-			"La fecha de inicio de las vacaciones debe ser posterior a la fecha actual.",
+		if ($fechaInicioVacacion <= $fechaActualVacacion) {
+			$message = generarMensajeError(
+				"No se pudo actualizar la solicitud de vacaciones.",
+				"La fecha de inicio de las vacaciones debe ser posterior a la fecha actual.",
 				[
 					"<strong>Fecha de inicio seleccionada: " . $fechaInicioVacacion->format("d/m/Y") . "</strong>"
 				]
-		);
+			);
 		
-		return false;
-	}
+			return false;
+		}
 	
-	/*
-		* Contar días hábiles DESPUÉS de hoy y ANTES de la fecha
-		* de inicio.
-		*
-		* No se cuenta:
-		* - el día actual
-		* - el propio día de inicio de vacaciones
-		*/
-	$sqlAnticipacionVacaciones = DB::PrepareSQL(
-		"SELECT COUNT(*)::int AS dias_habiles_anticipacion
-			FROM generate_series(
-				(CURRENT_DATE + INTERVAL '1 day')::date,
-				(':1'::date - INTERVAL '1 day')::date,
-				INTERVAL '1 day'
-				) AS d(fecha)
-			WHERE EXTRACT(ISODOW FROM d.fecha) BETWEEN 1 AND 5
-			AND NOT EXISTS (
-				SELECT 1
-				FROM public.feriados f
-				WHERE f.fer_fecha::date = d.fecha::date
-			)",
-		$fechaDesdeVacacion
-	);
-	
-	$rsAnticipacionVacaciones = DB::Query($sqlAnticipacionVacaciones);
-	if (!$rsAnticipacionVacaciones) {
-		$message = generarMensajeError(
-			"No se pudo actualizar la solicitud de vacaciones.",
-			"No fue posible validar el plazo de anticipación."
+		/*
+			* Contar días hábiles DESPUÉS de hoy y ANTES de la fecha
+			* de inicio.
+			*
+			* No se cuenta:
+			* - el día actual
+			* - el propio día de inicio de vacaciones
+			*/
+		$sqlAnticipacionVacaciones = DB::PrepareSQL(
+			"SELECT COUNT(*)::int AS dias_habiles_anticipacion
+				FROM generate_series(
+					(CURRENT_DATE + INTERVAL '1 day')::date,
+					(':1'::date - INTERVAL '1 day')::date,
+					INTERVAL '1 day'
+					) AS d(fecha)
+				WHERE EXTRACT(ISODOW FROM d.fecha) BETWEEN 1 AND 5
+				AND NOT EXISTS (
+					SELECT 1
+					FROM public.feriados f
+					WHERE f.fer_fecha::date = d.fecha::date
+				)",
+			$fechaDesdeVacacion
 		);
-		return false;
-	}
 	
-	$rowAnticipacionVacaciones = $rsAnticipacionVacaciones->fetchAssoc();
-	$diasAnticipacionVacaciones = $rowAnticipacionVacaciones ? (int)$rowAnticipacionVacaciones["dias_habiles_anticipacion"] : 0;
+		$rsAnticipacionVacaciones = DB::Query($sqlAnticipacionVacaciones);
+		if (!$rsAnticipacionVacaciones) {
+			$message = generarMensajeError(
+				"No se pudo actualizar la solicitud de vacaciones.",
+				"No fue posible validar el plazo de anticipación."
+			);
+			return false;
+		}
 	
-	if ($diasAnticipacionVacaciones < 10) {
-		$message = generarMensajeError(
-			"No se pudo actualizar la solicitud de vacaciones.",
-			"La solicitud no cumple con el plazo mínimo de anticipación.",
-			[
-				"<strong>Días hábiles de anticipación: " . $diasAnticipacionVacaciones . "</strong>",
-				"<strong>Se requieren como mínimo 10 días hábiles de anticipación.</strong>"
-			],
-			"<br><b>Selecciona una fecha de inicio posterior e intenta nuevamente.</b>"
-		);
-		return false;
-	}
+		$rowAnticipacionVacaciones = $rsAnticipacionVacaciones->fetchAssoc();
+		$diasAnticipacionVacaciones = $rowAnticipacionVacaciones ? (int)$rowAnticipacionVacaciones["dias_habiles_anticipacion"] : 0;
+	
+		//if ($diasAnticipacionVacaciones < 10) {
+		//if ($diasAnticipacionVacaciones < 5) {
+		if (!$esVacacionExcepcional && $diasAnticipacionVacaciones < 5) {
+			$message = generarMensajeError(
+				"No se pudo actualizar la solicitud de vacaciones.",
+				"La solicitud no cumple con el plazo mínimo de anticipación.",
+				[
+					"<strong>Días hábiles de anticipación: " . $diasAnticipacionVacaciones . "</strong>",
+					"<strong>Se requieren como mínimo 5 días hábiles de anticipación.</strong>"
+				],
+				"<br><b>Selecciona una fecha de inicio posterior e intenta nuevamente.</b>"
+			);
+			return false;
+		}
+	} // FIN: fecha de inicio modificada
+
 } elseif (isset($tip_presentacion_cantidad) && intval($tip_presentacion_cantidad) > 0) {
 	/*
 		* Para los demás tipos de permisos se conserva
@@ -3577,7 +3977,61 @@ $rechazadoPorRRHH = strtoupper(trim((string)$oldvalues["estado"])) === "APROBADO
     && strtoupper(trim((string)$oldvalues["resultado_decision"])) === "APROBADO"
     && strtoupper(trim((string)$oldvalues["rrhh_resultado_decision"])) === "RECHAZADO";
 
+/*
+ * ============================================================
+ * PROTEGER METADATOS DE DECISIÓN
+ * ============================================================
+ *
+ * Estos valores no deben depender de lo recibido desde el
+ * navegador, aunque los campos formen parte del formulario Edit.
+ *
+ * Por defecto se conservan exactamente los valores existentes
+ * en base de datos.
+ *
+ * Más abajo, cada flujo podrá modificarlos expresamente:
+ *
+ * - Rechazo por Jefatura:
+ *      fecha_decision y decidido_por -> NULL
+ *
+ * - Rechazo por DGTH:
+ *      rrhh_decidido_por y rrhh_fecha_decision -> NULL
+ */
+$values["fecha_decision"] = $oldvalues["fecha_decision"];
+$values["decidido_por"] = $oldvalues["decidido_por"];
+$values["rrhh_decidido_por"] = $oldvalues["rrhh_decidido_por"];
+$values["rrhh_fecha_decision"] = $oldvalues["rrhh_fecha_decision"];
+
+
 if ($rechazadoPorJefatura) {
+	
+	/*
+	 * ============================================================
+	 * CONTROL DE ÚNICA CORRECCIÓN POR RECHAZO DE JEFATURA
+	 * ============================================================
+	 *
+	 * La Jefatura puede rechazar la solicitud y el funcionario
+	 * dispone de una sola oportunidad para corregirla y reenviarla.
+	 *
+	 * Este contador es independiente del utilizado para DGTH/RRHH.
+	 */
+	$intentosCorreccionJefatura = isset($oldvalues["intentos_correccion_jefatura"]) ? (int)$oldvalues["intentos_correccion_jefatura"] : 0;
+	
+	if ($intentosCorreccionJefatura >= 1) {
+		$message = generarMensajeError(
+			"No se pudo actualizar la solicitud de vacaciones.",
+			"La solicitud ya utilizó la única corrección permitida después de un rechazo de Jefatura.",
+			[],
+			"<br><b>No es posible volver a modificar esta solicitud.</b>"
+		);
+		return false;
+	}
+	
+	/*
+	 * Consumir la única oportunidad de corrección de Jefatura.
+	 */
+	$values["intentos_correccion_jefatura"] = $intentosCorreccionJefatura + 1;
+	
+	
 	/*
 	 * Reiniciar únicamente la decisión de la jefatura.
 	 * RRHH continúa PENDIENTE porque todavía nunca decidió.
@@ -3585,6 +4039,14 @@ if ($rechazadoPorJefatura) {
 	$values["estado"] = "PENDIENTE";
 	$values["resultado_decision"] = "PENDIENTE";
 	$values["rrhh_resultado_decision"] = "PENDIENTE";
+	
+	/*
+	 * La solicitud vuelve a quedar pendiente de una nueva
+	 * decisión de Jefatura, por lo que no debe conservar
+	 * como decisión vigente al jefe que la rechazó anteriormente.
+	 */
+	$values["fecha_decision"] = null;
+	$values["decidido_por"] = null;
 	
 	/*
 	 * El contador intentos_correccion pertenece al circuito
@@ -3599,19 +4061,31 @@ if ($rechazadoPorJefatura) {
 	 */
 	$values["rrhh_motivo_rechazo"] = $oldvalues["rrhh_motivo_rechazo"];
 } elseif ($rechazadoPorRRHH) {
-	/*
-	 * Mantener el comportamiento que ya existía:
-	 * una corrección luego del rechazo de RRHH.
-	 */
 	$values["intentos_correccion"] = $oldvalues["intentos_correccion"] + 1;
 	
 	/*
-	 * No reiniciamos la aprobación del jefe.
-	 * Solamente vuelve a PENDIENTE para RRHH.
+	 * La aprobación de Jefatura se mantiene vigente.
+	 * Solamente se reinicia la decisión de DGTH/RRHH.
 	 */
 	$values["estado"] = $oldvalues["estado"];
 	$values["resultado_decision"] = $oldvalues["resultado_decision"];
 	$values["rrhh_resultado_decision"] = "PENDIENTE";
+
+	/*
+	 * La solicitud vuelve a quedar pendiente de una nueva
+	 * decisión de DGTH/RRHH.
+	 *
+	 * Se utiliza $sqlValues porque estos campos no forman
+	 * parte del formulario Edit y necesitamos escribir
+	 * SQL NULL real en la base.
+	 */
+	$sqlValues["rrhh_decidido_por"] = "NULL";
+	$sqlValues["rrhh_fecha_decision"] = "NULL";
+
+	/*
+	 * Se conserva el motivo del rechazo anterior como referencia
+	 * para que el funcionario conozca qué debía corregir.
+	 */
 	$values["rrhh_motivo_rechazo"] = $oldvalues["rrhh_motivo_rechazo"];
 } else {
 	/*
@@ -4011,6 +4485,11 @@ function BeforeShowView(&$xt, &$templatefile, &$values, $pageObject)
 //	echo $output;
 //}
 
+
+
+require_once(getabspath("include/view-vacacion-funciones.php"));
+
+
 // Oculta el id de permiso de el formulario.
 $pageObject->hideItem("view_id");
 
@@ -4052,50 +4531,116 @@ $pageObject->setProxyValue("car_descri", $dataDependencia["car_descri"]);
 $pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"]);
 
 
-// Query para obtener el conteo de cantidad de permisos por mes.
-//$sqlTotalPermisos = DB::PrepareSQL(
-//"SELECT TO_CHAR(fecha_solicitud, 'TMMonth') AS mes_nombre, 
-//				COUNT(*) AS cantidad_permisos_mes
-//FROM rrhh_permisos.permisos_funcionarios
-//WHERE id_funcionario = ':1'
-//AND EXTRACT(MONTH FROM fecha_solicitud) = EXTRACT(MONTH FROM CURRENT_DATE)
-//AND EXTRACT(YEAR FROM fecha_solicitud) = EXTRACT(YEAR FROM CURRENT_DATE)
-//GROUP BY TO_CHAR(fecha_solicitud, 'TMMonth')", $userPersonal
-//);
-//debug_to_console("sqlTotalPermisos: " . $sqlTotalPermisos);
-//$resultTotalPermisos = DB::Query($sqlTotalPermisos);
-//$rowTotalPermisos = $resultTotalPermisos->fetchAssoc();
-//if ($rowTotalPermisos && $rowTotalPermisos['cantidad_permisos_mes'] > 0) {
-//	$cantidad_permisos_mes = $rowTotalPermisos['cantidad_permisos_mes'];
-//} else {
-//	$cantidad_permisos_mes = 0;
-//}
-//debug_to_console("mes_nombre: " . $rowTotalPermisos['mes_nombre'] . ", total_permisos: " . $rowTotalPermisos['cantidad_permisos_mes']);
-//$pageObject->setProxyValue("cantidad_permisos_mes", $cantidad_permisos_mes);
 
+/* =========================================================
+   RESUMEN DE SALDO DE VACACIONES - VIEW
+========================================================= */
+$idSolicitud = 0;
+if (isset($pageObject->keys["id"])) {
+	$idSolicitud = (int)$pageObject->keys["id"];
+}
 
+$idFuncionarioSaldo = 0;
 
-// Calcular la cantidad de días entre dos fechas.
-//$sqlTotalDias = DB::PrepareSQL(
-//"SELECT id,
-//					id_funcionario,
-//					fecha_desde,
-//					fecha_hasta,
-//					(fecha_hasta - fecha_desde) AS dias_diferencia,
-//					(fecha_hasta - fecha_desde) + 1 AS dias_totales
-//FROM rrhh_permisos.permisos_funcionarios
-//WHERE permisos_funcionarios.id = ':1'", $values["id"]
-//);
-//debug_to_console("sqlTotalDias: " . $sqlTotalDias);
-//$resultTotalDias = DB::Query($sqlTotalDias);
-//$rowTotalDias = $resultTotalDias->fetchAssoc();
-// Voy a usar la columna de 'dias_totales' porque la columna de 'dias_diferencia', si
-// el permiso es en el dia muestra cero(0), y para evitar confusiones al usuario 
-// uso esa columna del query. 
-//$dias_totales = $rowTotalDias['dias_totales'];
+if ($idSolicitud > 0) {
+	$sqlSolicitudSaldo = DB::PrepareSQL(
+		"SELECT id_funcionario
+			FROM rrhh_permisos.permisos_funcionarios
+			WHERE id = ':1'",
+		$idSolicitud
+	);
 
-//debug_to_console("dias_totales: " . $dias_totales);
-//$pageObject->setProxyValue("dias_totales", $dias_totales);
+	$rsSolicitudSaldo = DB::Query($sqlSolicitudSaldo);
+
+	if ($rsSolicitudSaldo && ($rowSolicitudSaldo = $rsSolicitudSaldo->fetchAssoc())) {
+		$idFuncionarioSaldo = (int)$rowSolicitudSaldo["id_funcionario"];
+	}
+}
+
+$saldoVacacionesHtml = "";
+
+if ($idFuncionarioSaldo > 0) {
+	/*
+	* En View también excluimos la propia solicitud
+	* para mostrar cuánto saldo tenía disponible
+	* considerando que estamos mirando esa misma solicitud.
+	*/
+	$saldosVacaciones = obtenerSaldosVacacionesPorPeriodo($idFuncionarioSaldo, $idSolicitud);
+	$totalDisponible = 0;
+
+	$saldoVacacionesHtml .= "
+		<div style='
+			background:#f8f9fa;
+			border:1px solid #dee2e6;
+			border-radius:10px;
+			padding:16px;
+			margin-bottom:15px;
+		'>
+		<div style='
+			font-size:16px;
+			font-weight:600;
+			margin-bottom:12px;
+		'>
+			🏖️ Saldo disponible de vacaciones
+		</div>
+	";
+	
+	$hayPeriodos = false;
+	foreach ($saldosVacaciones as $saldoPeriodo) {
+		if (empty($saldoPeriodo["vigente"])) {
+			continue;
+		}
+
+		$hayPeriodos = true;
+		$periodo = (int)$saldoPeriodo["periodo"];
+		$saldoDias = (int)$saldoPeriodo["saldo_dias"];
+		
+		if ($saldoDias < 0) {
+			$saldoDias = 0;
+		}
+		
+		$totalDisponible += $saldoDias;
+
+		$saldoVacacionesHtml .= "
+				<div style='
+					display:flex;
+					justify-content:space-between;
+					align-items:center;
+					padding:7px 0;
+					border-bottom:1px solid #e9ecef;
+				'>
+					<span><strong>Período {$periodo}</strong></span>
+					<span>{$saldoDias} día(s)</span>
+				</div>
+			";
+    }
+
+		if (!$hayPeriodos) {
+			$saldoVacacionesHtml .= "
+				<div style='padding:8px 0;'>
+					No posee períodos de vacaciones vigentes con información disponible.
+				</div>
+			";
+		}
+
+		$saldoVacacionesHtml .= "
+			<div style='
+				margin-top:12px;
+				padding-top:10px;
+				border-top:2px solid #dee2e6;
+				font-weight:700;
+				display:flex;
+				justify-content:space-between;
+			'>
+				<span>Total disponible:</span>
+				<span>{$totalDisponible} día(s)</span>
+			</div>
+		</div>
+		";
+}
+
+$pageObject->setProxyValue("saldo_vacaciones_html", $saldoVacacionesHtml);
+
 
 ;		
 } // function BeforeShowView
@@ -4135,23 +4680,125 @@ $pageObject->setProxyValue("sed_descripcion", $dataDependencia["sed_descripcion"
 function BeforeProcessEdit($pageObject)
 {
 
-		// Bloquear edición según estado
-$id = postvalue("editid1");
+		/*
+ * ============================================================
+ * CONTROL SERVER-SIDE DE ACCESO A LA EDICIÓN
+ * ============================================================
+ *
+ * Se valida:
+ *
+ * 1. Que exista una sesión válida.
+ * 2. Que la solicitud pertenezca al funcionario autenticado.
+ * 3. Que el estado actual permita edición.
+ */
+$id = (int)postvalue("editid1");
 
-$sql = "
-SELECT estado,resultado_decision,rrhh_resultado_decision,intentos_correccion 
-FROM rrhh_permisos.permisos_funcionarios 
-WHERE id = $id
-";
+if ($id <= 0) {
+	header("Location: vacacion_list.php");
+	exit();
+}
+
+/*
+ * ============================================================
+ * OBTENER SOLICITUD ACTUAL
+ * ============================================================
+ */
+$sql = DB::PrepareSQL(
+		"SELECT id_funcionario,
+							estado,
+							resultado_decision,
+							rrhh_resultado_decision,
+							COALESCE(intentos_correccion, 0) AS intentos_correccion,
+							COALESCE(intentos_correccion_jefatura, 0) AS intentos_correccion_jefatura
+		FROM rrhh_permisos.permisos_funcionarios
+		WHERE id = ':1'",
+		$id
+);
 $resultSql = DB::Query($sql);
+if (!$resultSql) {
+	header("Location: vacacion_list.php");
+	exit();
+}
+
 $dataResult = $resultSql->fetchAssoc();
-$estado = $dataResult["estado"];
-$resultado_decision = $dataResult["resultado_decision"];
-$estado = $dataResult["estado"];
-$rrhh_resultado_decision = $dataResult["rrhh_resultado_decision"];
-if ($estado == 'APROBADO' && $resultado_decision == 'APROBADO' && $rrhh_resultado_decision == 'APROBADO') {
-	// Forzar el reenvio a la lista, si se ingresa a esta pantalla de edicion y el permiso ya esta totalmente aprobado.
-	header("Location: permisos_funcionarios_list.php");
+if (!$dataResult) {
+	header("Location: vacacion_list.php");
+	exit();
+}
+
+/*
+ * ============================================================
+ * VALIDAR PROPIEDAD DE LA SOLICITUD
+ * ============================================================
+ *
+ * El usuario solamente puede editar solicitudes pertenecientes
+ * al funcionario asociado a su propia cuenta.
+ */
+if (!Security::hasLogin()) {
+	header("Location: login.php");
+	exit();
+}
+
+$currentUser = Security::currentUserData();
+$userPersonal = isset($currentUser["usu_personal"]) ? (int)$currentUser["usu_personal"] : 0;
+$idFuncionarioSolicitud = (int)$dataResult["id_funcionario"];
+
+if ($userPersonal <= 0 || $idFuncionarioSolicitud <= 0 || $userPersonal !== $idFuncionarioSolicitud) {
+	header("Location: vacacion_list.php");
+	exit();
+}
+
+/*
+ * ============================================================
+ * NORMALIZAR ESTADOS
+ * ============================================================
+ */
+$estado = strtoupper(trim((string)$dataResult["estado"]));
+$resultadoDecision = strtoupper(trim((string)$dataResult["resultado_decision"]));
+$rrhhResultadoDecision = strtoupper(trim((string)$dataResult["rrhh_resultado_decision"]));
+$intentosCorreccion = (int)$dataResult["intentos_correccion"];
+$intentosCorreccionJefatura = (int)$dataResult["intentos_correccion_jefatura"];
+
+/*
+ * ============================================================
+ * CASO 1:
+ * PENDIENTE DE JEFATURA
+ * ============================================================
+ */
+$pendienteJefatura = $estado === "PENDIENTE"
+		&& $resultadoDecision === "PENDIENTE"
+		&& $rrhhResultadoDecision === "PENDIENTE";
+
+/*
+ * ============================================================
+ * CASO 2:
+ * RECHAZADA POR JEFATURA
+ * ============================================================
+ */
+$rechazadoPorJefatura = $estado === "RECHAZADO"
+		&& $resultadoDecision === "RECHAZADO"
+		&& $rrhhResultadoDecision === "PENDIENTE"
+		&& $intentosCorreccionJefatura < 1;
+
+/*
+ * ============================================================
+ * CASO 3:
+ * RECHAZADA POR DGTH Y TODAVÍA PUEDE CORREGIRSE
+ * ============================================================
+ */
+$rechazadoPorRRHH = $estado === "APROBADO"
+		&& $resultadoDecision === "APROBADO"
+		&& $rrhhResultadoDecision === "RECHAZADO"
+		&& $intentosCorreccion < 1;
+
+/*
+ * ============================================================
+ * BLOQUEAR CUALQUIER OTRO ESTADO
+ * ============================================================
+ */
+$puedeEditar = $pendienteJefatura || $rechazadoPorJefatura || $rechazadoPorRRHH;
+if (!$puedeEditar) {
+	header("Location: vacacion_list.php");
 	exit();
 }
 
@@ -4191,6 +4838,87 @@ if ($estado == 'APROBADO' && $resultado_decision == 'APROBADO' && $rrhh_resultad
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				// Before display
+function BeforeShowList(&$xt, &$templatefile, $pageObject)
+{
+
+		
+
+// Place event code here.
+// Use "Add Action" button to add code snippets.
+
+
+$pageObject->hideItem("list_vacacion_excepcional_archivo");
+$pageObject->hideItem("list_vacacion_excepcional");
+$pageObject->hideItem("list_vacacion_excepcional_motivo");
+;		
+} // function BeforeShowList
+
 		
 		
 		

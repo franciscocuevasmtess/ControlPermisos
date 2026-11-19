@@ -20,8 +20,54 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
     $observacion = isset($datosPermiso['observacion']) ? htmlspecialchars($datosPermiso['observacion']) : '';
     $dependencia = isset($datosPermiso['dependencia']) ? htmlspecialchars($datosPermiso['dependencia']) : 'N/A';
     $tipoSolicitud = $datosPermiso['tipo_solicitud'];
-    $archivo = $datosPermiso['archivo'];
+    //$archivo = $datosPermiso['archivo'];
+    
+    $archivo = isset($datosPermiso['archivo']) ? $datosPermiso['archivo'] : '';
+    $archivoVacacionExcepcional = isset($datosPermiso['vacacion_excepcional_archivo']) ? trim((string)$datosPermiso['vacacion_excepcional_archivo']) : '';
+    $esVacacionExcepcional = !empty($datosPermiso['vacacion_excepcional']);
 
+    $motivoVacacionExcepcional = isset($datosPermiso['vacacion_excepcional_motivo'])
+        ? htmlspecialchars(
+            $datosPermiso['vacacion_excepcional_motivo'],
+            ENT_QUOTES,
+            'UTF-8'
+        )
+        : '';
+
+    $bloqueVacacionExcepcional = '';
+
+    if ($esVacacionExcepcional) {
+        $bloqueVacacionExcepcional = '
+            <div style="
+                background:#fff3cd;
+                border-left:6px solid #ffc107;
+                padding:15px;
+                margin:15px 0;
+                border-radius:6px;
+                color:#664d03;
+            ">
+                <strong>⚠ SOLICITUD EXCEPCIONAL DE VACACIONES</strong>
+                <br><br>
+                Esta solicitud fue presentada con carácter excepcional
+                y puede no cumplir el plazo ordinario de cinco (5)
+                días hábiles de anticipación.
+                <br><br>
+                <strong>Motivo:</strong><br>'
+                . $motivoVacacionExcepcional .
+            '</div>';
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // ========================================================================
     // PARTE 2: FORMATEAR FECHAS CON HORA
     // ========================================================================
@@ -170,6 +216,7 @@ function generarPlantillaAprobacion($datosPermiso, $urlAprobar, $urlRechazar)
         
         <!-- CONTENIDO -->
         <div class="content">
+            ' . $bloqueVacacionExcepcional . '
             <p>Se ha recibido una nueva solicitud de permiso que requiere su aprobación:</p>
             
             <!-- Información del funcionario -->

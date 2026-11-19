@@ -116,6 +116,42 @@ try {
         exit;
     }
 
+
+    // ========================================================
+    // VALIDAR QUE EL SUPERIOR ESTÉ AUTORIZADO
+    // ========================================================
+
+    $idFuncionarioSolicitud = (int)$permiso["id_funcionario"];
+
+    $sqlValidarSuperior = DB::PrepareSQL(
+        "SELECT superior_cod
+            FROM public.vw_personales_superiores
+            WHERE funcionario_cod = ':1'
+            AND superior_cod = ':2'
+            LIMIT 1",
+        $idFuncionarioSolicitud,
+        $email_jefe_id
+    );
+
+    $rsValidarSuperior = DB::Query($sqlValidarSuperior);
+
+    if (!$rsValidarSuperior) {
+        throw new Exception("No se pudo validar al superior inmediato.");
+    }
+
+    $superiorAutorizado = $rsValidarSuperior->fetchAssoc();
+
+    if (!$superiorAutorizado) {
+        throw new Exception("El superior indicado no está autorizado para rechazar esta solicitud.");
+    }
+
+
+
+
+
+
+
+
     // ========================================================
     // OBTENER DATOS DEL JEFE
     // ========================================================

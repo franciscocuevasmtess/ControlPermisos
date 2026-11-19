@@ -1516,6 +1516,11 @@ function GetUploadFolderExpression($field, $file, $table )
 		$folder = "files";;
 		return $folder;
 	}
+	if($table=="vacacion" && $field=="vacacion_excepcional_archivo")
+	{
+		$folder = $_SERVER['DOCUMENT_ROOT']. "/permisos_file";;
+		return $folder;
+	}
 	return "";
 }
 

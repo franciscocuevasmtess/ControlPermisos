@@ -258,6 +258,71 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_id}</span>
 						</div>
 		{END searchCtrlBlock_id}
+																{BEGIN searchCtrlBlock_vacacion_excepcional_archivo}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_vacacion_excepcional_archivo}" {$filterRow_attrs_vacacion_excepcional_archivo}>
+			<label>{$label vacacion vacacion_excepcional_archivo }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_vacacion_excepcional_archivo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_vacacion_excepcional_archivo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_vacacion_excepcional_archivo}</span>
+						</div>
+		{END searchCtrlBlock_vacacion_excepcional_archivo}
+																{BEGIN searchCtrlBlock_vacacion_excepcional_motivo}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_vacacion_excepcional_motivo}" {$filterRow_attrs_vacacion_excepcional_motivo}>
+			<label>{$label vacacion vacacion_excepcional_motivo }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_vacacion_excepcional_motivo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_vacacion_excepcional_motivo}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_vacacion_excepcional_motivo}</span>
+						</div>
+		{END searchCtrlBlock_vacacion_excepcional_motivo}
+																{BEGIN searchCtrlBlock_vacacion_excepcional}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_vacacion_excepcional}" {$filterRow_attrs_vacacion_excepcional}>
+			<label>{$label vacacion vacacion_excepcional }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_vacacion_excepcional}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_vacacion_excepcional}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_vacacion_excepcional}</span>
+						</div>
+		{END searchCtrlBlock_vacacion_excepcional}
+																{BEGIN searchCtrlBlock_intentos_correccion_jefatura}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_intentos_correccion_jefatura}" {$filterRow_attrs_intentos_correccion_jefatura}>
+			<label>{$label vacacion intentos_correccion_jefatura }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_intentos_correccion_jefatura}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_intentos_correccion_jefatura}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_intentos_correccion_jefatura}</span>
+						</div>
+		{END searchCtrlBlock_intentos_correccion_jefatura}
+																{BEGIN searchCtrlBlock_rrhh_decidido_por}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_rrhh_decidido_por}" {$filterRow_attrs_rrhh_decidido_por}>
+			<label>{$label vacacion rrhh_decidido_por }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_rrhh_decidido_por}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_rrhh_decidido_por}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_rrhh_decidido_por}</span>
+						</div>
+		{END searchCtrlBlock_rrhh_decidido_por}
 																{BEGIN searchCtrlBlock_vac_periodo_solicitado}
 
 
@@ -1041,7 +1106,7 @@
 				[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="vac_dias_pedidos"]:before {
 		content: "{$label vacacion vac_dias_pedidos}";
 	}
-		}
+							}
 </style>
 <table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-striped table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
 	cellpadding="0"
@@ -1158,6 +1223,21 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field23}
+									{BEGIN cellblock_grid_headcell_field2}
+	<th
+	
+	{$cell_grid_headcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
 							</tr>
 											<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
 									{$gridHeader_class}
@@ -1773,6 +1853,21 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field24}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
 							</tr>
 															
 					{END grid_header}
@@ -2195,7 +2290,7 @@
 	{$cell_grid_headcell_field25}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$intentos_correccion_class}	"
+				 {$intentos_correccion_class}	"
 
 			data-field="intentos_correccion"
 	
@@ -2207,9 +2302,45 @@
 <span data-itemtype="grid_field" data-itemid="list_intentos_correccion" {$item_list_intentos_correccion} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="intentos_correccion" data-fieldname="intentos_correccion" data-default-width >
 {$intentos_correccion_value}
 </span>
-{END intentos_correccion_fieldcolumn}	
+{END intentos_correccion_fieldcolumn}	 
+		{BEGIN intentos_correccion_jefatura_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="list_intentos_correccion_jefatura" {$item_list_intentos_correccion_jefatura} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="intentos_correccion_jefatura" data-fieldname="intentos_correccion_jefatura" data-default-width >
+{$intentos_correccion_jefatura_value}
+</span>
+{END intentos_correccion_jefatura_fieldcolumn}	
 	</td>
 	{END cellblock_grid_headcell_field25}
+									{BEGIN cellblock_grid_cell_field2}
+	<td
+	
+	{$cell_grid_cell_field2}
+	{$recordattrs}
+	class="
+				 {$vacacion_excepcional_archivo_class}	"
+
+			data-field="vacacion_excepcional_archivo"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN vacacion_excepcional_archivo_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="list_vacacion_excepcional_archivo" {$item_list_vacacion_excepcional_archivo} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="vacacion_excepcional_archivo" data-fieldname="vacacion_excepcional_archivo" data-default-width >
+{$vacacion_excepcional_archivo_value}
+</span>
+{END vacacion_excepcional_archivo_fieldcolumn}	 
+		{BEGIN vacacion_excepcional_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="list_vacacion_excepcional" {$item_list_vacacion_excepcional} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="vacacion_excepcional" data-fieldname="vacacion_excepcional" data-default-width >
+{$vacacion_excepcional_value}
+</span>
+{END vacacion_excepcional_fieldcolumn}	 
+		{BEGIN vacacion_excepcional_motivo_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="list_vacacion_excepcional_motivo" {$item_list_vacacion_excepcional_motivo} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="vacacion_excepcional_motivo" data-fieldname="vacacion_excepcional_motivo" data-default-width >
+{$vacacion_excepcional_motivo_value}
+</span>
+{END vacacion_excepcional_motivo_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
 							</tr>
 										
 											{END grid_row}
@@ -2506,6 +2637,21 @@
 	
 	</td>
 	{END cellblock_grid_headcell_field26}
+									{BEGIN cellblock_grid_footcell_field2}
+	<td
+	
+	{$cell_grid_footcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="vacacion_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field2}
 							</tr>
 					
 					</tfoot>

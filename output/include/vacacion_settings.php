@@ -148,6 +148,21 @@ if(mlang_getcurrentlang()=="Spanish")
 	$fieldLabelsvacacion["Spanish"]["vac_periodo_solicitado"] = "Vac Periodo Solicitado";
 	$fieldToolTipsvacacion["Spanish"]["vac_periodo_solicitado"] = "";
 	$placeHoldersvacacion["Spanish"]["vac_periodo_solicitado"] = "";
+	$fieldLabelsvacacion["Spanish"]["rrhh_decidido_por"] = "Rrhh Decidido Por";
+	$fieldToolTipsvacacion["Spanish"]["rrhh_decidido_por"] = "";
+	$placeHoldersvacacion["Spanish"]["rrhh_decidido_por"] = "";
+	$fieldLabelsvacacion["Spanish"]["intentos_correccion_jefatura"] = "Intentos Correccion Jefatura";
+	$fieldToolTipsvacacion["Spanish"]["intentos_correccion_jefatura"] = "";
+	$placeHoldersvacacion["Spanish"]["intentos_correccion_jefatura"] = "";
+	$fieldLabelsvacacion["Spanish"]["vacacion_excepcional"] = "Solicitud excepcional / urgente";
+	$fieldToolTipsvacacion["Spanish"]["vacacion_excepcional"] = "";
+	$placeHoldersvacacion["Spanish"]["vacacion_excepcional"] = "";
+	$fieldLabelsvacacion["Spanish"]["vacacion_excepcional_motivo"] = "Motivo de la solicitud excepcional";
+	$fieldToolTipsvacacion["Spanish"]["vacacion_excepcional_motivo"] = "";
+	$placeHoldersvacacion["Spanish"]["vacacion_excepcional_motivo"] = "";
+	$fieldLabelsvacacion["Spanish"]["vacacion_excepcional_archivo"] = "Documento justificativo (opcional)";
+	$fieldToolTipsvacacion["Spanish"]["vacacion_excepcional_archivo"] = "";
+	$placeHoldersvacacion["Spanish"]["vacacion_excepcional_archivo"] = "";
 	$pageTitlesvacacion["Spanish"]["add"] = "🌴 FORMULARIO DE SOLICITUD DE VACACIONES";
 	$pageTitlesvacacion["Spanish"]["view"] = "SOLICIUTD DE VACACIONES NUMERO: {%id}";
 	$pageTitlesvacacion["Spanish"]["edit"] = "🌴 FORMULARIO DE SOLICITUD DE VACACIONES, EDITAR [{%id}]";
@@ -309,6 +324,11 @@ $tdatavacacion[".googleLikeFields"][] = "decidido_por";
 $tdatavacacion[".googleLikeFields"][] = "sex_descripcion";
 $tdatavacacion[".googleLikeFields"][] = "vac_dias_pedidos";
 $tdatavacacion[".googleLikeFields"][] = "vac_periodo_solicitado";
+$tdatavacacion[".googleLikeFields"][] = "rrhh_decidido_por";
+$tdatavacacion[".googleLikeFields"][] = "intentos_correccion_jefatura";
+$tdatavacacion[".googleLikeFields"][] = "vacacion_excepcional";
+$tdatavacacion[".googleLikeFields"][] = "vacacion_excepcional_motivo";
+$tdatavacacion[".googleLikeFields"][] = "vacacion_excepcional_archivo";
 
 
 
@@ -343,7 +363,7 @@ $tdatavacacion[".orderindexes"] = array();
 			$tdatavacacion[".orderindexes"][] = array(1, (0 ? "ASC" : "DESC"), "pf.id");
 
 
-$tdatavacacion[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos,  pf.vac_periodo_solicitado";
+$tdatavacacion[".sqlHead"] = "SELECT pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos,  pf.vac_periodo_solicitado,  pf.rrhh_decidido_por,  pf.intentos_correccion_jefatura,  pf.vacacion_excepcional,  pf.vacacion_excepcional_motivo,  pf.vacacion_excepcional_archivo";
 $tdatavacacion[".sqlFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
 $tdatavacacion[".sqlWhereExpr"] = "(pf.motivo_id = '1')";
 $tdatavacacion[".sqlTail"] = "";
@@ -6210,6 +6230,731 @@ $tdatavacacion[".hideMobileList"] = array();
 
 	$tdatavacacion["vac_periodo_solicitado"] = $fdata;
 		$tdatavacacion[".searchableFields"][] = "vac_periodo_solicitado";
+//	rrhh_decidido_por
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 42;
+	$fdata["strName"] = "rrhh_decidido_por";
+	$fdata["GoodName"] = "rrhh_decidido_por";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("vacacion","rrhh_decidido_por");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "rrhh_decidido_por";
+
+		$fdata["sourceSingle"] = "rrhh_decidido_por";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.rrhh_decidido_por";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatavacacion["rrhh_decidido_por"] = $fdata;
+		$tdatavacacion[".searchableFields"][] = "rrhh_decidido_por";
+//	intentos_correccion_jefatura
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 43;
+	$fdata["strName"] = "intentos_correccion_jefatura";
+	$fdata["GoodName"] = "intentos_correccion_jefatura";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("vacacion","intentos_correccion_jefatura");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "intentos_correccion_jefatura";
+
+		$fdata["sourceSingle"] = "intentos_correccion_jefatura";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.intentos_correccion_jefatura";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatavacacion["intentos_correccion_jefatura"] = $fdata;
+		$tdatavacacion[".searchableFields"][] = "intentos_correccion_jefatura";
+//	vacacion_excepcional
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 44;
+	$fdata["strName"] = "vacacion_excepcional";
+	$fdata["GoodName"] = "vacacion_excepcional";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("vacacion","vacacion_excepcional");
+	$fdata["FieldType"] = 11;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "vacacion_excepcional";
+
+		$fdata["sourceSingle"] = "vacacion_excepcional";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.vacacion_excepcional";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Checkbox");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Checkbox");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+				$fdata["filterFormat"] = "Options list";
+		$fdata["showCollapsed"] = false;
+
+	
+	
+	
+		$fdata["filterCheckedMessageType"] = "Text";
+	$fdata["filterCheckedMessageText"] = "Checked";
+	$fdata["filterUncheckedMessageType"] = "Text";
+	$fdata["filterUncheckedMessageText"] = "Unchecked";
+
+//end of Filters settings
+
+
+	$tdatavacacion["vacacion_excepcional"] = $fdata;
+		$tdatavacacion[".searchableFields"][] = "vacacion_excepcional";
+//	vacacion_excepcional_motivo
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 45;
+	$fdata["strName"] = "vacacion_excepcional_motivo";
+	$fdata["GoodName"] = "vacacion_excepcional_motivo";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("vacacion","vacacion_excepcional_motivo");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "vacacion_excepcional_motivo";
+
+		$fdata["sourceSingle"] = "vacacion_excepcional_motivo";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.vacacion_excepcional_motivo";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 0;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+		$edata["CreateThumbnail"] = true;
+	$edata["StrThumbnail"] = "th";
+			$edata["ThumbnailSize"] = 600;
+
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatavacacion["vacacion_excepcional_motivo"] = $fdata;
+		$tdatavacacion[".searchableFields"][] = "vacacion_excepcional_motivo";
+//	vacacion_excepcional_archivo
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 46;
+	$fdata["strName"] = "vacacion_excepcional_archivo";
+	$fdata["GoodName"] = "vacacion_excepcional_archivo";
+	$fdata["ownerTable"] = "rrhh_permisos.permisos_funcionarios";
+	$fdata["Label"] = GetFieldLabel("vacacion","vacacion_excepcional_archivo");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "vacacion_excepcional_archivo";
+
+		$fdata["sourceSingle"] = "vacacion_excepcional_archivo";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pf.vacacion_excepcional_archivo";
+
+	
+	
+		$fdata["UploadCodeExpression"] = true;
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "File-based Image");
+
+	
+	
+				$vdata["ShowThumbnail"] = true;
+	$vdata["ThumbWidth"] = 200;
+	$vdata["ThumbHeight"] = 150;
+	$vdata["ImageWidth"] = 600;
+	$vdata["ImageHeight"] = 400;
+
+			$vdata["multipleImgMode"] = 1;
+	$vdata["maxImages"] = 0;
+
+			$vdata["showGallery"] = true;
+	$vdata["galleryMode"] = 2;
+	$vdata["captionMode"] = 2;
+	$vdata["captionField"] = "";
+
+	$vdata["imageBorder"] = 1;
+	$vdata["imageFullWidth"] = 1;
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Document upload");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypes"] = array();
+			$edata["acceptFileTypes"][] = strtoupper("doc");
+						$edata["acceptFileTypesHtml"] = ".doc";
+			$edata["acceptFileTypes"][] = strtoupper("docx");
+						$edata["acceptFileTypesHtml"] .= ",.docx";
+			$edata["acceptFileTypes"][] = strtoupper("gif");
+						$edata["acceptFileTypesHtml"] .= ",.gif";
+			$edata["acceptFileTypes"][] = strtoupper("jpeg");
+						$edata["acceptFileTypesHtml"] .= ",.jpeg";
+			$edata["acceptFileTypes"][] = strtoupper("jpg");
+						$edata["acceptFileTypesHtml"] .= ",.jpg";
+			$edata["acceptFileTypes"][] = strtoupper("pdf");
+						$edata["acceptFileTypesHtml"] .= ",.pdf";
+			$edata["acceptFileTypes"][] = strtoupper("png");
+						$edata["acceptFileTypesHtml"] .= ",.png";
+			$edata["acceptFileTypes"][] = strtoupper("rtf");
+						$edata["acceptFileTypesHtml"] .= ",.rtf";
+			$edata["acceptFileTypes"][] = strtoupper("txt");
+						$edata["acceptFileTypesHtml"] .= ",.txt";
+
+		$edata["maxNumberOfFiles"] = 10;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+		$edata["CreateThumbnail"] = true;
+	$edata["StrThumbnail"] = "th";
+			$edata["ThumbnailSize"] = 600;
+
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatavacacion["vacacion_excepcional_archivo"] = $fdata;
+		$tdatavacacion[".searchableFields"][] = "vacacion_excepcional_archivo";
 
 
 $tables_data["vacacion"]=&$tdatavacacion;
@@ -6254,7 +6999,7 @@ function createSqlQuery_vacacion()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos,  pf.vac_periodo_solicitado";
+$proto0["m_strFieldList"] = "pf.id,  pf.id_funcionario,  p.per_nombre,  p.per_apellido,  p.per_nombre || ' ' || p.per_apellido AS nombre_completo,  p.per_ci,  pf.tipo_vinculacion,  pf.dependencia_id,  pf.fecha_desde,  pf.hora_desde,  pf.fecha_hasta,  pf.hora_hasta,  pf.motivo_id,  pf.comision_servicios,  pf.comision_servicios_descripcion,  pf.observacion,  pf.estado,  pf.archivo_adjunto,  '' AS email_jefe,  '' AS descripcion_dependencia,  '' AS descripcion_tipo_vinculacion,  pf.solicitado_por,  pf.fecha_solicitud,  '' AS email_jefe_id,  pf.resultado_decision,  pf.horas_compensar,  '' AS nombre_completo_edit,  '' AS descripcion_dependencia_edit,  pf.rrhh_resultado_decision,  pf.rrhh_motivo_rechazo,  '' AS antiguedad_laboral,  '' AS car_descri,  '' AS sed_descripcion,  '' AS cantidad_dias_permiso,  pf.fecha_decision,  pf.rrhh_fecha_decision,  pf.intentos_correccion,  pf.decidido_por,  '' AS sex_descripcion,  pf.vac_dias_pedidos,  pf.vac_periodo_solicitado,  pf.rrhh_decidido_por,  pf.intentos_correccion_jefatura,  pf.vacacion_excepcional,  pf.vacacion_excepcional_motivo,  pf.vacacion_excepcional_archivo";
 $proto0["m_strFrom"] = "FROM rrhh_permisos.permisos_funcionarios AS pf  LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
 $proto0["m_strWhere"] = "(pf.motivo_id = '1')";
 $proto0["m_strOrderBy"] = "ORDER BY pf.id DESC";
@@ -6846,147 +7591,222 @@ $proto86["m_alias"] = "";
 $obj = new SQLFieldListItem($proto86);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto88=array();
-$proto88["m_link"] = "SQLL_MAIN";
-			$proto89=array();
-$proto89["m_strName"] = "rrhh_permisos.permisos_funcionarios";
-$proto89["m_srcTableName"] = "vacacion";
-$proto89["m_columns"] = array();
-$proto89["m_columns"][] = "id";
-$proto89["m_columns"][] = "id_funcionario";
-$proto89["m_columns"][] = "tipo_vinculacion";
-$proto89["m_columns"][] = "dependencia_id";
-$proto89["m_columns"][] = "fecha_desde";
-$proto89["m_columns"][] = "hora_desde";
-$proto89["m_columns"][] = "fecha_hasta";
-$proto89["m_columns"][] = "hora_hasta";
-$proto89["m_columns"][] = "motivo_id";
-$proto89["m_columns"][] = "comision_servicios";
-$proto89["m_columns"][] = "comision_servicios_descripcion";
-$proto89["m_columns"][] = "observacion";
-$proto89["m_columns"][] = "estado";
-$proto89["m_columns"][] = "fecha_actualizacion";
-$proto89["m_columns"][] = "archivo_adjunto";
-$proto89["m_columns"][] = "solicitado_por";
-$proto89["m_columns"][] = "fecha_solicitud";
-$proto89["m_columns"][] = "fecha_decision";
-$proto89["m_columns"][] = "decidido_por";
-$proto89["m_columns"][] = "resultado_decision";
-$proto89["m_columns"][] = "horas_compensar";
-$proto89["m_columns"][] = "acompensar";
-$proto89["m_columns"][] = "rrhh_decidido_por";
-$proto89["m_columns"][] = "rrhh_fecha_decision";
-$proto89["m_columns"][] = "rrhh_resultado_decision";
-$proto89["m_columns"][] = "rrhh_motivo_rechazo";
-$proto89["m_columns"][] = "ocu_cod";
-$proto89["m_columns"][] = "intentos_correccion";
-$proto89["m_columns"][] = "vac_dias_pedidos";
-$proto89["m_columns"][] = "vac_periodo_solicitado";
-$obj = new SQLTable($proto89);
+						$proto88=array();
+			$obj = new SQLField(array(
+	"m_strName" => "rrhh_decidido_por",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "vacacion"
+));
 
-$proto88["m_table"] = $obj;
-$proto88["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
-$proto88["m_alias"] = "pf";
+$proto88["m_sql"] = "pf.rrhh_decidido_por";
 $proto88["m_srcTableName"] = "vacacion";
-$proto90=array();
-$proto90["m_sql"] = "";
-$proto90["m_uniontype"] = "SQLL_UNKNOWN";
+$proto88["m_expr"]=$obj;
+$proto88["m_alias"] = "";
+$obj = new SQLFieldListItem($proto88);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto90=array();
+			$obj = new SQLField(array(
+	"m_strName" => "intentos_correccion_jefatura",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "vacacion"
+));
+
+$proto90["m_sql"] = "pf.intentos_correccion_jefatura";
+$proto90["m_srcTableName"] = "vacacion";
+$proto90["m_expr"]=$obj;
+$proto90["m_alias"] = "";
+$obj = new SQLFieldListItem($proto90);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto92=array();
+			$obj = new SQLField(array(
+	"m_strName" => "vacacion_excepcional",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "vacacion"
+));
+
+$proto92["m_sql"] = "pf.vacacion_excepcional";
+$proto92["m_srcTableName"] = "vacacion";
+$proto92["m_expr"]=$obj;
+$proto92["m_alias"] = "";
+$obj = new SQLFieldListItem($proto92);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto94=array();
+			$obj = new SQLField(array(
+	"m_strName" => "vacacion_excepcional_motivo",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "vacacion"
+));
+
+$proto94["m_sql"] = "pf.vacacion_excepcional_motivo";
+$proto94["m_srcTableName"] = "vacacion";
+$proto94["m_expr"]=$obj;
+$proto94["m_alias"] = "";
+$obj = new SQLFieldListItem($proto94);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto96=array();
+			$obj = new SQLField(array(
+	"m_strName" => "vacacion_excepcional_archivo",
+	"m_strTable" => "pf",
+	"m_srcTableName" => "vacacion"
+));
+
+$proto96["m_sql"] = "pf.vacacion_excepcional_archivo";
+$proto96["m_srcTableName"] = "vacacion";
+$proto96["m_expr"]=$obj;
+$proto96["m_alias"] = "";
+$obj = new SQLFieldListItem($proto96);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto98=array();
+$proto98["m_link"] = "SQLL_MAIN";
+			$proto99=array();
+$proto99["m_strName"] = "rrhh_permisos.permisos_funcionarios";
+$proto99["m_srcTableName"] = "vacacion";
+$proto99["m_columns"] = array();
+$proto99["m_columns"][] = "id";
+$proto99["m_columns"][] = "id_funcionario";
+$proto99["m_columns"][] = "tipo_vinculacion";
+$proto99["m_columns"][] = "dependencia_id";
+$proto99["m_columns"][] = "fecha_desde";
+$proto99["m_columns"][] = "hora_desde";
+$proto99["m_columns"][] = "fecha_hasta";
+$proto99["m_columns"][] = "hora_hasta";
+$proto99["m_columns"][] = "motivo_id";
+$proto99["m_columns"][] = "comision_servicios";
+$proto99["m_columns"][] = "comision_servicios_descripcion";
+$proto99["m_columns"][] = "observacion";
+$proto99["m_columns"][] = "estado";
+$proto99["m_columns"][] = "fecha_actualizacion";
+$proto99["m_columns"][] = "archivo_adjunto";
+$proto99["m_columns"][] = "solicitado_por";
+$proto99["m_columns"][] = "fecha_solicitud";
+$proto99["m_columns"][] = "fecha_decision";
+$proto99["m_columns"][] = "decidido_por";
+$proto99["m_columns"][] = "resultado_decision";
+$proto99["m_columns"][] = "horas_compensar";
+$proto99["m_columns"][] = "acompensar";
+$proto99["m_columns"][] = "rrhh_decidido_por";
+$proto99["m_columns"][] = "rrhh_fecha_decision";
+$proto99["m_columns"][] = "rrhh_resultado_decision";
+$proto99["m_columns"][] = "rrhh_motivo_rechazo";
+$proto99["m_columns"][] = "ocu_cod";
+$proto99["m_columns"][] = "intentos_correccion";
+$proto99["m_columns"][] = "vac_dias_pedidos";
+$proto99["m_columns"][] = "vac_periodo_solicitado";
+$proto99["m_columns"][] = "jefe_motivo_rechazo";
+$proto99["m_columns"][] = "intentos_correccion_jefatura";
+$proto99["m_columns"][] = "vacacion_excepcional";
+$proto99["m_columns"][] = "vacacion_excepcional_motivo";
+$proto99["m_columns"][] = "vacacion_excepcional_archivo";
+$obj = new SQLTable($proto99);
+
+$proto98["m_table"] = $obj;
+$proto98["m_sql"] = "rrhh_permisos.permisos_funcionarios AS pf";
+$proto98["m_alias"] = "pf";
+$proto98["m_srcTableName"] = "vacacion";
+$proto100=array();
+$proto100["m_sql"] = "";
+$proto100["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto90["m_column"]=$obj;
-$proto90["m_contained"] = array();
-$proto90["m_strCase"] = "";
-$proto90["m_havingmode"] = false;
-$proto90["m_inBrackets"] = false;
-$proto90["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto90);
+$proto100["m_column"]=$obj;
+$proto100["m_contained"] = array();
+$proto100["m_strCase"] = "";
+$proto100["m_havingmode"] = false;
+$proto100["m_inBrackets"] = false;
+$proto100["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto100);
 
-$proto88["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto88);
+$proto98["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto98);
 
 $proto0["m_fromlist"][]=$obj;
-												$proto92=array();
-$proto92["m_link"] = "SQLL_LEFTJOIN";
-			$proto93=array();
-$proto93["m_strName"] = "public.personales";
-$proto93["m_srcTableName"] = "vacacion";
-$proto93["m_columns"] = array();
-$proto93["m_columns"][] = "per_cod";
-$proto93["m_columns"][] = "categoria_cat_codigo";
-$proto93["m_columns"][] = "departamentos_dep_cod";
-$proto93["m_columns"][] = "dependencias_dep_cod";
-$proto93["m_columns"][] = "paises_pai_cod";
-$proto93["m_columns"][] = "ciudades_ciu_cod";
-$proto93["m_columns"][] = "profesiones_pro_cod";
-$proto93["m_columns"][] = "per_profesional";
-$proto93["m_columns"][] = "tipo_funcionario_tfun_cod";
-$proto93["m_columns"][] = "per_institucion_origen";
-$proto93["m_columns"][] = "cargos_car_cod";
-$proto93["m_columns"][] = "per_nombre";
-$proto93["m_columns"][] = "per_apellido";
-$proto93["m_columns"][] = "per_ci";
-$proto93["m_columns"][] = "per_sexo";
-$proto93["m_columns"][] = "per_nacimiento";
-$proto93["m_columns"][] = "per_est_civil";
-$proto93["m_columns"][] = "per_gruposangre";
-$proto93["m_columns"][] = "per_pcd";
-$proto93["m_columns"][] = "per_domicilio";
-$proto93["m_columns"][] = "per_barrio";
-$proto93["m_columns"][] = "per_teleparticular";
-$proto93["m_columns"][] = "per_telecelular";
-$proto93["m_columns"][] = "per_email_part";
-$proto93["m_columns"][] = "per_email_instit";
-$proto93["m_columns"][] = "per_ruc";
-$proto93["m_columns"][] = "per_contacto_eme";
-$proto93["m_columns"][] = "per_tele_emer";
-$proto93["m_columns"][] = "per_ingreso";
-$proto93["m_columns"][] = "per_nombramiento";
-$proto93["m_columns"][] = "per_estado";
-$proto93["m_columns"][] = "per_usuario";
-$proto93["m_columns"][] = "per_sede";
-$obj = new SQLTable($proto93);
+												$proto102=array();
+$proto102["m_link"] = "SQLL_LEFTJOIN";
+			$proto103=array();
+$proto103["m_strName"] = "public.personales";
+$proto103["m_srcTableName"] = "vacacion";
+$proto103["m_columns"] = array();
+$proto103["m_columns"][] = "per_cod";
+$proto103["m_columns"][] = "categoria_cat_codigo";
+$proto103["m_columns"][] = "departamentos_dep_cod";
+$proto103["m_columns"][] = "dependencias_dep_cod";
+$proto103["m_columns"][] = "paises_pai_cod";
+$proto103["m_columns"][] = "ciudades_ciu_cod";
+$proto103["m_columns"][] = "profesiones_pro_cod";
+$proto103["m_columns"][] = "per_profesional";
+$proto103["m_columns"][] = "tipo_funcionario_tfun_cod";
+$proto103["m_columns"][] = "per_institucion_origen";
+$proto103["m_columns"][] = "cargos_car_cod";
+$proto103["m_columns"][] = "per_nombre";
+$proto103["m_columns"][] = "per_apellido";
+$proto103["m_columns"][] = "per_ci";
+$proto103["m_columns"][] = "per_sexo";
+$proto103["m_columns"][] = "per_nacimiento";
+$proto103["m_columns"][] = "per_est_civil";
+$proto103["m_columns"][] = "per_gruposangre";
+$proto103["m_columns"][] = "per_pcd";
+$proto103["m_columns"][] = "per_domicilio";
+$proto103["m_columns"][] = "per_barrio";
+$proto103["m_columns"][] = "per_teleparticular";
+$proto103["m_columns"][] = "per_telecelular";
+$proto103["m_columns"][] = "per_email_part";
+$proto103["m_columns"][] = "per_email_instit";
+$proto103["m_columns"][] = "per_ruc";
+$proto103["m_columns"][] = "per_contacto_eme";
+$proto103["m_columns"][] = "per_tele_emer";
+$proto103["m_columns"][] = "per_ingreso";
+$proto103["m_columns"][] = "per_nombramiento";
+$proto103["m_columns"][] = "per_estado";
+$proto103["m_columns"][] = "per_usuario";
+$proto103["m_columns"][] = "per_sede";
+$obj = new SQLTable($proto103);
 
-$proto92["m_table"] = $obj;
-$proto92["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
-$proto92["m_alias"] = "p";
-$proto92["m_srcTableName"] = "vacacion";
-$proto94=array();
-$proto94["m_sql"] = "p.per_cod = pf.id_funcionario";
-$proto94["m_uniontype"] = "SQLL_UNKNOWN";
+$proto102["m_table"] = $obj;
+$proto102["m_sql"] = "LEFT OUTER JOIN \"public\".personales AS p ON pf.id_funcionario = p.per_cod";
+$proto102["m_alias"] = "p";
+$proto102["m_srcTableName"] = "vacacion";
+$proto104=array();
+$proto104["m_sql"] = "p.per_cod = pf.id_funcionario";
+$proto104["m_uniontype"] = "SQLL_UNKNOWN";
 						$obj = new SQLField(array(
 	"m_strName" => "per_cod",
 	"m_strTable" => "p",
 	"m_srcTableName" => "vacacion"
 ));
 
-$proto94["m_column"]=$obj;
-$proto94["m_contained"] = array();
-$proto94["m_strCase"] = "= pf.id_funcionario";
-$proto94["m_havingmode"] = false;
-$proto94["m_inBrackets"] = false;
-$proto94["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto94);
+$proto104["m_column"]=$obj;
+$proto104["m_contained"] = array();
+$proto104["m_strCase"] = "= pf.id_funcionario";
+$proto104["m_havingmode"] = false;
+$proto104["m_inBrackets"] = false;
+$proto104["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto104);
 
-$proto92["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto92);
+$proto102["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto102);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
 $proto0["m_orderby"] = array();
-												$proto96=array();
+												$proto106=array();
 						$obj = new SQLField(array(
 	"m_strName" => "id",
 	"m_strTable" => "pf",
 	"m_srcTableName" => "vacacion"
 ));
 
-$proto96["m_column"]=$obj;
-$proto96["m_bAsc"] = 0;
-$proto96["m_nColumn"] = 0;
-$obj = new SQLOrderByItem($proto96);
+$proto106["m_column"]=$obj;
+$proto106["m_bAsc"] = 0;
+$proto106["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto106);
 
 $proto0["m_orderby"][]=$obj;					
 $proto0["m_srcTableName"]="vacacion";		
@@ -7000,7 +7820,7 @@ $queryData_vacacion = createSqlQuery_vacacion();
 	
 		;
 
-																																									
+																																														
 
 $tdatavacacion[".sqlquery"] = $queryData_vacacion;
 

@@ -136,11 +136,11 @@ class ConnectionManager extends ConnectionManager_Base
 		$data["DBPath"] = "db"; //currently unused
 		$data["useServerMapPath"] = 1; //currently unused
 
-$host="192.168.123.51";
+$host="192.168.14.254";
 $user="postgres";
-$password="mLxnvGxLX0ND4i2I";
-$options=" port=5432";
-$dbname="dbtalentos2";
+$password="5jYK3A2l9c9pxVphwcDT";
+$options="port=5432";
+$dbname="dbtalentos";
 $data["connInfo"][0] = $host;
 $data["connInfo"][1] = $user;
 $data["connInfo"][2] = $password;

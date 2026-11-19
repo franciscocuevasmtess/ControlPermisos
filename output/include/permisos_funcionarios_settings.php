@@ -6743,6 +6743,11 @@ $proto91["m_columns"][] = "ocu_cod";
 $proto91["m_columns"][] = "intentos_correccion";
 $proto91["m_columns"][] = "vac_dias_pedidos";
 $proto91["m_columns"][] = "vac_periodo_solicitado";
+$proto91["m_columns"][] = "jefe_motivo_rechazo";
+$proto91["m_columns"][] = "intentos_correccion_jefatura";
+$proto91["m_columns"][] = "vacacion_excepcional";
+$proto91["m_columns"][] = "vacacion_excepcional_motivo";
+$proto91["m_columns"][] = "vacacion_excepcional_archivo";
 $obj = new SQLTable($proto91);
 
 $proto90["m_table"] = $obj;

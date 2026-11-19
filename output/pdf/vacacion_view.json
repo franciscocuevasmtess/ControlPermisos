@@ -294,9 +294,6 @@ pdfDocument = {
 		
 	//	dynamic colspan/rowspan
 
-					{BEGIN colspan_grid_c23}
-			colSpan: {$colspan_grid_c23},
-			{END colspan_grid_c23}
 		
 		
 	
@@ -321,14 +318,34 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c23}
-																		{ 
-				cellId: 'c23',
-				row:  0,
-				col:  1,
-				text: '',
-				compensateColspan: true
-			},
-							],
+																							{BEGIN cellblock_grid_c24}
+{
+	cellId: 'c24',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"text":"<div id=\"saldo-vacaciones-resumen\"></div>","hidden":"{$item_hide_text5}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c24}
+											],
 				{END row_grid_1}
 						{BEGIN row_grid_2}
 				[
@@ -790,6 +807,18 @@ pdfDocument = {
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel vacacion vac_periodo_solicitado }","bold":true},{"text":{$vac_periodo_solicitado_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel vacacion rrhh_decidido_por }","bold":true},{"text":{$rrhh_decidido_por_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel vacacion vacacion_excepcional }","bold":true},{"text":{$vacacion_excepcional_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field7}","stack":[{"text":"{$jslabel vacacion vacacion_excepcional_motivo }","bold":true},{"text":{$vacacion_excepcional_motivo_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel vacacion vacacion_excepcional_archivo }","bold":true},{"text":{$vacacion_excepcional_archivo_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],
